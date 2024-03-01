@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Monster", menuName = "Scriptable Objects/Combatant")]
-public class CombatantScriptableObject : MonoBehaviour
+public class CombatantScriptableObject : ScriptableObject
 {
     public struct CombatantStats
     {
