@@ -13,6 +13,9 @@ public class SpellScriptableObject : ScriptableObject
     }
 
     public string spellName;
-    public float spellBaseDamage;
     public SpellType spellType;
+    public float spellBaseDamage;
+    public int spellCost;
+    public float spellHitRate;
+    public bool spellMultitarget;
 }
