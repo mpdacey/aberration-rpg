@@ -1,0 +1,24 @@
+B-lunt S-harp
+S-trong W-eak Type
+S-ingle M-ultiple
+S-trong W-eak Tier
+
+Strike (BSSW) 45 93 4
+Pummel (BSMW) 40 88 8
+Kick   (BWSW) 35 97 3
+Sweep  (BWMW) 30 93 6
+
+Slash  (SSSW) 50 88 4
+Slice  (SSMW) 45 83 8
+Sting  (SWSW) 40 93 3
+Blast (SWMW) 35 88 6
+
+Smash (BSSS) 115 88 9
+Flurry (BSMS) 103 82 18
+Break (BWSS) 96 93 7
+Topple (BWMS) 90 88 14
+
+Gouge (SSSS) 120 84 9
+Shred (SSMS) 110 79 18
+Skewer (SWSS) 105 87 7
+Burst (SWMS) 97 85 14
