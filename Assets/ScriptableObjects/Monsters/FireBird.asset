@@ -12,23 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: FireBird
   m_EditorClassIdentifier: 
-  combatantName: 
-  combatantMaxHealth: 0
-  combatantMaxStamina: 0
+  combatantName: Fire Owl
+  combatantMaxHealth: 75
+  combatantMaxStamina: 24
   combatantBaseStats:
-    strength: 0
-    magic: 0
-    endurance: 0
-    agility: 0
-    luck: 0
-  combatantAttributes:
-    blunt: 0
-    sharp: 0
-    fire: 0
-    ice: 0
-    thunder: 0
-    wind: 0
-  combatantSpells: []
-  combatantNormalAttackType: 0
+    strength: 4
+    magic: 3
+    endurance: 3
+    agility: 4
+    luck: 2
+  combatantSpells:
+  - {fileID: 11400000, guid: 075a282d5a21a0e4892dffcb1556f807, type: 2}
+  - {fileID: 11400000, guid: 6d15a6187678ee945af7b2a6a7d230e7, type: 2}
+  combatantNormalAttackType: 5
   combatantDice: {fileID: 0}
-  combatantSprite: {fileID: 0}
+  combatantSprite: {fileID: 21300000, guid: 6fac4e39926fd9c4ca2ba4416160a857, type: 3}
+  combatantAttributesArray:
+  - key: 0
+    value: 2
+  - key: 1
+    value: 1
+  - key: 2
+    value: 0
+  - key: 3
+    value: 1
+  - key: 4
+    value: 2
+  - key: 5
+    value: 0

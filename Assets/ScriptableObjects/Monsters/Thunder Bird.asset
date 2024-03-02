@@ -21,14 +21,22 @@ MonoBehaviour:
     endurance: 0
     agility: 0
     luck: 0
-  combatantAttributes:
-    blunt: 0
-    sharp: 0
-    fire: 0
-    ice: 0
-    thunder: 0
-    wind: 0
-  combatantSpells: []
-  combatantNormalAttackType: 0
+  combatantSpells:
+  - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
+  - {fileID: 11400000, guid: 163d8443cf495604e8da42d683eef9c7, type: 2}
+  combatantNormalAttackType: 4
   combatantDice: {fileID: 0}
-  combatantSprite: {fileID: 0}
+  combatantSprite: {fileID: 21300000, guid: 7fd3cda14282bb7429b8eeb6c121e5bb, type: 3}
+  combatantAttributesArray:
+  - key: 0
+    value: 1
+  - key: 1
+    value: 0
+  - key: 2
+    value: 2
+  - key: 3
+    value: 1
+  - key: 4
+    value: 0
+  - key: 5
+    value: 2
