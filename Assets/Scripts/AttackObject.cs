@@ -1,7 +1,6 @@
 public class AttackObject
 {
-    public string attackName;
-    public float attackDamage;
-    public SpellScriptableObject.SpellType attackType;
-    public bool attackMultitarget;
+    public CombatantScriptableObject.CombatantStats attackerStats;
+    public SpellScriptableObject attackSpell;
+    public bool isInitialiser = true;
 }

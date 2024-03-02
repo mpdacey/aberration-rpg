@@ -27,23 +27,24 @@ public class MonsterController : MonoBehaviour
 
     public AttackObject GetAttack()
     {
-        AttackObject StandardAttack()
+        AttackObject StandardAttack(AttackObject attack)
         {
-            AttackObject attack = new();
-
-            attack.attackName = "Attack";
-            attack.attackType = combatantStats.combatantNormalAttackType;
-            attack.attackMultitarget = false;
-
-            bool attackIsPhysical = combatantStats.combatantNormalAttackType == SpellScriptableObject.SpellType.Blunt || combatantStats.combatantNormalAttackType == SpellScriptableObject.SpellType.Sharp;
-            int attackStat = attackIsPhysical ? combatantStats.combatantBaseStats.strength : combatantStats.combatantBaseStats.magic;
-
-            attack.attackDamage = Mathf.Sqrt(25 * Random.Range(0.95f, 1.05f)) * Mathf.Sqrt(attackStat);
+            SpellScriptableObject normalAttack = new()
+            {
+                spellName = "Attack",
+                spellCost = 0,
+                spellHitRate = 95,
+                spellBaseDamage = 25,
+                spellMultitarget = false,
+                spellType = combatantStats.combatantNormalAttackType
+            };
+            attack.attackSpell = normalAttack;
 
             return attack;
         }
 
-        AttackObject attack;
+        AttackObject attack = new();
+        attack.attackerStats = combatantStats.combatantBaseStats;
 
         if (combatantStats.combatantSpells.Count > 0)
         {
@@ -51,24 +52,19 @@ public class MonsterController : MonoBehaviour
             SpellScriptableObject selectedSpell = combatantStats.combatantSpells[selectedSpellIndex];
 
             if (localSP - selectedSpell.spellCost < 0)
-                attack = StandardAttack();
+                attack = StandardAttack(attack);
             else
-            {
-                attack = new();
-
-                attack.attackName = selectedSpell.spellName;
-                attack.attackType = selectedSpell.spellType;
-                attack.attackMultitarget = selectedSpell.spellMultitarget;
-
-                bool attackIsPhysical = selectedSpell.spellType == SpellScriptableObject.SpellType.Blunt || selectedSpell.spellType == SpellScriptableObject.SpellType.Sharp;
-                int attackStat = attackIsPhysical ? combatantStats.combatantBaseStats.strength : combatantStats.combatantBaseStats.magic;
-
-                attack.attackDamage = Mathf.Sqrt(selectedSpell.spellBaseDamage * Random.Range(0.95f,1.05f)) * Mathf.Sqrt(attackStat);
-            }
+                attack.attackSpell = selectedSpell;
         }
         else
-            attack = StandardAttack();
+            attack = StandardAttack(attack);
 
         return attack;
+    }
+
+
+            }
+        }
+
     }
 }
