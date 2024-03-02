@@ -16,7 +16,8 @@ public class CombatantScriptableObject : ScriptableObject
 
     public struct CombatantAttributes
     {
-        public AttributeAffinity physical;
+        public AttributeAffinity blunt;
+        public AttributeAffinity sharp;
         public AttributeAffinity fire;
         public AttributeAffinity ice;
         public AttributeAffinity thunder;

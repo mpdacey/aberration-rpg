@@ -9,13 +9,14 @@ public class SpellScriptableObject : ScriptableObject
         Ice,
         Thunder,
         Wind,
-        Physical
+        Blunt,
+        Sharp
     }
 
     public string spellName;
     public SpellType spellType;
     public float spellBaseDamage;
-    public int spellCost;
     public float spellHitRate;
+    public int spellCost;
     public bool spellMultitarget;
 }
