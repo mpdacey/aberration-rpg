@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
-    [SerializeField]
-    public CombatantScriptableObject combatantStats
+    public CombatantScriptableObject CombatantStats
     {
-        private get => combatantStats;
+        get => combatantStats;
         set
         {
             combatantStats = value;
@@ -16,11 +15,12 @@ public class MonsterController : MonoBehaviour
             localSP = combatantStats.combatantMaxStamina;
         }
     }
+    [SerializeField] private CombatantScriptableObject combatantStats;
     private SpriteRenderer spriteRenderer;
     private int localHP = 0;
     private int localSP = 0;
 
-    private void Start()
+    private void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -36,7 +36,7 @@ public class MonsterController : MonoBehaviour
                 spellHitRate = 95,
                 spellBaseDamage = 25,
                 spellMultitarget = false,
-                spellType = combatantStats.combatantNormalAttackType
+                spellType = CombatantStats.combatantNormalAttackType
             };
             attack.attackSpell = normalAttack;
 
@@ -44,12 +44,12 @@ public class MonsterController : MonoBehaviour
         }
 
         AttackObject attack = new();
-        attack.attackerStats = combatantStats.combatantBaseStats;
+        attack.attackerStats = CombatantStats.combatantBaseStats;
 
-        if (combatantStats.combatantSpells.Count > 0)
+        if (CombatantStats.combatantSpells.Count > 0)
         {
-            int selectedSpellIndex = (combatantStats.combatantSpells.Count > 1) ? Mathf.FloorToInt(Random.value * combatantStats.combatantSpells.Count) : 0;
-            SpellScriptableObject selectedSpell = combatantStats.combatantSpells[selectedSpellIndex];
+            int selectedSpellIndex = (CombatantStats.combatantSpells.Count > 1) ? Mathf.FloorToInt(Random.value * CombatantStats.combatantSpells.Count) : 0;
+            SpellScriptableObject selectedSpell = CombatantStats.combatantSpells[selectedSpellIndex];
 
             if (localSP - selectedSpell.spellCost < 0)
                 attack = StandardAttack(attack);
@@ -67,7 +67,7 @@ public class MonsterController : MonoBehaviour
         bool isAbsorbing = false;
         float affinityDamageMultiplier = 1;
 
-        switch (combatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
+        switch (CombatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
         {
             case CombatantScriptableObject.AttributeAffinity.Resist:
                 affinityDamageMultiplier = 0.5f;
@@ -92,8 +92,8 @@ public class MonsterController : MonoBehaviour
         //Check for evasion
         if(!isAbsorbing)
         {
-            var agilityDiff = combatantStats.combatantBaseStats.agility - incomingAttack.attackerStats.agility;
-            var luckDiff = combatantStats.combatantBaseStats.luck - incomingAttack.attackerStats.luck;
+            var agilityDiff = CombatantStats.combatantBaseStats.agility - incomingAttack.attackerStats.agility;
+            var luckDiff = CombatantStats.combatantBaseStats.luck - incomingAttack.attackerStats.luck;
             var hitRate = Mathf.Clamp(incomingAttack.attackSpell.spellHitRate - agilityDiff / 2 - luckDiff / 4, 5, 100);
 
             if (hitRate < Random.value * 100)
@@ -107,9 +107,9 @@ public class MonsterController : MonoBehaviour
         int attackStat = attackIsPhysical ? incomingAttack.attackerStats.strength : incomingAttack.attackerStats.magic;
 
         float grossDamage = Mathf.Sqrt(incomingAttack.attackSpell.spellBaseDamage * Random.Range(0.95f, 1.05f)) * Mathf.Sqrt(attackStat);
-        float resultingDamageTaken = grossDamage * affinityDamageMultiplier / Mathf.Sqrt(combatantStats.combatantBaseStats.endurance * 4.5f);
+        float resultingDamageTaken = grossDamage * affinityDamageMultiplier / Mathf.Sqrt(CombatantStats.combatantBaseStats.endurance * 4.5f);
 
-        localHP = Mathf.RoundToInt(Mathf.Clamp(localHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, combatantStats.combatantMaxHealth));
+        localHP = Mathf.RoundToInt(Mathf.Clamp(localHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, CombatantStats.combatantMaxHealth));
 
         return null;
     }
