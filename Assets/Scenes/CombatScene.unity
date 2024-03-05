@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &60794683
 RectTransform:
   m_ObjectHideFlags: 0
@@ -534,6 +534,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
   m_PrefabInstance: {fileID: 1007382824}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1007382826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1152952985008984834, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+  m_PrefabInstance: {fileID: 1007382824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaa76d1dccea2744b3e2e010f49f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1054017526
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1098785529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1339,6 +1350,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
   m_PrefabInstance: {fileID: 1465054741}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1588695423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1152952985008984834, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+  m_PrefabInstance: {fileID: 1192314845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaa76d1dccea2744b3e2e010f49f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1593810100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1906,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerTurn: 1
+  monsters:
+  - {fileID: 15521311077695002}
+  - {fileID: 1007382826}
+  - {fileID: 1588695423}
+  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2156,7 +2183,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1714078748}
   - component: {fileID: 1714078747}
-  - component: {fileID: 1714078746}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2164,14 +2190,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1714078746
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1714078745}
-  m_Enabled: 1
 --- !u!20 &1714078747
 Camera:
   m_ObjectHideFlags: 0
@@ -2404,6 +2422,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
   m_PrefabInstance: {fileID: 15521311077695000}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &15521311077695002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1152952985008984834, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+  m_PrefabInstance: {fileID: 15521311077695000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaa76d1dccea2744b3e2e010f49f844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3306097812092775623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2411,34 +2440,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2110153000}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_fontSize
-      value: 31.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_fontSizeMax
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_fontSizeMin
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_overflowMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_charWidthMaxAdj
-      value: 5.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3306097811840945287, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
