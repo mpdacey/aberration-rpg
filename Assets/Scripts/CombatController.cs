@@ -38,6 +38,7 @@ public class CombatController : MonoBehaviour
     public ActionState actionState = ActionState.None;
     [SerializeField] private BattleState currentState;
     private PartyController.PartyMember currentMember;
+    private int selectedMonster = 0;
     private bool[] monstersAlive;
 
     private void OnEnable()
@@ -95,7 +96,10 @@ public class CombatController : MonoBehaviour
     }
 
     public void SetActionState(int value) =>
-        actionState = (ActionState)value;
+        actionState = (ActionState)Mathf.Clamp(value, 0, Enum.GetValues(typeof(ActionState)).Length);
+
+    public void SelectMonster(int value) =>
+        selectedMonster = Mathf.Clamp(value, 0, 3);
 
     private void MonsterDeathHandling(int monsterID)
     {
