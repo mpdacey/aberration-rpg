@@ -9,11 +9,11 @@ public class CombatantScriptableObject : ScriptableObject
     [System.Serializable]
     public struct CombatantStats
     {
-        public int strength;
-        public int magic;
-        public int endurance;
-        public int agility;
-        public int luck;
+        [Range(1,99)] public int strength;
+        [Range(1,99)] public int magic;
+        [Range(1,99)] public int endurance;
+        [Range(1,99)] public int agility;
+        [Range(1,99)] public int luck;
     }
 
     public enum AttributeAffinity
