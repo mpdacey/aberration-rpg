@@ -32,22 +32,6 @@ public class MonsterController : MonoBehaviour
 
     public AttackObject GetAttack()
     {
-        AttackObject StandardAttack(AttackObject attack)
-        {
-            SpellScriptableObject normalAttack = new()
-            {
-                spellName = "Attack",
-                spellCost = 0,
-                spellHitRate = 95,
-                spellBaseDamage = 25,
-                spellMultitarget = false,
-                spellType = CombatantStats.combatantNormalAttackType
-            };
-            attack.attackSpell = normalAttack;
-
-            return attack;
-        }
-
         AttackObject attack = new();
         attack.attackerStats = CombatantStats.combatantBaseStats;
 
@@ -57,12 +41,12 @@ public class MonsterController : MonoBehaviour
             SpellScriptableObject selectedSpell = CombatantStats.combatantSpells[selectedSpellIndex];
 
             if (localSP - selectedSpell.spellCost < 0)
-                attack = StandardAttack(attack);
+                attack = AttackHandler.GenerateNormalAttack(CombatantStats);
             else
                 attack.attackSpell = selectedSpell;
         }
         else
-            attack = StandardAttack(attack);
+            attack = AttackHandler.GenerateNormalAttack(CombatantStats);
 
         return attack;
     }

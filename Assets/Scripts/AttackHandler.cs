@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class AttackHandler
 {
+    public static AttackObject GenerateNormalAttack(CombatantScriptableObject attackerObject)
+    {
+        AttackObject attack = new()
+        {
+            attackerStats = attackerObject.combatantBaseStats
+        };
+
+        SpellScriptableObject normalAttack = new()
+        {
+            spellName = "Attack",
+            spellCost = 0,
+            spellHitRate = 95,
+            spellBaseDamage = 25,
+            spellMultitarget = false,
+            spellType = attackerObject.combatantNormalAttackType
+        };
+        attack.attackSpell = normalAttack;
+
+        return attack;
+    }
+
     public static void CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack)
     {
         bool isAbsorbing = false;
