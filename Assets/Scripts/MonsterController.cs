@@ -60,6 +60,9 @@ public class MonsterController : MonoBehaviour
         //TODO: Input reflect handling;
 
         if (localHP <= 0 && MonsterDefeated != null)
+        {
+            spriteRenderer.enabled = false;
             MonsterDefeated.Invoke(transform.GetSiblingIndex());
+        }
     }
 }
