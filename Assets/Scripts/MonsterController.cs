@@ -51,7 +51,7 @@ public class MonsterController : MonoBehaviour
         return attack;
     }
 
-    private void RecieveAttack(AttackObject incomingAttack)
+    public void RecieveAttack(AttackObject incomingAttack)
     {
         AttackObject reflectedAttack = null;
 

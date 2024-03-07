@@ -6,10 +6,8 @@ public class AttackHandler
 {
     public static AttackObject GenerateNormalAttack(CombatantScriptableObject attackerObject)
     {
-        AttackObject attack = new()
-        {
-            attackerStats = attackerObject.combatantBaseStats
-        };
+        AttackObject attack = new();
+        attack.attackerStats = attackerObject.combatantBaseStats;
 
         SpellScriptableObject normalAttack = new()
         {

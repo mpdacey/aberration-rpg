@@ -10,6 +10,13 @@ public class CombatController : MonoBehaviour
     public event Action ShowAttackMenu;
     public event Action<bool[]> ShowTargetIndicator;
 
+    struct PlayerAction
+    {
+        public ActionState actionType;
+        public int target;
+        public AttackObject attack;
+    }
+
     enum BattleState
     {
         Initializing,
@@ -40,6 +47,7 @@ public class CombatController : MonoBehaviour
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
     private bool[] monstersAlive;
+    private PlayerAction[] playerActions = new PlayerAction[4];
 
     private void OnEnable()
     {
@@ -109,7 +117,8 @@ public class CombatController : MonoBehaviour
             return;
         }
 
-        monsters[monsterID].GetComponent<SpriteRenderer>().enabled = false;
+        monstersAlive[monsterID] = false;
+        //monsters[monsterID].GetComponent<SpriteRenderer>().enabled = false;
     }
 
     IEnumerator BeginBattle()
@@ -130,14 +139,14 @@ public class CombatController : MonoBehaviour
         bool actionChosen = false;
         int lastValidIndex = 0;
 
-        for(int i = 0; i < 4; i++)
+        for(int currentPlayerIndex = 0; currentPlayerIndex < 4; currentPlayerIndex++)
         {
-            if (!PartyController.partyMembers[i].HasValue)
+            if (!PartyController.partyMembers[currentPlayerIndex].HasValue)
                 continue;
 
-            currentMember = PartyController.partyMembers[i].Value;
+            currentMember = PartyController.partyMembers[currentPlayerIndex].Value;
             if (CurrentPartyTurn != null)
-                CurrentPartyTurn.Invoke(i);
+                CurrentPartyTurn.Invoke(currentPlayerIndex);
 
             actionState = ActionState.None;
             actionChosen = false;
@@ -161,6 +170,18 @@ public class CombatController : MonoBehaviour
 
                             yield return new WaitForEndOfFrame();
                         }
+
+                        if(actionState == ActionState.Confirm)
+                        {
+                            PlayerAction playerAction = new()
+                            {
+                                actionType = ActionState.Attack,
+                                target = selectedMonster,
+                                attack = AttackHandler.GenerateNormalAttack(currentMember.partyMemberBaseStats)
+                            };
+
+                            playerActions[currentPlayerIndex] = playerAction;
+                        }
                         break;
                     case ActionState.Skill:
                         // Select Skill
@@ -173,11 +194,34 @@ public class CombatController : MonoBehaviour
                 actionChosen = actionState == ActionState.Confirm;
             }
 
-            lastValidIndex = i;
+            lastValidIndex = currentPlayerIndex;
         }
 
         CurrentPartyTurn.Invoke(-1);
+
+        // Perform actions
+        yield return PlayerActionExecution();
+
         StartCoroutine(EnemyPhase());
+    }
+
+    IEnumerator PlayerActionExecution()
+    {
+        for(int i = 0; i < playerActions.Length; i++)
+        {
+            if (playerActions[i].actionType == ActionState.None)
+                continue;
+
+            switch (playerActions[i].actionType)
+            {
+                case ActionState.Attack:
+                    monsters[playerActions[i].target].RecieveAttack(playerActions[i].attack);
+                    break;
+            }
+
+            playerActions[i].actionType = ActionState.None;
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     IEnumerator EnemyPhase()
