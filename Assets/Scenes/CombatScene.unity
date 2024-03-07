@@ -3072,9 +3072,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   protagonist:
-    partyMemberBaseStats: {fileID: 0}
     currentHP: 0
-    currentMP: 0
+    partyMemberBaseStats: {fileID: 11400000, guid: 998b75cfe3f38644e843342591665e9c, type: 2}
+    currentSP: 0
 --- !u!4 &1796975613
 Transform:
   m_ObjectHideFlags: 0

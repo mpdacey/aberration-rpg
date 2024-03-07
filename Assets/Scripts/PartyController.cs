@@ -9,7 +9,7 @@ public class PartyController : MonoBehaviour
     {
         public CombatantScriptableObject partyMemberBaseStats;
         public int currentHP;
-        public int currentMP;
+        public int currentSP;
     }
 
     public static PartyMember?[] partyMembers = new PartyMember?[4];
@@ -17,6 +17,9 @@ public class PartyController : MonoBehaviour
 
     private void OnEnable()
     {
+        protagonist.currentHP = protagonist.partyMemberBaseStats.combatantMaxHealth;
+        protagonist.currentSP = protagonist.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = protagonist;
+
     }
 }
