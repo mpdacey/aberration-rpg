@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9126826238177610269}
   - component: {fileID: 9126826238177610268}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SpellIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 9126826238238037546}
   - component: {fileID: 9126826238238037549}
   m_Layer: 5
-  m_Name: AttackName
+  m_Name: SpellName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 9126826238797888334}
   - component: {fileID: 9126826238797888321}
   m_Layer: 5
-  m_Name: AttackSP
+  m_Name: SpellCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
