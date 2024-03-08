@@ -61,6 +61,12 @@ public class CombatController : MonoBehaviour
     private PlayerAction[] playerActions = new PlayerAction[4];
     private SpellScriptableObject selectedSpell;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void OnEnable()
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
