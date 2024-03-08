@@ -124,7 +124,9 @@ public class CombatController : MonoBehaviour
         }
 
         monstersAlive[monsterID] = false;
-        //monsters[monsterID].GetComponent<SpriteRenderer>().enabled = false;
+
+        if (monstersAlive.All(x => x))
+            currentBattleState = BattleState.Victory;
     }
 
     IEnumerator BeginBattle()
@@ -252,23 +254,102 @@ public class CombatController : MonoBehaviour
 
     IEnumerator EnemyPhase()
     {
-        currentState = BattleState.EnemyPhase;
+        currentBattleState = BattleState.EnemyPhase;
 
-        yield return null;
+        int[] playerTargetPriority;
+        for (int i = 0; i < 3; i++)
+        {
+            if (!monstersAlive[i]) continue;
 
-        StartCoroutine(PlayerPhase());
+            // Get Enemy Attacks
+            AttackAction enemyAttackObject = new();
+            enemyAttackObject.attack = monsters[i].GetAttack();
+
+            if (enemyAttackObject.attack.attackSpell.spellMultitarget) continue;
+
+            // Determine target
+            playerTargetPriority = new int[]{ 5, 7, 7, 7 };
+
+            for (int j = 0; j < 4; j++)
+            {
+                if (!PartyController.partyMembers[j].HasValue)
+                {
+                    playerTargetPriority[j] = 0;
+                    continue;
+                }
+
+                PartyController.PartyMember? partyMember = PartyController.partyMembers[j].Value;
+
+                switch (partyMember?.partyMemberBaseStats.combatantAttributes[enemyAttackObject.attack.attackSpell.spellType])
+                {
+                    case CombatantScriptableObject.AttributeAffinity.Weak:
+                        playerTargetPriority[j] += 2;
+                        break;
+                    case CombatantScriptableObject.AttributeAffinity.Resist:
+                        playerTargetPriority[j] -= 2;
+                        break;
+                    case CombatantScriptableObject.AttributeAffinity.Null:
+                        playerTargetPriority[j] -= 3;
+                        break;
+                    case CombatantScriptableObject.AttributeAffinity.Absorb:
+                    case CombatantScriptableObject.AttributeAffinity.Repel:
+                        playerTargetPriority[j] -= 4;
+                        break;
+                }
+            }
+
+            int priorityTotal = playerTargetPriority.Sum();
+            int random = Mathf.FloorToInt(UnityEngine.Random.Range(0, priorityTotal));
+
+            for(int target = 0; target < 4; target++)
+            {
+                if(random < playerTargetPriority[target])
+                {
+                    enemyAttackObject.target = target;
+                    break;
+                }
+                random -= playerTargetPriority[target];
+            }
+
+            AttackObject reflectedAttack = null;
+            PartyController.PartyMember targetMember = PartyController.partyMembers[enemyAttackObject.target].Value;
+            int oldHealth = targetMember.currentHP;
+            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack);
+
+            // Display damage
+
+            targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
+            PartyController.partyMembers[enemyAttackObject.target] = targetMember;
+
+            yield return new WaitForSeconds(1f);
+
+            // Handle damage.
+            if (targetMember.currentHP == 0)
+            {
+                if(enemyAttackObject.target == 0)
+                {
+                    //Game over
+                    currentBattleState = BattleState.Defeat;
+                    break;
+                }
+                else
+                {
+                    PartyController.partyMembers[enemyAttackObject.target] = null;
+                }
+            }
+        }
     }
 
     IEnumerator Victory()
     {
-        currentState = BattleState.Victory;
+        currentBattleState = BattleState.Victory;
 
         yield return null;
     }
 
     IEnumerator Defeat()
     {
-        currentState = BattleState.Defeat;
+        currentBattleState = BattleState.Defeat;
 
         yield return null;
     }
