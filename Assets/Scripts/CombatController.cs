@@ -144,6 +144,7 @@ public class CombatController : MonoBehaviour
     IEnumerator PlayerPhase()
     {
         currentBattleState = BattleState.PlayerPhase;
+        Debug.Log("Player Phase");
 
         bool actionChosen = false;
         int lastValidIndex = 0;
@@ -258,6 +259,7 @@ public class CombatController : MonoBehaviour
     IEnumerator EnemyPhase()
     {
         currentBattleState = BattleState.EnemyPhase;
+        Debug.Log("Enemy Phase");
 
         int[] playerTargetPriority;
         for (int i = 0; i < 3; i++)
@@ -360,12 +362,16 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.Victory;
 
+        Debug.Log("Victory");
+
         yield return null;
     }
 
     IEnumerator Defeat()
     {
         currentBattleState = BattleState.Defeat;
+
+        Debug.Log("Defeated");
 
         yield return null;
     }

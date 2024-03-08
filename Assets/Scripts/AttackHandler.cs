@@ -74,6 +74,9 @@ public class AttackHandler
         float grossDamage = Mathf.Sqrt(incomingAttack.attackSpell.spellBaseDamage) * Mathf.Sqrt(attackStat*6) * affinityDamageMultiplier;
         float resultingDamageTaken = Mathf.Clamp(grossDamage* 3 * Random.Range(0.90f, 1.10f) / Mathf.Sqrt(combatantStats.combatantBaseStats.endurance*6), 0, 9999);
 
+        int oldHP = currentHP;
         currentHP = Mathf.RoundToInt(Mathf.Clamp(currentHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, combatantStats.combatantMaxHealth));
+
+        Debug.Log($"{combatantStats.combatantName} takes {oldHP -= currentHP}");
     }
 }
