@@ -71,8 +71,8 @@ public class AttackHandler
         bool attackIsPhysical = incomingAttack.attackSpell.spellType == SpellScriptableObject.SpellType.Blunt || incomingAttack.attackSpell.spellType == SpellScriptableObject.SpellType.Sharp;
         int attackStat = attackIsPhysical ? incomingAttack.attackerStats.strength : incomingAttack.attackerStats.magic;
 
-        float resultingDamageTaken = Mathf.Clamp(grossDamage* 3 * Random.Range(0.95f, 1.05f) / Mathf.Sqrt(combatantStats.combatantBaseStats.endurance*6), 0, 9999);
         float grossDamage = Mathf.Sqrt(incomingAttack.attackSpell.spellBaseDamage) * Mathf.Sqrt(attackStat*6) * affinityDamageMultiplier;
+        float resultingDamageTaken = Mathf.Clamp(grossDamage* 3 * Random.Range(0.90f, 1.10f) / Mathf.Sqrt(combatantStats.combatantBaseStats.endurance*6), 0, 9999);
 
         currentHP = Mathf.RoundToInt(Mathf.Clamp(currentHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, combatantStats.combatantMaxHealth));
     }
