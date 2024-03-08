@@ -44,6 +44,7 @@ public class SpellMenuUIController : MonoBehaviour
         combatController.ShowSpells += ShowSpellMenu;
         combatController.ShowAttackMenu += HideSpellMenu;
         combatController.ShowTargetIndicatorUI += HideSpellMenu;
+        combatController.HideAllUI += HideSpellMenu;
     }
 
     private void OnDisable()
@@ -51,6 +52,7 @@ public class SpellMenuUIController : MonoBehaviour
         combatController.ShowSpells -= ShowSpellMenu;
         combatController.ShowAttackMenu -= HideSpellMenu;
         combatController.ShowTargetIndicatorUI -= HideSpellMenu;
+        combatController.HideAllUI -= HideSpellMenu;
     }
 
     private void ShowSpellMenu(PartyController.PartyMember partyMember)

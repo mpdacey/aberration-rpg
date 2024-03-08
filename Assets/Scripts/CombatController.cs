@@ -13,6 +13,7 @@ public class CombatController : MonoBehaviour
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
+    public event Action HideAllUI;
 
     private struct PlayerAction
     {
@@ -271,6 +272,9 @@ public class CombatController : MonoBehaviour
 
     IEnumerator PlayerActionExecution()
     {
+        if (HideAllUI != null)
+            HideAllUI.Invoke();
+
         for (int i = 0; i < playerActions.Length; i++)
         {
             if (currentBattleState == BattleState.Victory || currentBattleState == BattleState.Defeat)
