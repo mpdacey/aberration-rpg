@@ -44,6 +44,7 @@ public class AttackHandler
             case CombatantScriptableObject.AttributeAffinity.Absorb:
                 Debug.Log("Attack Absorbed");
                 isAbsorbing = true;
+                affinityDamageMultiplier = 0.8f;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Repel:
                 Debug.Log("Attack Reflected");
@@ -70,8 +71,8 @@ public class AttackHandler
         bool attackIsPhysical = incomingAttack.attackSpell.spellType == SpellScriptableObject.SpellType.Blunt || incomingAttack.attackSpell.spellType == SpellScriptableObject.SpellType.Sharp;
         int attackStat = attackIsPhysical ? incomingAttack.attackerStats.strength : incomingAttack.attackerStats.magic;
 
-        float grossDamage = Mathf.Sqrt(incomingAttack.attackSpell.spellBaseDamage) * Mathf.Sqrt(attackStat*6);
         float resultingDamageTaken = Mathf.Clamp(grossDamage* 3 * Random.Range(0.95f, 1.05f) / Mathf.Sqrt(combatantStats.combatantBaseStats.endurance*6), 0, 9999);
+        float grossDamage = Mathf.Sqrt(incomingAttack.attackSpell.spellBaseDamage) * Mathf.Sqrt(attackStat*6) * affinityDamageMultiplier;
 
         currentHP = Mathf.RoundToInt(Mathf.Clamp(currentHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, combatantStats.combatantMaxHealth));
     }
