@@ -170,10 +170,11 @@ public class CombatController : MonoBehaviour
                 {
                     case ActionState.Attack:
                         // Select Enemy
-                        if (ShowTargetIndicator != null)
-                            ShowTargetIndicator.Invoke(monstersAlive);
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Attack);
+                        break;
+                    case ActionState.Skill:
+                        // Select Skill
 
-                        while(actionState == ActionState.Attack)
                         {
                             if (Input.GetButtonDown("Cancel"))
                                 actionState = ActionState.None;
@@ -181,23 +182,7 @@ public class CombatController : MonoBehaviour
                             yield return new WaitForEndOfFrame();
                         }
 
-                        if(actionState == ActionState.Confirm)
                         {
-                            PlayerAction playerAction = new()
-                            {
-                                actionType = ActionState.Attack,
-                                attackAction = new()
-                                {
-                                    target = selectedMonster,
-                                    attack = AttackHandler.GenerateNormalAttack(currentMember.partyMemberBaseStats)
-                                }
-                            };
-
-                            playerActions[currentPlayerIndex] = playerAction;
-                        }
-                        break;
-                    case ActionState.Skill:
-                        // Select Skill
                         // Select Enemy
                         break;
                     case ActionState.Guard:
@@ -229,6 +214,37 @@ public class CombatController : MonoBehaviour
         }
 
         return 2;
+    }
+
+    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
+    {
+        if (ShowTargetIndicator != null)
+            ShowTargetIndicator.Invoke(monstersAlive);
+        if (ShowTargetIndicatorUI != null)
+            ShowTargetIndicatorUI.Invoke();
+
+        while (actionState == loopState)
+        {
+            if (Input.GetButtonDown("Cancel"))
+                actionState = ActionState.None;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        if (actionState == ActionState.Confirm)
+        {
+            PlayerAction playerAction = new()
+            {
+                actionType = loopState,
+                attackAction = new()
+                {
+                    target = selectedMonster,
+                    attack = attackObject ?? AttackHandler.GenerateNormalAttack(currentMember.partyMemberBaseStats)
+                }
+            };
+
+            playerActions[currentPlayerIndex] = playerAction;
+        }
     }
 
     IEnumerator PlayerActionExecution()
