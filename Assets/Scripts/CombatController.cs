@@ -10,14 +10,17 @@ public class CombatController : MonoBehaviour
     public event Action<int> CurrentPartyTurn;
     public event Action ShowAttackMenu;
     public event Action<bool[]> ShowTargetIndicator;
+    public event Action ShowTargetIndicatorUI;
+    public event Action<PartyController.PartyMember> ShowSpells;
+    public event Action ShowSpellsUI;
 
-    struct PlayerAction
+    private struct PlayerAction
     {
         public ActionState actionType;
         public AttackAction attackAction;
     }
 
-    struct AttackAction
+    private struct AttackAction
     {
         public int target;
         public AttackObject attack;
@@ -54,6 +57,7 @@ public class CombatController : MonoBehaviour
     private int selectedMonster = 0;
     private bool[] monstersAlive;
     private PlayerAction[] playerActions = new PlayerAction[4];
+    private SpellScriptableObject selectedSpell;
 
     private void OnEnable()
     {
@@ -115,6 +119,9 @@ public class CombatController : MonoBehaviour
     public void SelectMonster(int value) =>
         selectedMonster = Mathf.Clamp(value, 0, 3);
 
+    public void SelectSpell(SpellScriptableObject spell) =>
+        selectedSpell = spell;
+
     private void MonsterDeathHandling(int monsterID)
     {
         if(monsterID > monsters.Length)
@@ -174,7 +181,14 @@ public class CombatController : MonoBehaviour
                         break;
                     case ActionState.Skill:
                         // Select Skill
+                        selectedSpell = null;
 
+                        if (ShowSpells != null)
+                            ShowSpells.Invoke(currentMember);
+                        if (ShowSpellsUI != null)
+                            ShowSpellsUI.Invoke();
+
+                        while (actionState == ActionState.Skill && selectedSpell == null)
                         {
                             if (Input.GetButtonDown("Cancel"))
                                 actionState = ActionState.None;
@@ -182,8 +196,16 @@ public class CombatController : MonoBehaviour
                             yield return new WaitForEndOfFrame();
                         }
 
+                        if (actionState == ActionState.None) break;
+
+                        AttackObject spellAttackObject = new()
                         {
+                            attackerStats = currentMember.partyMemberBaseStats.combatantBaseStats,
+                            attackSpell = selectedSpell
+                        };
+
                         // Select Enemy
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
                         break;
                     case ActionState.Guard:
                         break;
@@ -249,7 +271,7 @@ public class CombatController : MonoBehaviour
 
     IEnumerator PlayerActionExecution()
     {
-        for(int i = 0; i < playerActions.Length; i++)
+        for (int i = 0; i < playerActions.Length; i++)
         {
             if (currentBattleState == BattleState.Victory || currentBattleState == BattleState.Defeat)
                 break;
@@ -260,6 +282,7 @@ public class CombatController : MonoBehaviour
             switch (playerActions[i].actionType)
             {
                 case ActionState.Attack:
+                case ActionState.Skill:
                     if(monstersAlive[playerActions[i].attackAction.target])
                         monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack);
                     else
