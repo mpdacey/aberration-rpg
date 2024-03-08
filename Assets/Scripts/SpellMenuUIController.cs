@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class SpellMenuUIController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SpellMenuUIController : MonoBehaviour
 
     public CombatController combatController;
     private SpellUIObject[] buttonObjects;
+    private int currentSelected;
 
     private void Start()
     {
@@ -55,6 +57,19 @@ public class SpellMenuUIController : MonoBehaviour
         combatController.HideAllUI -= HideSpellMenu;
     }
 
+    private void Update()
+    {
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+
+        if (buttonObjects[0].spellButton.transform.parent.gameObject.activeInHierarchy)
+        {
+            if (selectedObject == null)
+                buttonObjects[currentSelected].spellButton.Select();
+            else
+                currentSelected = selectedObject.transform.GetSiblingIndex();
+        }
+    }
+
     private void ShowSpellMenu(PartyController.PartyMember partyMember)
     {
         for(int i = 0; i < 8; i++)
@@ -65,6 +80,7 @@ public class SpellMenuUIController : MonoBehaviour
                 buttonObjects[i].spellButton.gameObject.SetActive(false);
         }
 
+        buttonObjects[0].spellButton.Select();
         buttonObjects[0].spellButton.transform.parent.gameObject.SetActive(true);
     }
 
