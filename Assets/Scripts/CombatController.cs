@@ -234,6 +234,9 @@ public class CombatController : MonoBehaviour
     {
         for(int i = 0; i < playerActions.Length; i++)
         {
+            if (currentBattleState == BattleState.Victory || currentBattleState == BattleState.Defeat)
+                break;
+
             if (playerActions[i].actionType == ActionState.None)
                 continue;
 
@@ -337,6 +340,19 @@ public class CombatController : MonoBehaviour
                     PartyController.partyMembers[enemyAttackObject.target] = null;
                 }
             }
+        }
+
+        switch (currentBattleState)
+        {
+            case BattleState.Victory:
+                StartCoroutine(Victory());
+                break;
+            case BattleState.Defeat:
+                StartCoroutine(Defeat());
+                break;
+            default:
+                StartCoroutine(PlayerPhase());
+                break;
         }
     }
 
