@@ -3072,8 +3072,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   protagonist:
-    currentHP: 0
     partyMemberBaseStats: {fileID: 11400000, guid: 998b75cfe3f38644e843342591665e9c, type: 2}
+    currentHP: 0
+    currentSP: 0
+  partyMonsters:
+  - partyMemberBaseStats: {fileID: 11400000, guid: bce49baa849739f40895dbb5ad567f9e, type: 2}
+    currentHP: 0
+    currentSP: 0
+  - partyMemberBaseStats: {fileID: 11400000, guid: 38cd14063a8c0e34aa0994e9a27cc60b, type: 2}
+    currentHP: 0
+    currentSP: 0
+  - partyMemberBaseStats: {fileID: 11400000, guid: 82be60c962643954aa681aa5f266710e, type: 2}
+    currentHP: 0
     currentSP: 0
 --- !u!4 &1796975613
 Transform:

@@ -14,6 +14,7 @@ public class PartyController : MonoBehaviour
 
     public static PartyMember?[] partyMembers = new PartyMember?[4];
     public PartyMember protagonist;
+    public PartyMember[] partyMonsters;
 
     private void OnEnable()
     {
@@ -21,5 +22,12 @@ public class PartyController : MonoBehaviour
         protagonist.currentSP = protagonist.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = protagonist;
 
+        for(int i = 0; i < 3; i++)
+        {
+            if (partyMonsters.Length <= i) break;
+            partyMonsters[i].currentHP = partyMonsters[i].partyMemberBaseStats.combatantMaxHealth;
+            partyMonsters[i].currentSP = partyMonsters[i].partyMemberBaseStats.combatantMaxStamina;
+            partyMembers[i+1] = partyMonsters[i];
+        }
     }
 }
