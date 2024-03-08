@@ -15,6 +15,8 @@ public class BattleUIController : MonoBehaviour
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
+        combatController.ShowSpellsUI += HideAll;
+        combatController.HideAllUI += HideAll;
     }
 
     private void OnDisable()
@@ -22,6 +24,8 @@ public class BattleUIController : MonoBehaviour
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
+        combatController.ShowSpellsUI -= HideAll;
+        combatController.HideAllUI -= HideAll;
     }
 
     private void SetPartyLayoutPositions(int currentMember)
@@ -76,4 +80,10 @@ public class BattleUIController : MonoBehaviour
     }
 
     private void HideTargets() => monsterTargetButtons[0].transform.parent.gameObject.SetActive(false);
+
+    private void HideAll()
+    {
+        HideBattleMenu();
+        HideTargets();
+    }
 }

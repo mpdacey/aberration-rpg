@@ -33,9 +33,11 @@ public class AttackHandler
         switch (combatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
         {
             case CombatantScriptableObject.AttributeAffinity.Resist:
+                Debug.Log("Attack Resisted");
                 affinityDamageMultiplier = 0.5f;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Weak:
+                Debug.Log("Weakness Struct");
                 affinityDamageMultiplier = 1.5f;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
