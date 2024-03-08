@@ -61,13 +61,13 @@ public class BattleUIController : MonoBehaviour
             case 2:
                 for (int i = 0; i < 2; i++)
                 {
-                    monsterTargetButtons[i * 2].interactable = aliveTargets[i];
+                    monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
                     monsterTargetButtons[i * 2].transform.position = Vector3.left * (3 - 6 * i);
                 }
                 monsterTargetButtons[0].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].interactable = aliveTargets[0];
+                monsterTargetButtons[1].interactable = aliveTargets[1];
                 monsterTargetButtons[1].Select();
                 break;
         }

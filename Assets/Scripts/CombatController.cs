@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Linq;
 
 public class CombatController : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class CombatController : MonoBehaviour
     struct PlayerAction
     {
         public ActionState actionType;
+        public AttackAction attackAction;
+    }
+
+    struct AttackAction
+    {
         public int target;
         public AttackObject attack;
     }
@@ -43,7 +49,7 @@ public class CombatController : MonoBehaviour
     public MonsterController[] monsters;
     public FormationScriptableObject formation;
     public ActionState actionState = ActionState.None;
-    [SerializeField] private BattleState currentState;
+    [SerializeField] private BattleState currentBattleState;
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
     private bool[] monstersAlive;
@@ -62,7 +68,7 @@ public class CombatController : MonoBehaviour
 
     public void SetupCombat()
     {
-        currentState = BattleState.Initializing;
+        currentBattleState = BattleState.Initializing;
 
         foreach (var monster in monsters)
             monster.GetComponent<SpriteRenderer>().enabled = false;
@@ -86,14 +92,14 @@ public class CombatController : MonoBehaviour
                     monsters[i * 2].GetComponent<SpriteRenderer>().enabled = true;
                     monsters[i * 2].transform.position = Vector3.left * (3 - 6 * i);
                 }
-                monstersAlive = new bool[2];
-                monstersAlive[0] = monstersAlive[1] = true;
+                monstersAlive = new bool[3];
+                monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
                 monsters[1].CombatantStats = formation.monsters[0];
                 monsters[1].GetComponent<SpriteRenderer>().enabled = true;
-                monstersAlive = new bool[1];
-                monstersAlive[0] = true;
+                monstersAlive = new bool[3];
+                monstersAlive[1] = true;
                 break;
             default:
                 Debug.LogError($"Invalid number of monsters in foundation: {formation.name}");
@@ -135,7 +141,8 @@ public class CombatController : MonoBehaviour
 
     IEnumerator PlayerPhase()
     {
-        currentState = BattleState.PlayerPhase;
+        currentBattleState = BattleState.PlayerPhase;
+
         bool actionChosen = false;
         int lastValidIndex = 0;
 
@@ -176,8 +183,11 @@ public class CombatController : MonoBehaviour
                             PlayerAction playerAction = new()
                             {
                                 actionType = ActionState.Attack,
-                                target = selectedMonster,
-                                attack = AttackHandler.GenerateNormalAttack(currentMember.partyMemberBaseStats)
+                                attackAction = new()
+                                {
+                                    target = selectedMonster,
+                                    attack = AttackHandler.GenerateNormalAttack(currentMember.partyMemberBaseStats)
+                                }
                             };
 
                             playerActions[currentPlayerIndex] = playerAction;
@@ -205,6 +215,19 @@ public class CombatController : MonoBehaviour
         StartCoroutine(EnemyPhase());
     }
 
+    int GetNextAliveMonster()
+    {
+        int firstAlive = 0;
+
+        foreach (var alive in monstersAlive)
+        {
+            if (alive) return firstAlive;
+            firstAlive++;
+        }
+
+        return 2;
+    }
+
     IEnumerator PlayerActionExecution()
     {
         for(int i = 0; i < playerActions.Length; i++)
@@ -215,7 +238,10 @@ public class CombatController : MonoBehaviour
             switch (playerActions[i].actionType)
             {
                 case ActionState.Attack:
-                    monsters[playerActions[i].target].RecieveAttack(playerActions[i].attack);
+                    if(monstersAlive[playerActions[i].attackAction.target])
+                        monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack);
+                    else
+                        monsters[GetNextAliveMonster()].RecieveAttack(playerActions[i].attackAction.attack);
                     break;
             }
 

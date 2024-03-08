@@ -2598,7 +2598,7 @@ MonoBehaviour:
   - {fileID: 1588695423}
   formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
   actionState: 0
-  currentState: 0
+  currentBattleState: 0
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
