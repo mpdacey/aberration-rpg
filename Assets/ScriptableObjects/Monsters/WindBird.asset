@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
+  m_Name: WindBird
+  m_EditorClassIdentifier: 
+  combatantName: Green Owl
+  combatantMaxHealth: 80
+  combatantMaxStamina: 36
+  combatantBaseStats:
+    strength: 2
+    magic: 4
+    endurance: 3
+    agility: 5
+    luck: 2
+  combatantSpells:
+  - {fileID: 11400000, guid: b10de2ace0281134d97f013d44c17fd0, type: 2}
+  combatantNormalAttackType: 4
+  combatantDice: {fileID: 0}
+  combatantSprite: {fileID: 21300000, guid: 3a0c527d7f890d64a9b56b086e6e766a, type: 3}
+  combatantAttributesArray:
+  - key: 0
+    value: 0
+  - key: 1
+    value: 0
+  - key: 2
+    value: 1
+  - key: 3
+    value: 2
+  - key: 4
+    value: 0
+  - key: 5
+    value: 1
