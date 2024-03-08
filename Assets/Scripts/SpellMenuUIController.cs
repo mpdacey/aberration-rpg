@@ -42,7 +42,7 @@ public class SpellMenuUIController : MonoBehaviour
     private void OnEnable()
     {
         combatController.ShowSpells += ShowSpellMenu;
-        combatController.ShowAttackMenu += HideSpellMenu;
+        combatController.ShowAttackMenuUI += HideSpellMenu;
         combatController.ShowTargetIndicatorUI += HideSpellMenu;
         combatController.HideAllUI += HideSpellMenu;
     }
@@ -50,7 +50,7 @@ public class SpellMenuUIController : MonoBehaviour
     private void OnDisable()
     {
         combatController.ShowSpells -= ShowSpellMenu;
-        combatController.ShowAttackMenu -= HideSpellMenu;
+        combatController.ShowAttackMenuUI -= HideSpellMenu;
         combatController.ShowTargetIndicatorUI -= HideSpellMenu;
         combatController.HideAllUI -= HideSpellMenu;
     }

@@ -7,6 +7,7 @@ public class BattleUIController : MonoBehaviour
 {
     public CombatController combatController;
     public GameObject battleMenuUI;
+    public Button skillButton;
     public Button[] monsterTargetButtons;
     public GameObject[] partyLineUpUI;
 
@@ -34,10 +35,11 @@ public class BattleUIController : MonoBehaviour
             partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -140, 0);
     }
 
-    private void ShowBattleMenu()
+    private void ShowBattleMenu(PartyController.PartyMember currentPlayer)
     {
         battleMenuUI.SetActive(true);
         battleMenuUI.GetComponentInChildren<Button>().Select();
+        skillButton.interactable = currentPlayer.partyMemberBaseStats.combatantSpells.Count > 0;
 
         HideTargets();
     }

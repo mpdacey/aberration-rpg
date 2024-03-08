@@ -8,7 +8,8 @@ public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
     public event Action<int> CurrentPartyTurn;
-    public event Action ShowAttackMenu;
+    public event Action<PartyController.PartyMember> ShowAttackMenu;
+    public event Action ShowAttackMenuUI;
     public event Action<bool[]> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
@@ -171,8 +172,10 @@ public class CombatController : MonoBehaviour
             while (!actionChosen)
             {
                 if (ShowAttackMenu != null)
-                    ShowAttackMenu.Invoke();
-                while(actionState == ActionState.None) yield return new WaitForEndOfFrame();
+                    ShowAttackMenu.Invoke(currentMember);
+                if (ShowAttackMenuUI != null)
+                    ShowAttackMenuUI.Invoke();
+                while (actionState == ActionState.None) yield return new WaitForEndOfFrame();
 
                 switch (actionState)
                 {
