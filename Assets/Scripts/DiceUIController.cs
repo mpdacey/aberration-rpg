@@ -41,7 +41,9 @@ public class DiceUIController : MonoBehaviour
     {
         for(int i = 0; i < numOfRolls; i++)
         {
-            diceFaceRenderer.sprite = diceFaces[allDiceFaces[Mathf.FloorToInt(Random.Range(0, allDiceFaces.Length - 0.01f))]];
+            var randomIndex = Mathf.FloorToInt(Random.Range(1, allDiceFaces.Length) - 1);
+            var selectedNumber = allDiceFaces[randomIndex];
+            diceFaceRenderer.sprite = diceFaces[selectedNumber-1];
             yield return new WaitForSeconds(revealTime / numOfRolls);
         }
         diceFaceRenderer.sprite = diceFaces[chosenFace - 1];

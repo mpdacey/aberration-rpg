@@ -90,7 +90,10 @@ public class CombatController : MonoBehaviour
         currentBattleState = BattleState.Initializing;
 
         foreach (var monster in monsters)
+        {
             monster.GetComponent<SpriteRenderer>().enabled = false;
+            monster.HideDice();
+        }
 
         switch (formation.monsters.Length)
         {
@@ -164,6 +167,12 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
+
+        for(int i = 0; i < monsters.Length; i++)
+        {
+            if (monstersAlive[i])
+                monsters[i].GenerateDice();
+        }
 
         bool actionChosen = false;
 

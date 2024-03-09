@@ -38,6 +38,7 @@ public class MonsterController : MonoBehaviour
 
     public void GenerateDice()
     {
+        diceControllers[0].gameObject.SetActive(true);
         diceControllers[1].gameObject.SetActive(currentDiceValues.Length > 1);
 
         for(int i = 0; i < currentDiceValues.Length; i++)
@@ -45,6 +46,12 @@ public class MonsterController : MonoBehaviour
             currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Mathf.FloorToInt(Random.Range(0, currentDiceValues.Length - 0.01f))];
             diceControllers[i].CastFace(currentDiceValues[i], combatantStats.combatantDiceSet[i].dieFaces);
         }
+    }
+
+    public void HideDice()
+    {
+        diceControllers[0].gameObject.SetActive(false);
+        diceControllers[1].gameObject.SetActive(false);
     }
 
     public AttackObject GetAttack()
