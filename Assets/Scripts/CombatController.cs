@@ -168,11 +168,7 @@ public class CombatController : MonoBehaviour
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
 
-        for(int i = 0; i < monsters.Length; i++)
-        {
-            if (monstersAlive[i])
-                monsters[i].GenerateDice();
-        }
+        yield return GenerateMonsterDice();
 
         bool actionChosen = false;
 
@@ -257,6 +253,19 @@ public class CombatController : MonoBehaviour
         yield return PlayerActionExecution();
 
         BattleConditionInspector(EnemyPhase());
+    }
+
+    IEnumerator GenerateMonsterDice()
+    {
+        for (int i = 0; i < monsters.Length; i++)
+        {
+            if (monstersAlive[i])
+            {
+                StartCoroutine(monsters[i].GenerateDice());
+                yield return new WaitForSeconds(0.75f/2);
+            }
+        }
+        yield return new WaitForSeconds(0.75f);
     }
 
     int GetNextAliveMonster()

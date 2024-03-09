@@ -36,15 +36,16 @@ public class MonsterController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void GenerateDice()
+    public IEnumerator GenerateDice()
     {
-        diceControllers[0].gameObject.SetActive(true);
-        diceControllers[1].gameObject.SetActive(currentDiceValues.Length > 1);
-
+        //diceControllers[0].gameObject.SetActive(true);
         for(int i = 0; i < currentDiceValues.Length; i++)
         {
+            diceControllers[i].gameObject.SetActive(currentDiceValues.Length >= i);
             currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Mathf.FloorToInt(Random.Range(0, currentDiceValues.Length - 0.01f))];
             diceControllers[i].CastFace(currentDiceValues[i], combatantStats.combatantDiceSet[i].dieFaces);
+
+            yield return new WaitForSeconds(diceControllers[i].revealTime/2);
         }
     }
 
