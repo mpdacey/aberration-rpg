@@ -228,6 +228,8 @@ public class CombatController : MonoBehaviour
                         yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
                         break;
                     case ActionState.Guard:
+                        playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
+                        actionState = ActionState.Confirm;
                         break;
                     case ActionState.Cancel:
                         bool partyMemberExists = false;
@@ -318,8 +320,11 @@ public class CombatController : MonoBehaviour
                     break;
             }
 
-            playerActions[i].actionType = ActionState.None;
-            yield return new WaitForSeconds(1f);
+            if(playerActions[i].actionType != ActionState.Guard)
+            {
+                playerActions[i].actionType = ActionState.None;
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 
@@ -386,7 +391,7 @@ public class CombatController : MonoBehaviour
             AttackObject reflectedAttack = null;
             PartyController.PartyMember targetMember = PartyController.partyMembers[enemyAttackObject.target].Value;
             int oldHealth = targetMember.currentHP;
-            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack);
+            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
 
             // Display damage
 

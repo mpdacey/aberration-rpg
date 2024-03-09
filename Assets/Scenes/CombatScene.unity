@@ -2215,7 +2215,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1297064342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672502333}
+        m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
+        m_MethodName: SetActionState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1297064342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3444,7 +3456,7 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
+  formation: {fileID: 11400000, guid: 66a1f1e4460845a419f16ad1bbb1286e, type: 2}
   actionState: 0
   currentBattleState: 0
 --- !u!1001 &1689702921
