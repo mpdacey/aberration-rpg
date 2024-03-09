@@ -23,22 +23,26 @@ public class AttackHandler
         return attack;
     }
 
-    public static void CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack)
+    public static void CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack, bool isGuarding = false)
     {
         bool isAbsorbing = false;
         float affinityDamageMultiplier = 1;
 
         reflectedAttack = null;
+        if (isGuarding) Debug.Log("Guarding next attack");
 
         switch (combatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
         {
+            case CombatantScriptableObject.AttributeAffinity.None:
+                affinityDamageMultiplier = isGuarding? 0.5f : 1;
+                break;
             case CombatantScriptableObject.AttributeAffinity.Resist:
                 Debug.Log("Attack Resisted");
                 affinityDamageMultiplier = 0.5f;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Weak:
                 Debug.Log("Weakness Struct");
-                affinityDamageMultiplier = 1.5f;
+                affinityDamageMultiplier = isGuarding ? 0.65f : 1.5f;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
                 Debug.Log("Attack Nullified");
@@ -57,7 +61,7 @@ public class AttackHandler
         }
 
         //Check for evasion
-        if (!isAbsorbing)
+            if (!isAbsorbing)
         {
             var agilityDiff = combatantStats.combatantBaseStats.agility - incomingAttack.attackerStats.agility;
             var luckDiff = combatantStats.combatantBaseStats.luck - incomingAttack.attackerStats.luck;
