@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using System.Linq;
 
 public class MonsterController : MonoBehaviour
 {
@@ -17,17 +19,31 @@ public class MonsterController : MonoBehaviour
             spriteRenderer.sprite = combatantStats.combatantSprite;
             localHP = combatantStats.combatantMaxHealth;
             localSP = combatantStats.combatantMaxStamina;
+            currentDiceValues = new int[combatantStats.combatantDiceSet.Length];
         }
     }
     public bool isDefeated = false;
     [SerializeField] private CombatantScriptableObject combatantStats;
+    [SerializeReference] private DiceUIController[] diceControllers;
     private SpriteRenderer spriteRenderer;
     private int localHP = 0;
     private int localSP = 0;
+    private int[] currentDiceValues;
 
     private void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void GenerateDice()
+    {
+        diceControllers[1].gameObject.SetActive(currentDiceValues.Length > 1);
+
+        for(int i = 0; i < currentDiceValues.Length; i++)
+        {
+            currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Mathf.FloorToInt(Random.Range(0, currentDiceValues.Length - 0.01f))];
+            diceControllers[i].CastFace(currentDiceValues[i], combatantStats.combatantDiceSet[i].dieFaces);
+        }
     }
 
     public AttackObject GetAttack()

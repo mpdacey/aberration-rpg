@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDefeated: 0
   combatantStats: {fileID: 0}
+  diceControllers:
+  - {fileID: 5662409767837484484}
+  - {fileID: 4231280707576635237}
 --- !u!1001 &904072703906598902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,6 +169,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9146d58971f815d4a8b5478a149e1130, type: 3}
+--- !u!114 &4231280707576635237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905586485158170771, guid: 9146d58971f815d4a8b5478a149e1130, type: 3}
+  m_PrefabInstance: {fileID: 904072703906598902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312bab2412fe89e44a0c147e0f0e72d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8911678372814994905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8585915971948114479, guid: 9146d58971f815d4a8b5478a149e1130, type: 3}
@@ -241,3 +255,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8585915971948114479, guid: 9146d58971f815d4a8b5478a149e1130, type: 3}
   m_PrefabInstance: {fileID: 8694064501324813655}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5662409767837484484 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3905586485158170771, guid: 9146d58971f815d4a8b5478a149e1130, type: 3}
+  m_PrefabInstance: {fileID: 8694064501324813655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312bab2412fe89e44a0c147e0f0e72d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
