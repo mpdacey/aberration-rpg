@@ -23,7 +23,8 @@ public class CombatantScriptableObject : ScriptableObject
         Resist,
         Null,
         Repel,
-        Absorb
+        Absorb,
+        Evade
     }
 
     public string combatantName;

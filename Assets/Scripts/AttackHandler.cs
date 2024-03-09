@@ -23,10 +23,11 @@ public class AttackHandler
         return attack;
     }
 
-    public static void CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack, bool isGuarding = false)
+    public static CombatantScriptableObject.AttributeAffinity CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack, bool isGuarding = false)
     {
         bool isAbsorbing = false;
         float affinityDamageMultiplier = 1;
+        CombatantScriptableObject.AttributeAffinity resultingAffinity = CombatantScriptableObject.AttributeAffinity.None;
 
         reflectedAttack = null;
         if (isGuarding) Debug.Log("Guarding next attack");
@@ -39,29 +40,34 @@ public class AttackHandler
             case CombatantScriptableObject.AttributeAffinity.Resist:
                 Debug.Log("Attack Resisted");
                 affinityDamageMultiplier = 0.5f;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Resist;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Weak:
                 Debug.Log("Weakness Struct");
                 affinityDamageMultiplier = isGuarding ? 0.65f : 1.5f;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Weak;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
                 Debug.Log("Attack Nullified");
-                return;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Null;
+                return resultingAffinity;
             case CombatantScriptableObject.AttributeAffinity.Absorb:
                 Debug.Log("Attack Absorbed");
                 isAbsorbing = true;
                 affinityDamageMultiplier = 0.8f;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Absorb;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Repel:
                 Debug.Log("Attack Reflected");
                 // Initialiser prevents endless pingpong between combatants.
                 reflectedAttack = incomingAttack;
                 reflectedAttack.isInitialiser = !reflectedAttack.isInitialiser;
-                return;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Repel;
+                return resultingAffinity;
         }
 
         //Check for evasion
-            if (!isAbsorbing)
+        if (!isAbsorbing)
         {
             var agilityDiff = combatantStats.combatantBaseStats.agility - incomingAttack.attackerStats.agility;
             var luckDiff = combatantStats.combatantBaseStats.luck - incomingAttack.attackerStats.luck;
@@ -70,7 +76,8 @@ public class AttackHandler
             if (hitRate < Random.value * 100)
             {
                 Debug.Log("Attack Dodged");
-                return;
+                resultingAffinity = CombatantScriptableObject.AttributeAffinity.Evade;
+                return resultingAffinity;
             }
         }
 
@@ -84,5 +91,6 @@ public class AttackHandler
         currentHP = Mathf.RoundToInt(Mathf.Clamp(currentHP - resultingDamageTaken * (isAbsorbing ? -1 : 1), 0, combatantStats.combatantMaxHealth));
 
         Debug.Log($"{combatantStats.combatantName} takes {oldHP -= currentHP}");
+        return resultingAffinity;
     }
 }
