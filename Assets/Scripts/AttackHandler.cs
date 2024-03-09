@@ -23,7 +23,7 @@ public class AttackHandler
         return attack;
     }
 
-    public static CombatantScriptableObject.AttributeAffinity CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack, bool isGuarding = false)
+    public static CombatantScriptableObject.AttributeAffinity CalculateIncomingDamage(AttackObject incomingAttack, CombatantScriptableObject combatantStats, ref int currentHP, out AttackObject reflectedAttack, bool isGuarding = false, bool isStunned = false)
     {
         bool isAbsorbing = false;
         float affinityDamageMultiplier = 1;
@@ -35,16 +35,16 @@ public class AttackHandler
         switch (combatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
         {
             case CombatantScriptableObject.AttributeAffinity.None:
-                affinityDamageMultiplier = isGuarding? 0.5f : 1;
+                affinityDamageMultiplier = (isGuarding ? 0.5f : 1) * (isStunned ? 1.3f : 1);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Resist:
                 Debug.Log("Attack Resisted");
-                affinityDamageMultiplier = 0.5f;
+                affinityDamageMultiplier = (isGuarding ? 0.35f : 0.5f) * (isStunned ? 1.3f : 1);
                 resultingAffinity = CombatantScriptableObject.AttributeAffinity.Resist;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Weak:
                 Debug.Log("Weakness Struct");
-                affinityDamageMultiplier = isGuarding ? 0.65f : 1.5f;
+                affinityDamageMultiplier = (isGuarding ? 0.65f : 1.5f) * (isStunned ? 1.3f : 1);
                 resultingAffinity = CombatantScriptableObject.AttributeAffinity.Weak;
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
