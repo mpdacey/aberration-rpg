@@ -25,8 +25,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
   - {fileID: 11400000, guid: 163d8443cf495604e8da42d683eef9c7, type: 2}
   combatantNormalAttackType: 4
-  combatantDice: {fileID: 0}
   combatantSprite: {fileID: 21300000, guid: 7fd3cda14282bb7429b8eeb6c121e5bb, type: 3}
+  combatantDiceSet:
+  - dieFaces: 04000000010000000100000001000000
+  - dieFaces: 02000000010000000100000001000000
   combatantAttributesArray:
   - key: 0
     value: 1

@@ -23,7 +23,8 @@ public class CombatantScriptableObject : ScriptableObject
         Resist,
         Null,
         Repel,
-        Absorb
+        Absorb,
+        Evade
     }
 
     public string combatantName;
@@ -33,8 +34,14 @@ public class CombatantScriptableObject : ScriptableObject
     public Dictionary<SpellScriptableObject.SpellType, AttributeAffinity> combatantAttributes = new Dictionary<SpellScriptableObject.SpellType, AttributeAffinity>();
     public List<SpellScriptableObject> combatantSpells = new List<SpellScriptableObject>();
     public SpellScriptableObject.SpellType combatantNormalAttackType;
-    public DiceScriptableObject combatantDice;
     public Sprite combatantSprite;
+    public Dice[] combatantDiceSet;
+
+    [System.Serializable]
+    public struct Dice
+    {
+        public int[] dieFaces;
+    }
 
     [System.Serializable]
     private struct AttributeAffinityDictionaryItem

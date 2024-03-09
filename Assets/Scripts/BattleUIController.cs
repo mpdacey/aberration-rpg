@@ -20,7 +20,7 @@ public class BattleUIController : MonoBehaviour
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
         combatController.ShowSpellsUI += HideAll;
-        combatController.HideAllUI += HideAll;
+        combatController.StatePlayerAttack += HideAll;
     }
 
     private void OnDisable()
@@ -29,7 +29,7 @@ public class BattleUIController : MonoBehaviour
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
         combatController.ShowSpellsUI -= HideAll;
-        combatController.HideAllUI -= HideAll;
+        combatController.StatePlayerAttack -= HideAll;
     }
 
     private void Update()

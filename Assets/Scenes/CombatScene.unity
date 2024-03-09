@@ -1434,6 +1434,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 777177476}
     m_Modifications:
+    - target: {fileID: 1117113227660846968, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3456,7 +3460,7 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 66a1f1e4460845a419f16ad1bbb1286e, type: 2}
+  formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
   actionState: 0
   currentBattleState: 0
 --- !u!1001 &1689702921

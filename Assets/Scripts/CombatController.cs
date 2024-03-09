@@ -14,7 +14,7 @@ public class CombatController : MonoBehaviour
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
-    public event Action HideAllUI;
+    public event Action StatePlayerAttack;
 
     private struct PlayerAction
     {
@@ -59,6 +59,7 @@ public class CombatController : MonoBehaviour
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
     private bool[] monstersAlive = new bool[3];
+    public bool[] monstersStunned = new bool[3];
     private PlayerAction[] playerActions = new PlayerAction[4];
     private SpellScriptableObject selectedSpell;
     bool isCancelling = false;
@@ -72,12 +73,14 @@ public class CombatController : MonoBehaviour
     private void OnEnable()
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
+        MonsterController.MonsterStunned += StunMonster;
         SetupCombat();
     }
 
     private void OnDisable()
     {
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
+        MonsterController.MonsterStunned -= StunMonster;
     }
 
     private void Update()
@@ -90,7 +93,10 @@ public class CombatController : MonoBehaviour
         currentBattleState = BattleState.Initializing;
 
         foreach (var monster in monsters)
+        {
             monster.GetComponent<SpriteRenderer>().enabled = false;
+            monster.HideDice();
+        }
 
         switch (formation.monsters.Length)
         {
@@ -164,6 +170,9 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
+        monstersStunned = monstersAlive.Select(x => !x).ToArray();
+
+        yield return GenerateMonsterDice();
 
         bool actionChosen = false;
 
@@ -250,6 +259,24 @@ public class CombatController : MonoBehaviour
         BattleConditionInspector(EnemyPhase());
     }
 
+    IEnumerator GenerateMonsterDice()
+    {
+        for (int i = 0; i < monsters.Length; i++)
+        {
+            if (monstersAlive[i])
+            {
+                StartCoroutine(monsters[i].GenerateDice());
+                yield return new WaitForSeconds(0.75f/2);
+            }
+        }
+        yield return new WaitForSeconds(0.75f);
+    }
+
+    private void StunMonster(int enemyIndex)
+    {
+        monstersStunned[Mathf.Clamp(enemyIndex, 0, monstersStunned.Length - 1)] = true;
+    }
+
     int GetNextAliveMonster()
     {
         int firstAlive = 0;
@@ -295,8 +322,8 @@ public class CombatController : MonoBehaviour
 
     IEnumerator PlayerActionExecution()
     {
-        if (HideAllUI != null)
-            HideAllUI.Invoke();
+        if (StatePlayerAttack != null)
+            StatePlayerAttack.Invoke();
 
         for (int i = 0; i < playerActions.Length; i++)
         {
@@ -308,9 +335,12 @@ public class CombatController : MonoBehaviour
                 case ActionState.Attack:
                 case ActionState.Skill:
                     if(monstersAlive[playerActions[i].attackAction.target])
-                        monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack);
+                        monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[playerActions[i].attackAction.target]);
                     else
-                        monsters[GetNextAliveMonster()].RecieveAttack(playerActions[i].attackAction.attack);
+                    {
+                        var nextMonsterIndex = GetNextAliveMonster();
+                        monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                    }
                     break;
             }
 
@@ -334,7 +364,7 @@ public class CombatController : MonoBehaviour
         int[] playerTargetPriority;
         for (int i = 0; i < 3; i++)
         {
-            if (!monstersAlive[i]) continue;
+            if (!monstersAlive[i] || monstersStunned[i]) continue;
 
             // Get Enemy Attacks
             AttackAction enemyAttackObject = new();
@@ -389,7 +419,7 @@ public class CombatController : MonoBehaviour
             AttackObject reflectedAttack = null;
             PartyController.PartyMember targetMember = PartyController.partyMembers[enemyAttackObject.target].Value;
             int oldHealth = targetMember.currentHP;
-            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
+            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
 
             // Display damage
 
