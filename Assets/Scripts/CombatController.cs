@@ -250,7 +250,7 @@ public class CombatController : MonoBehaviour
         // Perform actions
         yield return PlayerActionExecution();
 
-        StartCoroutine(EnemyPhase());
+        BattleConditionInspector(EnemyPhase());
     }
 
     int GetNextAliveMonster()
@@ -303,9 +303,6 @@ public class CombatController : MonoBehaviour
 
         for (int i = 0; i < playerActions.Length; i++)
         {
-            if (currentBattleState == BattleState.Victory || currentBattleState == BattleState.Defeat)
-                break;
-
             if (playerActions[i].actionType == ActionState.None)
                 continue;
 
@@ -325,6 +322,10 @@ public class CombatController : MonoBehaviour
                 playerActions[i].actionType = ActionState.None;
                 yield return new WaitForSeconds(1f);
             }
+
+            if (currentBattleState == BattleState.Defeat) break;
+            if (monstersAlive.All(x => x == false)) currentBattleState = BattleState.Victory;
+            if (currentBattleState == BattleState.Victory) break;
         }
     }
 
@@ -416,6 +417,11 @@ public class CombatController : MonoBehaviour
             }
         }
 
+        BattleConditionInspector(PlayerPhase());
+    }
+
+    private void BattleConditionInspector(IEnumerator nextPhase)
+    {
         switch (currentBattleState)
         {
             case BattleState.Victory:
@@ -425,7 +431,7 @@ public class CombatController : MonoBehaviour
                 StartCoroutine(Defeat());
                 break;
             default:
-                StartCoroutine(PlayerPhase());
+                StartCoroutine(nextPhase);
                 break;
         }
     }
