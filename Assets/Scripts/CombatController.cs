@@ -14,7 +14,7 @@ public class CombatController : MonoBehaviour
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
-    public event Action HideAllUI;
+    public event Action StatePlayerAttack;
 
     private struct PlayerAction
     {
@@ -295,8 +295,8 @@ public class CombatController : MonoBehaviour
 
     IEnumerator PlayerActionExecution()
     {
-        if (HideAllUI != null)
-            HideAllUI.Invoke();
+        if (StatePlayerAttack != null)
+            StatePlayerAttack.Invoke();
 
         for (int i = 0; i < playerActions.Length; i++)
         {
