@@ -24,8 +24,9 @@ MonoBehaviour:
   combatantSpells:
   - {fileID: 11400000, guid: 06d8c1d47515bc642981bdc0acc28cdb, type: 2}
   combatantNormalAttackType: 4
-  combatantDice: {fileID: 0}
   combatantSprite: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
+  combatantDiceSet:
+  - dieFaces: 030000000200000002000000
   combatantAttributesArray:
   - key: 0
     value: 1
