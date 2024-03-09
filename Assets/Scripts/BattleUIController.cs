@@ -70,14 +70,14 @@ public class BattleUIController : MonoBehaviour
     private void HideBattleMenu() =>
         battleMenuUI.SetActive(false);
 
-    private void ShowTargets(bool[] aliveTargets)
+    private void ShowTargets(bool[] aliveTargets, int monsterCount)
     {
         monsterTargetButtons[0].transform.parent.gameObject.SetActive(true);
 
         foreach (var monsterTargetButton in monsterTargetButtons)
             monsterTargetButton.interactable = false;
 
-        switch (aliveTargets.Length)
+        switch (monsterCount)
         {
             case 3:
                 for (int i = 0; i < 3; i++)
@@ -98,6 +98,7 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
+                monsterTargetButtons[1].transform.position = Vector3.zero;
                 monsterTargetButtons[1].interactable = aliveTargets[1];
                 currentSelected = 1;
                 monsterTargetButtons[1].Select();

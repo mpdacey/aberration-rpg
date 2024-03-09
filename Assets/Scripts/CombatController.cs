@@ -10,7 +10,7 @@ public class CombatController : MonoBehaviour
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
-    public event Action<bool[]> ShowTargetIndicator;
+    public event Action<bool[], int> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
@@ -58,7 +58,7 @@ public class CombatController : MonoBehaviour
     [SerializeField] private BattleState currentBattleState;
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
-    private bool[] monstersAlive;
+    private bool[] monstersAlive = new bool[3];
     private PlayerAction[] playerActions = new PlayerAction[4];
     private SpellScriptableObject selectedSpell;
     bool isCancelling = false;
@@ -101,7 +101,6 @@ public class CombatController : MonoBehaviour
                     monsters[i].GetComponent<SpriteRenderer>().enabled = true;
                     monsters[i].transform.position = Vector3.left * (4.5f - 4.5f * i);
                 }
-                monstersAlive = new bool[3];
                 monstersAlive[0] = monstersAlive[1] = monstersAlive[2] = true;
                 break;
             case 2:
@@ -111,13 +110,11 @@ public class CombatController : MonoBehaviour
                     monsters[i * 2].GetComponent<SpriteRenderer>().enabled = true;
                     monsters[i * 2].transform.position = Vector3.left * (3 - 6 * i);
                 }
-                monstersAlive = new bool[3];
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
                 monsters[1].CombatantStats = formation.monsters[0];
                 monsters[1].GetComponent<SpriteRenderer>().enabled = true;
-                monstersAlive = new bool[3];
                 monstersAlive[1] = true;
                 break;
             default:
@@ -269,7 +266,7 @@ public class CombatController : MonoBehaviour
     IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
     {
         if (ShowTargetIndicator != null)
-            ShowTargetIndicator.Invoke(monstersAlive);
+            ShowTargetIndicator.Invoke(monstersAlive, formation.monsters.Length);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
 
