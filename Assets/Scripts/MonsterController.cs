@@ -8,6 +8,7 @@ using System.Linq;
 public class MonsterController : MonoBehaviour
 {
     public static event Action<int> MonsterDefeated;
+    public static event Action<int> MonsterStunned;
 
     public CombatantScriptableObject CombatantStats
     {
@@ -71,14 +72,39 @@ public class MonsterController : MonoBehaviour
     {
         AttackObject reflectedAttack = null;
 
-        AttackHandler.CalculateIncomingDamage(incomingAttack, combatantStats, ref localHP, out reflectedAttack);
+        var affinity = AttackHandler.CalculateIncomingDamage(incomingAttack, combatantStats, ref localHP, out reflectedAttack);
+        int lastDiceIndex = Array.FindLastIndex(currentDiceValues, x => x > 0);
+
+        if (currentDiceValues[0] > 0)
+        {
+            switch (affinity)
+            {
+                case CombatantScriptableObject.AttributeAffinity.None:
+                case CombatantScriptableObject.AttributeAffinity.Resist:
+                    diceControllers[lastDiceIndex].UpdateFace(--currentDiceValues[lastDiceIndex]);
+                break;
+                case CombatantScriptableObject.AttributeAffinity.Weak:
+                    diceControllers[lastDiceIndex].UpdateFace(currentDiceValues[lastDiceIndex] -= 3);
+                    break;
+                case CombatantScriptableObject.AttributeAffinity.Repel:
+                case CombatantScriptableObject.AttributeAffinity.Absorb:
+                    diceControllers[lastDiceIndex].UpdateFace(Mathf.Clamp(++currentDiceValues[lastDiceIndex], 1, 9));
+                    break;
+            }
+        }
 
         //TODO: Input reflect handling;
 
         if (localHP <= 0 && MonsterDefeated != null)
         {
             spriteRenderer.enabled = false;
-            MonsterDefeated.Invoke(transform.GetSiblingIndex());
+            if(MonsterDefeated != null)
+                MonsterDefeated.Invoke(transform.GetSiblingIndex());
+        }
+        else if(currentDiceValues[0] <= 0)
+        {
+            if (MonsterStunned != null)
+                MonsterStunned.Invoke(transform.GetSiblingIndex());
         }
     }
 }
