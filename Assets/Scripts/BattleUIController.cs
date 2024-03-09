@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BattleUIController : MonoBehaviour
 {
     public CombatController combatController;
     public GameObject battleMenuUI;
+    public Button skillButton;
     public Button[] monsterTargetButtons;
     public GameObject[] partyLineUpUI;
+    private int currentSelected;
 
     private void OnEnable()
     {
@@ -28,16 +32,37 @@ public class BattleUIController : MonoBehaviour
         combatController.HideAllUI -= HideAll;
     }
 
+    private void Update()
+    {
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+
+        if (battleMenuUI.activeInHierarchy)
+        {
+            if (selectedObject == null)
+                battleMenuUI.GetComponentsInChildren<Button>()[currentSelected].Select();
+            else
+                currentSelected = selectedObject.transform.GetSiblingIndex();
+        }
+        else if (monsterTargetButtons[0].transform.parent.gameObject.activeInHierarchy)
+        {
+            if (selectedObject == null)
+                monsterTargetButtons[currentSelected].Select();
+            else
+                currentSelected = selectedObject.transform.GetSiblingIndex();
+        }
+    }
+
     private void SetPartyLayoutPositions(int currentMember)
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
             partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -140, 0);
     }
 
-    private void ShowBattleMenu()
+    private void ShowBattleMenu(PartyController.PartyMember currentPlayer)
     {
         battleMenuUI.SetActive(true);
         battleMenuUI.GetComponentInChildren<Button>().Select();
+        skillButton.interactable = currentPlayer.partyMemberBaseStats.combatantSpells.Count > 0;
 
         HideTargets();
     }
@@ -60,7 +85,8 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i].interactable = aliveTargets[i];
                     monsterTargetButtons[i].transform.position = Vector3.left * (4.5f - 4.5f * i);
                 }
-                monsterTargetButtons[0].Select();
+                currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
+                monsterTargetButtons[currentSelected].Select();
                 break;
             case 2:
                 for (int i = 0; i < 2; i++)
@@ -68,10 +94,12 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
                     monsterTargetButtons[i * 2].transform.position = Vector3.left * (3 - 6 * i);
                 }
-                monsterTargetButtons[0].Select();
+                currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
+                monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
                 monsterTargetButtons[1].interactable = aliveTargets[1];
+                currentSelected = 1;
                 monsterTargetButtons[1].Select();
                 break;
         }
