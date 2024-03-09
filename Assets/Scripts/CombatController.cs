@@ -48,7 +48,8 @@ public class CombatController : MonoBehaviour
         Flee,
         Switch,
         Analyze,
-        Confirm
+        Confirm,
+        Cancel
     }
 
     public MonsterController[] monsters;
@@ -60,6 +61,7 @@ public class CombatController : MonoBehaviour
     private bool[] monstersAlive;
     private PlayerAction[] playerActions = new PlayerAction[4];
     private SpellScriptableObject selectedSpell;
+    bool isCancelling = false;
 
     private void Awake()
     {
@@ -76,6 +78,11 @@ public class CombatController : MonoBehaviour
     private void OnDisable()
     {
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
+    }
+
+    private void Update()
+    {
+        isCancelling = Input.GetButtonDown("Cancel");
     }
 
     public void SetupCombat()
@@ -162,9 +169,8 @@ public class CombatController : MonoBehaviour
         Debug.Log("Player Phase");
 
         bool actionChosen = false;
-        int lastValidIndex = 0;
 
-        for(int currentPlayerIndex = 0; currentPlayerIndex < 4; currentPlayerIndex++)
+        for(int currentPlayerIndex = 0; currentPlayerIndex < 4; currentPlayerIndex += (actionState != ActionState.Cancel) ? 1 : 0)
         {
             if (!PartyController.partyMembers[currentPlayerIndex].HasValue)
                 continue;
@@ -181,7 +187,12 @@ public class CombatController : MonoBehaviour
                     ShowAttackMenu.Invoke(currentMember);
                 if (ShowAttackMenuUI != null)
                     ShowAttackMenuUI.Invoke();
-                while (actionState == ActionState.None) yield return new WaitForEndOfFrame();
+
+                while (actionState == ActionState.None)
+                {
+                    if (isCancelling) actionState = ActionState.Cancel;
+                    yield return new WaitForEndOfFrame();
+                } 
 
                 switch (actionState)
                 {
@@ -200,13 +211,12 @@ public class CombatController : MonoBehaviour
 
                         while (actionState == ActionState.Skill && selectedSpell == null)
                         {
-                            if (Input.GetButtonDown("Cancel"))
-                                actionState = ActionState.None;
+                            if (isCancelling) actionState = ActionState.Cancel;
 
                             yield return new WaitForEndOfFrame();
                         }
 
-                        if (actionState == ActionState.None) break;
+                        if (actionState == ActionState.Cancel) break;
 
                         AttackObject spellAttackObject = new()
                         {
@@ -219,12 +229,18 @@ public class CombatController : MonoBehaviour
                         break;
                     case ActionState.Guard:
                         break;
+                    case ActionState.Cancel:
+                        bool partyMemberExists = false;
+                        while(!partyMemberExists && currentPlayerIndex > 0)
+                        {
+                            currentPlayerIndex--;
+                            partyMemberExists = PartyController.partyMembers[currentPlayerIndex].HasValue;
+                        }
+                        break;
                 }
 
-                actionChosen = actionState == ActionState.Confirm;
+                actionChosen = actionState == ActionState.Confirm || actionState == ActionState.Cancel;
             }
-
-            lastValidIndex = currentPlayerIndex;
         }
 
         CurrentPartyTurn.Invoke(-1);
@@ -257,8 +273,7 @@ public class CombatController : MonoBehaviour
 
         while (actionState == loopState)
         {
-            if (Input.GetButtonDown("Cancel"))
-                actionState = ActionState.None;
+            if (isCancelling) actionState = ActionState.Cancel;
 
             yield return new WaitForEndOfFrame();
         }
