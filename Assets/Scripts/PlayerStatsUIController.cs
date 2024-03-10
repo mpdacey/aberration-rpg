@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerStatsUIController : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerStatsUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI memberName;
     [SerializeField] TextMeshProUGUI memberHP;
     [SerializeField] TextMeshProUGUI memberSP;
+    [SerializeField] Image memberActionType;
 
     public void SetPartyMember(PartyController.PartyMember partyMember)
     {
@@ -16,6 +18,9 @@ public class PlayerStatsUIController : MonoBehaviour
         UpdateHealth(partyMember);
         UpdateStamina(partyMember);
     }
+
+    public void SetActionIcon(Sprite actionIcon) =>
+        memberActionType.sprite = actionIcon;
 
     public void UpdateHealth(PartyController.PartyMember partyMember) =>
         memberHP.text = $"{partyMember.currentHP}/{partyMember.partyMemberBaseStats.combatantMaxHealth}";

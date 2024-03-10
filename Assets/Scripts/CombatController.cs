@@ -18,16 +18,17 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember?, int> SetPartyMember;
     public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
     public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
+    public event Action<PlayerAction, int> UpdateActionIcon;
     public event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<int> DisplayEvadedAttack;
 
-    private struct PlayerAction
+    public struct PlayerAction
     {
         public ActionState actionType;
         public AttackAction attackAction;
     }
 
-    private struct AttackAction
+    public struct AttackAction
     {
         public int target;
         public AttackObject attack;
@@ -193,6 +194,10 @@ public class CombatController : MonoBehaviour
                 CurrentPartyTurn.Invoke(currentPlayerIndex);
 
             actionState = ActionState.None;
+            playerActions[currentPlayerIndex].actionType = actionState;
+            if (UpdateActionIcon != null)
+                UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
+
             actionChosen = false;
             while (!actionChosen)
             {
@@ -253,6 +258,9 @@ public class CombatController : MonoBehaviour
                         }
                         break;
                 }
+
+                if (UpdateActionIcon != null)
+                    UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
 
                 actionChosen = actionState == ActionState.Confirm || actionState == ActionState.Cancel;
             }
@@ -373,6 +381,9 @@ public class CombatController : MonoBehaviour
             {
                 playerActions[i].actionType = ActionState.None;
                 yield return new WaitForSeconds(1f);
+
+                if (UpdateActionIcon != null)
+                    UpdateActionIcon.Invoke(playerActions[i], i);
             }
 
             if (currentBattleState == BattleState.Defeat) break;
