@@ -9,6 +9,7 @@ public class MonsterController : MonoBehaviour
 {
     public static event Action<int> MonsterDefeated;
     public static event Action<int> MonsterStunned;
+    public static event Action<DamageTextProducer, int> DisplayRecievedMonsterDamage;
 
     public CombatantScriptableObject CombatantStats
     {
@@ -83,8 +84,12 @@ public class MonsterController : MonoBehaviour
     {
         AttackObject reflectedAttack = null;
 
+        int oldHP = localHP;
         var affinity = AttackHandler.CalculateIncomingDamage(incomingAttack, combatantStats, ref localHP, out reflectedAttack);
         int lastDiceIndex = Array.FindLastIndex(currentDiceValues, x => x > 0);
+
+        if (DisplayRecievedMonsterDamage != null && oldHP != localHP)
+            DisplayRecievedMonsterDamage.Invoke(GetComponent<DamageTextProducer>(), localHP-oldHP);
 
         if (currentDiceValues[0] > 0)
         {
