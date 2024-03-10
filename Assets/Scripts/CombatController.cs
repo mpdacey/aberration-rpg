@@ -7,7 +7,6 @@ using System.Linq;
 public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
-    public static event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
@@ -19,6 +18,7 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember?, int> SetPartyMember;
     public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
     public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
+    public event Action<int, int> DisplayRecievedPlayerDamage;
 
     private struct PlayerAction
     {
@@ -269,7 +269,6 @@ public class CombatController : MonoBehaviour
     {
         for (int i = 0; i < PartyController.partyMembers.Length; i++)
         {
-            Debug.Log(PartyController.partyMembers[i].HasValue);
             if (SetPartyMember != null && PartyController.partyMembers[i].HasValue)
                 SetPartyMember.Invoke(PartyController.partyMembers[i], i);
         }
