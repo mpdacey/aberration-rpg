@@ -1242,7 +1242,7 @@ Transform:
   - {fileID: 1007382825}
   - {fileID: 1192314846}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &777923603
 GameObject:
@@ -3455,7 +3455,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1672502333
 MonoBehaviour:
@@ -3843,7 +3843,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1719885876
 GameObject:
@@ -3961,6 +3961,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796975613}
   - component: {fileID: 1796975612}
+  - component: {fileID: 1796975614}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -4007,8 +4008,35 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1796975614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb21c658d79fb0b42872a4c4f955b941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localIconPairs:
+  - key: 0
+    value: {fileID: -738711310, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  - key: 1
+    value: {fileID: -1272700322, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  - key: 2
+    value: {fileID: -498448935, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  - key: 3
+    value: {fileID: 1240899493, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  - key: 4
+    value: {fileID: -2099217341, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  - key: 5
+    value: {fileID: 1510502929, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  noneSprite: {fileID: -696006631, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+  guardSprite: {fileID: -647915252, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
 --- !u!1001 &1856331282
 PrefabInstance:
   m_ObjectHideFlags: 0
