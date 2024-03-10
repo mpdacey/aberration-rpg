@@ -26,6 +26,7 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember += SetPartyValues;
         combatController.UpdatePlayerHP += UpdateHealth;
         combatController.UpdatePlayerSP += UpdateStamina;
+        combatController.UpdateActionIcon += SetActionIcon;
         combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
         combatController.DisplayEvadedAttack += DisplayEvadedAttack;
     }
@@ -40,6 +41,7 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember -= SetPartyValues;
         combatController.UpdatePlayerHP -= UpdateHealth;
         combatController.UpdatePlayerSP -= UpdateStamina;
+        combatController.UpdateActionIcon -= SetActionIcon;
         combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
         combatController.DisplayEvadedAttack -= DisplayEvadedAttack;
     }
@@ -71,6 +73,24 @@ public class BattleUIController : MonoBehaviour
         partyLineUpUI[partyMemberPosition].transform.GetChild(0).gameObject.SetActive(hasValue);
         if (hasValue)
             partyLineUpUI[partyMemberPosition].SetPartyMember(partyMemberStats.Value);
+    }
+
+    private void SetActionIcon(CombatController.PlayerAction playerAction, int playerIndex)
+    {
+        Sprite actionTypeSprite = SpellIcons.empty;
+
+        switch (playerAction.actionType)
+        {
+            case CombatController.ActionState.Attack:
+            case CombatController.ActionState.Skill:
+                actionTypeSprite = SpellIcons.icons[playerAction.attackAction.attack.attackSpell.spellType];
+                break;
+            case CombatController.ActionState.Guard:
+                actionTypeSprite = SpellIcons.guard;
+                break;
+        }
+
+        partyLineUpUI[playerIndex].SetActionIcon(actionTypeSprite);
     }
 
     private void SetPartyLayoutPositions(int currentMember)
