@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6686381662977745093}
   - component: {fileID: 7191578498576746649}
   - component: {fileID: 1152952985008984834}
+  - component: {fileID: 3916632201086158709}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -104,6 +105,19 @@ MonoBehaviour:
   diceControllers:
   - {fileID: 5662409767837484484}
   - {fileID: 4231280707576635237}
+--- !u!114 &3916632201086158709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785008219551619961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a96b6f194fc95468fda8b0002da001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePrefab: {fileID: 2761299047830861520, guid: c3429ab3e43822d42b023e04dd949479, type: 3}
 --- !u!1001 &904072703906598902
 PrefabInstance:
   m_ObjectHideFlags: 0

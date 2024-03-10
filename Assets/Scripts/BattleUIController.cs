@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class BattleUIController : MonoBehaviour
 {
+    public event Action<DamageTextProducer, int> DisplayRecievedPlayerDamageEvent;
+    public event Action<DamageTextProducer> DisplayEvadedAttackEvent;
+
     public CombatController combatController;
     public GameObject battleMenuUI;
     public Button skillButton;
@@ -24,6 +26,8 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember += SetPartyValues;
         combatController.UpdatePlayerHP += UpdateHealth;
         combatController.UpdatePlayerSP += UpdateStamina;
+        combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
+        combatController.DisplayEvadedAttack += DisplayEvadedAttack;
     }
 
     private void OnDisable()
@@ -36,6 +40,8 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember -= SetPartyValues;
         combatController.UpdatePlayerHP -= UpdateHealth;
         combatController.UpdatePlayerSP -= UpdateStamina;
+        combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
+        combatController.DisplayEvadedAttack -= DisplayEvadedAttack;
     }
 
     private void Update()
@@ -71,7 +77,7 @@ public class BattleUIController : MonoBehaviour
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
         {
-            partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -140, 0);
+            partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -105, 0);
         }
     }
 
@@ -138,4 +144,16 @@ public class BattleUIController : MonoBehaviour
 
     private void UpdateStamina(PartyController.PartyMember partyMember, int playerIndex) =>
         partyLineUpUI[playerIndex].UpdateStamina(partyMember);
+
+    private void DisplayRecievedPlayerDamage(int playerIndex, int damageValue)
+    {
+        if (DisplayRecievedPlayerDamageEvent != null)
+            DisplayRecievedPlayerDamageEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>(), damageValue);
+    }
+
+    private void DisplayEvadedAttack(int playerIndex)
+    {
+        if (DisplayEvadedAttackEvent != null)
+            DisplayEvadedAttackEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>());
+    }
 }

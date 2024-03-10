@@ -2513,7 +2513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3160,7 +3160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3434,6 +3434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1672502332}
   - component: {fileID: 1672502333}
+  - component: {fileID: 1672502334}
   m_Layer: 0
   m_Name: CombatController
   m_TagString: Untagged
@@ -3472,10 +3473,25 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
+  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
   actionState: 0
   currentBattleState: 0
   monstersStunned: 000000
+--- !u!114 &1672502334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672502331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13b5cd7626a23941bc0b4c191ce1475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageColour: {r: 0.8, g: 0.16951638, b: 0.101960756, a: 1}
+  evasionColour: {r: 0, g: 1, b: 1, a: 1}
+  battleUI: {fileID: 1654621435}
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3613,7 +3629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5078,7 +5094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
