@@ -15,6 +15,9 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
     public event Action StatePlayerAttack;
+    public event Action<PartyController.PartyMember?, int> SetPartyMember;
+    public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
+    public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
 
     private struct PlayerAction
     {
@@ -74,13 +77,14 @@ public class CombatController : MonoBehaviour
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
         MonsterController.MonsterStunned += StunMonster;
-        SetupCombat();
+        PartyController.PartyIsReady += SetupCombat;
     }
 
     private void OnDisable()
     {
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
         MonsterController.MonsterStunned -= StunMonster;
+        PartyController.PartyIsReady -= SetupCombat;
     }
 
     private void Update()
@@ -128,7 +132,7 @@ public class CombatController : MonoBehaviour
                 return;
         }
 
-        StartCoroutine(BeginBattle());
+        BeginBattle();
     }
 
     public void SetActionState(int value) =>
@@ -154,9 +158,9 @@ public class CombatController : MonoBehaviour
             currentBattleState = BattleState.Victory;
     }
 
-    IEnumerator BeginBattle()
+    private void BeginBattle()
     {
-        yield return null;
+        SetPlayerUI();
 
         bool playerGoesFirst = UnityEngine.Random.value < 0.8f;
 
@@ -170,13 +174,14 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
-        monstersStunned = monstersAlive.Select(x => !x).ToArray();
+        SetPlayerUI();
 
+        monstersStunned = monstersAlive.Select(x => !x).ToArray();
         yield return GenerateMonsterDice();
 
         bool actionChosen = false;
 
-        for(int currentPlayerIndex = 0; currentPlayerIndex < 4; currentPlayerIndex += (actionState != ActionState.Cancel) ? 1 : 0)
+        for (int currentPlayerIndex = 0; currentPlayerIndex < 4; currentPlayerIndex += (actionState != ActionState.Cancel) ? 1 : 0)
         {
             if (!PartyController.partyMembers[currentPlayerIndex].HasValue)
                 continue;
@@ -198,7 +203,7 @@ public class CombatController : MonoBehaviour
                 {
                     if (isCancelling) actionState = ActionState.Cancel;
                     yield return new WaitForEndOfFrame();
-                } 
+                }
 
                 switch (actionState)
                 {
@@ -239,7 +244,7 @@ public class CombatController : MonoBehaviour
                         break;
                     case ActionState.Cancel:
                         bool partyMemberExists = false;
-                        while(!partyMemberExists && currentPlayerIndex > 0)
+                        while (!partyMemberExists && currentPlayerIndex > 0)
                         {
                             currentPlayerIndex--;
                             partyMemberExists = PartyController.partyMembers[currentPlayerIndex].HasValue;
@@ -257,6 +262,16 @@ public class CombatController : MonoBehaviour
         yield return PlayerActionExecution();
 
         BattleConditionInspector(EnemyPhase());
+    }
+
+    private void SetPlayerUI()
+    {
+        for (int i = 0; i < PartyController.partyMembers.Length; i++)
+        {
+            Debug.Log(PartyController.partyMembers[i].HasValue);
+            if (SetPartyMember != null && PartyController.partyMembers[i].HasValue)
+                SetPartyMember.Invoke(PartyController.partyMembers[i], i);
+        }
     }
 
     IEnumerator GenerateMonsterDice()
@@ -340,6 +355,15 @@ public class CombatController : MonoBehaviour
                     {
                         var nextMonsterIndex = GetNextAliveMonster();
                         monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                    }
+
+                    if(playerActions[i].attackAction.attack.attackSpell.spellCost > 0 && PartyController.partyMembers[i].HasValue)
+                    {
+                        var temp = PartyController.partyMembers[i].Value;
+                        temp.currentSP -= playerActions[i].attackAction.attack.attackSpell.spellCost;
+                        PartyController.partyMembers[i] = temp;
+                        if (UpdatePlayerSP != null)
+                            UpdatePlayerSP.Invoke(PartyController.partyMembers[i].Value, i);
                     }
                     break;
             }
@@ -425,6 +449,9 @@ public class CombatController : MonoBehaviour
 
             targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
             PartyController.partyMembers[enemyAttackObject.target] = targetMember;
+
+            if (UpdatePlayerHP != null && PartyController.partyMembers[enemyAttackObject.target].HasValue)
+                UpdatePlayerHP.Invoke(PartyController.partyMembers[enemyAttackObject.target].Value, enemyAttackObject.target);
 
             yield return new WaitForSeconds(1f);
 

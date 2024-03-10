@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PartyController : MonoBehaviour
 {
+    public static event Action PartyIsReady;
+
     [System.Serializable]
     public struct PartyMember
     {
@@ -16,7 +17,7 @@ public class PartyController : MonoBehaviour
     public PartyMember protagonist;
     public PartyMember[] partyMonsters;
 
-    private void OnEnable()
+    private void Start()
     {
         protagonist.currentHP = protagonist.partyMemberBaseStats.combatantMaxHealth;
         protagonist.currentSP = protagonist.partyMemberBaseStats.combatantMaxStamina;
@@ -29,5 +30,8 @@ public class PartyController : MonoBehaviour
             partyMonsters[i].currentSP = partyMonsters[i].partyMemberBaseStats.combatantMaxStamina;
             partyMembers[i+1] = partyMonsters[i];
         }
+
+        if (PartyIsReady != null)
+            PartyIsReady.Invoke();
     }
 }

@@ -11,7 +11,7 @@ public class BattleUIController : MonoBehaviour
     public GameObject battleMenuUI;
     public Button skillButton;
     public Button[] monsterTargetButtons;
-    public GameObject[] partyLineUpUI;
+    public PlayerStatsUIController[] partyLineUpUI;
     private int currentSelected;
 
     private void OnEnable()
@@ -21,6 +21,9 @@ public class BattleUIController : MonoBehaviour
         combatController.ShowTargetIndicator += ShowTargets;
         combatController.ShowSpellsUI += HideAll;
         combatController.StatePlayerAttack += HideAll;
+        combatController.SetPartyMember += SetPartyValues;
+        combatController.UpdatePlayerHP += UpdateHealth;
+        combatController.UpdatePlayerSP += UpdateStamina;
     }
 
     private void OnDisable()
@@ -30,6 +33,9 @@ public class BattleUIController : MonoBehaviour
         combatController.ShowTargetIndicator -= ShowTargets;
         combatController.ShowSpellsUI -= HideAll;
         combatController.StatePlayerAttack -= HideAll;
+        combatController.SetPartyMember -= SetPartyValues;
+        combatController.UpdatePlayerHP -= UpdateHealth;
+        combatController.UpdatePlayerSP -= UpdateStamina;
     }
 
     private void Update()
@@ -52,10 +58,21 @@ public class BattleUIController : MonoBehaviour
         }
     }
 
+    private void SetPartyValues(PartyController.PartyMember? partyMemberStats, int partyMemberPosition)
+    {
+        Debug.Log(partyMemberStats.Value.partyMemberBaseStats.combatantName);
+        var hasValue = partyMemberStats.HasValue;
+        partyLineUpUI[partyMemberPosition].transform.GetChild(0).gameObject.SetActive(hasValue);
+        if (hasValue)
+            partyLineUpUI[partyMemberPosition].SetPartyMember(partyMemberStats.Value);
+    }
+
     private void SetPartyLayoutPositions(int currentMember)
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
+        {
             partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -140, 0);
+        }
     }
 
     private void ShowBattleMenu(PartyController.PartyMember currentPlayer)
@@ -115,4 +132,10 @@ public class BattleUIController : MonoBehaviour
         HideBattleMenu();
         HideTargets();
     }
+
+    private void UpdateHealth(PartyController.PartyMember partyMember, int playerIndex) =>
+        partyLineUpUI[playerIndex].UpdateHealth(partyMember);
+
+    private void UpdateStamina(PartyController.PartyMember partyMember, int playerIndex) =>
+        partyLineUpUI[playerIndex].UpdateStamina(partyMember);
 }

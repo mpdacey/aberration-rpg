@@ -68,7 +68,10 @@ public class MonsterController : MonoBehaviour
             if (localSP - selectedSpell.spellCost < 0)
                 attack = AttackHandler.GenerateNormalAttack(CombatantStats);
             else
+            {
                 attack.attackSpell = selectedSpell;
+                localSP -= selectedSpell.spellCost;
+            }
         }
         else
             attack = AttackHandler.GenerateNormalAttack(CombatantStats);
