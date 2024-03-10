@@ -71,7 +71,7 @@ public class BattleUIController : MonoBehaviour
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
         {
-            partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -140, 0);
+            partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -105, 0);
         }
     }
 

@@ -2513,7 +2513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3160,7 +3160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3472,7 +3472,7 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
+  formation: {fileID: 11400000, guid: 66a1f1e4460845a419f16ad1bbb1286e, type: 2}
   actionState: 0
   currentBattleState: 0
   monstersStunned: 000000
@@ -3613,7 +3613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5078,7 +5078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
