@@ -3490,6 +3490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageColour: {r: 0.8, g: 0.16951638, b: 0.101960756, a: 1}
+  evasionColour: {r: 0, g: 1, b: 1, a: 1}
   battleUI: {fileID: 1654621435}
 --- !u!1001 &1689702921
 PrefabInstance:

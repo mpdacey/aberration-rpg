@@ -5,20 +5,29 @@ using UnityEngine;
 public class DamageTextController : MonoBehaviour
 {
     public Color damageColour = new Color(0.8f, 0.1f, 0.2f);
+    public Color evasionColour = Color.cyan;
     public BattleUIController battleUI;
 
     private void OnEnable()
     {
-        BattleUIController.DisplayRecievedPlayerDamage += DisplayDamage;
+        battleUI.DisplayRecievedPlayerDamageEvent += DisplayDamage;
         MonsterController.DisplayRecievedMonsterDamage += DisplayDamage;
+        battleUI.DisplayEvadedAttackEvent += DisplayEvasion;
+        MonsterController.DisplayMonsterEvasion += DisplayEvasion;
+
     }
 
     private void OnDisable()
     {
-        BattleUIController.DisplayRecievedPlayerDamage -= DisplayDamage;
+        battleUI.DisplayRecievedPlayerDamageEvent -= DisplayDamage;
         MonsterController.DisplayRecievedMonsterDamage -= DisplayDamage;
+        battleUI.DisplayEvadedAttackEvent -= DisplayEvasion;
+        MonsterController.DisplayMonsterEvasion -= DisplayEvasion;
     }
 
     private void DisplayDamage(DamageTextProducer producer, int damageValue) =>
         producer.ProduceDamageText(damageValue, damageColour);
+
+    private void DisplayEvasion(DamageTextProducer producer) =>
+        producer.ProduceEvasionText(evasionColour);
 }

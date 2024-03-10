@@ -19,6 +19,7 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
     public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
     public event Action<int, int> DisplayRecievedPlayerDamage;
+    public event Action<int> DisplayEvadedAttack;
 
     private struct PlayerAction
     {
@@ -443,11 +444,13 @@ public class CombatController : MonoBehaviour
             AttackObject reflectedAttack = null;
             PartyController.PartyMember targetMember = PartyController.partyMembers[enemyAttackObject.target].Value;
             int oldHealth = targetMember.currentHP;
-            AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
+            var affinityCheck = AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
 
             // Display damage
             if (DisplayRecievedPlayerDamage != null && oldHealth - targetMember.currentHP != 0)
                 DisplayRecievedPlayerDamage.Invoke(enemyAttackObject.target, targetMember.currentHP - oldHealth);
+            if (DisplayEvadedAttack != null && affinityCheck == CombatantScriptableObject.AttributeAffinity.Evade)
+                DisplayEvadedAttack.Invoke(enemyAttackObject.target);
 
             targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
             PartyController.partyMembers[enemyAttackObject.target] = targetMember;

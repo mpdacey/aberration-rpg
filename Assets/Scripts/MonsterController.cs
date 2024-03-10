@@ -10,6 +10,7 @@ public class MonsterController : MonoBehaviour
     public static event Action<int> MonsterDefeated;
     public static event Action<int> MonsterStunned;
     public static event Action<DamageTextProducer, int> DisplayRecievedMonsterDamage;
+    public static event Action<DamageTextProducer> DisplayMonsterEvasion;
 
     public CombatantScriptableObject CombatantStats
     {
@@ -105,6 +106,10 @@ public class MonsterController : MonoBehaviour
                 case CombatantScriptableObject.AttributeAffinity.Repel:
                 case CombatantScriptableObject.AttributeAffinity.Absorb:
                     diceControllers[lastDiceIndex].UpdateFace(Mathf.Clamp(++currentDiceValues[lastDiceIndex], 1, 9));
+                    break;
+                case CombatantScriptableObject.AttributeAffinity.Evade:
+                    if (DisplayMonsterEvasion != null)
+                        DisplayMonsterEvasion.Invoke(GetComponent<DamageTextProducer>());
                     break;
             }
         }

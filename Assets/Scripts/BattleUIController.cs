@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class BattleUIController : MonoBehaviour
 {
-    public static event Action<DamageTextProducer, int> DisplayRecievedPlayerDamage;
+    public event Action<DamageTextProducer, int> DisplayRecievedPlayerDamageEvent;
+    public event Action<DamageTextProducer> DisplayEvadedAttackEvent;
 
     public CombatController combatController;
     public GameObject battleMenuUI;
@@ -25,7 +26,8 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember += SetPartyValues;
         combatController.UpdatePlayerHP += UpdateHealth;
         combatController.UpdatePlayerSP += UpdateStamina;
-        combatController.DisplayRecievedPlayerDamage += DisplayRecievedDamage;
+        combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
+        combatController.DisplayEvadedAttack += DisplayEvadedAttack;
     }
 
     private void OnDisable()
@@ -38,7 +40,8 @@ public class BattleUIController : MonoBehaviour
         combatController.SetPartyMember -= SetPartyValues;
         combatController.UpdatePlayerHP -= UpdateHealth;
         combatController.UpdatePlayerSP -= UpdateStamina;
-        combatController.DisplayRecievedPlayerDamage -= DisplayRecievedDamage;
+        combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
+        combatController.DisplayEvadedAttack -= DisplayEvadedAttack;
     }
 
     private void Update()
@@ -142,9 +145,15 @@ public class BattleUIController : MonoBehaviour
     private void UpdateStamina(PartyController.PartyMember partyMember, int playerIndex) =>
         partyLineUpUI[playerIndex].UpdateStamina(partyMember);
 
-    private void DisplayRecievedDamage(int playerIndex, int damageValue)
+    private void DisplayRecievedPlayerDamage(int playerIndex, int damageValue)
     {
-        if (DisplayRecievedPlayerDamage != null)
-            DisplayRecievedPlayerDamage.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>(), damageValue);
+        if (DisplayRecievedPlayerDamageEvent != null)
+            DisplayRecievedPlayerDamageEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>(), damageValue);
+    }
+
+    private void DisplayEvadedAttack(int playerIndex)
+    {
+        if (DisplayEvadedAttackEvent != null)
+            DisplayEvadedAttackEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>());
     }
 }
