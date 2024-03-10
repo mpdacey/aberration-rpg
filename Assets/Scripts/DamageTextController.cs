@@ -18,5 +18,4 @@ public class DamageTextController : MonoBehaviour
     }
 
     private void DisplayRecievedPlayerDamage(int playerIndex, int damageValue) =>
-        battleUI.partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>().ProduceDamageText(damageValue * -1, damageColour);
-}
+        battleUI.partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>().ProduceDamageText(damageValue, damageColour);
