@@ -109,6 +109,8 @@ public class MonsterController : MonoBehaviour
         if (localHP <= 0 && MonsterDefeated != null)
         {
             spriteRenderer.enabled = false;
+            foreach (var die in diceControllers)
+                die.UpdateFace(0);
             if(MonsterDefeated != null)
                 MonsterDefeated.Invoke(transform.GetSiblingIndex());
         }
