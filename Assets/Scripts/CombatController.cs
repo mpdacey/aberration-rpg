@@ -7,6 +7,7 @@ using System.Linq;
 public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
+    public static event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
@@ -446,6 +447,8 @@ public class CombatController : MonoBehaviour
             AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
 
             // Display damage
+            if (DisplayRecievedPlayerDamage != null && oldHealth - targetMember.currentHP != 0)
+                DisplayRecievedPlayerDamage.Invoke(enemyAttackObject.target, targetMember.currentHP - oldHealth);
 
             targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
             PartyController.partyMembers[enemyAttackObject.target] = targetMember;
