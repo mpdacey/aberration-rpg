@@ -27,7 +27,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
+        meshRenderer.sharedMaterial = groundMaterial;
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
         wallMeshRenderer.sharedMaterial = wallsMaterial;//new Material(Shader.Find("Standard"));
