@@ -15,7 +15,6 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
     public event Action StatePlayerAttack;
-    public event Action<PartyController.PartyMember?, int> SetPartyMember;
     public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
     public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
     public event Action<PlayerAction, int> UpdateActionIcon;
@@ -170,8 +169,6 @@ public class CombatController : MonoBehaviour
 
     private void BeginBattle()
     {
-        SetPlayerUI();
-
         bool playerGoesFirst = UnityEngine.Random.value < 0.8f;
 
         if (playerGoesFirst)
@@ -184,7 +181,6 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
-        SetPlayerUI();
 
         monstersStunned = monstersAlive.Select(x => !x).ToArray();
         yield return GenerateMonsterDice();
@@ -279,15 +275,6 @@ public class CombatController : MonoBehaviour
         yield return PlayerActionExecution();
 
         BattleConditionInspector(EnemyPhase());
-    }
-
-    private void SetPlayerUI()
-    {
-        for (int i = 0; i < PartyController.partyMembers.Length; i++)
-        {
-            if (SetPartyMember != null && PartyController.partyMembers[i].HasValue)
-                SetPartyMember.Invoke(PartyController.partyMembers[i], i);
-        }
     }
 
     IEnumerator GenerateMonsterDice()

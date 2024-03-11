@@ -18,12 +18,12 @@ public class BattleUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameController.SetPartyMember += SetPartyValues;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
         combatController.ShowSpellsUI += HideAll;
         combatController.StatePlayerAttack += HideAll;
-        combatController.SetPartyMember += SetPartyValues;
         combatController.UpdatePlayerHP += UpdateHealth;
         combatController.UpdatePlayerSP += UpdateStamina;
         combatController.UpdateActionIcon += SetActionIcon;
@@ -33,12 +33,12 @@ public class BattleUIController : MonoBehaviour
 
     private void OnDisable()
     {
+        GameController.SetPartyMember -= SetPartyValues;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
         combatController.ShowSpellsUI -= HideAll;
         combatController.StatePlayerAttack -= HideAll;
-        combatController.SetPartyMember -= SetPartyValues;
         combatController.UpdatePlayerHP -= UpdateHealth;
         combatController.UpdatePlayerSP -= UpdateStamina;
         combatController.UpdateActionIcon -= SetActionIcon;
