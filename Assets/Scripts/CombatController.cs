@@ -197,10 +197,7 @@ public class CombatController : MonoBehaviour
             if (CurrentPartyTurn != null)
                 CurrentPartyTurn.Invoke(currentPlayerIndex);
 
-            actionState = ActionState.None;
-            playerActions[currentPlayerIndex].actionType = actionState;
-            if (UpdateActionIcon != null)
-                UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
+            ClearPlayerActions(currentPlayerIndex);
 
             actionChosen = false;
             while (!actionChosen)
@@ -276,6 +273,14 @@ public class CombatController : MonoBehaviour
         yield return PlayerActionExecution();
 
         BattleConditionInspector(EnemyPhase());
+    }
+
+    private void ClearPlayerActions(int currentPlayerIndex)
+    {
+        actionState = ActionState.None;
+        playerActions[currentPlayerIndex].actionType = actionState;
+        if (UpdateActionIcon != null)
+            UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
     }
 
     IEnumerator GenerateMonsterDice()
@@ -508,6 +513,11 @@ public class CombatController : MonoBehaviour
         Debug.Log("Victory");
 
         FieldMovementController.inBattle = false;
+        for (int i = 0; i < 4; i++)
+            ClearPlayerActions(i);
+
+        if (CombatVictory != null)
+            CombatVictory.Invoke();
 
         yield return null;
     }
