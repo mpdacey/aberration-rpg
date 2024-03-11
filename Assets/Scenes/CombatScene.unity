@@ -1235,7 +1235,7 @@ Transform:
   m_GameObject: {fileID: 777177475}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 15521311077695001}
@@ -1440,6 +1440,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
@@ -1935,8 +1943,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3473,7 +3489,7 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
+  formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
   actionState: 0
   currentBattleState: 0
   monstersStunned: 000000
@@ -4920,8 +4936,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalPosition.y

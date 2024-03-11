@@ -112,7 +112,7 @@ public class CombatController : MonoBehaviour
                 {
                     monsters[i].CombatantStats = formation.monsters[i];
                     monsters[i].GetComponent<SpriteRenderer>().enabled = true;
-                    monsters[i].transform.position = Vector3.left * (4.5f - 4.5f * i);
+                    monsters[i].transform.position = Vector3.left * (1 - 1 * i);
                 }
                 monstersAlive[0] = monstersAlive[1] = monstersAlive[2] = true;
                 break;
@@ -121,7 +121,7 @@ public class CombatController : MonoBehaviour
                 {
                     monsters[i * 2].CombatantStats = formation.monsters[i];
                     monsters[i * 2].GetComponent<SpriteRenderer>().enabled = true;
-                    monsters[i * 2].transform.position = Vector3.left * (3 - 6 * i);
+                    monsters[i * 2].transform.position = Vector3.left * (0.75f - 1.5f * i);
                 }
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
