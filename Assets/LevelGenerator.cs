@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,11 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public Texture2D levelGeometry;
-    public Material ground;
+    public Material groundMaterial;
+    public Material wallsMaterial;
+    public MeshRenderer wallMeshRenderer;
+    public MeshFilter wallMeshFilter;
+    public float wallHeight = 10;
     private const float TILE_RADIUS = 2.5f;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
@@ -25,6 +30,8 @@ public class LevelGenerator : MonoBehaviour
         meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
+        wallMeshRenderer.sharedMaterial = wallsMaterial;//new Material(Shader.Find("Standard"));
+
         GenerateTerrain();
     }
 
@@ -32,7 +39,28 @@ public class LevelGenerator : MonoBehaviour
     {
         Color[] pixels = levelGeometry.GetPixels();
         List<Vector2> walkableTiles = new List<Vector2>();
+        List<Vector2[]> edges = new List<Vector2[]>();
+
         Vector2 startLocation = Vector2.zero;
+
+        for(int y = 0; y < levelGeometry.height; y++)
+        {
+            for(int x = 0; x < levelGeometry.width; x++)
+            {
+                int index = y * levelGeometry.width + x;
+                if (pixels[index].r == 1)
+                {
+                    Vector2 pixelCoords = new Vector2(x, y);
+                    walkableTiles.Add(pixelCoords);
+                    if (pixels[index] == Color.red)
+                    {
+                        startLocation = pixelCoords;
+                    }
+
+                    edges.AddRange(FindEdges(pixels, pixelCoords));
+                }
+            }
+        }
 
         for (int i = 0; i < pixels.Length; i++)
         {
@@ -47,6 +75,43 @@ public class LevelGenerator : MonoBehaviour
         }
 
         GenerateFlooring(walkableTiles, startLocation);
+        GenerateWalls(edges, startLocation);
+    }
+
+    private List<Vector2[]> FindEdges(Color[] pixels, Vector2 pixelCoords)
+    {
+        List<Vector2[]> localEdges = new List<Vector2[]>();
+
+        if(pixelCoords.x == 0 || pixels[(int)pixelCoords.y*levelGeometry.width + (int)pixelCoords.x -1].r != 1f)
+        {
+            localEdges.Add(new Vector2[]{
+                    new Vector2(pixelCoords.x-0.5f, pixelCoords.y - 0.5f),
+                    new Vector2(pixelCoords.x-0.5f, pixelCoords.y + 0.5f)
+                });
+        }
+        if(pixelCoords.y == 0 || pixels[(int)(pixelCoords.y-1) * levelGeometry.width + (int)pixelCoords.x].r != 1f)
+        {
+            localEdges.Add(new Vector2[]{
+                    new Vector2(pixelCoords.x-0.5f, pixelCoords.y - 0.5f),
+                    new Vector2(pixelCoords.x+0.5f, pixelCoords.y - 0.5f)
+                });
+        }
+        if(pixelCoords.x == levelGeometry.width-1 || pixels[(int)pixelCoords.y * levelGeometry.width + (int)pixelCoords.x+1].r != 1f)
+        {
+            localEdges.Add(new Vector2[]{
+                    new Vector2(pixelCoords.x+0.5f, pixelCoords.y + 0.5f),
+                    new Vector2(pixelCoords.x+0.5f, pixelCoords.y - 0.5f)
+                });
+        }
+        if(pixelCoords.y == levelGeometry.height-1 || pixels[(int)(pixelCoords.y + 1) * levelGeometry.width + (int)pixelCoords.x].r != 1f)
+        {
+            localEdges.Add(new Vector2[]{
+                    new Vector2(pixelCoords.x+0.5f, pixelCoords.y + 0.5f),
+                    new Vector2(pixelCoords.x-0.5f, pixelCoords.y + 0.5f)
+                });
+        }
+
+        return localEdges;
     }
 
     private void GenerateFlooring(List<Vector2> floorCoords, Vector2 startLocation)
@@ -90,5 +155,90 @@ public class LevelGenerator : MonoBehaviour
 
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
+    }
+
+    private void GenerateWalls(List<Vector2[]> edges, Vector2 startLocation)
+    {
+        Vector3[] vertices = new Vector3[edges.Count * 4* 2];
+        int[] tris = new int[edges.Count * 6 * 2];
+        Vector3[] normals = new Vector3[edges.Count * 4 * 2];
+        Vector2[] uv = new Vector2[edges.Count * 4 * 2];
+
+        Mesh mesh = new Mesh();
+
+        for (int i = 0; i < edges.Count; i++)
+        {
+            if (edges[i][0].x == edges[i][1].x)
+            {
+                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+            }
+            else
+            {
+                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+            }
+
+            tris[i * 6 * 2] = i * 4 * 2;
+            tris[i * 6 * 2 + 1] = i * 4 * 2 + 2;
+            tris[i * 6 * 2 + 2] = i * 4 * 2 + 1;
+            tris[i * 6 * 2 + 3] = i * 4 * 2 + 2;
+            tris[i * 6 * 2 + 4] = i * 4 * 2 + 3;
+            tris[i * 6 * 2 + 5] = i * 4 * 2 + 1;
+
+            normals[i * 4 * 2] = Vector3.back;
+            normals[i * 4 * 2 + 1] = Vector3.back;
+            normals[i * 4 * 2 + 2] = Vector3.back;
+            normals[i * 4 * 2 + 3] = Vector3.back;
+
+            uv[i * 4 * 2] = Vector2.zero;
+            uv[i * 4 * 2 + 1] = Vector2.right;
+            uv[i * 4 * 2 + 2] = Vector2.up;
+            uv[i * 4 * 2 + 3] = Vector2.one;
+
+            if (edges[i][0].x == edges[i][1].x)
+            {
+                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+            }
+            else
+            {
+                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+            }
+
+            tris[i * 6 * 2 + 6] = i * 4 * 2 + 4;
+            tris[i * 6 * 2 + 6 + 1] = i * 4 * 2 + 4 + 1;
+            tris[i * 6 * 2 + 6 + 2] = i * 4 * 2 + 4 + 2;
+            tris[i * 6 * 2 + 6 + 3] = i * 4 * 2 + 4 + 2;
+            tris[i * 6 * 2 + 6 + 4] = i * 4 * 2 + 4 + 1;
+            tris[i * 6 * 2 + 6 + 5] = i * 4 * 2 + 4 + 3;
+
+            normals[i * 4 * 2 + 4] = Vector3.forward;
+            normals[i * 4 * 2 + 4 + 1] = Vector3.forward;
+            normals[i * 4 * 2 + 4 + 2] = Vector3.forward;
+            normals[i * 4 * 2 + 4 + 3] = Vector3.forward;
+
+            uv[i * 4 * 2 + 4] = Vector2.zero;
+            uv[i * 4 * 2 + 1 + 4] = Vector2.right;
+            uv[i * 4 * 2 + 2 + 4] = Vector2.up;
+            uv[i * 4 * 2 + 3 + 4] = Vector2.one;
+        }
+
+        mesh.vertices = vertices;
+        mesh.triangles = tris;
+        mesh.normals = normals;
+        mesh.uv = uv;
+        mesh.RecalculateNormals();
+
+        wallMeshFilter.mesh = mesh;
     }
 }
