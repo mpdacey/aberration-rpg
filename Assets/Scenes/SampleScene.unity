@@ -582,6 +582,8 @@ GameObject:
   - component: {fileID: 1796975613}
   - component: {fileID: 1796975612}
   - component: {fileID: 1796975614}
+  - component: {fileID: 1796975615}
+  - component: {fileID: 1796975616}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -657,3 +659,28 @@ MonoBehaviour:
     value: {fileID: 1510502929, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
   noneSprite: {fileID: -696006631, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
   guardSprite: {fileID: -647915252, guid: ba7de749ece4475408b3d50c1ff4c64b, type: 3}
+--- !u!114 &1796975615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193cb5f68a3864a40b077039c2e25ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelRankUpMax: 10
+--- !u!114 &1796975616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd03fe9395c4f224ca7cebee64d2bd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
