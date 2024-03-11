@@ -811,7 +811,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1672502333}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
@@ -1285,7 +1285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &777177476
 Transform:
   m_ObjectHideFlags: 0
@@ -1548,6 +1548,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
@@ -2126,6 +2130,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_Name
       value: Monster Right
@@ -2376,7 +2384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1672502333}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
@@ -3598,7 +3606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1672502332
 Transform:
   m_ObjectHideFlags: 0
@@ -3648,7 +3656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageColour: {r: 0.8, g: 0.16951638, b: 0.101960756, a: 1}
   evasionColour: {r: 0, g: 1, b: 1, a: 1}
-  battleUI: {fileID: 0}
+  battleUI: {fileID: 1654621435}
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4929,7 +4937,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1672502333}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
@@ -5036,6 +5044,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
