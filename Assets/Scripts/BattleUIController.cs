@@ -68,7 +68,6 @@ public class BattleUIController : MonoBehaviour
 
     private void SetPartyValues(PartyController.PartyMember? partyMemberStats, int partyMemberPosition)
     {
-        Debug.Log(partyMemberStats.Value.partyMemberBaseStats.combatantName);
         var hasValue = partyMemberStats.HasValue;
         partyLineUpUI[partyMemberPosition].transform.GetChild(0).gameObject.SetActive(hasValue);
         if (hasValue)
