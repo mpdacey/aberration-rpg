@@ -9,6 +9,7 @@ public class LevelGenerator : MonoBehaviour
     private const float TILE_RADIUS = 2.5f;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
+    private MeshCollider meshCollider;
     private Vector2[] uvs = new Vector2[4]
     {
         Vector2.zero,
@@ -23,6 +24,7 @@ public class LevelGenerator : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
         meshFilter = GetComponent<MeshFilter>();
+        meshCollider = GetComponent<MeshCollider>();
         GenerateTerrain();
     }
 
@@ -87,5 +89,6 @@ public class LevelGenerator : MonoBehaviour
         mesh.uv = uv;
 
         meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
     }
 }
