@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class FieldMovementController : MonoBehaviour
 {
+    public static event Action FieldMovementEvent;
+
     public bool inBattle = false;
     [SerializeField] Animator movementAnimator;
     private float currentAnimationTimer = 0;
@@ -32,8 +33,12 @@ public class FieldMovementController : MonoBehaviour
         {
             Vector3 rayOrigin = transform.position + transform.rotation * Vector3.forward * 5;
             Ray ray = new Ray(rayOrigin, Vector3.down * 3);
-            if(Physics.Raycast(ray))
+            if (Physics.Raycast(ray))
+            {
                 CallAnimation(MOVE_FORWARD_STATE);
+                if (FieldMovementEvent != null)
+                    FieldMovementEvent.Invoke();
+            }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
         }
