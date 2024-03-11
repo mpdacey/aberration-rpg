@@ -21,11 +21,13 @@ public class MonsterEncounterController : MonoBehaviour
     private void OnEnable()
     {
         FieldMovementController.FieldMovementEvent += UpdateThreatLevel;
+        CombatController.CombatVictory += ResetThreatLevel;
     }
 
     private void OnDisable()
     {
         FieldMovementController.FieldMovementEvent -= UpdateThreatLevel;
+        CombatController.CombatVictory -= ResetThreatLevel;
     }
 
     private void UpdateThreatLevel()
@@ -44,5 +46,12 @@ public class MonsterEncounterController : MonoBehaviour
                 ThreatLevelChanged.Invoke(threatLevel);
         }
         else timer++;
+    }
+
+    private void ResetThreatLevel()
+    {
+        threatLevel = 0;
+        if (ThreatLevelChanged != null)
+            ThreatLevelChanged.Invoke(threatLevel);
     }
 }

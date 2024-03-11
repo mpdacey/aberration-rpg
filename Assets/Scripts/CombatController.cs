@@ -7,6 +7,7 @@ using System.Linq;
 public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
+    public static event Action CombatVictory;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
