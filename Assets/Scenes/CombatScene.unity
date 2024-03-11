@@ -157,11 +157,11 @@ RectTransform:
   - {fileID: 2029167160}
   - {fileID: 420466502}
   m_Father: {fileID: 1654621434}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 335, y: 220}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &16629604
@@ -248,7 +248,7 @@ RectTransform:
   - {fileID: 1297064340}
   - {fileID: 650770614}
   m_Father: {fileID: 1654621434}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -319,6 +319,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60794682}
   m_CullTransparentMesh: 1
+--- !u!1 &211606254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211606255}
+  - component: {fileID: 211606256}
+  m_Layer: 5
+  m_Name: DangerGuage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &211606255
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211606254}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1159205250}
+  m_Father: {fileID: 1654621434}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 331.26, y: 37.200012}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &211606256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211606254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243225883f0e3df478cdd074c342617b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guageImage: {fileID: 1159205251}
+  threatColourPairs:
+  - key: 0
+    value: {r: 0.50787646, g: 0.9078407, b: 0.9528302, a: 1}
+  - key: 1
+    value: {r: 0.56406415, g: 0.9716981, b: 0.5454343, a: 1}
+  - key: 2
+    value: {r: 0.9433962, g: 0.8190271, b: 0.38714847, a: 1}
+  - key: 3
+    value: {r: 0.9245283, g: 0.36904806, b: 0.31835172, a: 1}
 --- !u!224 &246543794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126826238819231817, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
@@ -751,7 +811,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502333}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
@@ -1225,7 +1285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &777177476
 Transform:
   m_ObjectHideFlags: 0
@@ -1931,6 +1991,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112800716}
   m_CullTransparentMesh: 1
+--- !u!1 &1159205249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159205250}
+  - component: {fileID: 1159205252}
+  - component: {fileID: 1159205251}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1159205250
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159205249}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 211606255}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1159205251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159205249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6367924, g: 0.9067211, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1159205252
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159205249}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1192314845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2240,7 +2376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502333}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
@@ -3409,6 +3545,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 211606255}
   - {fileID: 2110153000}
   - {fileID: 60794683}
   - {fileID: 16629601}
@@ -3461,7 +3598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1672502332
 Transform:
   m_ObjectHideFlags: 0
@@ -3511,7 +3648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageColour: {r: 0.8, g: 0.16951638, b: 0.101960756, a: 1}
   evasionColour: {r: 0, g: 1, b: 1, a: 1}
-  battleUI: {fileID: 1654621435}
+  battleUI: {fileID: 0}
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4637,7 +4774,7 @@ RectTransform:
   - {fileID: 1465054742}
   - {fileID: 1622869109}
   m_Father: {fileID: 1654621434}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -4792,7 +4929,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502333}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CombatController, Assembly-CSharp
         m_MethodName: SetActionState
         m_Mode: 3
