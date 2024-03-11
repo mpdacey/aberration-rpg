@@ -174,6 +174,11 @@ public class LevelGenerator : MonoBehaviour
                 vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+
+                uv[i * 4 * 2] = Vector2.one;
+                uv[i * 4 * 2 + 1] = Vector2.right;
+                uv[i * 4 * 2 + 2] = Vector2.up;
+                uv[i * 4 * 2 + 3] = Vector2.zero;
             }
             else
             {
@@ -181,6 +186,11 @@ public class LevelGenerator : MonoBehaviour
                 vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+
+                uv[i * 4 * 2] = Vector2.zero;
+                uv[i * 4 * 2 + 1] = Vector2.up;
+                uv[i * 4 * 2 + 2] = Vector2.right;
+                uv[i * 4 * 2 + 3] = Vector2.one;
             }
 
             tris[i * 6 * 2] = i * 4 * 2;
@@ -195,17 +205,17 @@ public class LevelGenerator : MonoBehaviour
             normals[i * 4 * 2 + 2] = Vector3.back;
             normals[i * 4 * 2 + 3] = Vector3.back;
 
-            uv[i * 4 * 2] = Vector2.zero;
-            uv[i * 4 * 2 + 1] = Vector2.right;
-            uv[i * 4 * 2 + 2] = Vector2.up;
-            uv[i * 4 * 2 + 3] = Vector2.one;
-
             if (edges[i][0].x == edges[i][1].x)
             {
                 vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+
+                uv[i * 4 * 2 + 4] = Vector2.one;
+                uv[i * 4 * 2 + 1 + 4] = Vector2.right;
+                uv[i * 4 * 2 + 2 + 4] = Vector2.up;
+                uv[i * 4 * 2 + 3 + 4] = Vector2.zero;
             }
             else
             {
@@ -213,6 +223,11 @@ public class LevelGenerator : MonoBehaviour
                 vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
                 vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+
+                uv[i * 4 * 2 + 4] = Vector2.zero;
+                uv[i * 4 * 2 + 1 + 4] = Vector2.up;
+                uv[i * 4 * 2 + 2 + 4] = Vector2.right;
+                uv[i * 4 * 2 + 3 + 4] = Vector2.one;
             }
 
             tris[i * 6 * 2 + 6] = i * 4 * 2 + 4;
@@ -226,11 +241,6 @@ public class LevelGenerator : MonoBehaviour
             normals[i * 4 * 2 + 4 + 1] = Vector3.forward;
             normals[i * 4 * 2 + 4 + 2] = Vector3.forward;
             normals[i * 4 * 2 + 4 + 3] = Vector3.forward;
-
-            uv[i * 4 * 2 + 4] = Vector2.zero;
-            uv[i * 4 * 2 + 1 + 4] = Vector2.right;
-            uv[i * 4 * 2 + 2 + 4] = Vector2.up;
-            uv[i * 4 * 2 + 3 + 4] = Vector2.one;
         }
 
         mesh.vertices = vertices;
