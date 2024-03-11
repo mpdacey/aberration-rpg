@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class FieldMovementController : MonoBehaviour
 {
+    public static event Action<Transform> PlayerTranformChanged;
     public static event Action FieldMovementEvent;
 
-    public bool inBattle = false;
+    public static bool inBattle = false;
     [SerializeField] Animator movementAnimator;
     private float currentAnimationTimer = 0;
 
@@ -38,6 +39,8 @@ public class FieldMovementController : MonoBehaviour
                 CallAnimation(MOVE_FORWARD_STATE);
                 if (FieldMovementEvent != null)
                     FieldMovementEvent.Invoke();
+                if (PlayerTranformChanged != null)
+                    PlayerTranformChanged.Invoke(transform);
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
