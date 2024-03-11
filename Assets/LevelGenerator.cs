@@ -10,6 +10,7 @@ public class LevelGenerator : MonoBehaviour
     public Material wallsMaterial;
     public MeshRenderer wallMeshRenderer;
     public MeshFilter wallMeshFilter;
+    public float floorHeight = -1;
     public float wallHeight = 10;
     private const float TILE_RADIUS = 2.5f;
     private MeshRenderer meshRenderer;
@@ -125,10 +126,10 @@ public class LevelGenerator : MonoBehaviour
 
         for (int i = 0; i < floorCoords.Count; i++)
         {
-            vertices[i * 4] = new Vector3((floorCoords[i].x - startLocation.x)*2*TILE_RADIUS - TILE_RADIUS, -2, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS - TILE_RADIUS);
-            vertices[i * 4 + 1] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS + TILE_RADIUS, -2, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS - TILE_RADIUS);
-            vertices[i * 4 + 2] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS - TILE_RADIUS, -2, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS + TILE_RADIUS);
-            vertices[i * 4 + 3] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS + TILE_RADIUS, -2, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS + TILE_RADIUS);
+            vertices[i * 4] = new Vector3((floorCoords[i].x - startLocation.x)*2*TILE_RADIUS - TILE_RADIUS, floorHeight, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS - TILE_RADIUS);
+            vertices[i * 4 + 1] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS + TILE_RADIUS, floorHeight, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS - TILE_RADIUS);
+            vertices[i * 4 + 2] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS - TILE_RADIUS, floorHeight, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS + TILE_RADIUS);
+            vertices[i * 4 + 3] = new Vector3((floorCoords[i].x - startLocation.x) * 2 * TILE_RADIUS + TILE_RADIUS, floorHeight, (floorCoords[i].y - startLocation.y) * 2 * TILE_RADIUS + TILE_RADIUS);
 
             tris[i * 6] = i * 4;
             tris[i * 6 + 1] = i * 4 + 2;
@@ -170,10 +171,10 @@ public class LevelGenerator : MonoBehaviour
         {
             if (edges[i][0].x == edges[i][1].x)
             {
-                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
 
                 uv[i * 4 * 2] = Vector2.one;
                 uv[i * 4 * 2 + 1] = Vector2.right;
@@ -182,10 +183,10 @@ public class LevelGenerator : MonoBehaviour
             }
             else
             {
-                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
 
                 uv[i * 4 * 2] = Vector2.zero;
                 uv[i * 4 * 2 + 1] = Vector2.up;
@@ -207,10 +208,10 @@ public class LevelGenerator : MonoBehaviour
 
             if (edges[i][0].x == edges[i][1].x)
             {
-                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
 
                 uv[i * 4 * 2 + 4] = Vector2.one;
                 uv[i * 4 * 2 + 1 + 4] = Vector2.right;
@@ -219,10 +220,10 @@ public class LevelGenerator : MonoBehaviour
             }
             else
             {
-                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight - 2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
-                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, -2, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 1] = new Vector3((edges[i][0].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][0].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 3] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, wallHeight + floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
+                vertices[i * 4 * 2 + 4 + 2] = new Vector3((edges[i][1].x - startLocation.x) * 2 * TILE_RADIUS, floorHeight, (edges[i][1].y - startLocation.y) * 2 * TILE_RADIUS);
 
                 uv[i * 4 * 2 + 4] = Vector2.zero;
                 uv[i * 4 * 2 + 1 + 4] = Vector2.up;
