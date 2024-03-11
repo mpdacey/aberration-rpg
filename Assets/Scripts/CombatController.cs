@@ -70,12 +70,6 @@ public class CombatController : MonoBehaviour
     private SpellScriptableObject selectedSpell;
     bool isCancelling = false;
 
-    private void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void OnEnable()
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
