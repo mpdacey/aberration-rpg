@@ -107,10 +107,7 @@ public class CombatController : MonoBehaviour
         monstersParent.position  = playerTransform.position + playerTransform.rotation * Vector3.forward * 5f;
 
         foreach (var monster in monsters)
-        {
-            monster.GetComponent<SpriteRenderer>().enabled = false;
             monster.HideDice();
-        }
 
         switch (formation.monsters.Length)
         {
@@ -118,7 +115,7 @@ public class CombatController : MonoBehaviour
                 for(int i = 0; i < 3; i++)
                 {
                     monsters[i].CombatantStats = formation.monsters[i];
-                    monsters[i].GetComponent<SpriteRenderer>().enabled = true;
+                    monsters[i].PlayEntranceAnimation();
                     monsters[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i);
                 }
                 monstersAlive[0] = monstersAlive[1] = monstersAlive[2] = true;
@@ -127,14 +124,14 @@ public class CombatController : MonoBehaviour
                 for (int i = 0; i < 2; i++)
                 {
                     monsters[i * 2].CombatantStats = formation.monsters[i];
-                    monsters[i * 2].GetComponent<SpriteRenderer>().enabled = true;
+                    monsters[i * 2].PlayEntranceAnimation();
                     monsters[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
                 monsters[1].CombatantStats = formation.monsters[0];
-                monsters[1].GetComponent<SpriteRenderer>().enabled = true;
+                monsters[1].PlayEntranceAnimation();
                 monsters[1].transform.localPosition = Vector3.zero;
                 monstersAlive[1] = true;
                 break;
