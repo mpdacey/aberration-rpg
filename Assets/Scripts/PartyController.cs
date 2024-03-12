@@ -20,11 +20,28 @@ public class PartyController : MonoBehaviour
     private void OnEnable()
     {
         SceneController.CombatSceneLoaded += SetPartyValues;
+        GoalRiftController.GoalRiftEntered += HealParty;
     }
 
     private void OnDisable()
     {
         SceneController.CombatSceneLoaded -= SetPartyValues;
+        GoalRiftController.GoalRiftEntered -= HealParty;
+    }
+
+    private void HealParty()
+    {
+        for(int i = 0; i < partyMembers.Length; i++)
+        {
+            if (!partyMembers[i].HasValue) continue;
+
+            var currentMember = partyMembers[i].Value;
+            currentMember.currentHP = currentMember.partyMemberBaseStats.combatantMaxHealth;
+            partyMembers[i] = currentMember;
+        }
+
+        if (PartyIsReady != null)
+            PartyIsReady.Invoke();
     }
 
     private void SetPartyValues()
