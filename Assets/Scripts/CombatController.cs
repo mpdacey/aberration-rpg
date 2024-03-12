@@ -7,6 +7,7 @@ using System.Linq;
 public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
+    public static event Action CombatVictory;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
@@ -15,7 +16,6 @@ public class CombatController : MonoBehaviour
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
     public event Action StatePlayerAttack;
-    public event Action<PartyController.PartyMember?, int> SetPartyMember;
     public event Action<PartyController.PartyMember, int> UpdatePlayerHP;
     public event Action<PartyController.PartyMember, int> UpdatePlayerSP;
     public event Action<PlayerAction, int> UpdateActionIcon;
@@ -62,6 +62,7 @@ public class CombatController : MonoBehaviour
     public FormationScriptableObject formation;
     public ActionState actionState = ActionState.None;
     [SerializeField] private BattleState currentBattleState;
+    private Transform playerTransform;
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
     private bool[] monstersAlive = new bool[3];
@@ -70,24 +71,20 @@ public class CombatController : MonoBehaviour
     private SpellScriptableObject selectedSpell;
     bool isCancelling = false;
 
-    private void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void OnEnable()
     {
+        FieldMovementController.PlayerTranformChanged += UpdatePlayerTransform;
         MonsterController.MonsterDefeated += MonsterDeathHandling;
         MonsterController.MonsterStunned += StunMonster;
-        PartyController.PartyIsReady += SetupCombat;
+        MonsterEncounterController.ThreatTriggered += SetupCombat;
     }
 
     private void OnDisable()
     {
+        FieldMovementController.PlayerTranformChanged -= UpdatePlayerTransform;
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
         MonsterController.MonsterStunned -= StunMonster;
-        PartyController.PartyIsReady -= SetupCombat;
+        MonsterEncounterController.ThreatTriggered -= SetupCombat;
     }
 
     private void Update()
@@ -95,9 +92,18 @@ public class CombatController : MonoBehaviour
         isCancelling = Input.GetButtonDown("Cancel");
     }
 
+    private void UpdatePlayerTransform(Transform value) =>
+        playerTransform = value;
+
     public void SetupCombat()
     {
         currentBattleState = BattleState.Initializing;
+
+        FieldMovementController.inBattle = true;
+
+        var monstersParent = monsters[0].transform.parent;
+        monstersParent.localRotation = playerTransform.rotation;
+        monstersParent.position  = playerTransform.position + playerTransform.rotation * Vector3.forward * 5f;
 
         foreach (var monster in monsters)
         {
@@ -112,7 +118,7 @@ public class CombatController : MonoBehaviour
                 {
                     monsters[i].CombatantStats = formation.monsters[i];
                     monsters[i].GetComponent<SpriteRenderer>().enabled = true;
-                    monsters[i].transform.position = Vector3.left * (4.5f - 4.5f * i);
+                    monsters[i].transform.localPosition = Vector3.left * (1.5f - 4.5f * i);
                 }
                 monstersAlive[0] = monstersAlive[1] = monstersAlive[2] = true;
                 break;
@@ -121,13 +127,14 @@ public class CombatController : MonoBehaviour
                 {
                     monsters[i * 2].CombatantStats = formation.monsters[i];
                     monsters[i * 2].GetComponent<SpriteRenderer>().enabled = true;
-                    monsters[i * 2].transform.position = Vector3.left * (3 - 6 * i);
+                    monsters[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
                 monsters[1].CombatantStats = formation.monsters[0];
                 monsters[1].GetComponent<SpriteRenderer>().enabled = true;
+                monsters[1].transform.localPosition = Vector3.zero;
                 monstersAlive[1] = true;
                 break;
             default:
@@ -163,8 +170,6 @@ public class CombatController : MonoBehaviour
 
     private void BeginBattle()
     {
-        SetPlayerUI();
-
         bool playerGoesFirst = UnityEngine.Random.value < 0.8f;
 
         if (playerGoesFirst)
@@ -177,7 +182,6 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.PlayerPhase;
         Debug.Log("Player Phase");
-        SetPlayerUI();
 
         monstersStunned = monstersAlive.Select(x => !x).ToArray();
         yield return GenerateMonsterDice();
@@ -193,10 +197,7 @@ public class CombatController : MonoBehaviour
             if (CurrentPartyTurn != null)
                 CurrentPartyTurn.Invoke(currentPlayerIndex);
 
-            actionState = ActionState.None;
-            playerActions[currentPlayerIndex].actionType = actionState;
-            if (UpdateActionIcon != null)
-                UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
+            ClearPlayerActions(currentPlayerIndex);
 
             actionChosen = false;
             while (!actionChosen)
@@ -274,13 +275,12 @@ public class CombatController : MonoBehaviour
         BattleConditionInspector(EnemyPhase());
     }
 
-    private void SetPlayerUI()
+    private void ClearPlayerActions(int currentPlayerIndex)
     {
-        for (int i = 0; i < PartyController.partyMembers.Length; i++)
-        {
-            if (SetPartyMember != null && PartyController.partyMembers[i].HasValue)
-                SetPartyMember.Invoke(PartyController.partyMembers[i], i);
-        }
+        actionState = ActionState.None;
+        playerActions[currentPlayerIndex].actionType = actionState;
+        if (UpdateActionIcon != null)
+            UpdateActionIcon.Invoke(playerActions[currentPlayerIndex], currentPlayerIndex);
     }
 
     IEnumerator GenerateMonsterDice()
@@ -511,6 +511,13 @@ public class CombatController : MonoBehaviour
         currentBattleState = BattleState.Victory;
 
         Debug.Log("Victory");
+
+        FieldMovementController.inBattle = false;
+        for (int i = 0; i < 4; i++)
+            ClearPlayerActions(i);
+
+        if (CombatVictory != null)
+            CombatVictory.Invoke();
 
         yield return null;
     }

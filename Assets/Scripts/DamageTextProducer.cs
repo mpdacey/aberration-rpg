@@ -26,5 +26,6 @@ public class DamageTextProducer : MonoBehaviour
         }
         damageObject.transform.parent = transform;
         damageObject.transform.localPosition = Vector3.zero;
+        damageObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }

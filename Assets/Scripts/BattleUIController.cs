@@ -18,12 +18,12 @@ public class BattleUIController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameController.SetPartyMember += SetPartyValues;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
         combatController.ShowSpellsUI += HideAll;
         combatController.StatePlayerAttack += HideAll;
-        combatController.SetPartyMember += SetPartyValues;
         combatController.UpdatePlayerHP += UpdateHealth;
         combatController.UpdatePlayerSP += UpdateStamina;
         combatController.UpdateActionIcon += SetActionIcon;
@@ -33,12 +33,12 @@ public class BattleUIController : MonoBehaviour
 
     private void OnDisable()
     {
+        GameController.SetPartyMember -= SetPartyValues;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
         combatController.ShowSpellsUI -= HideAll;
         combatController.StatePlayerAttack -= HideAll;
-        combatController.SetPartyMember -= SetPartyValues;
         combatController.UpdatePlayerHP -= UpdateHealth;
         combatController.UpdatePlayerSP -= UpdateStamina;
         combatController.UpdateActionIcon -= SetActionIcon;
@@ -125,7 +125,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     monsterTargetButtons[i].interactable = aliveTargets[i];
-                    monsterTargetButtons[i].transform.position = Vector3.left * (4.5f - 4.5f * i);
+                    monsterTargetButtons[i].transform.position = Vector3.left * (1 - 1 * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
@@ -134,7 +134,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 2; i++)
                 {
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
-                    monsterTargetButtons[i * 2].transform.position = Vector3.left * (3 - 6 * i);
+                    monsterTargetButtons[i * 2].transform.position = Vector3.left * (0.75f - 1.5f * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();

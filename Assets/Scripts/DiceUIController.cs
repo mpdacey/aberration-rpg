@@ -45,10 +45,10 @@ public class DiceUIController : MonoBehaviour
             var randomIndex = Mathf.FloorToInt(Random.Range(1, allDiceFaces.Length) - 1);
             var selectedNumber = allDiceFaces[randomIndex];
             diceFaceRenderer.sprite = diceFaces[selectedNumber-1];
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, ((i + randomRotationOffset) % 2 == 0) ? -15 : 15));
+            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, ((i + randomRotationOffset) % 2 == 0) ? -15 : 15));
             yield return new WaitForSeconds(revealTime / numOfRolls);
         }
         diceFaceRenderer.sprite = diceFaces[chosenFace - 1];
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }
