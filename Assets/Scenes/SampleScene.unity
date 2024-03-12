@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 951064607}
   - component: {fileID: 951064610}
   - component: {fileID: 951064611}
+  - component: {fileID: 951064612}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -419,6 +420,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &951064612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951064606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45759533857d3c4f9df0228d92bcf5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: {x: 16, y: 16}
+  visited: []
+  walls: []
+  debugSpriteRenderer: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c188fafa62f2c45a8457e698eb047c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inBattle: 0
   movementAnimator: {fileID: 0}
 --- !u!1 &1796975611
 GameObject:
