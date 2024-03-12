@@ -61,6 +61,7 @@ public class CombatController : MonoBehaviour
     public MonsterController[] monsters;
     public FormationScriptableObject formation;
     public ActionState actionState = ActionState.None;
+    public float spellAttackDelay = 0.25f;
     [SerializeField] private BattleState currentBattleState;
     private Transform playerTransform;
     private PartyController.PartyMember currentMember;
@@ -383,6 +384,8 @@ public class CombatController : MonoBehaviour
                             var nextMonsterIndex = GetNextAliveMonster();
                             monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
                         }
+
+                        yield return new WaitForSeconds(spellAttackDelay);
                     }
                     else
                     {
@@ -390,6 +393,8 @@ public class CombatController : MonoBehaviour
                         {
                             if (monstersAlive[j])
                                 monsters[j].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[j]);
+
+                            yield return new WaitForSeconds(spellAttackDelay);
                         }
                     }
 
@@ -407,7 +412,7 @@ public class CombatController : MonoBehaviour
             if(playerActions[i].actionType != ActionState.Guard)
             {
                 playerActions[i].actionType = ActionState.None;
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(spellAttackDelay*3);
 
                 if (UpdateActionIcon != null)
                     UpdateActionIcon.Invoke(playerActions[i], i);
@@ -490,7 +495,7 @@ public class CombatController : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(spellAttackDelay*3);
         }
 
         BattleConditionInspector(PlayerPhase());
@@ -515,7 +520,7 @@ public class CombatController : MonoBehaviour
         if (UpdatePlayerHP != null && PartyController.partyMembers[target].HasValue)
             UpdatePlayerHP.Invoke(PartyController.partyMembers[target].Value, target);
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(spellAttackDelay);
 
         // Handle damage.
         if (targetMember.currentHP == 0)
