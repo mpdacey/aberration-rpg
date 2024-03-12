@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class FieldMovementController : MonoBehaviour
@@ -20,6 +21,29 @@ public class FieldMovementController : MonoBehaviour
     private void Start()
     {
         movementAnimator = GetComponent<Animator>();
+    }
+
+    private void OnEnable()
+    {
+        GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
+    }
+
+    private void OnDisable()
+    {
+        GoalRiftController.GoalRiftEntered -= ResetPlayerPosition;
+    }
+
+    private void ResetPlayerPosition()
+    {
+        StartCoroutine(WaitForAnimationToStop());
+    }
+
+    IEnumerator WaitForAnimationToStop()
+    {
+        while (!movementAnimator.GetCurrentAnimatorStateInfo(0).IsName(NULL_STATE))
+            yield return new WaitForEndOfFrame();
+
+        transform.position = Vector3.zero;
     }
 
     void Update()

@@ -14,6 +14,16 @@ public class MazeGenerator : MonoBehaviour
     private Color[] cells;
     private Texture2D generatedTexture;
 
+    private void OnEnable()
+    {
+        GoalRiftController.GoalRiftEntered += GenerateMaze;
+    }
+
+    private void OnDisable()
+    {
+        GoalRiftController.GoalRiftEntered -= GenerateMaze;
+    }
+
     private void Start()
     {
         GenerateMaze();
@@ -31,6 +41,9 @@ public class MazeGenerator : MonoBehaviour
         Vector2Int end = new Vector2Int(0,0);
 
         cells[start.y * gridSize.x + start.x] = Color.red;
+
+        visited.Clear();
+        walls.Clear();
 
         visited.Add(start);
         AddWalls(start);

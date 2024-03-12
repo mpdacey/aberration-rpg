@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GoalRiftController : MonoBehaviour
 {
+    public static event Action GoalRiftEntered;
+
     public Transform player;
 
     private void OnEnable()
@@ -25,8 +26,8 @@ public class GoalRiftController : MonoBehaviour
     {
         transform.rotation = player.rotation;
 
-        if (player.position == transform.position)
-            Debug.Log("Goal found");
+        if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
+            GoalRiftEntered.Invoke();
     }
 
     private void SetEndGoal(Vector2 endLocation)
