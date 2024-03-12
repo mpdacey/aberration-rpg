@@ -121,6 +121,8 @@ public class BattleUIController : MonoBehaviour
         foreach (var monsterTargetButton in monsterTargetButtons)
             monsterTargetButton.interactable = false;
 
+        Navigation customNav;
+
         switch (monsterCount)
         {
             case 3:
@@ -129,8 +131,9 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i].interactable = aliveTargets[i];
                     monsterTargetButtons[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i) /2;
 
-                    var customNav = monsterTargetButtons[i].navigation;
-                    for(int j = 0; j < 3; j++) 
+                    customNav = monsterTargetButtons[i].navigation;
+                    customNav.mode = Navigation.Mode.Explicit;
+                    for (int j = 0; j < 3; j++) 
                         if(aliveTargets[(i + j) % 3])
                             customNav.selectOnLeft = monsterTargetButtons[(i + j) % 3];
 
@@ -149,7 +152,8 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
                     monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i)/2;
 
-                    var customNav = monsterTargetButtons[i * 2].navigation;
+                    customNav = monsterTargetButtons[i * 2].navigation;
+                    customNav.mode = Navigation.Mode.Explicit;
                     customNav.selectOnLeft = customNav.selectOnRight = monsterTargetButtons[aliveTargets[(i+1)%2 * 2] ? (i + 1) % 2 * 2 : i % 2 * 2];
                     monsterTargetButtons[i * 2].navigation = customNav;
                 }
@@ -157,8 +161,11 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].transform.position = Vector3.zero;
-                monsterTargetButtons[1].gameObject.SetActive(aliveTargets[1]);
+                monsterTargetButtons[1].transform.localPosition = Vector3.zero;
+                monsterTargetButtons[1].interactable = aliveTargets[1];
+                customNav = monsterTargetButtons[1].navigation;
+                customNav.mode = Navigation.Mode.None;
+                monsterTargetButtons[1].navigation = customNav;
                 currentSelected = 1;
                 monsterTargetButtons[1].Select();
                 break;
