@@ -1,14 +1,15 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MazeGenerator : MonoBehaviour
 {
+    public static event Action<Texture2D> MazeTextureGenerated;
 
     public Vector2Int gridSize = new Vector2Int(16,16);
     public List<Vector2Int> visited = new List<Vector2Int>();
     public List<Vector2Int> walls = new List<Vector2Int>();
-    public SpriteRenderer debugSpriteRenderer;
     private Color[] cells;
     private Texture2D generatedTexture;
 
@@ -60,8 +61,9 @@ public class MazeGenerator : MonoBehaviour
         generatedTexture.filterMode = FilterMode.Point;
         generatedTexture.SetPixels(cells);
         generatedTexture.Apply();
-        Sprite sprite = Sprite.Create(generatedTexture, new Rect(0, 0, gridSize.x, gridSize.y), Vector2.zero, 16f);
-        debugSpriteRenderer.sprite = sprite;
+
+        if (MazeTextureGenerated != null)
+            MazeTextureGenerated.Invoke(generatedTexture);
     }
 
     private void AddVisited(Vector2Int newCell)
