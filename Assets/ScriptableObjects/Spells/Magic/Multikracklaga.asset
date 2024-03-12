@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Multikracklaga
   spellType: 2
   spellBaseDamage: 74
-  spellCost: 9
   spellHitRate: 74
+  spellCost: 18
   spellMultitarget: 1
