@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41067ef3fa486874b85bcca58acf5ccd, type: 3}
   m_Name: Multikrackle
   m_EditorClassIdentifier: 
-  spellName: Krackle
+  spellName: Multikrackle
   spellType: 2
   spellBaseDamage: 29
-  spellCost: 4
   spellHitRate: 76
+  spellCost: 8
   spellMultitarget: 1

@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Multikindle
   spellType: 0
   spellBaseDamage: 35
-  spellCost: 4
   spellHitRate: 80
+  spellCost: 8
   spellMultitarget: 1

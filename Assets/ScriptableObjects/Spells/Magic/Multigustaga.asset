@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Multigustaga
   spellType: 3
   spellBaseDamage: 68
-  spellCost: 7
   spellHitRate: 71
+  spellCost: 14
   spellMultitarget: 1

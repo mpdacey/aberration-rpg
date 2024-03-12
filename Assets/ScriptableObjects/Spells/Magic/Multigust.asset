@@ -15,6 +15,6 @@ MonoBehaviour:
   spellName: Multigust
   spellType: 3
   spellBaseDamage: 26
-  spellCost: 3
   spellHitRate: 77
+  spellCost: 6
   spellMultitarget: 1

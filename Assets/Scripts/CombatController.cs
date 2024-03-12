@@ -61,6 +61,7 @@ public class CombatController : MonoBehaviour
     public MonsterController[] monsters;
     public FormationScriptableObject formation;
     public ActionState actionState = ActionState.None;
+    public float spellAttackDelay = 0.25f;
     [SerializeField] private BattleState currentBattleState;
     private Transform playerTransform;
     private PartyController.PartyMember currentMember;
@@ -243,8 +244,24 @@ public class CombatController : MonoBehaviour
                             attackSpell = selectedSpell
                         };
 
-                        // Select Enemy
-                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
+                        if(!selectedSpell.spellMultitarget)
+                            // Select Enemy
+                            yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
+                        else
+                        {
+                            PlayerAction playerAction = new()
+                            {
+                                actionType = ActionState.Skill,
+                                attackAction = new()
+                                {
+                                    target = -1,
+                                    attack = spellAttackObject
+                                }
+                            };
+
+                            playerActions[currentPlayerIndex] = playerAction;
+                            actionState = ActionState.Confirm;
+                        }
                         break;
                     case ActionState.Guard:
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
@@ -358,12 +375,27 @@ public class CombatController : MonoBehaviour
             {
                 case ActionState.Attack:
                 case ActionState.Skill:
-                    if(monstersAlive[playerActions[i].attackAction.target])
-                        monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[playerActions[i].attackAction.target]);
+                    if (!playerActions[i].attackAction.attack.attackSpell.spellMultitarget)
+                    {
+                        if (monstersAlive[playerActions[i].attackAction.target])
+                            monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[playerActions[i].attackAction.target]);
+                        else
+                        {
+                            var nextMonsterIndex = GetNextAliveMonster();
+                            monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                        }
+
+                        yield return new WaitForSeconds(spellAttackDelay);
+                    }
                     else
                     {
-                        var nextMonsterIndex = GetNextAliveMonster();
-                        monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                        for(int j = 0; j < 3; j++)
+                        {
+                            if (monstersAlive[j])
+                                monsters[j].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[j]);
+
+                            yield return new WaitForSeconds(spellAttackDelay);
+                        }
                     }
 
                     if(playerActions[i].attackAction.attack.attackSpell.spellCost > 0 && PartyController.partyMembers[i].HasValue)
@@ -380,7 +412,7 @@ public class CombatController : MonoBehaviour
             if(playerActions[i].actionType != ActionState.Guard)
             {
                 playerActions[i].actionType = ActionState.None;
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(spellAttackDelay*3);
 
                 if (UpdateActionIcon != null)
                     UpdateActionIcon.Invoke(playerActions[i], i);
@@ -406,88 +438,103 @@ public class CombatController : MonoBehaviour
             AttackAction enemyAttackObject = new();
             enemyAttackObject.attack = monsters[i].GetAttack();
 
-            if (enemyAttackObject.attack.attackSpell.spellMultitarget) continue;
-
-            // Determine target
-            playerTargetPriority = new int[]{ 5, 7, 7, 7 };
-
-            for (int j = 0; j < 4; j++)
+            if (!enemyAttackObject.attack.attackSpell.spellMultitarget)
             {
-                if (!PartyController.partyMembers[j].HasValue)
+                // Determine target
+                playerTargetPriority = new int[] { 5, 7, 7, 7 };
+
+                for (int j = 0; j < 4; j++)
                 {
-                    playerTargetPriority[j] = 0;
-                    continue;
+                    if (!PartyController.partyMembers[j].HasValue)
+                    {
+                        playerTargetPriority[j] = 0;
+                        continue;
+                    }
+
+                    PartyController.PartyMember? partyMember = PartyController.partyMembers[j].Value;
+
+                    switch (partyMember?.partyMemberBaseStats.combatantAttributes[enemyAttackObject.attack.attackSpell.spellType])
+                    {
+                        case CombatantScriptableObject.AttributeAffinity.Weak:
+                            playerTargetPriority[j] += 2;
+                            break;
+                        case CombatantScriptableObject.AttributeAffinity.Resist:
+                            playerTargetPriority[j] -= 2;
+                            break;
+                        case CombatantScriptableObject.AttributeAffinity.Null:
+                            playerTargetPriority[j] -= 3;
+                            break;
+                        case CombatantScriptableObject.AttributeAffinity.Absorb:
+                        case CombatantScriptableObject.AttributeAffinity.Repel:
+                            playerTargetPriority[j] -= 4;
+                            break;
+                    }
                 }
 
-                PartyController.PartyMember? partyMember = PartyController.partyMembers[j].Value;
+                int priorityTotal = playerTargetPriority.Sum();
+                int random = Mathf.FloorToInt(UnityEngine.Random.Range(0, priorityTotal));
 
-                switch (partyMember?.partyMemberBaseStats.combatantAttributes[enemyAttackObject.attack.attackSpell.spellType])
+                for (int target = 0; target < 4; target++)
                 {
-                    case CombatantScriptableObject.AttributeAffinity.Weak:
-                        playerTargetPriority[j] += 2;
+                    if (random < playerTargetPriority[target])
+                    {
+                        enemyAttackObject.target = target;
                         break;
-                    case CombatantScriptableObject.AttributeAffinity.Resist:
-                        playerTargetPriority[j] -= 2;
-                        break;
-                    case CombatantScriptableObject.AttributeAffinity.Null:
-                        playerTargetPriority[j] -= 3;
-                        break;
-                    case CombatantScriptableObject.AttributeAffinity.Absorb:
-                    case CombatantScriptableObject.AttributeAffinity.Repel:
-                        playerTargetPriority[j] -= 4;
-                        break;
+                    }
+                    random -= playerTargetPriority[target];
+                }
+
+                yield return DamagePartyMember(enemyAttackObject.target, enemyAttackObject.attack);
+            }
+            else
+            {
+                for(int target = 0; target < 4; target++)
+                {
+                    if(PartyController.partyMembers[target].HasValue)
+                        yield return DamagePartyMember(target, enemyAttackObject.attack);
                 }
             }
 
-            int priorityTotal = playerTargetPriority.Sum();
-            int random = Mathf.FloorToInt(UnityEngine.Random.Range(0, priorityTotal));
-
-            for(int target = 0; target < 4; target++)
-            {
-                if(random < playerTargetPriority[target])
-                {
-                    enemyAttackObject.target = target;
-                    break;
-                }
-                random -= playerTargetPriority[target];
-            }
-
-            AttackObject reflectedAttack = null;
-            PartyController.PartyMember targetMember = PartyController.partyMembers[enemyAttackObject.target].Value;
-            int oldHealth = targetMember.currentHP;
-            var affinityCheck = AttackHandler.CalculateIncomingDamage(enemyAttackObject.attack, PartyController.partyMembers[enemyAttackObject.target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[enemyAttackObject.target].actionType == ActionState.Guard);
-
-            // Display damage
-            if (DisplayRecievedPlayerDamage != null && oldHealth - targetMember.currentHP != 0)
-                DisplayRecievedPlayerDamage.Invoke(enemyAttackObject.target, targetMember.currentHP - oldHealth);
-            if (DisplayEvadedAttack != null && affinityCheck == CombatantScriptableObject.AttributeAffinity.Evade)
-                DisplayEvadedAttack.Invoke(enemyAttackObject.target);
-
-            targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
-            PartyController.partyMembers[enemyAttackObject.target] = targetMember;
-
-            if (UpdatePlayerHP != null && PartyController.partyMembers[enemyAttackObject.target].HasValue)
-                UpdatePlayerHP.Invoke(PartyController.partyMembers[enemyAttackObject.target].Value, enemyAttackObject.target);
-
-            yield return new WaitForSeconds(1f);
-
-            // Handle damage.
-            if (targetMember.currentHP == 0)
-            {
-                if(enemyAttackObject.target == 0)
-                {
-                    //Game over
-                    currentBattleState = BattleState.Defeat;
-                    break;
-                }
-                else
-                {
-                    PartyController.partyMembers[enemyAttackObject.target] = null;
-                }
-            }
+            yield return new WaitForSeconds(spellAttackDelay*3);
         }
 
         BattleConditionInspector(PlayerPhase());
+    }
+
+    IEnumerator DamagePartyMember(int target, AttackObject attack)
+    {
+        AttackObject reflectedAttack = null;
+        PartyController.PartyMember targetMember = PartyController.partyMembers[target].Value;
+        int oldHealth = targetMember.currentHP;
+        var affinityCheck = AttackHandler.CalculateIncomingDamage(attack, PartyController.partyMembers[target].Value.partyMemberBaseStats, ref targetMember.currentHP, out reflectedAttack, isGuarding: playerActions[target].actionType == ActionState.Guard);
+
+        // Display damage
+        if (DisplayRecievedPlayerDamage != null && oldHealth - targetMember.currentHP != 0)
+            DisplayRecievedPlayerDamage.Invoke(target, targetMember.currentHP - oldHealth);
+        if (DisplayEvadedAttack != null && affinityCheck == CombatantScriptableObject.AttributeAffinity.Evade)
+            DisplayEvadedAttack.Invoke(target);
+
+        targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
+        PartyController.partyMembers[target] = targetMember;
+
+        if (UpdatePlayerHP != null && PartyController.partyMembers[target].HasValue)
+            UpdatePlayerHP.Invoke(PartyController.partyMembers[target].Value, target);
+
+        yield return new WaitForSeconds(spellAttackDelay);
+
+        // Handle damage.
+        if (targetMember.currentHP == 0)
+        {
+            if (target == 0)
+            {
+                //Game over
+                currentBattleState = BattleState.Defeat;
+            }
+            else
+            {
+                PartyController.partyMembers[target] = null;
+            }
+        }
     }
 
     private void BattleConditionInspector(IEnumerator nextPhase)
