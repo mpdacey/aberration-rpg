@@ -45,7 +45,7 @@ public class MonsterEncounterController : MonoBehaviour
             timer = 0;
             if (threatLevel == ThreatLevel.High)
             {
-                if (ThreatTriggered != null && Vector3.Distance(player.position, goalPosition) > 13.5f)
+                if (ThreatTriggered != null && Vector3.Distance(player.position, goalPosition*5) > 9.5f)
                     ThreatTriggered.Invoke();
             }
             else
