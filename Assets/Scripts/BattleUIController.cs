@@ -116,7 +116,7 @@ public class BattleUIController : MonoBehaviour
     {
         monsterTargetButtons[0].transform.parent.gameObject.SetActive(true);
         monsterTargetButtons[0].transform.parent.position = playerTransform.position;
-        monsterTargetButtons[0].transform.parent.rotation = playerTransform.rotation;
+        monsterTargetButtons[0].transform.parent.rotation = Quaternion.Inverse(playerTransform.rotation);
 
         foreach (var monsterTargetButton in monsterTargetButtons)
             monsterTargetButton.interactable = false;
@@ -127,18 +127,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     monsterTargetButtons[i].interactable = aliveTargets[i];
-                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i) /2;
-
-                    var customNav = monsterTargetButtons[i].navigation;
-                    for(int j = 0; j < 3; j++) 
-                        if(aliveTargets[(i + j) % 3])
-                            customNav.selectOnLeft = monsterTargetButtons[(i + j) % 3];
-
-                    for(int j = 3; j > 0; j--)
-                        if (aliveTargets[(i + j) % 3])
-                            customNav.selectOnRight = monsterTargetButtons[(i + j) % 3];
-
-                    monsterTargetButtons[i].navigation = customNav;
+                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (1.5f - 4.5f * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
@@ -147,11 +136,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 2; i++)
                 {
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
-                    monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i)/2;
-
-                    var customNav = monsterTargetButtons[i * 2].navigation;
-                    customNav.selectOnLeft = customNav.selectOnRight = monsterTargetButtons[aliveTargets[(i+1)%2 * 2] ? (i + 1) % 2 * 2 : i % 2 * 2];
-                    monsterTargetButtons[i * 2].navigation = customNav;
+                    monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
