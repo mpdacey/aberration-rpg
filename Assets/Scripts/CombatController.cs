@@ -11,7 +11,7 @@ public class CombatController : MonoBehaviour
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
-    public event Action<bool[], int> ShowTargetIndicator;
+    public event Action<Transform, bool[], int> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
@@ -317,7 +317,7 @@ public class CombatController : MonoBehaviour
     IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
     {
         if (ShowTargetIndicator != null)
-            ShowTargetIndicator.Invoke(monstersAlive, formation.monsters.Length);
+            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, formation.monsters.Length);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
 

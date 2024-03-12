@@ -112,9 +112,11 @@ public class BattleUIController : MonoBehaviour
     private void HideBattleMenu() =>
         battleMenuUI.SetActive(false);
 
-    private void ShowTargets(bool[] aliveTargets, int monsterCount)
+    private void ShowTargets(Transform playerTransform, bool[] aliveTargets, int monsterCount)
     {
         monsterTargetButtons[0].transform.parent.gameObject.SetActive(true);
+        monsterTargetButtons[0].transform.parent.position = playerTransform.position;
+        monsterTargetButtons[0].transform.parent.rotation = Quaternion.Inverse(playerTransform.rotation);
 
         foreach (var monsterTargetButton in monsterTargetButtons)
             monsterTargetButton.interactable = false;
@@ -125,7 +127,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     monsterTargetButtons[i].interactable = aliveTargets[i];
-                    monsterTargetButtons[i].transform.position = Vector3.left * (1 - 1 * i);
+                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (1.5f - 4.5f * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
@@ -134,14 +136,14 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 2; i++)
                 {
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
-                    monsterTargetButtons[i * 2].transform.position = Vector3.left * (0.75f - 1.5f * i);
+                    monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
                 monsterTargetButtons[1].transform.position = Vector3.zero;
-                monsterTargetButtons[1].interactable = aliveTargets[1];
+                monsterTargetButtons[1].gameObject.SetActive(aliveTargets[1]);
                 currentSelected = 1;
                 monsterTargetButtons[1].Select();
                 break;
