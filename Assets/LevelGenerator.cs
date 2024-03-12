@@ -25,19 +25,29 @@ public class LevelGenerator : MonoBehaviour
     };
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = groundMaterial;
         meshFilter = GetComponent<MeshFilter>();
         meshCollider = GetComponent<MeshCollider>();
-        wallMeshRenderer.sharedMaterial = wallsMaterial;//new Material(Shader.Find("Standard"));
-
-        GenerateTerrain();
+        wallMeshRenderer.sharedMaterial = wallsMaterial;
     }
 
-    private void GenerateTerrain()
+    private void OnEnable()
     {
+        MazeGenerator.MazeTextureGenerated += GenerateTerrain;
+    }
+
+    private void OnDisable()
+    {
+        MazeGenerator.MazeTextureGenerated -= GenerateTerrain;
+    }
+
+    private void GenerateTerrain(Texture2D levelTexture)
+    {
+        levelGeometry = levelTexture;
+
         Color[] pixels = levelGeometry.GetPixels();
         List<Vector2> walkableTiles = new List<Vector2>();
         List<Vector2[]> edges = new List<Vector2[]>();
