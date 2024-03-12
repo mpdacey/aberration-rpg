@@ -1661,7 +1661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_Name
@@ -2241,7 +2241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_Name
@@ -3751,6 +3751,7 @@ MonoBehaviour:
   - {fileID: 1588695423}
   formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
   actionState: 0
+  spellAttackDelay: 0.25
   currentBattleState: 0
   monstersStunned: 000000
 --- !u!114 &1672502334
@@ -5167,10 +5168,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6686381662977745093, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7191578498576746649, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785008219551619961, guid: cf6b48f8781a26d48b427ba0a44cd394, type: 3}

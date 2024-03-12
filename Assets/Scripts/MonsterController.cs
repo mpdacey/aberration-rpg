@@ -29,6 +29,7 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private CombatantScriptableObject combatantStats;
     [SerializeReference] private DiceUIController[] diceControllers;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private int localHP = 0;
     private int localSP = 0;
     private int[] currentDiceValues;
@@ -36,6 +37,12 @@ public class MonsterController : MonoBehaviour
     private void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+    }
+
+    public void PlayEntranceAnimation()
+    {
+        animator.Play("MonsterEntrance");
     }
 
     public IEnumerator GenerateDice()
@@ -118,7 +125,7 @@ public class MonsterController : MonoBehaviour
 
         if (localHP <= 0 && MonsterDefeated != null)
         {
-            spriteRenderer.enabled = false;
+            animator.Play("MonsterDefeated");
             foreach (var die in diceControllers)
                 die.UpdateFace(0);
             if(MonsterDefeated != null)
