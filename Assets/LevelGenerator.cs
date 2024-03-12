@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    public static event Action<Vector2> GoalLocationFound;
+
     public Texture2D levelGeometry;
     public Material groundMaterial;
     public Material wallsMaterial;
@@ -53,6 +55,7 @@ public class LevelGenerator : MonoBehaviour
         List<Vector2[]> edges = new List<Vector2[]>();
 
         Vector2 startLocation = Vector2.zero;
+        Vector2 endLocation = Vector2.zero;
 
         for(int y = 0; y < levelGeometry.height; y++)
         {
@@ -67,11 +70,18 @@ public class LevelGenerator : MonoBehaviour
                     {
                         startLocation = pixelCoords;
                     }
+                    if(pixels[index].g == 1 && pixels[index].b == 0)
+                    {
+                        endLocation = pixelCoords;
+                    }
 
                     edges.AddRange(FindEdges(pixels, pixelCoords));
                 }
             }
         }
+
+        if (GoalLocationFound != null)
+            GoalLocationFound.Invoke(endLocation-startLocation);
 
         for (int i = 0; i < pixels.Length; i++)
         {
@@ -163,6 +173,7 @@ public class LevelGenerator : MonoBehaviour
         mesh.triangles = tris;
         mesh.normals = normals;
         mesh.uv = uv;
+        mesh.RecalculateNormals();
 
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;

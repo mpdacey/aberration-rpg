@@ -19,6 +19,9 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadCombatScene()
     {
+        if (SceneManager.GetSceneByBuildIndex(COMBAT_SCENE_INDEX).isLoaded)
+            SceneManager.UnloadSceneAsync(COMBAT_SCENE_INDEX);
+
         var asyncLoadLevel = SceneManager.LoadSceneAsync(COMBAT_SCENE_INDEX, LoadSceneMode.Additive);
         while (!asyncLoadLevel.isDone)
             yield return new WaitForEndOfFrame();

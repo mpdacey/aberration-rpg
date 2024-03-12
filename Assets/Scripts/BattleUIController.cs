@@ -14,11 +14,13 @@ public class BattleUIController : MonoBehaviour
     public Button skillButton;
     public Button[] monsterTargetButtons;
     public PlayerStatsUIController[] partyLineUpUI;
+    public Animator riftTransitionAnimator;
     private int currentSelected;
 
     private void OnEnable()
     {
         GameController.SetPartyMember += SetPartyValues;
+        GoalRiftController.GoalRiftEntered += PlayTransitionAnimation;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
@@ -34,6 +36,7 @@ public class BattleUIController : MonoBehaviour
     private void OnDisable()
     {
         GameController.SetPartyMember -= SetPartyValues;
+        GoalRiftController.GoalRiftEntered -= PlayTransitionAnimation;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
@@ -199,4 +202,7 @@ public class BattleUIController : MonoBehaviour
         if (DisplayEvadedAttackEvent != null)
             DisplayEvadedAttackEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>());
     }
+
+    private void PlayTransitionAnimation() =>
+        riftTransitionAnimator.Play("RiftOverlayUI");
 }

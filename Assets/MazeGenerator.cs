@@ -10,8 +10,19 @@ public class MazeGenerator : MonoBehaviour
     public Vector2Int gridSize = new Vector2Int(16,16);
     public List<Vector2Int> visited = new List<Vector2Int>();
     public List<Vector2Int> walls = new List<Vector2Int>();
+    public SpriteRenderer testRenderer;
     private Color[] cells;
     private Texture2D generatedTexture;
+
+    private void OnEnable()
+    {
+        GoalRiftController.GoalRiftEntered += GenerateMaze;
+    }
+
+    private void OnDisable()
+    {
+        GoalRiftController.GoalRiftEntered -= GenerateMaze;
+    }
 
     private void Start()
     {
@@ -27,8 +38,12 @@ public class MazeGenerator : MonoBehaviour
         int startX = Mathf.FloorToInt((float)Random.Range(0, gridSize.x - 1)/2)*2;
         int startY = Mathf.FloorToInt((float)Random.Range(0, gridSize.y - 1)/2)*2;
         Vector2Int start = new Vector2Int(startX, startY);
+        Vector2Int end = new Vector2Int(0,0);
 
         cells[start.y * gridSize.x + start.x] = Color.red;
+
+        visited.Clear();
+        walls.Clear();
 
         visited.Add(start);
         AddWalls(start);
@@ -41,26 +56,46 @@ public class MazeGenerator : MonoBehaviour
             {
                 cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
                 if (visited.Contains(randomWall + Vector2Int.left))
+                {
                     AddVisited(randomWall + Vector2Int.right);
+                    end = randomWall + Vector2Int.right;
+                }
                 else
+                {
                     AddVisited(randomWall + Vector2Int.left);
+                    end = randomWall + Vector2Int.left;
+                }
             }
             else if (visited.Contains(randomWall + Vector2Int.up) ^ visited.Contains(randomWall + Vector2Int.down))
             {
                 cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
                 if (visited.Contains(randomWall + Vector2Int.up))
+                {
                     AddVisited(randomWall + Vector2Int.down);
+                    end = randomWall + Vector2Int.down;
+                }
                 else
+                {
                     AddVisited(randomWall + Vector2Int.up);
+                    end = randomWall + Vector2Int.up;
+                }
             }
 
             walls.Remove(randomWall);
         }
 
+        cells[end.y * gridSize.x + end.x] = Color.red + Color.green;
+
         generatedTexture = new Texture2D(gridSize.x, gridSize.y);
         generatedTexture.filterMode = FilterMode.Point;
         generatedTexture.SetPixels(cells);
         generatedTexture.Apply();
+
+        if(testRenderer != null)
+        {
+            Sprite testSprite = Sprite.Create(generatedTexture, new Rect(0, 0, gridSize.x, gridSize.y), Vector2.zero, 16f);
+            testRenderer.sprite = testSprite;
+        }
 
         if (MazeTextureGenerated != null)
             MazeTextureGenerated.Invoke(generatedTexture);
