@@ -23,6 +23,7 @@ public class MonsterEncounterController : MonoBehaviour
     {
         FieldMovementController.PlayerTranformChanged += UpdateThreatLevel;
         CombatController.CombatVictory += ResetThreatLevel;
+        GoalRiftController.GoalRiftEntered += ResetThreatLevel;
         LevelGenerator.GoalLocationFound += SetGoalPosition;
     }
 
@@ -30,6 +31,7 @@ public class MonsterEncounterController : MonoBehaviour
     {
         FieldMovementController.PlayerTranformChanged -= UpdateThreatLevel;
         CombatController.CombatVictory -= ResetThreatLevel;
+        GoalRiftController.GoalRiftEntered -= ResetThreatLevel;
         LevelGenerator.GoalLocationFound -= SetGoalPosition;
     }
 
