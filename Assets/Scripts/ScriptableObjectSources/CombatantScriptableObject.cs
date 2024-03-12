@@ -55,6 +55,16 @@ public class CombatantScriptableObject : ScriptableObject
 
     private void OnValidate()
     {
+        SetSpells();
+    }
+
+    private void OnEnable()
+    {
+        SetSpells();
+    }
+
+    private void SetSpells()
+    {
         if (combatantAttributesArray.Length != Enum.GetNames(typeof(SpellScriptableObject.SpellType)).Length)
             combatantAttributesArray = new AttributeAffinityDictionaryItem[Enum.GetValues(typeof(SpellScriptableObject.SpellType)).Length];
 
