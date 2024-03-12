@@ -127,7 +127,7 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     monsterTargetButtons[i].interactable = aliveTargets[i];
-                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (1.5f - 4.5f * i)/2;
+                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i) /2;
 
                     var customNav = monsterTargetButtons[i].navigation;
                     customNav.selectOnLeft = monsterTargetButtons[(i + 2) % 3];

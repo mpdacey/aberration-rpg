@@ -118,7 +118,7 @@ public class CombatController : MonoBehaviour
                 {
                     monsters[i].CombatantStats = formation.monsters[i];
                     monsters[i].GetComponent<SpriteRenderer>().enabled = true;
-                    monsters[i].transform.localPosition = Vector3.left * (1.5f - 4.5f * i);
+                    monsters[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i);
                 }
                 monstersAlive[0] = monstersAlive[1] = monstersAlive[2] = true;
                 break;
