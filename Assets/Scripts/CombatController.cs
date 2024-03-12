@@ -243,8 +243,24 @@ public class CombatController : MonoBehaviour
                             attackSpell = selectedSpell
                         };
 
-                        // Select Enemy
-                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
+                        if(!selectedSpell.spellMultitarget)
+                            // Select Enemy
+                            yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
+                        else
+                        {
+                            PlayerAction playerAction = new()
+                            {
+                                actionType = ActionState.Skill,
+                                attackAction = new()
+                                {
+                                    target = -1,
+                                    attack = spellAttackObject
+                                }
+                            };
+
+                            playerActions[currentPlayerIndex] = playerAction;
+                            actionState = ActionState.Confirm;
+                        }
                         break;
                     case ActionState.Guard:
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
@@ -358,12 +374,23 @@ public class CombatController : MonoBehaviour
             {
                 case ActionState.Attack:
                 case ActionState.Skill:
-                    if(monstersAlive[playerActions[i].attackAction.target])
-                        monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[playerActions[i].attackAction.target]);
+                    if (!playerActions[i].attackAction.attack.attackSpell.spellMultitarget)
+                    {
+                        if (monstersAlive[playerActions[i].attackAction.target])
+                            monsters[playerActions[i].attackAction.target].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[playerActions[i].attackAction.target]);
+                        else
+                        {
+                            var nextMonsterIndex = GetNextAliveMonster();
+                            monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                        }
+                    }
                     else
                     {
-                        var nextMonsterIndex = GetNextAliveMonster();
-                        monsters[nextMonsterIndex].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[nextMonsterIndex]);
+                        for(int j = 0; j < 3; j++)
+                        {
+                            if (monstersAlive[j])
+                                monsters[j].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[j]);
+                        }
                     }
 
                     if(playerActions[i].attackAction.attack.attackSpell.spellCost > 0 && PartyController.partyMembers[i].HasValue)
