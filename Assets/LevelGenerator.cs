@@ -163,6 +163,7 @@ public class LevelGenerator : MonoBehaviour
         mesh.triangles = tris;
         mesh.normals = normals;
         mesh.uv = uv;
+        mesh.RecalculateNormals();
 
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
