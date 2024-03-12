@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelGeometry: {fileID: 2800000, guid: 28e808062e28a1e4d871168e82054041, type: 3}
-  groundMaterial: {fileID: 2100000, guid: ef48e8552154bdd4d9dfc4d2d5c58d71, type: 2}
-  wallsMaterial: {fileID: 2100000, guid: 29ee7a239f59de149817b614960fd315, type: 2}
+  groundMaterial: {fileID: 2100000, guid: 761d285c68fdaaa4389ec21334989bb1, type: 2}
+  wallsMaterial: {fileID: 2100000, guid: 0996a9a5b5ce7ef439c034e6b11cdf67, type: 2}
   wallMeshRenderer: {fileID: 332953820}
   wallMeshFilter: {fileID: 332953818}
   floorHeight: -1
