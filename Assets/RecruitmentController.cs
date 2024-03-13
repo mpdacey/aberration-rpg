@@ -26,15 +26,16 @@ public class RecruitmentController : MonoBehaviour
 
         CombatantScriptableObject requestingCreature = currentFormation.monsters[Random.Range(0, currentFormation.monsters.Length-1)];
 
-        var leftOfferIndex = availableIndexes[Random.Range(0, availableIndexes.Count - 1)];
+        int minIndex = availableIndexes.Count == 4 ? 1 : 0;
+        int leftOfferIndex = availableIndexes[Random.Range(minIndex, availableIndexes.Count - 1)];
         int rightOfferIndex = leftOfferIndex;
 
-        if(availableIndexes.Count != 1)
+        if(availableIndexes.Count > 1)
         {
             do
             {
-                rightOfferIndex = availableIndexes[Random.Range(0, availableIndexes.Count - 1)];
-            } while (rightOfferIndex != leftOfferIndex);
+                rightOfferIndex = availableIndexes[Random.Range(minIndex, availableIndexes.Count - 1)];
+            } while (rightOfferIndex == leftOfferIndex);
         }
 
         uiController.gameObject.SetActive(true);
