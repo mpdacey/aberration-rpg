@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
         audioMixer = GetComponent<AudioMixerManager>();
     }
 
-    public static void PlayPlayerAudioClip(AudioClip audioClip, bool randomPitch = false)
+    public static void PlayAudioClip(AudioClip audioClip, bool randomPitch = false)
     {
         audioMixer.SetSFXPitch(randomPitch ? Random.Range(1, 1.05f) : 1);
         audioSource.PlayOneShot(audioClip);
