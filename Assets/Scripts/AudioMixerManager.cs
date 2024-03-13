@@ -11,5 +11,5 @@ public class AudioMixerManager : MonoBehaviour
 
     // Pitch Settings
     public void SetSFXPitch(float level) =>
-        mixer.SetFloat("_PlayerSFXPitch", level);
+        mixer.SetFloat("_SFXPitch", level);
 }
