@@ -32,6 +32,8 @@ public class AttackHandler
         reflectedAttack = null;
         if (isGuarding) Debug.Log("Guarding next attack");
 
+        AudioManager.PlayAudioClip(SoundEffectsStorage.spellSFXDictionary[incomingAttack.attackSpell.spellType]);
+
         switch (combatantStats.combatantAttributes[incomingAttack.attackSpell.spellType])
         {
             case CombatantScriptableObject.AttributeAffinity.None:

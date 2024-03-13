@@ -8,6 +8,7 @@ public class FieldMovementController : MonoBehaviour
     public static event Action FieldMovementEvent;
 
     public static bool inBattle = false;
+    public AudioClip playerMovementSFX;
     [SerializeField] Animator movementAnimator;
     private float currentAnimationTimer = 0;
 
@@ -60,6 +61,7 @@ public class FieldMovementController : MonoBehaviour
             Ray ray = new Ray(rayOrigin, Vector3.down * 3);
             if (Physics.Raycast(ray))
             {
+                AudioManager.PlayAudioClip(playerMovementSFX, true);
                 CallAnimation(MOVE_FORWARD_STATE);
                 if (FieldMovementEvent != null)
                     FieldMovementEvent.Invoke();
