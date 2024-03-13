@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
 
     public static void PlayAudioClip(AudioClip audioClip, bool randomPitch = false)
     {
-        audioMixer.SetSFXPitch(randomPitch ? Random.Range(1, 1.05f) : 1);
+        audioMixer.SetSFXPitch(randomPitch ? Random.Range(0.95f, 1.05f) : 1);
         audioSource.PlayOneShot(audioClip);
     }
 }
