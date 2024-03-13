@@ -51,7 +51,7 @@ public class MonsterController : MonoBehaviour
         for(int i = 0; i < currentDiceValues.Length; i++)
         {
             diceControllers[i].gameObject.SetActive(currentDiceValues.Length >= i);
-            currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Mathf.FloorToInt(Random.Range(0, currentDiceValues.Length - 0.01f))];
+            currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Random.Range(0, combatantStats.combatantDiceSet[i].dieFaces.Length-1)];
             diceControllers[i].CastFace(currentDiceValues[i], combatantStats.combatantDiceSet[i].dieFaces);
 
             yield return new WaitForSeconds(diceControllers[i].revealTime/2);

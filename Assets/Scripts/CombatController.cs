@@ -313,11 +313,9 @@ public class CombatController : MonoBehaviour
         {
             if (monstersAlive[i])
             {
-                StartCoroutine(monsters[i].GenerateDice());
-                yield return new WaitForSeconds(0.75f/2);
+                yield return monsters[i].GenerateDice();
             }
         }
-        yield return new WaitForSeconds(0.75f);
     }
 
     private void StunMonster(int enemyIndex)
