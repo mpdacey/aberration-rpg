@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
+  m_Name: Eleplant
+  m_EditorClassIdentifier: 
+  combatantName: Eleplant
+  combatantMaxHealth: 210
+  combatantMaxStamina: 56
+  combatantBaseStats:
+    strength: 14
+    magic: 6
+    endurance: 17
+    agility: 6
+    luck: 4
+  combatantSpells:
+  - {fileID: 11400000, guid: 0bc736dd35c3f2c479135e22b2238fdf, type: 2}
+  - {fileID: 11400000, guid: b8d172e35eb36b84fa130234e5b8077d, type: 2}
+  - {fileID: 11400000, guid: 5e69d74244c95874ca7cc1fb8c35a603, type: 2}
+  combatantNormalAttackType: 4
+  combatantSprite: {fileID: -732398305, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  combatantDiceSet:
+  - dieFaces: 030000000100000001000000
+  - dieFaces: 030000000100000001000000
+  combatantAttributesArray:
+  - key: 0
+    value: 1
+  - key: 1
+    value: 3
+  - key: 2
+    value: 1
+  - key: 3
+    value: 3
+  - key: 4
+    value: 3
+  - key: 5
+    value: 2

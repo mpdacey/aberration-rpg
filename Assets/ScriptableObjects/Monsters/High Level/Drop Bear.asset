@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
+  m_Name: Drop Bear
+  m_EditorClassIdentifier: 
+  combatantName: Drop Bear
+  combatantMaxHealth: 175
+  combatantMaxStamina: 64
+  combatantBaseStats:
+    strength: 15
+    magic: 19
+    endurance: 12
+    agility: 16
+    luck: 5
+  combatantSpells:
+  - {fileID: 11400000, guid: ba1e02f8e5ad6cb41930aad93cb69978, type: 2}
+  - {fileID: 11400000, guid: ca6d8b819bc6a7c4493a436134b59840, type: 2}
+  - {fileID: 11400000, guid: b03df470cb16f3c4a856d15cbff0e97e, type: 2}
+  combatantNormalAttackType: 5
+  combatantSprite: {fileID: -257342482, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  combatantDiceSet:
+  - dieFaces: 060000000300000001000000
+  combatantAttributesArray:
+  - key: 0
+    value: 0
+  - key: 1
+    value: 1
+  - key: 2
+    value: 3
+  - key: 3
+    value: 1
+  - key: 4
+    value: 0
+  - key: 5
+    value: 0
