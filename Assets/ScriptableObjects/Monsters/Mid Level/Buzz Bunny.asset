@@ -10,34 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
-  m_Name: Player
+  m_Name: Buzz Bunny
   m_EditorClassIdentifier: 
-  combatantName: Maggie
-  combatantMaxHealth: 120
-  combatantMaxStamina: 40
+  combatantName: Buzz Bunny
+  combatantMaxHealth: 130
+  combatantMaxStamina: 48
   combatantBaseStats:
     strength: 6
-    magic: 8
+    magic: 12
     endurance: 8
-    agility: 5
-    luck: 7
+    agility: 12
+    luck: 13
   combatantSpells:
-  - {fileID: 11400000, guid: 362c445ce24fdfc4b88c8c03b3ec55b2, type: 2}
-  - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
-  - {fileID: 11400000, guid: 6d15a6187678ee945af7b2a6a7d230e7, type: 2}
+  - {fileID: 11400000, guid: ba1e02f8e5ad6cb41930aad93cb69978, type: 2}
+  - {fileID: 11400000, guid: 952d517cabdf71d42ae2219b5b54475e, type: 2}
+  - {fileID: 11400000, guid: 28a19f5acc2b621458da0f5065008509, type: 2}
   combatantNormalAttackType: 4
-  combatantSprite: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
-  combatantDiceSet: []
+  combatantSprite: {fileID: -761714582, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  combatantDiceSet:
+  - dieFaces: 05000000020000000200000002000000
   combatantAttributesArray:
   - key: 0
     value: 0
   - key: 1
     value: 0
   - key: 2
-    value: 0
+    value: 3
   - key: 3
-    value: 0
+    value: 1
   - key: 4
     value: 0
   - key: 5
-    value: 0
+    value: 1

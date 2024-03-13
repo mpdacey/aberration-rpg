@@ -10,31 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
-  m_Name: Player
+  m_Name: Ice Snake
   m_EditorClassIdentifier: 
-  combatantName: Maggie
-  combatantMaxHealth: 120
-  combatantMaxStamina: 40
+  combatantName: Ice Snake
+  combatantMaxHealth: 75
+  combatantMaxStamina: 24
   combatantBaseStats:
     strength: 6
-    magic: 8
-    endurance: 8
+    magic: 5
+    endurance: 3
     agility: 5
-    luck: 7
+    luck: 4
   combatantSpells:
-  - {fileID: 11400000, guid: 362c445ce24fdfc4b88c8c03b3ec55b2, type: 2}
-  - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
-  - {fileID: 11400000, guid: 6d15a6187678ee945af7b2a6a7d230e7, type: 2}
-  combatantNormalAttackType: 4
-  combatantSprite: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
-  combatantDiceSet: []
+  - {fileID: 11400000, guid: f7496283193cfd743aa0da567fd3d200, type: 2}
+  - {fileID: 11400000, guid: 06d8c1d47515bc642981bdc0acc28cdb, type: 2}
+  combatantNormalAttackType: 1
+  combatantSprite: {fileID: 1930351950, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  combatantDiceSet:
+  - dieFaces: 0200000001000000
+  - dieFaces: 0200000001000000
   combatantAttributesArray:
   - key: 0
-    value: 0
+    value: 1
   - key: 1
-    value: 0
+    value: 2
   - key: 2
-    value: 0
+    value: 1
   - key: 3
     value: 0
   - key: 4

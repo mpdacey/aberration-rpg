@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3749,7 +3749,7 @@ MonoBehaviour:
   - {fileID: 15521311077695002}
   - {fileID: 1007382826}
   - {fileID: 1588695423}
-  formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
+  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
   actionState: 0
   spellAttackDelay: 0.25
   enemyPortalSFX: {fileID: 8300000, guid: d8a447472b087d54880eaf0883bae392, type: 3}
@@ -5636,6 +5636,22 @@ PrefabInstance:
     - target: {fileID: 6936772259292056679, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936772259881004658, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936772259881004658, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936772259881004658, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936772259881004669, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3982e1e5e299354096e188cce73a210, type: 3}
