@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45759533857d3c4f9df0228d92bcf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 8, y: 8}
+  startingSize: 8
   visited: []
   walls: []
   testRenderer: {fileID: 0}
@@ -830,9 +830,10 @@ GameObject:
   - component: {fileID: 1796975615}
   - component: {fileID: 1796975616}
   - component: {fileID: 1796975617}
+  - component: {fileID: 1796975618}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -942,6 +943,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e19499d7b6729646a53c93a518e0cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1796975618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2c837cfeb7b1e40941d95f975d73cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introFormation: {fileID: 11400000, guid: 0942dd0dfb834e94ea36b81e4f0d7321, type: 2}
+  formationTiers:
+  - formations:
+    - {fileID: 11400000, guid: 41bb9565446b20549bdc119b9b913329, type: 2}
+    - {fileID: 11400000, guid: 783901aee25f1254d9a2894ca21ab76e, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 8c36f679fcdebeb47b165a5031f9d902, type: 2}
+    - {fileID: 11400000, guid: 3171d1a17a5f2194aa2d43882662dc9b, type: 2}
+    - {fileID: 11400000, guid: dd0247bf4db5006429acd1ebc3e938ad, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 43ba2e8bb3b831141aaaa02f4f567d9c, type: 2}
+    - {fileID: 11400000, guid: a6295cf058702de45852fcd5ef33c8be, type: 2}
+    - {fileID: 11400000, guid: 42db9ccadc282e84ea1687447ac61dcf, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: c23195c651775c24e9dd2a81650a182a, type: 2}
+    - {fileID: 11400000, guid: e7d4e30f78b4bc645bdfc8af5111cd44, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 449a34c1cd4a68c419e0cfa39316ab12, type: 2}
+    - {fileID: 11400000, guid: 902233791b2b5e943a37584474092395, type: 2}
+    - {fileID: 11400000, guid: cfba0a13423acbf4dbb30e62a32d0b6d, type: 2}
+    - {fileID: 11400000, guid: a2364fb38a7f99444835eb0a01a7f36a, type: 2}
+    - {fileID: 11400000, guid: 47e65dd1b5c229940825365f607191d3, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 9d2b880f04b255e47b74b5c7b466d05e, type: 2}
+    - {fileID: 11400000, guid: db8054ca16b18e44b8beb4d4b95a5537, type: 2}
+    - {fileID: 11400000, guid: 7d83e5405ac878343a99a59be281a146, type: 2}
+    - {fileID: 11400000, guid: 13d4b3711d5848f4382a46881dbacc8b, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: fccd22d0431968e4e8377d082b469a4f, type: 2}
+    - {fileID: 11400000, guid: 34ba29f284044b44cabc755f9a1f86dd, type: 2}
+    - {fileID: 11400000, guid: 4e053406deb19ef4d8069a149ca51cdf, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: b9d23abc44fd7c046b2c13f30ae657f5, type: 2}
+    - {fileID: 11400000, guid: 314a1df2735e4844baa9c551b9728af9, type: 2}
+    - {fileID: 11400000, guid: b44b3f0b49e46504bbc10f01c87b5de0, type: 2}
+    - {fileID: 11400000, guid: 9eabc126748ef7844af7f7c8d79a0eda, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 7f8bf5f313df55548b0df5b78f38fc49, type: 2}
+    - {fileID: 11400000, guid: 8d860cbfbbb8d2447a604537cb3ffd4c, type: 2}
+    - {fileID: 11400000, guid: b14455bb5f1ce4b41824283087d5b874, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 46ee71dcc03e852478f90078cf42442b, type: 2}
+    - {fileID: 11400000, guid: 9adb002f08903634a92677c54176b215, type: 2}
+    - {fileID: 11400000, guid: 5e404c400f1b03b4b95fe080d73fce40, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: fe54722548efa7c4db15a551e06596d9, type: 2}
+    - {fileID: 11400000, guid: 26e8ffa65ba949f46b01c2cee0cc190b, type: 2}
+    - {fileID: 11400000, guid: e5f0e4a4253fe844f92c135a7af2af6f, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 8351840d6720d354ca9c09c5497ad0a3, type: 2}
+    - {fileID: 11400000, guid: dcea9430c35a5664782964f35f9a934e, type: 2}
+    - {fileID: 11400000, guid: d637d81c74bc7f843b66f63a4fdc35fc, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 3908ba4dadbd7474e963e60a980b7ab8, type: 2}
+    - {fileID: 11400000, guid: 8a7852a1d0b0b974e931a3d989d93318, type: 2}
+    - {fileID: 11400000, guid: 7dfca32abb1e80d4b8b1f022f92e864b, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 5c3047e06a4f9cd4691755520035d9e0, type: 2}
+    - {fileID: 11400000, guid: 7c2e186925e26f74ea0d181c8c80b36f, type: 2}
+    - {fileID: 11400000, guid: eb91bae547eef7c4484618aec93d3235, type: 2}
+  - formations:
+    - {fileID: 11400000, guid: 76fd07ab4b031d04f9ca122fa475d0e6, type: 2}
+    - {fileID: 11400000, guid: 1956a7324e7dbb845997c59a7fb723b8, type: 2}
+    - {fileID: 11400000, guid: 2574d9579feb2ae44a0b4e954f61c83d, type: 2}
+    - {fileID: 11400000, guid: 82a48fe5ffaa60c45bede2006e61f60e, type: 2}
 --- !u!1 &1972612775
 GameObject:
   m_ObjectHideFlags: 0
