@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class BattleUIController : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public class BattleUIController : MonoBehaviour
     public Button[] monsterTargetButtons;
     public PlayerStatsUIController[] partyLineUpUI;
     public Animator riftTransitionAnimator;
+    public TextMeshProUGUI floorCounter;
     private int currentSelected;
 
     private void OnEnable()
     {
         GameController.SetPartyMember += SetPartyValues;
         GoalRiftController.GoalRiftEntered += PlayTransitionAnimation;
+        GoalRiftController.GoalRiftEntered += UpdateFloorCounter;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
@@ -37,6 +40,7 @@ public class BattleUIController : MonoBehaviour
     {
         GameController.SetPartyMember -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= PlayTransitionAnimation;
+        GoalRiftController.GoalRiftEntered -= UpdateFloorCounter;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
@@ -205,4 +209,7 @@ public class BattleUIController : MonoBehaviour
 
     private void PlayTransitionAnimation() =>
         riftTransitionAnimator.Play("RiftOverlayUI");
+
+    private void UpdateFloorCounter() =>
+        floorCounter.text = $"Realm: {GameController.CurrentLevel+1}";
 }
