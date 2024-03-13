@@ -53,12 +53,17 @@ public class PartyController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             if (partyMonsters.Length <= i) break;
-            partyMonsters[i].currentHP = partyMonsters[i].partyMemberBaseStats.combatantMaxHealth;
-            partyMonsters[i].currentSP = partyMonsters[i].partyMemberBaseStats.combatantMaxStamina;
-            partyMembers[i + 1] = partyMonsters[i];
+            SetPartyMember(partyMonsters[i], i + 1);
         }
 
         if (PartyIsReady != null)
             PartyIsReady.Invoke();
+    }
+
+    public static void SetPartyMember(PartyMember creature, int index)
+    {
+        creature.currentHP = creature.partyMemberBaseStats.combatantMaxHealth;
+        creature.currentSP = creature.partyMemberBaseStats.combatantMaxStamina;
+        partyMembers[index] = creature;
     }
 }
