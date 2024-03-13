@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45759533857d3c4f9df0228d92bcf5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 8, y: 8}
+  startingSize: 8
   visited: []
   walls: []
   testRenderer: {fileID: 0}
@@ -830,9 +830,10 @@ GameObject:
   - component: {fileID: 1796975615}
   - component: {fileID: 1796975616}
   - component: {fileID: 1796975617}
+  - component: {fileID: 1796975618}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -942,6 +943,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e19499d7b6729646a53c93a518e0cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1796975618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2c837cfeb7b1e40941d95f975d73cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introFormation: {fileID: 11400000, guid: 0942dd0dfb834e94ea36b81e4f0d7321, type: 2}
 --- !u!1 &1972612775
 GameObject:
   m_ObjectHideFlags: 0
