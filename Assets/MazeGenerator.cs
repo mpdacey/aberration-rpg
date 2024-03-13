@@ -7,9 +7,10 @@ public class MazeGenerator : MonoBehaviour
 {
     public static event Action<Texture2D> MazeTextureGenerated;
 
-    public Vector2Int gridSize = new Vector2Int(16,16);
+    public int startingSize = 8;
     public List<Vector2Int> visited = new List<Vector2Int>();
     public List<Vector2Int> walls = new List<Vector2Int>();
+    private Vector2Int gridSize = new Vector2Int(16, 16);
     public SpriteRenderer testRenderer;
     private Color[] cells;
     private Texture2D generatedTexture;
@@ -31,6 +32,8 @@ public class MazeGenerator : MonoBehaviour
 
     private void GenerateMaze()
     {
+        gridSize = new Vector2Int(startingSize + (GameController.CurrentLevel /3), startingSize + (GameController.CurrentLevel /3));
+
         cells = new Color[gridSize.x * gridSize.y];
         for (int i = 0; i < cells.Length; i++)
             cells[i] = Color.black;

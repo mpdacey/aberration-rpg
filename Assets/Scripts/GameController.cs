@@ -5,6 +5,12 @@ public class GameController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
 
+    public static int CurrentLevel
+    {
+        get => currentLevel;
+    }
+    private static int currentLevel = 0;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -14,11 +20,13 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         PartyController.PartyIsReady += SetPlayerUI;
+        GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
     }
 
     private void OnDisable()
     {
         PartyController.PartyIsReady -= SetPlayerUI;
+        GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
     }
 
     private void SetPlayerUI()
@@ -29,4 +37,7 @@ public class GameController : MonoBehaviour
                 SetPartyMember.Invoke(PartyController.partyMembers[i], i);
         }
     }
+
+    private void IncrementCurrentLevel() =>
+        currentLevel++;
 }
