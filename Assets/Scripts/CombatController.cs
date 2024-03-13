@@ -60,6 +60,7 @@ public class CombatController : MonoBehaviour
 
     public MonsterController[] monsters;
     public FormationSelector formationSelector;
+    public RecruitmentController recruitmentController;
     public ActionState actionState = ActionState.None;
     public float spellAttackDelay = 0.25f;
     public AudioClip enemyPortalSFX;
@@ -564,13 +565,27 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("Victory");
 
-        FieldMovementController.inBattle = false;
-        for (int i = 0; i < 4; i++)
-            ClearPlayerActions(i);
+        int recruitmentChance = UnityEngine.Random.Range(0, 2);
+        if (recruitmentChance == 0 || formation.monsters[0].combatantName.Equals("Wolf"))
+        {
+            //Begin recruitment
+            yield return recruitmentController.PitchRecruitment(formation);
+            if (PartyController.partyMembers[0].Value.currentHP <= 0)
+            {
+                yield return Defeat();
+            }
+        }
+        
+        if(currentBattleState != BattleState.Defeat)
+        {
+            for (int i = 0; i < 4; i++)
+                ClearPlayerActions(i);
 
-        if (CombatVictory != null)
-            CombatVictory.Invoke();
-
+            if (CombatVictory != null)
+                CombatVictory.Invoke();
+            FieldMovementController.inBattle = false;
+        }
+        
         yield return null;
     }
 

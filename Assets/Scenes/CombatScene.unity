@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 231922215}
   - component: {fileID: 231922214}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Left Offer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1467,7 +1467,7 @@ GameObject:
   - component: {fileID: 773940730}
   - component: {fileID: 773940729}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Right Offer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2263,7 +2263,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1109640018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672502335}
+        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
+        m_MethodName: SetRecruitmentState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1109640018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,8 +2569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1c5b0a5767f8e449f9b12f4b9a9211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftOffer: {fileID: 1370968807}
-  rightOffer: {fileID: 1135293195}
+  leftOffer: {fileID: 231922214}
+  rightOffer: {fileID: 773940729}
 --- !u!1 &1135293194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,7 +2633,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1135293196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672502335}
+        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
+        m_MethodName: SetRecruitmentState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1135293196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3182,7 +3206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1370968808}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1672502335}
+        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
+        m_MethodName: SetRecruitmentState
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1370968808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4466,6 +4502,7 @@ MonoBehaviour:
   - {fileID: 1007382826}
   - {fileID: 1588695423}
   formationSelector: {fileID: 0}
+  recruitmentController: {fileID: 1672502335}
   actionState: 0
   spellAttackDelay: 0.25
   enemyPortalSFX: {fileID: 8300000, guid: d8a447472b087d54880eaf0883bae392, type: 3}
@@ -4500,6 +4537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d86332a51b07946b08b9fd6742e388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiController: {fileID: 1115945990}
 --- !u!1001 &1689702921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5072,7 +5110,7 @@ GameObject:
   - component: {fileID: 1924246289}
   - component: {fileID: 1924246288}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Decline Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
