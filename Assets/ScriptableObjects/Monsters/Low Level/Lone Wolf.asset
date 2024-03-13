@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
+  m_Name: Lone Wolf
+  m_EditorClassIdentifier: 
+  combatantName: Wolf
+  combatantMaxHealth: 90
+  combatantMaxStamina: 24
+  combatantBaseStats:
+    strength: 5
+    magic: 2
+    endurance: 6
+    agility: 4
+    luck: 2
+  combatantSpells:
+  - {fileID: 11400000, guid: b03df470cb16f3c4a856d15cbff0e97e, type: 2}
+  - {fileID: 11400000, guid: 163d8443cf495604e8da42d683eef9c7, type: 2}
+  combatantNormalAttackType: 5
+  combatantSprite: {fileID: -636383311, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  combatantDiceSet:
+  - dieFaces: 03000000020000000100000001000000
+  combatantAttributesArray:
+  - key: 0
+    value: 1
+  - key: 1
+    value: 2
+  - key: 2
+    value: 1
+  - key: 3
+    value: 2
+  - key: 4
+    value: 0
+  - key: 5
+    value: 0
