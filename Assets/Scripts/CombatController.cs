@@ -62,6 +62,8 @@ public class CombatController : MonoBehaviour
     public FormationScriptableObject formation;
     public ActionState actionState = ActionState.None;
     public float spellAttackDelay = 0.25f;
+    public AudioClip enemyPortalSFX;
+    public AudioClip rollDiceSFX;
     [SerializeField] private BattleState currentBattleState;
     private Transform playerTransform;
     private PartyController.PartyMember currentMember;
@@ -108,6 +110,8 @@ public class CombatController : MonoBehaviour
 
         foreach (var monster in monsters)
             monster.HideDice();
+
+        AudioManager.PlayAudioClip(enemyPortalSFX);
 
         switch (formation.monsters.Length)
         {
@@ -299,6 +303,8 @@ public class CombatController : MonoBehaviour
 
     IEnumerator GenerateMonsterDice()
     {
+        AudioManager.PlayAudioClip(rollDiceSFX);
+
         for (int i = 0; i < monsters.Length; i++)
         {
             if (monstersAlive[i])

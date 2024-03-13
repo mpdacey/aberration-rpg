@@ -3752,6 +3752,8 @@ MonoBehaviour:
   formation: {fileID: 11400000, guid: 79bc23c3885684240bca7b575ad0ce61, type: 2}
   actionState: 0
   spellAttackDelay: 0.25
+  enemyPortalSFX: {fileID: 8300000, guid: d8a447472b087d54880eaf0883bae392, type: 3}
+  rollDiceSFX: {fileID: 8300000, guid: 30599515d823ecf47829b73085f3760e, type: 3}
   currentBattleState: 0
   monstersStunned: 000000
 --- !u!114 &1672502334
