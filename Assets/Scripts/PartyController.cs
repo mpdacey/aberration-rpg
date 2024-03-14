@@ -3,6 +3,7 @@ using System;
 
 public class PartyController : MonoBehaviour
 {
+    public static event Action<PartyMember?, int> PartyLineUpChanged;
     public static event Action PartyIsReady;
 
     [System.Serializable]
@@ -53,12 +54,26 @@ public class PartyController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             if (partyMonsters.Length <= i) break;
-            partyMonsters[i].currentHP = partyMonsters[i].partyMemberBaseStats.combatantMaxHealth;
-            partyMonsters[i].currentSP = partyMonsters[i].partyMemberBaseStats.combatantMaxStamina;
-            partyMembers[i + 1] = partyMonsters[i];
+            SetPartyMember(partyMonsters[i], i + 1);
         }
 
         if (PartyIsReady != null)
             PartyIsReady.Invoke();
+    }
+
+    public static void SetPartyMember(PartyMember? creature, int index)
+    {
+        if (creature.HasValue)
+        {
+            var temp = creature.Value;
+            temp.currentHP = temp.partyMemberBaseStats.combatantMaxHealth;
+            temp.currentSP = temp.partyMemberBaseStats.combatantMaxStamina;
+            partyMembers[index] = temp;
+
+            if (PartyLineUpChanged != null)
+                PartyLineUpChanged.Invoke(temp, index);
+        }
+        else if (PartyLineUpChanged != null)
+            PartyLineUpChanged.Invoke(null, index);
     }
 }
