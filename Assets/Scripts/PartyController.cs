@@ -77,7 +77,11 @@ public class PartyController : MonoBehaviour
             if (PartyLineUpChanged != null)
                 PartyLineUpChanged.Invoke(temp, index);
         }
-        else if (PartyLineUpChanged != null)
-            PartyLineUpChanged.Invoke(null, index);
+        else
+        {
+            partyMembers[index] = null;
+            if (PartyLineUpChanged != null)
+                PartyLineUpChanged.Invoke(null, index);
+        }
     }
 }
