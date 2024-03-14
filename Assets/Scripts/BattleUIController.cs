@@ -17,6 +17,10 @@ public class BattleUIController : MonoBehaviour
     public PlayerStatsUIController[] partyLineUpUI;
     public Animator riftTransitionAnimator;
     public TextMeshProUGUI floorCounter;
+
+    [Header("Gameover Scene")]
+    public Animation gameoverAnimation;
+    public TextMeshProUGUI gameoverFloorCounter;
     private int currentSelected;
 
     private void OnEnable()
@@ -26,6 +30,7 @@ public class BattleUIController : MonoBehaviour
         GoalRiftController.GoalRiftEntered += UpdateFloorCounter;
         PartyController.PartyLineUpChanged += SetPartyValues;
         RecruitmentController.UpdatePlayerHP += UpdateHealth;
+        CombatController.GameoverEvent += PlayGameoverAnimation;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
@@ -45,6 +50,7 @@ public class BattleUIController : MonoBehaviour
         GoalRiftController.GoalRiftEntered -= UpdateFloorCounter;
         PartyController.PartyLineUpChanged -= SetPartyValues;
         RecruitmentController.UpdatePlayerHP -= UpdateHealth;
+        CombatController.GameoverEvent -= PlayGameoverAnimation;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
@@ -214,6 +220,12 @@ public class BattleUIController : MonoBehaviour
     private void PlayTransitionAnimation() =>
         riftTransitionAnimator.Play("RiftOverlayUI");
 
-    private void UpdateFloorCounter() =>
-        floorCounter.text = $"Realm: {GameController.CurrentLevel+1}";
+    private void UpdateFloorCounter()
+    {
+        floorCounter.text = $"Realm: {GameController.CurrentLevel + 1}";
+        gameoverFloorCounter.text = $"{GameController.CurrentLevel + 1}";
+    }
+
+    private void PlayGameoverAnimation() =>
+        gameoverAnimation.Play();
 }
