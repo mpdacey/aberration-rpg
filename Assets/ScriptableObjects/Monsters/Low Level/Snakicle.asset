@@ -10,36 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
-  m_Name: Chill Croc
+  m_Name: Snakicle
   m_EditorClassIdentifier: 
-  combatantName: Chill Croc
-  combatantMaxHealth: 140
-  combatantMaxStamina: 36
+  combatantName: Snakicle
+  combatantMaxHealth: 75
+  combatantMaxStamina: 24
   combatantBaseStats:
-    strength: 14
-    magic: 7
-    endurance: 16
-    agility: 4
-    luck: 3
+    strength: 6
+    magic: 5
+    endurance: 3
+    agility: 5
+    luck: 4
   combatantSpells:
-  - {fileID: 11400000, guid: 838d09b9860dd0045a557ef04ee419a9, type: 2}
   - {fileID: 11400000, guid: f7496283193cfd743aa0da567fd3d200, type: 2}
-  - {fileID: 11400000, guid: f256cb48c54c35e44bde0dcea00470c8, type: 2}
-  combatantNormalAttackType: 5
-  combatantSprite: {fileID: -1055035964, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
+  - {fileID: 11400000, guid: 06d8c1d47515bc642981bdc0acc28cdb, type: 2}
+  combatantNormalAttackType: 1
+  combatantSprite: {fileID: 1930351950, guid: b34d74d2a7c393c478a2dc927ee5bb86, type: 3}
   combatantDiceSet:
-  - dieFaces: 040000000300000003000000
+  - dieFaces: 0200000001000000
   - dieFaces: 0200000001000000
   combatantAttributesArray:
   - key: 0
     value: 1
   - key: 1
-    value: 3
+    value: 2
   - key: 2
-    value: 0
-  - key: 3
     value: 1
+  - key: 3
+    value: 0
   - key: 4
-    value: 2
+    value: 0
   - key: 5
-    value: 2
+    value: 0
