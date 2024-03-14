@@ -538,7 +538,7 @@ public class CombatController : MonoBehaviour
             }
             else
             {
-                PartyController.partyMembers[target] = null;
+                PartyController.SetPartyMember(null, target);
             }
         }
     }

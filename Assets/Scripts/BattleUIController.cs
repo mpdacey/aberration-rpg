@@ -24,6 +24,8 @@ public class BattleUIController : MonoBehaviour
         GameController.SetPartyMember += SetPartyValues;
         GoalRiftController.GoalRiftEntered += PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered += UpdateFloorCounter;
+        PartyController.PartyLineUpChanged += SetPartyValues;
+        RecruitmentController.UpdatePlayerHP += UpdateHealth;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
@@ -41,6 +43,8 @@ public class BattleUIController : MonoBehaviour
         GameController.SetPartyMember -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered -= UpdateFloorCounter;
+        PartyController.PartyLineUpChanged -= SetPartyValues;
+        RecruitmentController.UpdatePlayerHP -= UpdateHealth;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
