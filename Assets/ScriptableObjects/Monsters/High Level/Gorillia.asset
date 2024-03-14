@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatantName: Gorillia
   combatantMaxHealth: 220
-  combatantMaxStamina: 0
+  combatantMaxStamina: 80
   combatantBaseStats:
     strength: 22
     magic: 13
