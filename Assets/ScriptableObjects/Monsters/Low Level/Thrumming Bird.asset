@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatantName: Thrumming Bird
   combatantMaxHealth: 80
-  combatantMaxStamina: 0
+  combatantMaxStamina: 40
   combatantBaseStats:
     strength: 3
     magic: 5
