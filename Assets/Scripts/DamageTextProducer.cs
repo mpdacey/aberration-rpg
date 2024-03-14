@@ -24,7 +24,7 @@ public class DamageTextProducer : MonoBehaviour
             textMesh.color = textColour;
             textMesh.text = text;
         }
-        damageObject.transform.parent = transform;
+        damageObject.transform.SetParent(transform);
         damageObject.transform.localPosition = Vector3.zero;
         damageObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
