@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class RecruitmentController : MonoBehaviour
 {
+    public static event Action<PartyController.PartyMember, int> UpdatePlayerHP;
+
     public RecruitmentUIController uiController;
 
     private enum RecruitmentState
@@ -18,7 +22,6 @@ public class RecruitmentController : MonoBehaviour
 
     public IEnumerator PitchRecruitment(FormationScriptableObject currentFormation)
     {
-        state = RecruitmentState.Pending;
         List<int> availableIndexes = new List<int>();
         for (int i = 0; i < 4; i++)
             if (PartyController.partyMembers[i].HasValue)
@@ -26,16 +29,18 @@ public class RecruitmentController : MonoBehaviour
 
         CombatantScriptableObject requestingCreature = currentFormation.monsters[Random.Range(0, currentFormation.monsters.Length-1)];
 
-        int minIndex = availableIndexes.Count == 4 ? 1 : 0;
-        int leftOfferIndex = availableIndexes[Random.Range(minIndex, availableIndexes.Count - 1)];
-        int rightOfferIndex = leftOfferIndex;
+        int leftOfferIndex;
+        int rightOfferIndex;
 
-        if(availableIndexes.Count > 1)
+        if (availableIndexes.Count == 4)
         {
-            do
-            {
-                rightOfferIndex = availableIndexes[Random.Range(minIndex, availableIndexes.Count - 1)];
-            } while (rightOfferIndex == leftOfferIndex);
+            leftOfferIndex = availableIndexes[DateTime.Now.Millisecond % (availableIndexes.Count-1) + 1];
+            rightOfferIndex = availableIndexes[(DateTime.Now.Millisecond + 1) % (availableIndexes.Count-1) + 1];
+        }
+        else
+        {
+            leftOfferIndex = availableIndexes[DateTime.Now.Millisecond % availableIndexes.Count];
+            rightOfferIndex = availableIndexes[(DateTime.Now.Millisecond + 1) % availableIndexes.Count];
         }
 
         uiController.gameObject.SetActive(true);
@@ -51,6 +56,7 @@ public class RecruitmentController : MonoBehaviour
 
         uiController.SetOffers(leftOffer, rightOffer);
 
+        state = RecruitmentState.Pending;
         while (state == RecruitmentState.Pending)
         {
             yield return null;
@@ -82,11 +88,16 @@ public class RecruitmentController : MonoBehaviour
             var temp = PartyController.partyMembers[0].Value;
             temp.currentHP -= 40;
             PartyController.partyMembers[0] = temp;
+            if (UpdatePlayerHP != null)
+                UpdatePlayerHP.Invoke(temp, 0);
 
             for(int i = 1; i < 4; i++)
             {
                 if (!PartyController.partyMembers[i].HasValue)
+                {
                     PartyController.SetPartyMember(newPartyMember, i);
+                    break;
+                }
             }
         }
         else

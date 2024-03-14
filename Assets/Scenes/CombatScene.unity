@@ -2571,6 +2571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftOffer: {fileID: 231922214}
   rightOffer: {fileID: 773940729}
+  defaultOfferButton: {fileID: 1109640017}
 --- !u!1 &1135293194
 GameObject:
   m_ObjectHideFlags: 0
@@ -6282,6 +6283,10 @@ PrefabInstance:
     - target: {fileID: 3306097813586349253, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306097813598289677, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3306097813725022111, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
       propertyPath: m_AnchorMax.y
