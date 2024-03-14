@@ -8,6 +8,7 @@ public class CombatController : MonoBehaviour
 {
     public static event Action<int> FormationCount;
     public static event Action CombatVictory;
+    public static event Action GameoverEvent;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
@@ -551,7 +552,7 @@ public class CombatController : MonoBehaviour
                 StartCoroutine(Victory());
                 break;
             case BattleState.Defeat:
-                StartCoroutine(Defeat());
+                Defeat();
                 break;
             default:
                 StartCoroutine(nextPhase);
@@ -572,7 +573,7 @@ public class CombatController : MonoBehaviour
             yield return recruitmentController.PitchRecruitment(formation);
             if (PartyController.partyMembers[0].Value.currentHP <= 0)
             {
-                yield return Defeat();
+                Defeat();
             }
         }
         
@@ -589,12 +590,13 @@ public class CombatController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Defeat()
+    private void Defeat()
     {
         currentBattleState = BattleState.Defeat;
 
         Debug.Log("Defeated");
 
-        yield return null;
+        if (GameoverEvent != null)
+            GameoverEvent.Invoke();
     }
 }
