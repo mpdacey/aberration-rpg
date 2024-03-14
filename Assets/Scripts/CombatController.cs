@@ -565,7 +565,7 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("Victory");
 
-        int recruitmentChance = UnityEngine.Random.Range(0, 2);
+        int recruitmentChance = UnityEngine.Random.Range(0, PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length);
         if (recruitmentChance == 0 || formation.monsters[0].combatantName.Equals("Wolf"))
         {
             //Begin recruitment
