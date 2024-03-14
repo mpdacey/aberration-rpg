@@ -41,6 +41,10 @@ public class PartyController : MonoBehaviour
             partyMembers[i] = currentMember;
         }
 
+        var temp = partyMembers[0].Value;
+        temp.currentSP = Mathf.Min(temp.currentSP + temp.partyMemberBaseStats.combatantMaxStamina / 3, temp.partyMemberBaseStats.combatantMaxStamina);
+        partyMembers[0] = temp;
+
         if (PartyIsReady != null)
             PartyIsReady.Invoke();
     }
