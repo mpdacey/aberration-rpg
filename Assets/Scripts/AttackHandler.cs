@@ -9,15 +9,13 @@ public class AttackHandler
         AttackObject attack = new();
         attack.attackerStats = attackerObject.combatantBaseStats;
 
-        SpellScriptableObject normalAttack = new()
-        {
-            spellName = "Attack",
-            spellCost = 0,
-            spellHitRate = 95,
-            spellBaseDamage = 25,
-            spellMultitarget = false,
-            spellType = attackerObject.combatantNormalAttackType
-        };
+        SpellScriptableObject normalAttack = ScriptableObject.CreateInstance<SpellScriptableObject>();
+        normalAttack.spellName = "Attack";
+        normalAttack.spellCost = 0;
+        normalAttack.spellHitRate = 95;
+        normalAttack.spellBaseDamage = 25;
+        normalAttack.spellMultitarget = false;
+        normalAttack.spellType = attackerObject.combatantNormalAttackType;
         attack.attackSpell = normalAttack;
 
         return attack;
