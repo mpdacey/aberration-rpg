@@ -54,10 +54,17 @@ public class MazeGenerator : MonoBehaviour
         while(walls.Count > 0)
         {
             var randomWall = walls[Random.Range(0, walls.Count - 1)];
+            var canLoop = 0 == Random.Range(0, 3);
 
-            if(randomWall.x % 2 == 1 && (visited.Contains(randomWall + Vector2Int.left) ^ visited.Contains(randomWall + Vector2Int.right)))
+            if(randomWall.x % 2 == 1 && (canLoop || (visited.Contains(randomWall + Vector2Int.left) ^ visited.Contains(randomWall + Vector2Int.right))))
             {
+                if (randomWall + Vector2Int.left == end || randomWall + Vector2Int.right == end)
+                    continue;
+
                 cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
+                if (visited.Contains(randomWall + Vector2Int.left) && visited.Contains(randomWall + Vector2Int.right))
+                    continue;
+
                 if (visited.Contains(randomWall + Vector2Int.left))
                 {
                     AddVisited(randomWall + Vector2Int.right);
@@ -69,9 +76,15 @@ public class MazeGenerator : MonoBehaviour
                     end = randomWall + Vector2Int.left;
                 }
             }
-            else if (visited.Contains(randomWall + Vector2Int.up) ^ visited.Contains(randomWall + Vector2Int.down))
+            else if (canLoop || (visited.Contains(randomWall + Vector2Int.up) ^ visited.Contains(randomWall + Vector2Int.down)))
             {
+                if (randomWall + Vector2Int.up == end || randomWall + Vector2Int.down == end)
+                    continue;
+
                 cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
+                if (visited.Contains(randomWall + Vector2Int.up) && visited.Contains(randomWall + Vector2Int.down))
+                    continue;
+
                 if (visited.Contains(randomWall + Vector2Int.up))
                 {
                     AddVisited(randomWall + Vector2Int.down);
