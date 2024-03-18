@@ -6,7 +6,7 @@ public class PartyController : MonoBehaviour
     public static event Action<PartyMember?, int> PartyLineUpChanged;
     public static event Action PartyIsReady;
 
-    [System.Serializable]
+    [Serializable]
     public struct PartyMember
     {
         public CombatantScriptableObject partyMemberBaseStats;
@@ -14,8 +14,17 @@ public class PartyController : MonoBehaviour
         public int currentSP;
     }
 
+    [Serializable]
+    public struct ProtagonistEquipment
+    {
+        public EquipmentScriptableObject weapon;
+        public EquipmentScriptableObject defense;
+        public EquipmentScriptableObject[] trinkets;
+    }
+
     public static PartyMember?[] partyMembers = new PartyMember?[4];
     public PartyMember protagonist;
+    public ProtagonistEquipment protagonistEquipment;
     public PartyMember[] partyMonsters;
 
     private void OnEnable()
@@ -51,9 +60,10 @@ public class PartyController : MonoBehaviour
 
     private void SetPartyValues()
     {
-        protagonist.currentHP = protagonist.partyMemberBaseStats.combatantMaxHealth;
-        protagonist.currentSP = protagonist.partyMemberBaseStats.combatantMaxStamina;
-        partyMembers[0] = protagonist;
+        var tempProtag = SetProtagonistStats();
+        tempProtag.currentHP = tempProtag.partyMemberBaseStats.combatantMaxHealth;
+        tempProtag.currentSP = tempProtag.partyMemberBaseStats.combatantMaxStamina;
+        partyMembers[0] = tempProtag;
 
         for (int i = 0; i < 3; i++)
         {
@@ -63,6 +73,48 @@ public class PartyController : MonoBehaviour
 
         if (PartyIsReady != null)
             PartyIsReady.Invoke();
+    }
+
+    private PartyMember SetProtagonistStats()
+    {
+        var protagonist = new PartyMember();
+        var protagonistStats = Instantiate(this.protagonist.partyMemberBaseStats);
+
+        ApplyEquipmentStats(ref protagonistStats, protagonistEquipment.weapon);
+        ApplyEquipmentStats(ref protagonistStats, protagonistEquipment.defense);
+        foreach(var tricket in protagonistEquipment.trinkets)
+            ApplyEquipmentStats(ref protagonistStats, tricket);
+
+        protagonist.partyMemberBaseStats = protagonistStats;
+        return protagonist;
+    }
+
+    private void ApplyEquipmentStats(ref CombatantScriptableObject stats, EquipmentScriptableObject equipment)
+    {
+        if (equipment == null) return;
+
+        // Set stats
+        stats.combatantBaseStats.strength += equipment.equipmentStats.strength;
+        stats.combatantBaseStats.magic += equipment.equipmentStats.magic;
+        stats.combatantBaseStats.endurance += equipment.equipmentStats.endurance;
+        stats.combatantBaseStats.agility += equipment.equipmentStats.agility;
+        stats.combatantBaseStats.luck += equipment.equipmentStats.luck;
+        stats.combatantMaxHealth += equipment.equipmentHP;
+        stats.combatantMaxStamina += equipment.equipmentSP;
+
+        // Set affinities
+        foreach(var affinity in equipment.equipmentAffinties)
+        {
+            if (!stats.combatantAttributes.ContainsKey(affinity.key))
+                stats.combatantAttributes.Add(affinity.key, affinity.value);
+            else if(stats.combatantAttributes[affinity.key] < affinity.value)
+                stats.combatantAttributes[affinity.key] = affinity.value;
+        }
+
+        // Set spells
+        foreach(var spell in equipment.equipmentSpells)
+            if(!stats.combatantSpells.Contains(spell))
+                stats.combatantSpells.Add(spell);
     }
 
     public static void SetPartyMember(PartyMember? creature, int index)
