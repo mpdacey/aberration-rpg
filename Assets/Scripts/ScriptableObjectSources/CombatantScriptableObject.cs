@@ -44,7 +44,7 @@ public class CombatantScriptableObject : ScriptableObject
     }
 
     [System.Serializable]
-    private struct AttributeAffinityDictionaryItem
+    public struct AttributeAffinityDictionaryItem
     {
         public SpellScriptableObject.SpellType key;
         public AttributeAffinity value;
