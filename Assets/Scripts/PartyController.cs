@@ -86,6 +86,9 @@ public class PartyController : MonoBehaviour
             ApplyEquipmentStats(ref protagonistStats, tricket);
 
         protagonist.partyMemberBaseStats = protagonistStats;
+        protagonist.currentHP = Mathf.Min(this.protagonist.currentHP, protagonistStats.combatantMaxHealth);
+        protagonist.currentSP = Mathf.Min(this.protagonist.currentSP, protagonistStats.combatantMaxStamina);
+
         return protagonist;
     }
 
