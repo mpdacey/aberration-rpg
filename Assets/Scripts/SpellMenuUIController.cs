@@ -33,7 +33,7 @@ public class SpellMenuUIController : MonoBehaviour
 
             SpellUIObject currentObject = new();
             currentObject.spellButton = currentChild.GetComponent<Button>();
-            currentObject.spellIcon = currentChild.GetComponentInChildren<Image>();
+            currentObject.spellIcon = currentChild.GetChild(0).GetComponent<Image>();
             currentObject.spellName = currentChild.GetComponentsInChildren<TextMeshProUGUI>()[0];
             currentObject.spellCost = currentChild.GetComponentsInChildren<TextMeshProUGUI>()[1];
 
@@ -89,6 +89,7 @@ public class SpellMenuUIController : MonoBehaviour
         buttonObject.spellButton.gameObject.SetActive(true);
         buttonObject.spellName.text = spell.spellName;
         buttonObject.spellCost.text = spell.spellCost.ToString();
+        buttonObject.spellIcon.sprite = SpellIcons.icons[spell.spellType];
         buttonObject.spellButton.interactable = currentSP >= spell.spellCost;
         buttonObject.spellButton.onClick.RemoveAllListeners();
         buttonObject.spellButton.onClick.AddListener(() => combatController.SelectSpell(spell));
