@@ -115,6 +115,8 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
+        SetTreasures(cells, gridSize);
+
         cells[end.y * gridSize.x + end.x] = Color.red + Color.green;
 
         generatedTexture = new Texture2D(gridSize.x, gridSize.y);
@@ -130,6 +132,36 @@ public class MazeGenerator : MonoBehaviour
 
         if (MazeTextureGenerated != null)
             MazeTextureGenerated.Invoke(generatedTexture);
+    }
+
+    private void SetTreasures(Color[] cells, Vector2Int gridsize)
+    {
+        int numOfTreasures = Mathf.Max(Random.Range(-1, 3),0);
+
+        Vector2Int edgeZoneRadius = new Vector2Int(gridsize.x / 4, gridsize.y / 4);
+        Vector2Int innerTopLeft = edgeZoneRadius;
+        Vector2Int innerBottomRight = gridsize - innerTopLeft;
+        Vector2Int treasureLocation = new Vector2Int();
+
+        for(int i = 0; i < numOfTreasures; i++)
+        {
+
+            bool isOnXAxis = Random.Range(0, 1) == 0;
+            int onOppositeMultiplier = Random.Range(0, 1);
+
+            if (isOnXAxis)
+            {
+                treasureLocation.x = Random.Range(0, gridsize.x - 1);
+                treasureLocation.y = Random.Range(0, edgeZoneRadius.y - 1) + innerBottomRight.y * onOppositeMultiplier;
+            }
+            else
+            {
+                treasureLocation.x = Random.Range(0, edgeZoneRadius.x - 1) + innerBottomRight.x * onOppositeMultiplier;
+                treasureLocation.y = Random.Range(0, gridsize.y - 1);
+            }
+            
+            cells[treasureLocation.y * gridsize.x + treasureLocation.x] = Color.red + Color.blue;
+        }
     }
 
     private void AddVisited(Vector2Int newCell)
