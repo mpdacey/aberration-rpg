@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119639345}
   - component: {fileID: 119639344}
+  - component: {fileID: 119639346}
   m_Layer: 0
   m_Name: GoalRiftPivot
   m_TagString: Untagged
@@ -152,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c74a717fb01bf41b8cc7e09470e24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1477624373}
   playerWarpSFX: {fileID: 8300000, guid: 0def90cb04cbf864b9f35f693ed0f8de, type: 3}
 --- !u!4 &119639345
 Transform:
@@ -170,6 +170,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119639346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119639343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebccbb1d881f0543afec0a3c732964c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &332953817
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +774,7 @@ GameObject:
   - component: {fileID: 1477624374}
   m_Layer: 0
   m_Name: CameraPivot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

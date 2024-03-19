@@ -5,8 +5,8 @@ public class GoalRiftController : MonoBehaviour
 {
     public static event Action GoalRiftEntered;
 
-    public Transform player;
     public AudioClip playerWarpSFX;
+    private Transform player;
 
     private void OnEnable()
     {
@@ -20,13 +20,12 @@ public class GoalRiftController : MonoBehaviour
 
     private void Update()
     {
+        if (player == null) player = GetComponent<RotateTowardsCamera>().player;
         CheckForPlayer(player);
     }
 
     private void CheckForPlayer(Transform player)
     {
-        transform.rotation = player.rotation;
-
         if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
         {
             AudioManager.PlayAudioClip(playerWarpSFX);
