@@ -10,18 +10,18 @@ public class GoalRiftController : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelGenerator.GoalLocationFound += SetGoalPosition;
+        LevelGenerator.GoalLocationFound += SetInitialPosition;
     }
 
     private void OnDisable()
     {
-        LevelGenerator.GoalLocationFound -= SetGoalPosition;
+        LevelGenerator.GoalLocationFound -= SetInitialPosition;
     }
 
     private void Update()
     {
         if (player == null) player = GetComponent<RotateTowardsCamera>().player;
-        CheckForPlayer(player);
+        else CheckForPlayer(player);
     }
 
     private void CheckForPlayer(Transform player)
@@ -36,7 +36,7 @@ public class GoalRiftController : MonoBehaviour
         GoalRiftEntered.Invoke();
     }
 
-    private void SetGoalPosition(Vector2 endLocation)
+    public void SetInitialPosition(Vector2 endLocation)
     {
         transform.position = new Vector3(endLocation.x*5, 0, endLocation.y * 5);
     }
