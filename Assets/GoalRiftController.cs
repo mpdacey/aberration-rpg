@@ -10,12 +10,12 @@ public class GoalRiftController : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelGenerator.GoalLocationFound += SetEndGoal;
+        LevelGenerator.GoalLocationFound += SetGoalPosition;
     }
 
     private void OnDisable()
     {
-        LevelGenerator.GoalLocationFound -= SetEndGoal;
+        LevelGenerator.GoalLocationFound -= SetGoalPosition;
     }
 
     private void Update()
@@ -27,13 +27,16 @@ public class GoalRiftController : MonoBehaviour
     private void CheckForPlayer(Transform player)
     {
         if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
-        {
-            AudioManager.PlayAudioClip(playerWarpSFX);
-            GoalRiftEntered.Invoke();
-        }
+            PerformAction();
     }
 
-    private void SetEndGoal(Vector2 endLocation)
+    virtual protected void PerformAction()
+    {
+        AudioManager.PlayAudioClip(playerWarpSFX);
+        GoalRiftEntered.Invoke();
+    }
+
+    private void SetGoalPosition(Vector2 endLocation)
     {
         transform.position = new Vector3(endLocation.x*5, 0, endLocation.y * 5);
     }
