@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class FieldMovementController : MonoBehaviour
 {
-    public static event Action<Transform> PlayerTranformChanged;
+    public static event Action<Vector3> PlayerPositionChanged;
     public static event Action FieldMovementEvent;
 
     public static bool inBattle = false;
     public AudioClip playerMovementSFX;
     [SerializeField] Animator movementAnimator;
-    private float currentAnimationTimer = 0;
 
     private const string MOVE_FORWARD_STATE = "MoveForward";
     private const string BUMP_FORWARD_STATE = "MoveForwardBump";
@@ -65,8 +64,8 @@ public class FieldMovementController : MonoBehaviour
                 CallAnimation(MOVE_FORWARD_STATE);
                 if (FieldMovementEvent != null)
                     FieldMovementEvent.Invoke();
-                if (PlayerTranformChanged != null)
-                    PlayerTranformChanged.Invoke(transform);
+                if (PlayerPositionChanged != null)
+                    PlayerPositionChanged.Invoke(rayOrigin);
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
