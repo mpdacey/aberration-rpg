@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class MinimapController : MonoBehaviour
 {
-    public Sprite[] tiles;
     public RawImage mapImage;
     public RawImage mapMask;
-    public Transform player;
+    public Color fillColour;
+    public Color outlineColour;
     private Vector2 startPosition;
     private Texture2D mapMaskTexture;
     private float mazeRatio = 1f;
@@ -17,7 +17,6 @@ public class MinimapController : MonoBehaviour
     {
         MazeGenerator.MazeTextureGenerated += DrawNewMinimap;
         FieldMovementController.PlayerPositionChanged += UpdatePlayerPosition;
-        player = GameObject.FindWithTag("Player").transform;
     }
 
     private void OnDisable()
@@ -39,20 +38,27 @@ public class MinimapController : MonoBehaviour
         mapMaskTexture.Apply();
         mapMask.texture = mapMaskTexture;
 
-        Vector2Int spriteSize = new Vector2Int((int)tiles[0].rect.width, (int)tiles[0].rect.height);
-        Texture2D minimapTexture = new Texture2D(mazeTexture.width * spriteSize.x, mazeTexture.height * spriteSize.y);
-        minimapTexture.filterMode = FilterMode.Point;
+        mazeRatio = mazeTexture.width / 8f;
+        mapMask.transform.localScale = Vector2.one * 2 * mazeRatio;
+
+        Color[] mapCells = new Color[mazeTexture.width * mazeTexture.height * 36];
+        Color[] mazeCells = mazeTexture.GetPixels();
+        Texture2D minimapTexture = new Texture2D(mazeTexture.width * 6, mazeTexture.height * 6);
 
         for (int y = 0; y < mazeTexture.height; y++)
         {
             for(int x = 0; x < mazeTexture.width; x++)
             {
-                Color currentCell = mazeTexture.GetPixel(x, y);
+                Color currentCell = mazeCells[y * mazeTexture.width + x];
 
                 if (currentCell.r == 1)
                 {
-                    minimapTexture.SetPixels(x * spriteSize.x, y * spriteSize.y, spriteSize.x, spriteSize.y, tiles[0].texture.GetPixels(0,0, spriteSize.x, spriteSize.y));
-                    minimapTexture.Apply();
+                    Vector2Int currentCoords = new Vector2Int(x, y);
+                    FillCell(ref mapCells, currentCoords, mazeTexture.width);
+                    if (x == 0 || mazeCells[y * mazeTexture.width + x - 1].r == 0) DrawOutline(ref mapCells, currentCoords*6, mazeTexture.width, false);
+                    if (x == mazeTexture.width-1 || mazeCells[y * mazeTexture.width + x + 1].r == 0) DrawOutline(ref mapCells, (currentCoords*6) + (Vector2Int.right*5), mazeTexture.width, false);
+                    if (y == 0 || mazeCells[(y-1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords*6, mazeTexture.width, true);
+                    if (y == mazeTexture.height - 1 || mazeCells[(y+1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords* 6 + (Vector2Int.up * 5), mazeTexture.width, true);
 
                     if (currentCell.g == 0 && currentCell.b == 0)
                         startPosition = new Vector2(x, y);
@@ -60,11 +66,29 @@ public class MinimapController : MonoBehaviour
             }
         }
 
-        mazeRatio = mazeTexture.width / 8f;
-        mapMask.transform.localScale = Vector2.one * 2 * mazeRatio;
+        minimapTexture.filterMode = FilterMode.Point;
+        minimapTexture.SetPixels(mapCells);
+        minimapTexture.Apply();
         mapImage.texture = minimapTexture;
 
         UpdatePlayerPosition(Vector2.zero);
+    }
+
+    private void FillCell(ref Color[] cells, Vector2Int currentCell, int baseWidth)
+    {
+        for (int y = 0; y < 6; y++)
+            for (int x = 0; x < 6; x++)
+                cells[(currentCell.y * 6 + y) * baseWidth * 6 + currentCell.x * 6 + x] = fillColour;
+    }
+
+    private void DrawOutline(ref Color[] cells, Vector2Int topLeft, int baseWidth, bool horizontalLine)
+    {
+        if (horizontalLine)
+            for (int x = 0; x < 6; x++)
+                cells[topLeft.y * baseWidth*6 + topLeft.x + x] = outlineColour;
+        else
+            for (int y = 0; y < 6; y++)
+                cells[(topLeft.y+y) * baseWidth * 6 + topLeft.x] = outlineColour;
     }
 
     private void UpdatePlayerPosition(Vector3 playerPosition)

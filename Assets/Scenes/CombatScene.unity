@@ -2462,7 +2462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.3137255}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2516,6 +2516,8 @@ MonoBehaviour:
   mapImage: {fileID: 375042139}
   mapMask: {fileID: 1884715149}
   player: {fileID: 0}
+  fillColour: {r: 0.3647059, g: 0.5529412, b: 0.9960785, a: 1}
+  outlineColour: {r: 0.6784314, g: 0.7843138, b: 0.9803922, a: 1}
 --- !u!1001 &1007382824
 PrefabInstance:
   m_ObjectHideFlags: 0
