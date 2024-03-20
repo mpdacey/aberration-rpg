@@ -10,6 +10,8 @@ public class MinimapController : MonoBehaviour
     public RawImage mapMask;
     public Transform player;
     private Vector2 startPosition;
+    private Texture2D mapMaskTexture;
+    private float mazeRatio = 1f;
 
     private void OnEnable()
     {
@@ -26,6 +28,17 @@ public class MinimapController : MonoBehaviour
 
     private void DrawNewMinimap(Texture2D mazeTexture)
     {
+        mapMaskTexture = new Texture2D(mazeTexture.width, mazeTexture.height);
+        mapMaskTexture.filterMode = FilterMode.Point;
+        Color[] mapMaskCells = mapMaskTexture.GetPixels();
+
+        for (int i = 0; i < mapMaskCells.Length; i++)
+            mapMaskCells[i] = Color.clear;
+
+        mapMaskTexture.SetPixels(mapMaskCells);
+        mapMaskTexture.Apply();
+        mapMask.texture = mapMaskTexture;
+
         Vector2Int spriteSize = new Vector2Int((int)tiles[0].rect.width, (int)tiles[0].rect.height);
         Texture2D minimapTexture = new Texture2D(mazeTexture.width * spriteSize.x, mazeTexture.height * spriteSize.y);
         minimapTexture.filterMode = FilterMode.Point;
@@ -47,8 +60,8 @@ public class MinimapController : MonoBehaviour
             }
         }
 
-        mapMask.transform.localScale = new Vector2((mazeTexture.width + 1) * 1.5f + 1, (mazeTexture.height + 1) * 1.5f + 1);
-        mapImage.transform.localScale = new Vector2(1f/spriteSize.x, 1f / spriteSize.y);
+        mazeRatio = mazeTexture.width / 8f;
+        mapMask.transform.localScale = Vector2.one * 2 * mazeRatio;
         mapImage.texture = minimapTexture;
 
         UpdatePlayerPosition(Vector2.zero);
@@ -56,6 +69,15 @@ public class MinimapController : MonoBehaviour
 
     private void UpdatePlayerPosition(Vector3 playerPosition)
     {
-        mapMask.transform.localPosition = new Vector2(27.5f, 27.5f) + (startPosition + new Vector2(playerPosition.x/5, playerPosition.z/5)) * -25f;
+        Vector2 currentPosition = startPosition + new Vector2(playerPosition.x / 5, playerPosition.z / 5);
+        mapMask.transform.localPosition = new Vector2(12.5f, 12.5f) * ((mazeRatio-1)*8+1) + new Vector2(15,15) + currentPosition * -25f;
+        UpdateMask(currentPosition);
+    }
+
+    private void UpdateMask(Vector2 currentPosition)
+    {
+        mapMaskTexture.SetPixel(Mathf.RoundToInt(currentPosition.x), Mathf.RoundToInt(currentPosition.y), Color.white);
+        mapMaskTexture.Apply();
+        mapMask.texture = mapMaskTexture;
     }
 }
