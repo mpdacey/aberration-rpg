@@ -8,16 +8,20 @@ public class MinimapController : MonoBehaviour
     public Sprite[] tiles;
     public RawImage mapImage;
     public RawImage mapMask;
+    public Transform player;
     private Vector2 startPosition;
 
     private void OnEnable()
     {
         MazeGenerator.MazeTextureGenerated += DrawNewMinimap;
+        FieldMovementController.PlayerPositionChanged += UpdatePlayerPosition;
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     private void OnDisable()
     {
         MazeGenerator.MazeTextureGenerated -= DrawNewMinimap;
+        FieldMovementController.PlayerPositionChanged -= UpdatePlayerPosition;
     }
 
     private void DrawNewMinimap(Texture2D mazeTexture)
@@ -47,6 +51,11 @@ public class MinimapController : MonoBehaviour
         mapImage.transform.localScale = new Vector2(1f/spriteSize.x, 1f / spriteSize.y);
         mapImage.texture = minimapTexture;
 
-        mapMask.transform.localPosition = new Vector2(27.5f, 27.5f) + startPosition * -25f;
+        UpdatePlayerPosition(Vector2.zero);
+    }
+
+    private void UpdatePlayerPosition(Vector3 playerPosition)
+    {
+        mapMask.transform.localPosition = new Vector2(27.5f, 27.5f) + (startPosition + new Vector2(playerPosition.x/5, playerPosition.z/5)) * -25f;
     }
 }
