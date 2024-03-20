@@ -29,9 +29,14 @@ public class GoalRiftController : MonoBehaviour
 
         if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
         {
-            AudioManager.PlayAudioClip(playerWarpSFX);
-            GoalRiftEntered.Invoke();
+            EnterRift();
         }
+    }
+
+    public void EnterRift()
+    {
+        AudioManager.PlayAudioClip(playerWarpSFX);
+        GoalRiftEntered.Invoke();
     }
 
     private void SetEndGoal(Vector2 endLocation)
