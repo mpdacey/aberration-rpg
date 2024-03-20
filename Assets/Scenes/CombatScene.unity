@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2469,7 +2469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -2496,26 +2496,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effc52846e9f6724d9f706126be5b637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles:
-  - {fileID: 1260451816, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 992637639, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 1508781933, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -378552872, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 1571583024, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -1337052117, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 1881782733, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -123813046, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -604287401, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 471749078, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 2084813675, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -1410489664, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 1818722048, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -1910700646, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: 906512829, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
-  - {fileID: -1156907629, guid: 991d30a4af864ad469d6ca79eda32a1c, type: 3}
   mapImage: {fileID: 375042139}
   mapMask: {fileID: 1884715149}
-  player: {fileID: 0}
   fillColour: {r: 0.3647059, g: 0.5529412, b: 0.9960785, a: 1}
   outlineColour: {r: 0.6784314, g: 0.7843138, b: 0.9803922, a: 1}
 --- !u!1001 &1007382824
@@ -3201,7 +3183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 24.170013}
+  m_AnchoredPosition: {x: 0, y: 24.170044}
   m_SizeDelta: {x: -100.000015, y: -150.13995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1115945987
