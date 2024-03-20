@@ -18,16 +18,13 @@ public class MazeGenerator : MonoBehaviour
     private void OnEnable()
     {
         GoalRiftController.GoalRiftEntered += GenerateMaze;
+        SceneController.CombatSceneLoaded += GenerateMaze;
     }
 
     private void OnDisable()
     {
         GoalRiftController.GoalRiftEntered -= GenerateMaze;
-    }
-
-    private void Start()
-    {
-        GenerateMaze();
+        SceneController.CombatSceneLoaded -= GenerateMaze;
     }
 
     private void GenerateMaze()
