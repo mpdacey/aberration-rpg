@@ -8,6 +8,7 @@ public class MinimapController : MonoBehaviour
     [Header("Minimap Grid Properties")]
     public RawImage mapImage;
     public RawImage mapMask;
+    public Transform mapParentTranform;
     public Color fillColour;
     public Color outlineColour;
     [Header("Minimap Entities")]
@@ -99,7 +100,7 @@ public class MinimapController : MonoBehaviour
     private void UpdatePlayerPosition(Vector3 playerPosition)
     {
         Vector2 currentPosition = startPosition + new Vector2(playerPosition.x / 5, playerPosition.z / 5);
-        mapMask.transform.localPosition = new Vector2(12.5f, 12.5f) * ((mazeRatio-1)*8+1) + new Vector2(15,15) + currentPosition * -25f;
+        mapParentTranform.localPosition = new Vector2(12.5f, 12.5f) * ((mazeRatio-1)*8+1) + new Vector2(15,15) + currentPosition * -25f;
         UpdateMask(currentPosition);
     }
 
