@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class MinimapController : MonoBehaviour
 {
+    [Header("Minimap Grid Properties")]
     public RawImage mapImage;
     public RawImage mapMask;
     public Color fillColour;
     public Color outlineColour;
+    [Header("Minimap Entities")]
+    public Transform playerEntity;
     private Vector2 startPosition;
     private Texture2D mapMaskTexture;
     private float mazeRatio = 1f;
@@ -17,12 +20,14 @@ public class MinimapController : MonoBehaviour
     {
         MazeGenerator.MazeTextureGenerated += DrawNewMinimap;
         FieldMovementController.PlayerPositionChanged += UpdatePlayerPosition;
+        FieldMovementController.PlayerRotationChanged += UpdatePlayerRotation;
     }
 
     private void OnDisable()
     {
         MazeGenerator.MazeTextureGenerated -= DrawNewMinimap;
         FieldMovementController.PlayerPositionChanged -= UpdatePlayerPosition;
+        FieldMovementController.PlayerRotationChanged -= UpdatePlayerRotation;
     }
 
     private void DrawNewMinimap(Texture2D mazeTexture)
@@ -103,5 +108,10 @@ public class MinimapController : MonoBehaviour
         mapMaskTexture.SetPixel(Mathf.RoundToInt(currentPosition.x), Mathf.RoundToInt(currentPosition.y), Color.white);
         mapMaskTexture.Apply();
         mapMask.texture = mapMaskTexture;
+    }
+
+    private void UpdatePlayerRotation(Vector3 newRotation)
+    {
+        playerEntity.Rotate(newRotation);
     }
 }

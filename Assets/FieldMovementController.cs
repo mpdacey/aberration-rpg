@@ -5,6 +5,7 @@ using UnityEngine;
 public class FieldMovementController : MonoBehaviour
 {
     public static event Action<Vector3> PlayerPositionChanged;
+    public static event Action<Vector3> PlayerRotationChanged;
     public static event Action FieldMovementEvent;
 
     public static bool inBattle = false;
@@ -70,9 +71,24 @@ public class FieldMovementController : MonoBehaviour
             else
                 CallAnimation(BUMP_FORWARD_STATE);
         }
-        else if (horizontal > 0.5f) CallAnimation(TURN_RIGHT_STATE);
-        else if (horizontal < -0.5f) CallAnimation(TURN_LEFT_STATE);
-        else if (vertical < -0.5f) CallAnimation(TURN_AROUND_STATE);
+        else if (horizontal > 0.5f)
+        {
+            CallAnimation(TURN_RIGHT_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, -90));
+        }
+        else if (horizontal < -0.5f)
+        {
+            CallAnimation(TURN_LEFT_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, 90));
+        }
+        else if (vertical < -0.5f)
+        {
+            CallAnimation(TURN_AROUND_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, 180));
+        }
     }
 
     private void CallAnimation(string animationClipName)
