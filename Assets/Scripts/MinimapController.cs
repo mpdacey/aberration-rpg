@@ -13,6 +13,7 @@ public class MinimapController : MonoBehaviour
     public Color outlineColour;
     [Header("Minimap Entities")]
     public Transform playerEntity;
+    private const int TILE_SIZE = 6;
     private Vector2 startPosition;
     private Texture2D mapMaskTexture;
     private float mazeRatio = 1f;
@@ -47,9 +48,9 @@ public class MinimapController : MonoBehaviour
         mazeRatio = mazeTexture.width / 8f;
         mapMask.transform.localScale = Vector2.one * 2 * mazeRatio;
 
-        Color[] mapCells = new Color[mazeTexture.width * mazeTexture.height * 36];
+        Color[] mapCells = new Color[mazeTexture.width * mazeTexture.height * TILE_SIZE * TILE_SIZE];
         Color[] mazeCells = mazeTexture.GetPixels();
-        Texture2D minimapTexture = new Texture2D(mazeTexture.width * 6, mazeTexture.height * 6);
+        Texture2D minimapTexture = new Texture2D(mazeTexture.width * TILE_SIZE, mazeTexture.height * TILE_SIZE);
 
         for (int y = 0; y < mazeTexture.height; y++)
         {
@@ -61,10 +62,10 @@ public class MinimapController : MonoBehaviour
                 {
                     Vector2Int currentCoords = new Vector2Int(x, y);
                     FillCell(ref mapCells, currentCoords, mazeTexture.width);
-                    if (x == 0 || mazeCells[y * mazeTexture.width + x - 1].r == 0) DrawOutline(ref mapCells, currentCoords*6, mazeTexture.width, false);
-                    if (x == mazeTexture.width-1 || mazeCells[y * mazeTexture.width + x + 1].r == 0) DrawOutline(ref mapCells, (currentCoords*6) + (Vector2Int.right*5), mazeTexture.width, false);
-                    if (y == 0 || mazeCells[(y-1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords*6, mazeTexture.width, true);
-                    if (y == mazeTexture.height - 1 || mazeCells[(y+1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords* 6 + (Vector2Int.up * 5), mazeTexture.width, true);
+                    if (x == 0 || mazeCells[y * mazeTexture.width + x - 1].r == 0) DrawOutline(ref mapCells, currentCoords * TILE_SIZE, mazeTexture.width, false);
+                    if (x == mazeTexture.width-1 || mazeCells[y * mazeTexture.width + x + 1].r == 0) DrawOutline(ref mapCells, (currentCoords * TILE_SIZE) + (Vector2Int.right*5), mazeTexture.width, false);
+                    if (y == 0 || mazeCells[(y-1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords * TILE_SIZE, mazeTexture.width, true);
+                    if (y == mazeTexture.height - 1 || mazeCells[(y+1) * mazeTexture.width + x].r == 0) DrawOutline(ref mapCells, currentCoords * TILE_SIZE + (Vector2Int.up * 5), mazeTexture.width, true);
 
                     if (currentCell.g == 0 && currentCell.b == 0)
                         startPosition = new Vector2(x, y);
@@ -82,19 +83,19 @@ public class MinimapController : MonoBehaviour
 
     private void FillCell(ref Color[] cells, Vector2Int currentCell, int baseWidth)
     {
-        for (int y = 0; y < 6; y++)
-            for (int x = 0; x < 6; x++)
-                cells[(currentCell.y * 6 + y) * baseWidth * 6 + currentCell.x * 6 + x] = fillColour;
+        for (int y = 0; y < TILE_SIZE; y++)
+            for (int x = 0; x < TILE_SIZE; x++)
+                cells[(currentCell.y * TILE_SIZE + y) * baseWidth * TILE_SIZE + currentCell.x * TILE_SIZE + x] = fillColour;
     }
 
     private void DrawOutline(ref Color[] cells, Vector2Int topLeft, int baseWidth, bool horizontalLine)
     {
         if (horizontalLine)
-            for (int x = 0; x < 6; x++)
-                cells[topLeft.y * baseWidth*6 + topLeft.x + x] = outlineColour;
+            for (int x = 0; x < TILE_SIZE; x++)
+                cells[topLeft.y * baseWidth * TILE_SIZE + topLeft.x + x] = outlineColour;
         else
-            for (int y = 0; y < 6; y++)
-                cells[(topLeft.y+y) * baseWidth * 6 + topLeft.x] = outlineColour;
+            for (int y = 0; y < TILE_SIZE; y++)
+                cells[(topLeft.y+y) * baseWidth * TILE_SIZE + topLeft.x] = outlineColour;
     }
 
     private void UpdatePlayerPosition(Vector3 playerPosition)
