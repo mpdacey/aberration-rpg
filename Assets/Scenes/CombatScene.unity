@@ -2676,6 +2676,7 @@ MonoBehaviour:
   fillColour: {r: 0.3647059, g: 0.5529412, b: 0.9960785, a: 1}
   outlineColour: {r: 0.6784314, g: 0.7843138, b: 0.9803922, a: 1}
   playerEntity: {fileID: 443243344}
+  portalEntity: {fileID: 467729122}
 --- !u!1001 &1007382824
 PrefabInstance:
   m_ObjectHideFlags: 0

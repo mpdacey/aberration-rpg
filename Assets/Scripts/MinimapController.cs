@@ -13,6 +13,7 @@ public class MinimapController : MonoBehaviour
     public Color outlineColour;
     [Header("Minimap Entities")]
     public Transform playerEntity;
+    public Transform portalEntity;
     private const int TILE_SIZE = 6;
     private Vector2 startPosition;
     private Texture2D mapMaskTexture;
@@ -52,6 +53,8 @@ public class MinimapController : MonoBehaviour
         Color[] mazeCells = mazeTexture.GetPixels();
         Texture2D minimapTexture = new Texture2D(mazeTexture.width * TILE_SIZE, mazeTexture.height * TILE_SIZE);
 
+        Vector2 endPosition = Vector2.zero;
+
         for (int y = 0; y < mazeTexture.height; y++)
         {
             for(int x = 0; x < mazeTexture.width; x++)
@@ -69,6 +72,9 @@ public class MinimapController : MonoBehaviour
 
                     if (currentCell.g == 0 && currentCell.b == 0)
                         startPosition = new Vector2(x, y);
+
+                    if (currentCell.g == 1 && currentCell.b == 0)
+                        endPosition = new Vector2(x, y);
                 }
             }
         }
@@ -79,6 +85,7 @@ public class MinimapController : MonoBehaviour
         mapImage.texture = minimapTexture;
 
         UpdatePlayerPosition(Vector2.zero);
+        SetPortalPosition(endPosition, new Vector2(mazeTexture.width/2f, mazeTexture.height/2f));
     }
 
     private void FillCell(ref Color[] cells, Vector2Int currentCell, int baseWidth)
@@ -115,5 +122,10 @@ public class MinimapController : MonoBehaviour
     private void UpdatePlayerRotation(Vector3 newRotation)
     {
         playerEntity.Rotate(newRotation);
+    }
+
+    private void SetPortalPosition(Vector2 portalPosition, Vector2 gridRadius)
+    {
+        portalEntity.position = transform.GetChild(1).position + (Vector3)((portalPosition - startPosition) * TILE_SIZE * 5);
     }
 }
