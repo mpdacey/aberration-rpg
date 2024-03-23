@@ -6,7 +6,6 @@ public class FieldMovementController : MonoBehaviour
 {
     public static event Action<Vector3> PlayerPositionChanged;
     public static event Action<Vector3> PlayerRotationChanged;
-    public static event Action FieldMovementEvent;
 
     public static bool inBattle = false;
     public AudioClip playerMovementSFX;
@@ -63,8 +62,6 @@ public class FieldMovementController : MonoBehaviour
             {
                 AudioManager.PlayAudioClip(playerMovementSFX, true);
                 CallAnimation(MOVE_FORWARD_STATE);
-                if (FieldMovementEvent != null)
-                    FieldMovementEvent.Invoke();
                 if (PlayerPositionChanged != null)
                     PlayerPositionChanged.Invoke(rayOrigin);
             }
