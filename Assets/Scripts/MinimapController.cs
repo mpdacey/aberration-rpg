@@ -111,6 +111,7 @@ public class MinimapController : MonoBehaviour
         Vector2 currentPosition = startPosition + new Vector2(playerPosition.x / 5, playerPosition.z / 5);
         mapParentTranform.localPosition = new Vector2(12.5f, 12.5f) * ((mazeRatio-1)*8+1) + new Vector2(15,15) + currentPosition * -25f;
         UpdateMask(currentPosition);
+        UpdateEntities();
     }
 
     private void UpdateMask(Vector2 currentPosition)
@@ -118,6 +119,12 @@ public class MinimapController : MonoBehaviour
         mapMaskTexture.SetPixel(Mathf.RoundToInt(currentPosition.x), Mathf.RoundToInt(currentPosition.y), Color.white);
         mapMaskTexture.Apply();
         mapMask.texture = mapMaskTexture;
+    }
+
+    private void UpdateEntities()
+    {
+        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 2 * (TILE_SIZE * 5 * 2))
+            portalEntity.gameObject.SetActive(true);
     }
 
     private void UpdatePlayerRotation(Vector3 newRotation)
@@ -128,5 +135,6 @@ public class MinimapController : MonoBehaviour
     private void SetPortalPosition(Vector2 portalPosition)
     {
         portalEntity.position = playerEntity.transform.position + (Vector3)((portalPosition - startPosition) * TILE_SIZE * 5 * 2);
+        portalEntity.gameObject.SetActive(false);
     }
 }
