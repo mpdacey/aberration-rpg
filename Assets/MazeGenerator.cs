@@ -17,28 +17,52 @@ public class MazeGenerator : MonoBehaviour
 
     private void OnEnable()
     {
-        GoalRiftController.GoalRiftEntered += GenerateMaze;
-        SceneController.CombatSceneLoaded += GenerateMaze;
+        GoalRiftController.GoalRiftEntered += GenerateMazeTexture;
+        SceneController.CombatSceneLoaded += GenerateMazeTexture;
     }
 
     private void OnDisable()
     {
-        GoalRiftController.GoalRiftEntered -= GenerateMaze;
-        SceneController.CombatSceneLoaded -= GenerateMaze;
+        GoalRiftController.GoalRiftEntered -= GenerateMazeTexture;
+        SceneController.CombatSceneLoaded -= GenerateMazeTexture;
     }
 
-    private void GenerateMaze()
+    private void GenerateMazeTexture()
     {
-        gridSize = new Vector2Int(startingSize + (GameController.CurrentLevel /3), startingSize + (GameController.CurrentLevel /3));
-
+        gridSize = new Vector2Int(startingSize + (GameController.CurrentLevel / 3), startingSize + (GameController.CurrentLevel / 3));
         cells = new Color[gridSize.x * gridSize.y];
+        int minimumCellCount;
+
+        do
+        {
+            cells = GetGeneratedMaze(out minimumCellCount);
+        }
+        while (minimumCellCount > 0);
+
+        generatedTexture = new Texture2D(gridSize.x, gridSize.y);
+        generatedTexture.filterMode = FilterMode.Point;
+        generatedTexture.SetPixels(cells);
+        generatedTexture.Apply();
+
+        if (testRenderer != null)
+        {
+            Sprite testSprite = Sprite.Create(generatedTexture, new Rect(0, 0, gridSize.x, gridSize.y), Vector2.zero, 16f);
+            testRenderer.sprite = testSprite;
+        }
+
+        if (MazeTextureGenerated != null)
+            MazeTextureGenerated.Invoke(generatedTexture);
+    }
+
+    private Color[] GetGeneratedMaze(out int minimumCount)
+    {
         for (int i = 0; i < cells.Length; i++)
             cells[i] = Color.black;
 
-        int startX = Mathf.FloorToInt((float)Random.Range(0, gridSize.x - 1)/2)*2;
-        int startY = Mathf.FloorToInt((float)Random.Range(0, gridSize.y - 1)/2)*2;
+        int startX = Mathf.FloorToInt((float)Random.Range(0, gridSize.x - 1) / 2) * 2;
+        int startY = Mathf.FloorToInt((float)Random.Range(0, gridSize.y - 1) / 2) * 2;
         Vector2Int start = new Vector2Int(startX, startY);
-        Vector2Int end = new Vector2Int(0,0);
+        Vector2Int end = new Vector2Int(0, 0);
 
         int loopFactor = Random.Range(2, 5);
 
@@ -50,13 +74,15 @@ public class MazeGenerator : MonoBehaviour
         visited.Add(start);
         AddWalls(start);
 
-        while(walls.Count > 0)
+        minimumCount = gridSize.x / 2;
+
+        while (walls.Count > 0)
         {
             var randomWall = walls[Random.Range(0, walls.Count - 1)];
             walls.Remove(randomWall);
             var canLoop = 0 == Random.Range(0, loopFactor);
 
-            if(randomWall.x % 2 == 1 && (canLoop || (visited.Contains(randomWall + Vector2Int.left) ^ visited.Contains(randomWall + Vector2Int.right))))
+            if (randomWall.x % 2 == 1 && (canLoop || (visited.Contains(randomWall + Vector2Int.left) ^ visited.Contains(randomWall + Vector2Int.right))))
             {
                 if (randomWall + Vector2Int.left == end || randomWall + Vector2Int.right == end)
                     continue;
@@ -67,19 +93,19 @@ public class MazeGenerator : MonoBehaviour
                     int fillSpaceValue = Random.Range(0, 3);
                     if (fillSpaceValue > 1)
                         FillSpace(randomWall + Vector2Int.up);
-                    if(fillSpaceValue % 2 == 0)
+                    if (fillSpaceValue % 2 == 0)
                         FillSpace(randomWall + Vector2Int.down);
                     continue;
                 }
-                
+
                 if (visited.Contains(randomWall + Vector2Int.left))
                 {
-                    AddVisited(randomWall + Vector2Int.right);
+                    AddVisited(randomWall + Vector2Int.right, ref minimumCount);
                     end = randomWall + Vector2Int.right;
                 }
                 else
                 {
-                    AddVisited(randomWall + Vector2Int.left);
+                    AddVisited(randomWall + Vector2Int.left, ref minimumCount);
                     end = randomWall + Vector2Int.left;
                 }
             }
@@ -101,39 +127,28 @@ public class MazeGenerator : MonoBehaviour
 
                 if (visited.Contains(randomWall + Vector2Int.up))
                 {
-                    AddVisited(randomWall + Vector2Int.down);
+                    AddVisited(randomWall + Vector2Int.down, ref minimumCount);
                     end = randomWall + Vector2Int.down;
                 }
                 else
                 {
-                    AddVisited(randomWall + Vector2Int.up);
+                    AddVisited(randomWall + Vector2Int.up, ref minimumCount);
                     end = randomWall + Vector2Int.up;
-                }
+                 }
             }
         }
 
         cells[end.y * gridSize.x + end.x] = Color.red + Color.green;
 
-        generatedTexture = new Texture2D(gridSize.x, gridSize.y);
-        generatedTexture.filterMode = FilterMode.Point;
-        generatedTexture.SetPixels(cells);
-        generatedTexture.Apply();
-
-        if(testRenderer != null)
-        {
-            Sprite testSprite = Sprite.Create(generatedTexture, new Rect(0, 0, gridSize.x, gridSize.y), Vector2.zero, 16f);
-            testRenderer.sprite = testSprite;
-        }
-
-        if (MazeTextureGenerated != null)
-            MazeTextureGenerated.Invoke(generatedTexture);
+        return cells;
     }
 
-    private void AddVisited(Vector2Int newCell)
+    private void AddVisited(Vector2Int newCell, ref int visitedCellsLeft)
     {
         cells[newCell.y * gridSize.x + newCell.x] = Color.white;
         visited.Add(newCell);
         AddWalls(newCell);
+        visitedCellsLeft--;
     }
 
     private void AddWalls(Vector2Int currentCell)
