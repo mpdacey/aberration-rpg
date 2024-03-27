@@ -21,7 +21,7 @@ public class MonsterEncounterController : MonoBehaviour
 
     private void OnEnable()
     {
-        FieldMovementController.PlayerTranformChanged += UpdateThreatLevel;
+        FieldMovementController.PlayerPositionChanged += UpdateThreatLevel;
         CombatController.CombatVictory += ResetThreatLevel;
         GoalRiftController.GoalRiftEntered += ResetThreatLevel;
         LevelGenerator.GoalLocationFound += SetGoalPosition;
@@ -29,7 +29,7 @@ public class MonsterEncounterController : MonoBehaviour
 
     private void OnDisable()
     {
-        FieldMovementController.PlayerTranformChanged -= UpdateThreatLevel;
+        FieldMovementController.PlayerPositionChanged -= UpdateThreatLevel;
         CombatController.CombatVictory -= ResetThreatLevel;
         GoalRiftController.GoalRiftEntered -= ResetThreatLevel;
         LevelGenerator.GoalLocationFound -= SetGoalPosition;
@@ -38,14 +38,14 @@ public class MonsterEncounterController : MonoBehaviour
     private void SetGoalPosition(Vector2 goal) =>
         goalPosition = new Vector3(goal.x, 0, goal.y);
 
-    private void UpdateThreatLevel(Transform player)
+    private void UpdateThreatLevel(Vector3 playerPosition)
     {
         if (UnityEngine.Random.Range(0, levelRankUpMax) < timer)
         {
             timer = 0;
             if (threatLevel == ThreatLevel.High)
             {
-                if (ThreatTriggered != null && Vector3.Distance(player.position, goalPosition*5) > 9.5f)
+                if (ThreatTriggered != null && Vector3.Distance(playerPosition, goalPosition*5) > 9.5f)
                     ThreatTriggered.Invoke();
             }
             else

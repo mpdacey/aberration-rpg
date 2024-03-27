@@ -7,6 +7,7 @@ public class GoalRiftController : MonoBehaviour
 
     public Transform player;
     public AudioClip playerWarpSFX;
+    private bool portalIsActive;
 
     private void OnEnable()
     {
@@ -18,9 +19,10 @@ public class GoalRiftController : MonoBehaviour
         LevelGenerator.GoalLocationFound -= SetEndGoal;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        CheckForPlayer(player);
+        if(portalIsActive)
+            CheckForPlayer(player);
     }
 
     private void CheckForPlayer(Transform player)
@@ -29,13 +31,20 @@ public class GoalRiftController : MonoBehaviour
 
         if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
         {
-            AudioManager.PlayAudioClip(playerWarpSFX);
-            GoalRiftEntered.Invoke();
+            EnterRift();
         }
+    }
+
+    public void EnterRift()
+    {
+        portalIsActive = false;
+        AudioManager.PlayAudioClip(playerWarpSFX);
+        GoalRiftEntered.Invoke();
     }
 
     private void SetEndGoal(Vector2 endLocation)
     {
         transform.position = new Vector3(endLocation.x*5, 0, endLocation.y * 5);
+        portalIsActive = true;
     }
 }

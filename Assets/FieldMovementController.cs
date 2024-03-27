@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class FieldMovementController : MonoBehaviour
 {
-    public static event Action<Transform> PlayerTranformChanged;
-    public static event Action FieldMovementEvent;
+    public static event Action<Vector3> PlayerPositionChanged;
+    public static event Action<Vector3> PlayerRotationChanged;
 
     public static bool inBattle = false;
     public AudioClip playerMovementSFX;
     [SerializeField] Animator movementAnimator;
-    private float currentAnimationTimer = 0;
 
     private const string MOVE_FORWARD_STATE = "MoveForward";
     private const string BUMP_FORWARD_STATE = "MoveForwardBump";
@@ -63,17 +62,30 @@ public class FieldMovementController : MonoBehaviour
             {
                 AudioManager.PlayAudioClip(playerMovementSFX, true);
                 CallAnimation(MOVE_FORWARD_STATE);
-                if (FieldMovementEvent != null)
-                    FieldMovementEvent.Invoke();
-                if (PlayerTranformChanged != null)
-                    PlayerTranformChanged.Invoke(transform);
+                if (PlayerPositionChanged != null)
+                    PlayerPositionChanged.Invoke(rayOrigin);
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
         }
-        else if (horizontal > 0.5f) CallAnimation(TURN_RIGHT_STATE);
-        else if (horizontal < -0.5f) CallAnimation(TURN_LEFT_STATE);
-        else if (vertical < -0.5f) CallAnimation(TURN_AROUND_STATE);
+        else if (horizontal > 0.5f)
+        {
+            CallAnimation(TURN_RIGHT_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, -90));
+        }
+        else if (horizontal < -0.5f)
+        {
+            CallAnimation(TURN_LEFT_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, 90));
+        }
+        else if (vertical < -0.5f)
+        {
+            CallAnimation(TURN_AROUND_STATE);
+            if (PlayerRotationChanged != null)
+                PlayerRotationChanged.Invoke(new Vector3(0, 0, 180));
+        }
     }
 
     private void CallAnimation(string animationClipName)

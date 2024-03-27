@@ -79,16 +79,16 @@ public class CombatController : MonoBehaviour
 
     private void OnEnable()
     {
-        FieldMovementController.PlayerTranformChanged += UpdatePlayerTransform;
         MonsterController.MonsterDefeated += MonsterDeathHandling;
         MonsterController.MonsterStunned += StunMonster;
         MonsterEncounterController.ThreatTriggered += SetupCombat;
         formationSelector = GameObject.FindWithTag("GameController").GetComponent<FormationSelector>();
+
+        if (playerTransform == null) playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     private void OnDisable()
     {
-        FieldMovementController.PlayerTranformChanged -= UpdatePlayerTransform;
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
         MonsterController.MonsterStunned -= StunMonster;
         MonsterEncounterController.ThreatTriggered -= SetupCombat;
@@ -98,9 +98,6 @@ public class CombatController : MonoBehaviour
     {
         isCancelling = Input.GetButtonDown("Cancel");
     }
-
-    private void UpdatePlayerTransform(Transform value) =>
-        playerTransform = value;
 
     public void SetupCombat()
     {
