@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5594631122021667814}
   - component: {fileID: 575310320566054418}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: PlayerHPSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -720,7 +720,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memberName: {fileID: 5377565352204027187}
   memberHP: {fileID: 3306097813792610456}
+  memberHPSlider: {fileID: 575310320566054418}
   memberSP: {fileID: 7083470332980541455}
+  memberSPSlider: {fileID: 1221574756333876929}
   memberActionType: {fileID: 3306097813348431397}
 --- !u!114 &5421090853057011544
 MonoBehaviour:
@@ -1970,7 +1972,7 @@ GameObject:
   - component: {fileID: 4938013933820743810}
   - component: {fileID: 1221574756333876929}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: PlayerSPSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2046,7 +2048,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
