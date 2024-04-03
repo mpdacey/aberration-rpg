@@ -14,9 +14,13 @@ public class BattleUIController : MonoBehaviour
     public GameObject battleMenuUI;
     public Button skillButton;
     public Button[] monsterTargetButtons;
-    public PlayerStatsUIController[] partyLineUpUI;
     public Animator riftTransitionAnimator;
     public TextMeshProUGUI floorCounter;
+
+    [Header("Player Battle UI")]
+    public PlayerStatsUIController[] partyLineUpUI;
+    [SerializeField] private float partyLineUpDefaultY = 231 - 178f;
+    [SerializeField] private float partyLineUpActiveY = 231 - 142f;
 
     [Header("Gameover Scene")]
     public Animation gameoverAnimation;
@@ -113,7 +117,7 @@ public class BattleUIController : MonoBehaviour
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
         {
-            partyLineUpUI[i].transform.localPosition = new Vector3(partyLineUpUI[i].transform.localPosition.x, i == currentMember ? -65 : -105, 0);
+            partyLineUpUI[i].transform.position = new Vector3(partyLineUpUI[i].transform.position.x, i == currentMember ? partyLineUpActiveY: partyLineUpDefaultY, 0);
         }
     }
 
