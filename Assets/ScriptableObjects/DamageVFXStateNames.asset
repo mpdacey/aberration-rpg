@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5422ef65c02d1b6429dc1805e6371a3e, type: 3}
   m_Name: DamageVFXStateNames
   m_EditorClassIdentifier: 
-  vfxPairs: []
+  vfxPairs:
+  - spellType: 4
+    spellAnimationKey: BluntVFX
