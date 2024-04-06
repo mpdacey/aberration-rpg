@@ -15,3 +15,13 @@ MonoBehaviour:
   vfxPairs:
   - spellType: 4
     spellAnimationKey: BluntVFX
+  - spellType: 5
+    spellAnimationKey: SharpVFX
+  - spellType: 0
+    spellAnimationKey: FireVFX
+  - spellType: 1
+    spellAnimationKey: IceVFX
+  - spellType: 2
+    spellAnimationKey: ThunderVFX
+  - spellType: 3
+    spellAnimationKey: WindVFX
