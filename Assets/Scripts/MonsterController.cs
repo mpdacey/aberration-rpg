@@ -27,7 +27,8 @@ public class MonsterController : MonoBehaviour
     }
     public bool isDefeated = false;
     [SerializeField] private CombatantScriptableObject combatantStats;
-    [SerializeReference] private DiceUIController[] diceControllers;
+    [SerializeField] private DiceUIController[] diceControllers;
+    [SerializeField] private DamageVFXController damageVFXController;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private int localHP = 0;
@@ -96,6 +97,7 @@ public class MonsterController : MonoBehaviour
         var affinity = AttackHandler.CalculateIncomingDamage(incomingAttack, combatantStats, ref localHP, out reflectedAttack);
         int lastDiceIndex = Array.FindLastIndex(currentDiceValues, x => x > 0);
 
+        damageVFXController.PlayDamageVFX(incomingAttack.attackSpell.spellType);
         if (DisplayRecievedMonsterDamage != null && oldHP != localHP)
             DisplayRecievedMonsterDamage.Invoke(GetComponent<DamageTextProducer>(), localHP-oldHP);
 
