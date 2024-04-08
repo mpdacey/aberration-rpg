@@ -2303,6 +2303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageVFX
       objectReference: {fileID: 0}
+    - target: {fileID: 9046662063471672465, guid: 4bcb587e2bacfd64cbc206929894c3f9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bcb587e2bacfd64cbc206929894c3f9, type: 3}
 --- !u!224 &5331900664072420722 stripped
