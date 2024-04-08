@@ -22,6 +22,7 @@ public class CombatController : MonoBehaviour
     public event Action<PlayerAction, int> UpdateActionIcon;
     public event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<int> DisplayEvadedAttack;
+    public event Action<int, SpellScriptableObject.SpellType> DisplayAttackVFX;
 
     public struct PlayerAction
     {
@@ -517,6 +518,8 @@ public class CombatController : MonoBehaviour
             DisplayRecievedPlayerDamage.Invoke(target, targetMember.currentHP - oldHealth);
         if (DisplayEvadedAttack != null && affinityCheck == CombatantScriptableObject.AttributeAffinity.Evade)
             DisplayEvadedAttack.Invoke(target);
+        if (DisplayAttackVFX != null)
+            DisplayAttackVFX.Invoke(target, attack.attackSpell.spellType);
 
         targetMember.currentHP = Mathf.Clamp(targetMember.currentHP, 0, targetMember.partyMemberBaseStats.combatantMaxHealth);
         PartyController.partyMembers[target] = targetMember;

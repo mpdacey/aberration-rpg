@@ -45,6 +45,7 @@ public class BattleUIController : MonoBehaviour
         combatController.UpdateActionIcon += SetActionIcon;
         combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
         combatController.DisplayEvadedAttack += DisplayEvadedAttack;
+        combatController.DisplayAttackVFX += DisplayRecievedPlayerDamage;
     }
 
     private void OnDisable()
@@ -65,6 +66,7 @@ public class BattleUIController : MonoBehaviour
         combatController.UpdateActionIcon -= SetActionIcon;
         combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
         combatController.DisplayEvadedAttack -= DisplayEvadedAttack;
+        combatController.DisplayAttackVFX -= DisplayRecievedPlayerDamage;
     }
 
     private void Update()
@@ -219,6 +221,11 @@ public class BattleUIController : MonoBehaviour
     {
         if (DisplayEvadedAttackEvent != null)
             DisplayEvadedAttackEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>());
+    }
+
+    private void DisplayRecievedPlayerDamage(int playerIndex, SpellScriptableObject.SpellType spellType)
+    {
+        partyLineUpUI[playerIndex].GetComponentInChildren<DamageVFXController>().PlayDamageVFX(spellType);
     }
 
     private void PlayTransitionAnimation() =>
