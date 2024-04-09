@@ -46,13 +46,13 @@ public class DamageTextController : MonoBehaviour
                 StartTextCoroutine(producer, $"Weak", weakColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
-                StartTextCoroutine(producer, $"Null", nullColour);
+                StartTextCoroutine(producer, $"Null", nullColour, false);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Absorb:
                 StartTextCoroutine(producer, $"Absorb", absorbColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Repel:
-                StartTextCoroutine(producer, $"Repel", repelColour);
+                StartTextCoroutine(producer, $"Repel", repelColour, false);
                 break;
         }
     }
