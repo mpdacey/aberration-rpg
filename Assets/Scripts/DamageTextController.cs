@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageTextController : MonoBehaviour
@@ -18,8 +16,8 @@ public class DamageTextController : MonoBehaviour
     {
         battleUI.DisplayRecievedPlayerDamageEvent += DisplayDamage;
         MonsterController.DisplayRecievedMonsterDamage += DisplayDamage;
-        battleUI.DisplayEvadedAttackEvent += DisplayEvasion;
-        MonsterController.DisplayMonsterEvasion += DisplayEvasion;
+        battleUI.DisplayAttackAffinityEvent += DisplayAdditionalText;
+        MonsterController.DisplayMonsterAffinityEvent += DisplayAdditionalText;
 
     }
 
@@ -27,13 +25,35 @@ public class DamageTextController : MonoBehaviour
     {
         battleUI.DisplayRecievedPlayerDamageEvent -= DisplayDamage;
         MonsterController.DisplayRecievedMonsterDamage -= DisplayDamage;
-        battleUI.DisplayEvadedAttackEvent -= DisplayEvasion;
-        MonsterController.DisplayMonsterEvasion -= DisplayEvasion;
+        battleUI.DisplayAttackAffinityEvent -= DisplayAdditionalText;
+        MonsterController.DisplayMonsterAffinityEvent -= DisplayAdditionalText;
     }
 
     private void DisplayDamage(DamageTextProducer producer, int damageValue) =>
-        producer.ProduceDamageText(damageValue, damageColour);
+        producer.ProduceText($"{damageValue}HP", damageColour);
 
-    private void DisplayEvasion(DamageTextProducer producer) =>
-        producer.ProduceEvasionText(evasionColour);
+    private void DisplayAdditionalText(DamageTextProducer producer, CombatantScriptableObject.AttributeAffinity affinity)
+    {
+        switch (affinity)
+        {
+            case CombatantScriptableObject.AttributeAffinity.Evade:
+                producer.ProduceText($"Evade", evasionColour);
+                break;
+            case CombatantScriptableObject.AttributeAffinity.Resist:
+                producer.ProduceText($"Resist", resistColour);
+                break;
+            case CombatantScriptableObject.AttributeAffinity.Weak:
+                producer.ProduceText($"Weak", weakColour);
+                break;
+            case CombatantScriptableObject.AttributeAffinity.Null:
+                producer.ProduceText($"Null", nullColour);
+                break;
+            case CombatantScriptableObject.AttributeAffinity.Absorb:
+                producer.ProduceText($"Absorb", absorbColour);
+                break;
+            case CombatantScriptableObject.AttributeAffinity.Repel:
+                producer.ProduceText($"Repel", repelColour);
+                break;
+        }
+    }
 }

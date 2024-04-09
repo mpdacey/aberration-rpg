@@ -5,13 +5,7 @@ public class DamageTextProducer : MonoBehaviour
 {
     public GameObject damagePrefab;
 
-    public void ProduceDamageText(int damage, Color textColour) =>
-        ProduceText($"{damage}HP", textColour);
-
-    public void ProduceEvasionText(Color textColour) =>
-        ProduceText($"Evaded!", textColour);
-
-    private void ProduceText(string text, Color textColour)
+    public void ProduceText(string text, Color textColour)
     {
         var damageObject = Instantiate(damagePrefab, transform, true);
         if (damageObject.transform.GetChild(0).TryGetComponent(out TextMeshProUGUI textMeshUI))

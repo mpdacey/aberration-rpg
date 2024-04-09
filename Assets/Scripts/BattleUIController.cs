@@ -8,7 +8,7 @@ using TMPro;
 public class BattleUIController : MonoBehaviour
 {
     public event Action<DamageTextProducer, int> DisplayRecievedPlayerDamageEvent;
-    public event Action<DamageTextProducer> DisplayEvadedAttackEvent;
+    public event Action<DamageTextProducer, CombatantScriptableObject.AttributeAffinity> DisplayAttackAffinityEvent;
 
     public CombatController combatController;
     public GameObject battleMenuUI;
@@ -44,7 +44,7 @@ public class BattleUIController : MonoBehaviour
         combatController.UpdatePlayerSP += UpdateStamina;
         combatController.UpdateActionIcon += SetActionIcon;
         combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
-        combatController.DisplayEvadedAttack += DisplayEvadedAttack;
+        combatController.DisplayAttackText += DisplayAttackAffinity;
         combatController.DisplayAttackVFX += DisplayRecievedPlayerDamage;
     }
 
@@ -65,7 +65,7 @@ public class BattleUIController : MonoBehaviour
         combatController.UpdatePlayerSP -= UpdateStamina;
         combatController.UpdateActionIcon -= SetActionIcon;
         combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
-        combatController.DisplayEvadedAttack -= DisplayEvadedAttack;
+        combatController.DisplayAttackText -= DisplayAttackAffinity;
         combatController.DisplayAttackVFX -= DisplayRecievedPlayerDamage;
     }
 
@@ -217,10 +217,10 @@ public class BattleUIController : MonoBehaviour
             DisplayRecievedPlayerDamageEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>(), damageValue);
     }
 
-    private void DisplayEvadedAttack(int playerIndex)
+    private void DisplayAttackAffinity(CombatantScriptableObject.AttributeAffinity affinity, int playerIndex)
     {
-        if (DisplayEvadedAttackEvent != null)
-            DisplayEvadedAttackEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>());
+        if (DisplayAttackAffinityEvent != null)
+            DisplayAttackAffinityEvent.Invoke(partyLineUpUI[playerIndex].GetComponent<DamageTextProducer>(), affinity);
     }
 
     private void DisplayRecievedPlayerDamage(int playerIndex, SpellScriptableObject.SpellType spellType)
