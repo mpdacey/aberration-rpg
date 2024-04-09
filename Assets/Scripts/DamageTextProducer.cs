@@ -22,7 +22,7 @@ public class DamageTextProducer : MonoBehaviour
             textMesh.text = text;
         }
         damageObject.transform.SetParent(transform);
-        damageObject.transform.localPosition = Vector3.zero;
+        damageObject.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.04f, 0.04f));
         damageObject.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }
