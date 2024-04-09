@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -5,8 +6,10 @@ public class DamageTextProducer : MonoBehaviour
 {
     public GameObject damagePrefab;
 
-    public void ProduceText(string text, Color textColour)
+    public IEnumerator ProduceText(string text, Color textColour, float delayInSeconds = 0.4f)
     {
+        yield return new WaitForSeconds(delayInSeconds);
+
         var damageObject = Instantiate(damagePrefab, transform, true);
         if (damageObject.transform.GetChild(0).TryGetComponent(out TextMeshProUGUI textMeshUI))
         {

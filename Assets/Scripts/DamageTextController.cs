@@ -30,30 +30,33 @@ public class DamageTextController : MonoBehaviour
     }
 
     private void DisplayDamage(DamageTextProducer producer, int damageValue) =>
-        producer.ProduceText($"{damageValue}HP", damageColour);
+        StartTextCoroutine(producer, $"{damageValue}HP", damageColour, false);
 
     private void DisplayAdditionalText(DamageTextProducer producer, CombatantScriptableObject.AttributeAffinity affinity)
     {
         switch (affinity)
         {
             case CombatantScriptableObject.AttributeAffinity.Evade:
-                producer.ProduceText($"Evade", evasionColour);
+                StartTextCoroutine(producer, $"Evade", evasionColour, false);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Resist:
-                producer.ProduceText($"Resist", resistColour);
+                StartTextCoroutine(producer, $"Resist", resistColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Weak:
-                producer.ProduceText($"Weak", weakColour);
+                StartTextCoroutine(producer, $"Weak", weakColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Null:
-                producer.ProduceText($"Null", nullColour);
+                StartTextCoroutine(producer, $"Null", nullColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Absorb:
-                producer.ProduceText($"Absorb", absorbColour);
+                StartTextCoroutine(producer, $"Absorb", absorbColour);
                 break;
             case CombatantScriptableObject.AttributeAffinity.Repel:
-                producer.ProduceText($"Repel", repelColour);
+                StartTextCoroutine(producer, $"Repel", repelColour);
                 break;
         }
     }
+
+    private void StartTextCoroutine(DamageTextProducer producer, string text, Color textColour, bool delay = true) =>
+        StartCoroutine(producer.ProduceText(text, textColour, delay? 0.4f : 0));
 }
