@@ -47,6 +47,7 @@ public class BattleUIController : MonoBehaviour
         combatController.DisplayRecievedPlayerDamage += DisplayRecievedPlayerDamage;
         combatController.DisplayAttackText += DisplayAttackAffinity;
         combatController.DisplayAttackVFX += DisplayRecievedPlayerDamage;
+        combatController.DisplayInspectUI += DisplayInspectUI;
     }
 
     private void OnDisable()
@@ -68,6 +69,7 @@ public class BattleUIController : MonoBehaviour
         combatController.DisplayRecievedPlayerDamage -= DisplayRecievedPlayerDamage;
         combatController.DisplayAttackText -= DisplayAttackAffinity;
         combatController.DisplayAttackVFX -= DisplayRecievedPlayerDamage;
+        combatController.DisplayInspectUI -= DisplayInspectUI;
     }
 
     private void Update()
@@ -196,13 +198,11 @@ public class BattleUIController : MonoBehaviour
         }
 
         HideBattleMenu();
-        monsterAffinityUI.ShowMonsterAffinities();
     }
 
     private void HideTargets()
     {
         monsterTargetButtons[0].transform.parent.gameObject.SetActive(false);
-        monsterAffinityUI.HideMonsterAffinities();
     }
 
     private void HideAll()
@@ -232,6 +232,12 @@ public class BattleUIController : MonoBehaviour
     private void DisplayRecievedPlayerDamage(int playerIndex, SpellScriptableObject.SpellType spellType)
     {
         partyLineUpUI[playerIndex].GetComponentInChildren<DamageVFXController>().PlayDamageVFX(spellType);
+    }
+
+    private void DisplayInspectUI(bool shouldShowUI)
+    {
+        if(shouldShowUI) monsterAffinityUI.ShowMonsterAffinities();
+        else monsterAffinityUI.HideMonsterAffinities();
     }
 
     private void PlayTransitionAnimation() =>

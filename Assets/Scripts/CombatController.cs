@@ -23,6 +23,7 @@ public class CombatController : MonoBehaviour
     public event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<CombatantScriptableObject.AttributeAffinity, int> DisplayAttackText;
     public event Action<int, SpellScriptableObject.SpellType> DisplayAttackVFX;
+    public event Action<bool> DisplayInspectUI;
 
     public struct PlayerAction
     {
@@ -270,6 +271,11 @@ public class CombatController : MonoBehaviour
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
                         actionState = ActionState.Confirm;
                         break;
+                    case ActionState.Analyze:
+                        if (DisplayInspectUI != null) DisplayInspectUI.Invoke(true);
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Analyze);
+                        if (DisplayInspectUI != null) DisplayInspectUI.Invoke(false);
+                        break;
                     case ActionState.Cancel:
                         bool partyMemberExists = false;
                         while (!partyMemberExists && currentPlayerIndex > 0)
@@ -341,7 +347,7 @@ public class CombatController : MonoBehaviour
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
 
-        while (actionState == loopState)
+        while (actionState == loopState || (loopState == ActionState.Analyze && actionState != ActionState.Cancel))
         {
             if (isCancelling) actionState = ActionState.Cancel;
 
