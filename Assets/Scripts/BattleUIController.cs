@@ -16,6 +16,7 @@ public class BattleUIController : MonoBehaviour
     public Button[] monsterTargetButtons;
     public Animator riftTransitionAnimator;
     public TextMeshProUGUI floorCounter;
+    public MonsterAffinityUIController monsterAffinityUI;
 
     [Header("Player Battle UI")]
     public PlayerStatsUIController[] partyLineUpUI;
@@ -195,9 +196,14 @@ public class BattleUIController : MonoBehaviour
         }
 
         HideBattleMenu();
+        monsterAffinityUI.ShowMonsterAffinities();
     }
 
-    private void HideTargets() => monsterTargetButtons[0].transform.parent.gameObject.SetActive(false);
+    private void HideTargets()
+    {
+        monsterTargetButtons[0].transform.parent.gameObject.SetActive(false);
+        monsterAffinityUI.HideMonsterAffinities();
+    }
 
     private void HideAll()
     {

@@ -24,4 +24,10 @@ public class MonsterAffinityUIController : MonoBehaviour
         affinitySpriteDictionary = new Dictionary<CombatantScriptableObject.AttributeAffinity, Sprite>();
         foreach (AffinitySpritePair pair in affinitySpritePairs) affinitySpriteDictionary.Add(pair.key, pair.value);
     }
+
+    public void ShowMonsterAffinities() =>
+        transform.GetChild(0).gameObject.SetActive(true);
+
+    public void HideMonsterAffinities()=>
+        transform.GetChild(0).gameObject.SetActive(false);
 }
