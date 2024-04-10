@@ -12,6 +12,13 @@ public class SeenMonsterAffinities
         return seenMonsterAffinities[monster];
     }
 
+    public static void UpdateAffinityWitness(CombatantScriptableObject monster, SpellScriptableObject.SpellType afflictedSpellType)
+    {
+        bool[] witnessedAffinties = GetAffinityWitnesses(monster);
+        witnessedAffinties[(int)afflictedSpellType] = true;
+        seenMonsterAffinities[monster] = witnessedAffinties;
+    }
+
     public static void ClearSeenAffinity() =>
         seenMonsterAffinities.Clear();
 }
