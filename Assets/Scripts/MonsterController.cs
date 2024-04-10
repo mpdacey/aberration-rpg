@@ -124,7 +124,8 @@ public class MonsterController : MonoBehaviour
 
         //TODO: Input reflect handling;
 
-        SeenMonsterAffinities.UpdateAffinityWitness(combatantStats, incomingAttack.attackSpell.spellType);
+        if(affinity != CombatantScriptableObject.AttributeAffinity.Evade)
+            SeenMonsterAffinities.UpdateAffinityWitness(combatantStats, incomingAttack.attackSpell.spellType);
 
         if (localHP <= 0 && MonsterDefeated != null)
         {
