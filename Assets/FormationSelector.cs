@@ -14,7 +14,7 @@ public class FormationSelector : MonoBehaviour
 
     public FormationScriptableObject introFormation;
     [SerializeField] FormationTier[] formationTiers;
-    [SerializeField] private bool hasFoughtBefore = false;
+    private bool hasFoughtBefore = false;
 
     private void OnEnable()
     {
