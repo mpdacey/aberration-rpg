@@ -61,7 +61,6 @@ public class CombatController : MonoBehaviour
     }
 
     public MonsterController[] monsters;
-    public FormationSelector formationSelector;
     public RecruitmentController recruitmentController;
     public ActionState actionState = ActionState.None;
     public float spellAttackDelay = 0.25f;
@@ -82,8 +81,7 @@ public class CombatController : MonoBehaviour
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
         MonsterController.MonsterStunned += StunMonster;
-        MonsterEncounterController.ThreatTriggered += SetupCombat;
-        formationSelector = GameObject.FindWithTag("GameController").GetComponent<FormationSelector>();
+        FormationSelector.FormationSelected += SetupCombat;
 
         if (playerTransform == null) playerTransform = GameObject.FindWithTag("Player").transform;
     }
@@ -92,7 +90,7 @@ public class CombatController : MonoBehaviour
     {
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
         MonsterController.MonsterStunned -= StunMonster;
-        MonsterEncounterController.ThreatTriggered -= SetupCombat;
+        FormationSelector.FormationSelected -= SetupCombat;
     }
 
     private void Update()
@@ -100,7 +98,7 @@ public class CombatController : MonoBehaviour
         isCancelling = Input.GetButtonDown("Cancel");
     }
 
-    public void SetupCombat()
+    public void SetupCombat(FormationScriptableObject formation)
     {
         currentBattleState = BattleState.Initializing;
 
@@ -113,7 +111,7 @@ public class CombatController : MonoBehaviour
         foreach (var monster in monsters)
             monster.HideDice();
 
-        formation = formationSelector.GetFormation();
+        this.formation = formation;
 
         AudioManager.PlayAudioClip(enemyPortalSFX);
 
