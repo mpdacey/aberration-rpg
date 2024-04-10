@@ -7464,6 +7464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce72498cb3973e04dafc7edbf7afc810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterNameText: {fileID: 1334393515}
   affinityImages:
   - {fileID: 1364506694}
   - {fileID: 473202201}
