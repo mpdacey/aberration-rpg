@@ -823,6 +823,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7964470719748325546, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: targetIndex
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3982e1e5e299354096e188cce73a210, type: 3}
 --- !u!224 &282298967 stripped
@@ -5570,7 +5574,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageColour: {r: 0.8, g: 0.16951638, b: 0.101960756, a: 1}
+  weakColour: {r: 0.9098039, g: 0.8117647, b: 0.32941177, a: 1}
   evasionColour: {r: 0, g: 1, b: 1, a: 1}
+  resistColour: {r: 0.78431374, g: 0.8235294, b: 0.8235294, a: 1}
+  nullColour: {r: 0.8117647, g: 0.4392157, b: 1, a: 1}
+  absorbColour: {r: 0.38039216, g: 0.8156863, b: 0.14509805, a: 1}
+  repelColour: {r: 0.26666668, g: 0.43137255, b: 0.9529412, a: 1}
   battleUI: {fileID: 1654621435}
 --- !u!114 &1672502335
 MonoBehaviour:
@@ -6614,6 +6623,10 @@ PrefabInstance:
     - target: {fileID: 6936772259292056679, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7964470719748325546, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: targetIndex
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3982e1e5e299354096e188cce73a210, type: 3}
