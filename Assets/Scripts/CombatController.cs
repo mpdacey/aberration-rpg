@@ -567,8 +567,9 @@ public class CombatController : MonoBehaviour
         Debug.Log("Victory");
 
         HashSet<int> recruitmentChance = new HashSet<int>();
+        int partyMemberCount = PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length;
         while (recruitmentChance.Count < formation.monsters.Count())
-            recruitmentChance.Add(UnityEngine.Random.Range(0, PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length));
+            recruitmentChance.Add(UnityEngine.Random.Range(0, partyMemberCount));
 
         if (recruitmentChance.Contains(0) || formation.monsters[0].combatantName.Equals("Lone Wolf"))
         {
