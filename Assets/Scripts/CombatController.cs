@@ -570,7 +570,7 @@ public class CombatController : MonoBehaviour
         while (recruitmentChance.Count < formation.monsters.Count())
             recruitmentChance.Add(UnityEngine.Random.Range(0, PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length));
 
-        if (recruitmentChance.Contains(0) || formation.monsters[0].combatantName.Equals("Wolf"))
+        if (recruitmentChance.Contains(0) || formation.monsters[0].combatantName.Equals("Lone Wolf"))
         {
             //Begin recruitment
             yield return recruitmentController.PitchRecruitment(formation);
