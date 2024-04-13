@@ -28,7 +28,6 @@ public class TargetIndicatorButton : Button
     private IEnumerator LerpToNewColour(Color newColor, float fadeDuration)
     {
         foreach (var image in childImages) image.material.color = Color.white;
-        Debug.Log(childImages.Length);
         for (float t = 0; t <= fadeDuration; t += Time.deltaTime)
         {
             foreach (var image in childImages) image.color = Color.Lerp(image.color, newColor, t / fadeDuration);

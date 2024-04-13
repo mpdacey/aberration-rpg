@@ -929,6 +929,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: NaN
       objectReference: {fileID: 0}
+    - target: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5476420010910533180, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2217,6 +2221,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b77da31ae97b46a5aedacd964326f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &546033404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+  m_PrefabInstance: {fileID: 6936772259741756298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &562135801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,6 +3039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 777923604}
   - component: {fileID: 777923605}
+  - component: {fileID: 777923606}
   m_Layer: 5
   m_Name: MonsterTargets
   m_TagString: Untagged
@@ -3062,6 +3078,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777923603}
   m_CullTransparentMesh: 1
+--- !u!114 &777923606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777923603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecff7d62565837b4e9c0ac77efba36b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affinityImages:
+  - {fileID: 546033404}
+  - {fileID: 924286153}
+  - {fileID: 1186198912}
+  affinitySpritesSO: {fileID: 11400000, guid: 1b49b363b441cee4cbe46d20cd6ced87, type: 2}
 --- !u!1 &852515362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,6 +3230,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852515362}
   m_CullTransparentMesh: 1
+--- !u!114 &924286153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+  m_PrefabInstance: {fileID: 1940352346}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &928241739
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,6 +4586,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175115843}
   m_CullTransparentMesh: 1
+--- !u!114 &1186198912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+  m_PrefabInstance: {fileID: 282298966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1192314845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6922,7 +6977,6 @@ MonoBehaviour:
   enemyPortalSFX: {fileID: 8300000, guid: d8a447472b087d54880eaf0883bae392, type: 3}
   rollDiceSFX: {fileID: 8300000, guid: 30599515d823ecf47829b73085f3760e, type: 3}
   currentBattleState: 0
-  formation: {fileID: 11400000, guid: 42eec97aa86e1924f91c16fc89ae8dd6, type: 2}
   monstersStunned: 000000
 --- !u!114 &1672502334
 MonoBehaviour:
@@ -8180,6 +8234,10 @@ PrefabInstance:
     - target: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_Color.r
       value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5476420010910533180, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9894,6 +9952,10 @@ PrefabInstance:
     - target: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_Color.r
       value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5476420010910533180, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

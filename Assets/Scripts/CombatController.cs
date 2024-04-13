@@ -344,6 +344,8 @@ public class CombatController : MonoBehaviour
             ShowTargetIndicator.Invoke(playerTransform, monstersAlive, FormationSelector.CurrentFormation.monsters.Length);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
+        if (SetTargetAffinity != null && loopState != ActionState.Analyze)
+            SetTargetAffinity.Invoke(attackObject != null ? attackObject.attackSpell.spellType : currentMember.partyMemberBaseStats.combatantNormalAttackType);
 
         while (actionState == loopState || (loopState == ActionState.Analyze && actionState != ActionState.Cancel))
         {
