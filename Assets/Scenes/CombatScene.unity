@@ -865,6 +865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterTargetRight
       objectReference: {fileID: 0}
+    - target: {fileID: 6936772259292056676, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6936772259292056678, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8014,6 +8018,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterTargetMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 6936772259292056676, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6936772259292056678, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9608,6 +9616,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterTargetLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 6936772259292056676, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6936772259292056678, guid: c3982e1e5e299354096e188cce73a210, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9692,7 +9704,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8682169484709507881, guid: c3982e1e5e299354096e188cce73a210, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c3982e1e5e299354096e188cce73a210, type: 3}
 --- !u!1001 &9126826239772670022
 PrefabInstance:

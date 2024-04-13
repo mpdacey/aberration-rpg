@@ -8,7 +8,7 @@ public class TargetIndicatorButton : Button
 
     protected override void DoStateTransition(SelectionState state, bool instant)
     {
-        childImages = transform.GetChild(0).GetComponentsInChildren<Image>();
+        childImages = transform.GetComponentsInChildren<Image>();
         StopAllCoroutines();
 
         switch (state)
