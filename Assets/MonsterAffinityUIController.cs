@@ -13,35 +13,29 @@ public class MonsterAffinityUIController : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private AffinitySpritesScriptableObject affinitySpritesSO;
 
-    private FormationScriptableObject currentFormation;
-
     private void OnEnable()
     {
-        FormationSelector.FormationSelected += SetFormation;
         MonsterTargetOnSelect.MonsterTargetSelected += SetSelectedMonsterAffinities;
     }
 
     private void OnDisable()
     {
-        FormationSelector.FormationSelected -= SetFormation;
         MonsterTargetOnSelect.MonsterTargetSelected -= SetSelectedMonsterAffinities;
     }
 
-    private void SetFormation(FormationScriptableObject formation) =>
-        currentFormation = formation;
 
     private void SetSelectedMonsterAffinities(int selectedMonsterIndex)
     {
-        switch (currentFormation.monsters.Length)
+        switch (FormationSelector.CurrentFormation.monsters.Length)
         {
             case 1:
-                SetMonsterAffinities(currentFormation.monsters[0]);
+                SetMonsterAffinities(FormationSelector.CurrentFormation.monsters[0]);
                 break;
             case 2:
-                SetMonsterAffinities(currentFormation.monsters[selectedMonsterIndex/2]);
+                SetMonsterAffinities(FormationSelector.CurrentFormation.monsters[selectedMonsterIndex/2]);
                 break;
             case 3:
-                SetMonsterAffinities(currentFormation.monsters[selectedMonsterIndex]);
+                SetMonsterAffinities(FormationSelector.CurrentFormation.monsters[selectedMonsterIndex]);
                 break;
         }
     }
