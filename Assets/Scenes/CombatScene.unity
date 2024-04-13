@@ -7624,20 +7624,7 @@ MonoBehaviour:
   - {fileID: 1484637070}
   - {fileID: 1100990838}
   - {fileID: 1736667203}
-  affinitySpritePairs:
-  - key: 0
-    value: {fileID: -694099086, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  - key: 1
-    value: {fileID: 1399482991, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  - key: 2
-    value: {fileID: 1579305068, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  - key: 3
-    value: {fileID: 311683958, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  - key: 4
-    value: {fileID: -148241436, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  - key: 5
-    value: {fileID: 1361068935, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
-  unknownAffinitySprite: {fileID: -203642754, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  affinitySpritesSO: {fileID: 11400000, guid: 1b49b363b441cee4cbe46d20cd6ced87, type: 2}
 --- !u!1 &1884715144
 GameObject:
   m_ObjectHideFlags: 0

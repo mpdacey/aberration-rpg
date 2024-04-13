@@ -6,29 +6,14 @@ using TMPro;
 
 public class MonsterAffinityUIController : MonoBehaviour
 {
-    [System.Serializable]
-    public struct AffinitySpritePair
-    {
-        public CombatantScriptableObject.AttributeAffinity key;
-        public Sprite value;
-    }
-
     // Sort affinity image array in this order: Fire, Ice, Thunder, Wind, Blunt, and Sharp.
     [Header("Object References")]
     public TextMeshProUGUI monsterNameText;
     public Image[] affinityImages;
     [Header("Sprites")]
-    [SerializeField] private AffinitySpritePair[] affinitySpritePairs;
-    [SerializeField] private Sprite unknownAffinitySprite;
-    private Dictionary<CombatantScriptableObject.AttributeAffinity, Sprite> affinitySpriteDictionary;
+    [SerializeField] private AffinitySpritesScriptableObject affinitySpritesSO;
 
     private FormationScriptableObject currentFormation;
-
-    void Start()
-    {
-        affinitySpriteDictionary = new Dictionary<CombatantScriptableObject.AttributeAffinity, Sprite>();
-        foreach (AffinitySpritePair pair in affinitySpritePairs) affinitySpriteDictionary.Add(pair.key, pair.value);
-    }
 
     private void OnEnable()
     {
@@ -68,8 +53,8 @@ public class MonsterAffinityUIController : MonoBehaviour
 
         for(int i = 0; i < knownAffinities.Length; i++)
         {
-            if (knownAffinities[i]) affinityImages[i].sprite = affinitySpriteDictionary[monster.combatantAttributes[(SpellScriptableObject.SpellType)i]];
-            else affinityImages[i].sprite = unknownAffinitySprite;
+            if (knownAffinities[i]) affinityImages[i].sprite = affinitySpritesSO.affinitySpriteDictionary[monster.combatantAttributes[(SpellScriptableObject.SpellType)i]];
+            else affinityImages[i].sprite = affinitySpritesSO.unknownAffinitySprite;
         }
     }
 
