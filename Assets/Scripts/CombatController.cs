@@ -13,7 +13,7 @@ public class CombatController : MonoBehaviour
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
-    public event Action<Transform, bool[], int> ShowTargetIndicator;
+    public event Action<Transform, bool[], int, bool> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
@@ -338,10 +338,10 @@ public class CombatController : MonoBehaviour
         return 2;
     }
 
-    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
+    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null, bool isMultitarget = false)
     {
         if (ShowTargetIndicator != null)
-            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, FormationSelector.CurrentFormation.monsters.Length);
+            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, FormationSelector.CurrentFormation.monsters.Length, isMultitarget);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
         if (SetTargetAffinity != null && loopState != ActionState.Analyze)

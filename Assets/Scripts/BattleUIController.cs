@@ -138,7 +138,7 @@ public class BattleUIController : MonoBehaviour
     private void HideBattleMenu() =>
         battleMenuUI.SetActive(false);
 
-    private void ShowTargets(Transform playerTransform, bool[] aliveTargets, int monsterCount)
+    private void ShowTargets(Transform playerTransform, bool[] aliveTargets, int monsterCount, bool isMultitarget)
     {
         monsterTargetButtons[0].transform.parent.gameObject.SetActive(true);
         monsterTargetButtons[0].transform.parent.position = playerTransform.position;
@@ -147,6 +147,32 @@ public class BattleUIController : MonoBehaviour
         foreach (var monsterTargetButton in monsterTargetButtons)
             monsterTargetButton.interactable = false;
 
+        SetTargetPositions(monsterCount);
+        if (!isMultitarget) SelectSingleTarget(aliveTargets, monsterCount);
+        else SelectAllTargets(aliveTargets);
+        HideBattleMenu();
+    }
+
+    private void SetTargetPositions(int monsterCount)
+    {
+        switch (monsterCount)
+        {
+            case 3:
+                for (int i = 0; i < 3; i++)
+                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i) / 2;
+                break;
+            case 2:
+                for (int i = 0; i < 2; i++)
+                    monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i) / 2;
+                break;
+            case 1:
+                monsterTargetButtons[1].transform.localPosition = Vector3.zero;
+                break;
+        }
+    }
+
+    private void SelectSingleTarget(bool[] aliveTargets, int monsterCount)
+    {
         Navigation customNav;
 
         switch (monsterCount)
@@ -155,15 +181,14 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     monsterTargetButtons[i].interactable = aliveTargets[i];
-                    monsterTargetButtons[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i) /2;
 
                     customNav = monsterTargetButtons[i].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
-                    for (int j = 0; j < 3; j++) 
-                        if(aliveTargets[(i + j) % 3])
+                    for (int j = 0; j < 3; j++)
+                        if (aliveTargets[(i + j) % 3])
                             customNav.selectOnLeft = monsterTargetButtons[(i + j) % 3];
 
-                    for(int j = 3; j > 0; j--)
+                    for (int j = 3; j > 0; j--)
                         if (aliveTargets[(i + j) % 3])
                             customNav.selectOnRight = monsterTargetButtons[(i + j) % 3];
 
@@ -176,18 +201,16 @@ public class BattleUIController : MonoBehaviour
                 for (int i = 0; i < 2; i++)
                 {
                     monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
-                    monsterTargetButtons[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i)/2;
 
                     customNav = monsterTargetButtons[i * 2].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
-                    customNav.selectOnLeft = customNav.selectOnRight = monsterTargetButtons[aliveTargets[(i+1)%2 * 2] ? (i + 1) % 2 * 2 : i % 2 * 2];
+                    customNav.selectOnLeft = customNav.selectOnRight = monsterTargetButtons[aliveTargets[(i + 1) % 2 * 2] ? (i + 1) % 2 * 2 : i % 2 * 2];
                     monsterTargetButtons[i * 2].navigation = customNav;
                 }
                 currentSelected = monsterTargetButtons.First(x => x.interactable == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].transform.localPosition = Vector3.zero;
                 monsterTargetButtons[1].interactable = aliveTargets[1];
                 customNav = monsterTargetButtons[1].navigation;
                 customNav.mode = Navigation.Mode.None;
@@ -195,6 +218,20 @@ public class BattleUIController : MonoBehaviour
                 currentSelected = 1;
                 monsterTargetButtons[1].Select();
                 break;
+        }
+    }
+
+    private void SelectAllTargets(bool[] aliveTargets)
+    {
+        for(int i = 0; i < monsterTargetButtons.Length; i++)
+        {
+            monsterTargetButtons[i].interactable = aliveTargets[i];
+            if (!aliveTargets[i]) continue;
+
+            Navigation customNav = monsterTargetButtons[i].navigation;
+            customNav.mode = Navigation.Mode.None;
+            monsterTargetButtons[i].navigation = customNav;
+            monsterTargetButtons[i].Select();
         }
 
         HideBattleMenu();
