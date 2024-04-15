@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58e2f4c87ee797409b7abd12b750f6e, type: 3}
+  m_Name: AffinitySprites
+  m_EditorClassIdentifier: 
+  affinitySpritePairs:
+  - key: 0
+    value: {fileID: -694099086, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  - key: 1
+    value: {fileID: 1399482991, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  - key: 2
+    value: {fileID: 1579305068, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  - key: 3
+    value: {fileID: 311683958, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  - key: 4
+    value: {fileID: -148241436, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  - key: 5
+    value: {fileID: 1361068935, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
+  unknownAffinitySprite: {fileID: -203642754, guid: cc00fded18b733d4f89ce4d9535f2d83, type: 3}
