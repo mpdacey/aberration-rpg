@@ -397,9 +397,10 @@ public class CombatController : MonoBehaviour
                         for(int j = 0; j < 3; j++)
                         {
                             if (monstersAlive[j])
+                            {
                                 monsters[j].RecieveAttack(playerActions[i].attackAction.attack, isStunned: monstersStunned[j]);
-
-                            yield return new WaitForSeconds(spellAttackDelay);
+                                yield return new WaitForSeconds(spellAttackDelay);
+                            }
                         }
                     }
 
