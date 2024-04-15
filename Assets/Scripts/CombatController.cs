@@ -9,10 +9,11 @@ public class CombatController : MonoBehaviour
     public static event Action<int> FormationCount;
     public static event Action CombatVictory;
     public static event Action GameoverEvent;
+    public static event Action<SpellScriptableObject.SpellType> SetTargetAffinity;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
-    public event Action<Transform, bool[], int> ShowTargetIndicator;
+    public event Action<Transform, bool[], int, bool> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
@@ -23,6 +24,7 @@ public class CombatController : MonoBehaviour
     public event Action<int, int> DisplayRecievedPlayerDamage;
     public event Action<CombatantScriptableObject.AttributeAffinity, int> DisplayAttackText;
     public event Action<int, SpellScriptableObject.SpellType> DisplayAttackVFX;
+    public event Action<bool> DisplayInspectUI;
 
     public struct PlayerAction
     {
@@ -61,14 +63,12 @@ public class CombatController : MonoBehaviour
     }
 
     public MonsterController[] monsters;
-    public FormationSelector formationSelector;
     public RecruitmentController recruitmentController;
     public ActionState actionState = ActionState.None;
     public float spellAttackDelay = 0.25f;
     public AudioClip enemyPortalSFX;
     public AudioClip rollDiceSFX;
     [SerializeField] private BattleState currentBattleState;
-    [SerializeField] private FormationScriptableObject formation;
     private Transform playerTransform;
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
@@ -82,8 +82,7 @@ public class CombatController : MonoBehaviour
     {
         MonsterController.MonsterDefeated += MonsterDeathHandling;
         MonsterController.MonsterStunned += StunMonster;
-        MonsterEncounterController.ThreatTriggered += SetupCombat;
-        formationSelector = GameObject.FindWithTag("GameController").GetComponent<FormationSelector>();
+        FormationSelector.FormationSelected += SetupCombat;
 
         if (playerTransform == null) playerTransform = GameObject.FindWithTag("Player").transform;
     }
@@ -92,7 +91,7 @@ public class CombatController : MonoBehaviour
     {
         MonsterController.MonsterDefeated -= MonsterDeathHandling;
         MonsterController.MonsterStunned -= StunMonster;
-        MonsterEncounterController.ThreatTriggered -= SetupCombat;
+        FormationSelector.FormationSelected -= SetupCombat;
     }
 
     private void Update()
@@ -108,21 +107,19 @@ public class CombatController : MonoBehaviour
 
         var monstersParent = monsters[0].transform.parent;
         monstersParent.localRotation = playerTransform.rotation;
-        monstersParent.position  = playerTransform.position + playerTransform.rotation * Vector3.forward * 5f;
+        monstersParent.position = playerTransform.position + playerTransform.rotation * Vector3.forward * 5f;
 
         foreach (var monster in monsters)
             monster.HideDice();
 
-        formation = formationSelector.GetFormation();
-
         AudioManager.PlayAudioClip(enemyPortalSFX);
 
-        switch (formation.monsters.Length)
+        switch (FormationSelector.CurrentFormation.monsters.Length)
         {
             case 3:
-                for(int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    monsters[i].CombatantStats = formation.monsters[i];
+                    monsters[i].CombatantStats = FormationSelector.CurrentFormation.monsters[i];
                     monsters[i].PlayEntranceAnimation();
                     monsters[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i);
                 }
@@ -131,20 +128,20 @@ public class CombatController : MonoBehaviour
             case 2:
                 for (int i = 0; i < 2; i++)
                 {
-                    monsters[i * 2].CombatantStats = formation.monsters[i];
+                    monsters[i * 2].CombatantStats = FormationSelector.CurrentFormation.monsters[i];
                     monsters[i * 2].PlayEntranceAnimation();
                     monsters[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
-                monsters[1].CombatantStats = formation.monsters[0];
+                monsters[1].CombatantStats = FormationSelector.CurrentFormation.monsters[0];
                 monsters[1].PlayEntranceAnimation();
                 monsters[1].transform.localPosition = Vector3.zero;
                 monstersAlive[1] = true;
                 break;
             default:
-                Debug.LogError($"Invalid number of monsters in foundation: {formation.name}");
+                Debug.LogError($"Invalid number of monsters in foundation: {FormationSelector.CurrentFormation.name}");
                 return;
         }
 
@@ -162,7 +159,7 @@ public class CombatController : MonoBehaviour
 
     private void MonsterDeathHandling(int monsterID)
     {
-        if(monsterID > monsters.Length)
+        if (monsterID > monsters.Length)
         {
             Debug.LogError($"Monster ID {monsterID} is out of the monster array scope.");
             return;
@@ -249,28 +246,17 @@ public class CombatController : MonoBehaviour
                             attackSpell = selectedSpell
                         };
 
-                        if(!selectedSpell.spellMultitarget)
-                            // Select Enemy
-                            yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
-                        else
-                        {
-                            PlayerAction playerAction = new()
-                            {
-                                actionType = ActionState.Skill,
-                                attackAction = new()
-                                {
-                                    target = -1,
-                                    attack = spellAttackObject
-                                }
-                            };
-
-                            playerActions[currentPlayerIndex] = playerAction;
-                            actionState = ActionState.Confirm;
-                        }
+                        // Select Enemy
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject, selectedSpell.spellMultitarget);
                         break;
                     case ActionState.Guard:
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
                         actionState = ActionState.Confirm;
+                        break;
+                    case ActionState.Analyze:
+                        if (DisplayInspectUI != null) DisplayInspectUI.Invoke(true);
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Analyze);
+                        if (DisplayInspectUI != null) DisplayInspectUI.Invoke(false);
                         break;
                     case ActionState.Cancel:
                         bool partyMemberExists = false;
@@ -336,14 +322,16 @@ public class CombatController : MonoBehaviour
         return 2;
     }
 
-    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
+    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null, bool isMultitarget = false)
     {
         if (ShowTargetIndicator != null)
-            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, formation.monsters.Length);
+            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, FormationSelector.CurrentFormation.monsters.Length, isMultitarget);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
+        if (SetTargetAffinity != null && loopState != ActionState.Analyze)
+            SetTargetAffinity.Invoke(attackObject != null ? attackObject.attackSpell.spellType : currentMember.partyMemberBaseStats.combatantNormalAttackType);
 
-        while (actionState == loopState)
+        while (actionState == loopState || (loopState == ActionState.Analyze && actionState != ActionState.Cancel))
         {
             if (isCancelling) actionState = ActionState.Cancel;
 
@@ -394,7 +382,7 @@ public class CombatController : MonoBehaviour
                     }
                     else
                     {
-                        for(int j = 0; j < 3; j++)
+                        for (int j = 0; j < 3; j++)
                         {
                             if (monstersAlive[j])
                             {
@@ -404,7 +392,7 @@ public class CombatController : MonoBehaviour
                         }
                     }
 
-                    if(playerActions[i].attackAction.attack.attackSpell.spellCost > 0 && PartyController.partyMembers[i].HasValue)
+                    if (playerActions[i].attackAction.attack.attackSpell.spellCost > 0 && PartyController.partyMembers[i].HasValue)
                     {
                         var temp = PartyController.partyMembers[i].Value;
                         temp.currentSP -= playerActions[i].attackAction.attack.attackSpell.spellCost;
@@ -415,10 +403,10 @@ public class CombatController : MonoBehaviour
                     break;
             }
 
-            if(playerActions[i].actionType != ActionState.Guard)
+            if (playerActions[i].actionType != ActionState.Guard)
             {
                 playerActions[i].actionType = ActionState.None;
-                yield return new WaitForSeconds(spellAttackDelay*3);
+                yield return new WaitForSeconds(spellAttackDelay * 3);
 
                 if (UpdateActionIcon != null)
                     UpdateActionIcon.Invoke(playerActions[i], i);
@@ -494,14 +482,14 @@ public class CombatController : MonoBehaviour
             }
             else
             {
-                for(int target = 0; target < 4; target++)
+                for (int target = 0; target < 4; target++)
                 {
-                    if(PartyController.partyMembers[target].HasValue)
+                    if (PartyController.partyMembers[target].HasValue)
                         yield return DamagePartyMember(target, enemyAttackObject.attack);
                 }
             }
 
-            yield return new WaitForSeconds(spellAttackDelay*3);
+            yield return new WaitForSeconds(spellAttackDelay * 3);
         }
 
         BattleConditionInspector(PlayerPhase());
@@ -575,14 +563,14 @@ public class CombatController : MonoBehaviour
         if (recruitmentChance.Contains(0) || formation.monsters[0].combatantName.Equals("Lone Wolf"))
         {
             //Begin recruitment
-            yield return recruitmentController.PitchRecruitment(formation);
+            yield return recruitmentController.PitchRecruitment(FormationSelector.CurrentFormation);
             if (PartyController.partyMembers[0].Value.currentHP <= 0)
             {
                 Defeat();
             }
         }
-        
-        if(currentBattleState != BattleState.Defeat)
+
+        if (currentBattleState != BattleState.Defeat)
         {
             for (int i = 0; i < 4; i++)
                 ClearPlayerActions(i);
@@ -591,7 +579,7 @@ public class CombatController : MonoBehaviour
                 CombatVictory.Invoke();
             FieldMovementController.inBattle = false;
         }
-        
+
         yield return null;
     }
 
