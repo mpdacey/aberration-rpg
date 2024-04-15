@@ -1029,14 +1029,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 119639345}
     m_Modifications:
-    - target: {fileID: 9094493331368900777, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094493332030948223, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9094493332113136610, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
       propertyPath: m_Name
       value: RiftMask
@@ -1111,7 +1103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9094493332113136617, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.19999981
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 9094493332113136617, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1123,10 +1115,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9094493332113136617, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9094493333105500709, guid: 2ddf5aa6b69393041bd9621dc7b8601b, type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
