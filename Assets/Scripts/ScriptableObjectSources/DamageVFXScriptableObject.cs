@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageVFXStateNames", menuName = "Scriptable Objects/Damage VFX States")]
+[CreateAssetMenu(fileName = "DamageVFXStateNames", menuName = "Scriptable Objects/Storage/Damage VFX States")]
 public class DamageVFXScriptableObject : ScriptableObject
 {
     [System.Serializable]
@@ -13,10 +12,11 @@ public class DamageVFXScriptableObject : ScriptableObject
     }
 
     public DamageVFXAnimationPair[] vfxPairs;
-    public Dictionary<SpellScriptableObject.SpellType, string> vfxDictionary = new Dictionary<SpellScriptableObject.SpellType, string>();
+    public Dictionary<SpellScriptableObject.SpellType, string> vfxDictionary;
 
     void OnEnable()
     {
+        vfxDictionary = new Dictionary<SpellScriptableObject.SpellType, string>();
         foreach (var pair in vfxPairs) vfxDictionary.Add(pair.spellType, pair.spellAnimationKey);
     }
 }

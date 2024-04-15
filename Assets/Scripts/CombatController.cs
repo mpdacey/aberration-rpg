@@ -9,10 +9,11 @@ public class CombatController : MonoBehaviour
     public static event Action<int> FormationCount;
     public static event Action CombatVictory;
     public static event Action GameoverEvent;
+    public static event Action<SpellScriptableObject.SpellType> SetTargetAffinity;
     public event Action<int> CurrentPartyTurn;
     public event Action<PartyController.PartyMember> ShowAttackMenu;
     public event Action ShowAttackMenuUI;
-    public event Action<Transform, bool[], int> ShowTargetIndicator;
+    public event Action<Transform, bool[], int, bool> ShowTargetIndicator;
     public event Action ShowTargetIndicatorUI;
     public event Action<PartyController.PartyMember> ShowSpells;
     public event Action ShowSpellsUI;
@@ -68,7 +69,6 @@ public class CombatController : MonoBehaviour
     public AudioClip enemyPortalSFX;
     public AudioClip rollDiceSFX;
     [SerializeField] private BattleState currentBattleState;
-    [SerializeField] private FormationScriptableObject formation;
     private Transform playerTransform;
     private PartyController.PartyMember currentMember;
     private int selectedMonster = 0;
@@ -99,7 +99,7 @@ public class CombatController : MonoBehaviour
         isCancelling = Input.GetButtonDown("Cancel");
     }
 
-    public void SetupCombat(FormationScriptableObject formation)
+    public void SetupCombat()
     {
         currentBattleState = BattleState.Initializing;
 
@@ -112,16 +112,14 @@ public class CombatController : MonoBehaviour
         foreach (var monster in monsters)
             monster.HideDice();
 
-        this.formation = formation;
-
         AudioManager.PlayAudioClip(enemyPortalSFX);
 
-        switch (formation.monsters.Length)
+        switch (FormationSelector.CurrentFormation.monsters.Length)
         {
             case 3:
                 for(int i = 0; i < 3; i++)
                 {
-                    monsters[i].CombatantStats = formation.monsters[i];
+                    monsters[i].CombatantStats = FormationSelector.CurrentFormation.monsters[i];
                     monsters[i].PlayEntranceAnimation();
                     monsters[i].transform.localPosition = Vector3.left * (2.25f - 2.25f * i);
                 }
@@ -130,20 +128,20 @@ public class CombatController : MonoBehaviour
             case 2:
                 for (int i = 0; i < 2; i++)
                 {
-                    monsters[i * 2].CombatantStats = formation.monsters[i];
+                    monsters[i * 2].CombatantStats = FormationSelector.CurrentFormation.monsters[i];
                     monsters[i * 2].PlayEntranceAnimation();
                     monsters[i * 2].transform.localPosition = Vector3.left * (1f - 2f * i);
                 }
                 monstersAlive[0] = monstersAlive[2] = true;
                 break;
             case 1:
-                monsters[1].CombatantStats = formation.monsters[0];
+                monsters[1].CombatantStats = FormationSelector.CurrentFormation.monsters[0];
                 monsters[1].PlayEntranceAnimation();
                 monsters[1].transform.localPosition = Vector3.zero;
                 monstersAlive[1] = true;
                 break;
             default:
-                Debug.LogError($"Invalid number of monsters in foundation: {formation.name}");
+                Debug.LogError($"Invalid number of monsters in foundation: {FormationSelector.CurrentFormation.name}");
                 return;
         }
 
@@ -248,24 +246,8 @@ public class CombatController : MonoBehaviour
                             attackSpell = selectedSpell
                         };
 
-                        if(!selectedSpell.spellMultitarget)
-                            // Select Enemy
-                            yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
-                        else
-                        {
-                            PlayerAction playerAction = new()
-                            {
-                                actionType = ActionState.Skill,
-                                attackAction = new()
-                                {
-                                    target = -1,
-                                    attack = spellAttackObject
-                                }
-                            };
-
-                            playerActions[currentPlayerIndex] = playerAction;
-                            actionState = ActionState.Confirm;
-                        }
+                        // Select Enemy
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject, selectedSpell.spellMultitarget);
                         break;
                     case ActionState.Guard:
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };
@@ -340,12 +322,14 @@ public class CombatController : MonoBehaviour
         return 2;
     }
 
-    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null)
+    IEnumerator SelectEnemy(int currentPlayerIndex, ActionState loopState, AttackObject attackObject = null, bool isMultitarget = false)
     {
         if (ShowTargetIndicator != null)
-            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, formation.monsters.Length);
+            ShowTargetIndicator.Invoke(playerTransform, monstersAlive, FormationSelector.CurrentFormation.monsters.Length, isMultitarget);
         if (ShowTargetIndicatorUI != null)
             ShowTargetIndicatorUI.Invoke();
+        if (SetTargetAffinity != null && loopState != ActionState.Analyze)
+            SetTargetAffinity.Invoke(attackObject != null ? attackObject.attackSpell.spellType : currentMember.partyMemberBaseStats.combatantNormalAttackType);
 
         while (actionState == loopState || (loopState == ActionState.Analyze && actionState != ActionState.Cancel))
         {
@@ -571,13 +555,13 @@ public class CombatController : MonoBehaviour
         Debug.Log("Victory");
 
         HashSet<int> recruitmentChance = new HashSet<int>();
-        while (recruitmentChance.Count < formation.monsters.Count())
+        while (recruitmentChance.Count < FormationSelector.CurrentFormation.monsters.Count())
             recruitmentChance.Add(UnityEngine.Random.Range(0, PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length));
 
-        if (recruitmentChance.Contains(0) || formation.monsters[0].combatantName.Equals("Wolf"))
+        if (recruitmentChance.Contains(0) || FormationSelector.CurrentFormation.monsters[0].combatantName.Equals("Wolf"))
         {
             //Begin recruitment
-            yield return recruitmentController.PitchRecruitment(formation);
+            yield return recruitmentController.PitchRecruitment(FormationSelector.CurrentFormation);
             if (PartyController.partyMembers[0].Value.currentHP <= 0)
             {
                 Defeat();

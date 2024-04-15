@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class FormationSelector : MonoBehaviour
 {
-    public static event Action<FormationScriptableObject> FormationSelected;
+    public static event Action FormationSelected;
 
     [Serializable]
     public struct FormationTier
@@ -12,6 +12,8 @@ public class FormationSelector : MonoBehaviour
         public FormationScriptableObject[] formations;
     }
 
+    public static FormationScriptableObject CurrentFormation { get => currentFormation; }
+    private static FormationScriptableObject currentFormation;
     public FormationScriptableObject introFormation;
     [SerializeField] FormationTier[] formationTiers;
     private bool hasFoughtBefore = false;
@@ -44,8 +46,9 @@ public class FormationSelector : MonoBehaviour
 
     private void InvokeFormation(FormationScriptableObject formation)
     {
+        currentFormation = formation;
         if (FormationSelected != null)
-            FormationSelected.Invoke(formation);
+            FormationSelected.Invoke();
     }
         
 }
