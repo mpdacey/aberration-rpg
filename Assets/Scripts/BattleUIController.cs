@@ -145,7 +145,10 @@ public class BattleUIController : MonoBehaviour
         monsterTargetButtons[0].transform.parent.rotation = playerTransform.rotation;
 
         foreach (var monsterTargetButton in monsterTargetButtons)
-            monsterTargetButton.interactable = false;
+        {
+            monsterTargetButton.interactable = true;
+            monsterTargetButton.enabled = true;
+        }
 
         SetTargetPositions(monsterCount);
         if (!isMultitarget) SelectSingleTarget(aliveTargets, monsterCount);
@@ -180,7 +183,7 @@ public class BattleUIController : MonoBehaviour
             case 3:
                 for (int i = 0; i < 3; i++)
                 {
-                    monsterTargetButtons[i].interactable = aliveTargets[i];
+                    monsterTargetButtons[i].enabled = aliveTargets[i];
 
                     customNav = monsterTargetButtons[i].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
@@ -200,7 +203,7 @@ public class BattleUIController : MonoBehaviour
             case 2:
                 for (int i = 0; i < 2; i++)
                 {
-                    monsterTargetButtons[i * 2].interactable = aliveTargets[i * 2];
+                    monsterTargetButtons[i * 2].enabled = aliveTargets[i * 2];
 
                     customNav = monsterTargetButtons[i * 2].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
@@ -211,7 +214,7 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].interactable = aliveTargets[1];
+                monsterTargetButtons[1].enabled = aliveTargets[1];
                 customNav = monsterTargetButtons[1].navigation;
                 customNav.mode = Navigation.Mode.None;
                 monsterTargetButtons[1].navigation = customNav;
@@ -223,18 +226,25 @@ public class BattleUIController : MonoBehaviour
 
     private void SelectAllTargets(bool[] aliveTargets)
     {
+        bool setInteractable = false;
         for(int i = 0; i < monsterTargetButtons.Length; i++)
         {
-            monsterTargetButtons[i].interactable = aliveTargets[i];
+            monsterTargetButtons[i].enabled = aliveTargets[i];
+            monsterTargetButtons[i].interactable = false;
+
             if (!aliveTargets[i]) continue;
+
+            if (!setInteractable)
+            {
+                monsterTargetButtons[i].interactable = true;
+                monsterTargetButtons[i].Select();
+                setInteractable = true;
+            }
 
             Navigation customNav = monsterTargetButtons[i].navigation;
             customNav.mode = Navigation.Mode.None;
             monsterTargetButtons[i].navigation = customNav;
-            monsterTargetButtons[i].Select();
         }
-
-        HideBattleMenu();
     }
 
     private void HideTargets()

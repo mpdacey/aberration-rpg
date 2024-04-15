@@ -246,24 +246,8 @@ public class CombatController : MonoBehaviour
                             attackSpell = selectedSpell
                         };
 
-                        if(!selectedSpell.spellMultitarget)
-                            // Select Enemy
-                            yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject);
-                        else
-                        {
-                            PlayerAction playerAction = new()
-                            {
-                                actionType = ActionState.Skill,
-                                attackAction = new()
-                                {
-                                    target = -1,
-                                    attack = spellAttackObject
-                                }
-                            };
-
-                            playerActions[currentPlayerIndex] = playerAction;
-                            actionState = ActionState.Confirm;
-                        }
+                        // Select Enemy
+                        yield return SelectEnemy(currentPlayerIndex, ActionState.Skill, spellAttackObject, selectedSpell.spellMultitarget);
                         break;
                     case ActionState.Guard:
                         playerActions[currentPlayerIndex] = new() { actionType = ActionState.Guard };

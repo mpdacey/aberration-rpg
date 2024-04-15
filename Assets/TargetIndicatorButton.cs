@@ -22,6 +22,9 @@ public class TargetIndicatorButton : Button
             case SelectionState.Pressed:
                 StartCoroutine(LerpToNewColour(colors.pressedColor, instant ? 0 : colors.fadeDuration));
                 break;
+            case SelectionState.Disabled:
+                StartCoroutine(LerpToNewColour(colors.disabledColor, instant ? 0 : colors.fadeDuration));
+                break;
         }
     }
 
