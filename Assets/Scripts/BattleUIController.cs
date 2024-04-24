@@ -204,7 +204,7 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[1].enabled = false;
                 for (int i = 0; i < 2; i++)
                 {
-                    monsterTargetButtons[i * 2].transform.gameObject.SetActive(aliveTargets[i]);
+                    monsterTargetButtons[i * 2].transform.gameObject.SetActive(aliveTargets[i * 2]);
 
                     customNav = monsterTargetButtons[i * 2].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
