@@ -183,7 +183,7 @@ public class BattleUIController : MonoBehaviour
             case 3:
                 for (int i = 0; i < 3; i++)
                 {
-                    monsterTargetButtons[i].enabled = aliveTargets[i];
+                    monsterTargetButtons[i].transform.gameObject.SetActive(true);
 
                     customNav = monsterTargetButtons[i].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
@@ -204,7 +204,7 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[1].enabled = false;
                 for (int i = 0; i < 2; i++)
                 {
-                    monsterTargetButtons[i * 2].enabled = aliveTargets[i * 2];
+                    monsterTargetButtons[i * 2].transform.gameObject.SetActive(true);
 
                     customNav = monsterTargetButtons[i * 2].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
@@ -215,7 +215,7 @@ public class BattleUIController : MonoBehaviour
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].enabled = aliveTargets[1];
+                monsterTargetButtons[1].transform.gameObject.SetActive(true);
                 customNav = monsterTargetButtons[1].navigation;
                 customNav.mode = Navigation.Mode.None;
                 monsterTargetButtons[1].navigation = customNav;
@@ -230,7 +230,7 @@ public class BattleUIController : MonoBehaviour
         bool setInteractable = false;
         for(int i = 0; i < monsterTargetButtons.Length; i++)
         {
-            monsterTargetButtons[i].enabled = aliveTargets[i];
+            monsterTargetButtons[i].transform.gameObject.SetActive(aliveTargets[i]);
             monsterTargetButtons[i].interactable = false;
 
             if (!aliveTargets[i]) continue;
