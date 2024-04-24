@@ -13,10 +13,7 @@ public class PlayerStatsUIController : MonoBehaviour
 
     public void SetPartyMember(PartyController.PartyMember partyMember)
     {
-        var memberNameValue = partyMember.partyMemberBaseStats.combatantName;
-        if (memberNameValue.Length > 7)
-            memberNameValue = memberNameValue.Substring(0, 7);
-        memberName.text = memberNameValue;
+        memberName.text = partyMember.partyMemberBaseStats.combatantName;
         SetSliders(partyMember);
         UpdateHealth(partyMember);
         UpdateStamina(partyMember);
