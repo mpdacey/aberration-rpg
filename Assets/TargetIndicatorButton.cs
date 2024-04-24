@@ -10,6 +10,7 @@ public class TargetIndicatorButton : Button
     {
         childImages = transform.GetComponentsInChildren<Image>();
         StopAllCoroutines();
+        if (!gameObject.activeInHierarchy) return;
 
         switch (state)
         {
