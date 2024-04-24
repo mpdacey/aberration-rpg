@@ -183,7 +183,7 @@ public class BattleUIController : MonoBehaviour
             case 3:
                 for (int i = 0; i < 3; i++)
                 {
-                    monsterTargetButtons[i].enabled = aliveTargets[i];
+                    monsterTargetButtons[i].transform.gameObject.SetActive(aliveTargets[i]);
 
                     customNav = monsterTargetButtons[i].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
@@ -197,25 +197,25 @@ public class BattleUIController : MonoBehaviour
 
                     monsterTargetButtons[i].navigation = customNav;
                 }
-                currentSelected = monsterTargetButtons.First(x => x.enabled == true).transform.GetSiblingIndex();
+                currentSelected = monsterTargetButtons.First(x => x.gameObject.activeInHierarchy == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 2:
                 monsterTargetButtons[1].enabled = false;
                 for (int i = 0; i < 2; i++)
                 {
-                    monsterTargetButtons[i * 2].enabled = aliveTargets[i * 2];
+                    monsterTargetButtons[i * 2].transform.gameObject.SetActive(aliveTargets[i * 2]);
 
                     customNav = monsterTargetButtons[i * 2].navigation;
                     customNav.mode = Navigation.Mode.Explicit;
                     customNav.selectOnLeft = customNav.selectOnRight = monsterTargetButtons[aliveTargets[(i + 1) % 2 * 2] ? (i + 1) % 2 * 2 : i % 2 * 2];
                     monsterTargetButtons[i * 2].navigation = customNav;
                 }
-                currentSelected = monsterTargetButtons.First(x => x.enabled == true).transform.GetSiblingIndex();
+                currentSelected = monsterTargetButtons.First(x => x.gameObject.activeInHierarchy == true).transform.GetSiblingIndex();
                 monsterTargetButtons[currentSelected].Select();
                 break;
             case 1:
-                monsterTargetButtons[1].enabled = aliveTargets[1];
+                monsterTargetButtons[1].transform.gameObject.SetActive(true);
                 customNav = monsterTargetButtons[1].navigation;
                 customNav.mode = Navigation.Mode.None;
                 monsterTargetButtons[1].navigation = customNav;
@@ -230,7 +230,7 @@ public class BattleUIController : MonoBehaviour
         bool setInteractable = false;
         for(int i = 0; i < monsterTargetButtons.Length; i++)
         {
-            monsterTargetButtons[i].enabled = aliveTargets[i];
+            monsterTargetButtons[i].transform.gameObject.SetActive(aliveTargets[i]);
             monsterTargetButtons[i].interactable = false;
 
             if (!aliveTargets[i]) continue;
