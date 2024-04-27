@@ -48,11 +48,11 @@ public class RecruitmentController : MonoBehaviour
 
         string leftOffer;
         if (leftOfferIndex == 0) leftOffer = "Sacrifice 40HP";
-        else leftOffer = $"Offer {PartyController.partyMembers[leftOfferIndex].Value.partyMemberBaseStats.combatantName}";
+        else leftOffer = $"Offer {PartyController.partyMembers[leftOfferIndex].Value.partyMemberBaseStats.combatantName} ({leftOfferIndex})";
 
         string rightOffer;
         if (rightOfferIndex == 0) rightOffer = "Sacrifice 40HP";
-        else rightOffer = $"Offer {PartyController.partyMembers[rightOfferIndex].Value.partyMemberBaseStats.combatantName}";
+        else rightOffer = $"Offer {PartyController.partyMembers[rightOfferIndex].Value.partyMemberBaseStats.combatantName} ({rightOfferIndex})";
 
         uiController.SetOffers(leftOffer, rightOffer);
 
