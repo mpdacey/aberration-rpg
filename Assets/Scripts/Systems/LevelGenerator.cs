@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public static event Action<Vector2> GoalLocationFound;
+    public static event Action FinishedLevelGeneration;
 
     public Texture2D levelGeometry;
     public Material groundMaterial;
@@ -97,6 +98,9 @@ public class LevelGenerator : MonoBehaviour
 
         GenerateFlooring(walkableTiles, startLocation);
         GenerateWalls(edges, startLocation);
+
+        if (FinishedLevelGeneration != null)
+            FinishedLevelGeneration.Invoke();
     }
 
     private List<Vector2[]> FindEdges(Color[] pixels, Vector2 pixelCoords)
