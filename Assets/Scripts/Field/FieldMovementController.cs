@@ -25,12 +25,14 @@ public class FieldMovementController : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelGenerator.FinishedLevelGeneration += ResetPlayerPosition;
+        GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
+        LevelGenerator.FinishedLevelGeneration += SetPlayerOrientation;
     }
 
     private void OnDisable()
     {
-        LevelGenerator.FinishedLevelGeneration -= ResetPlayerPosition;
+        GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
+        LevelGenerator.FinishedLevelGeneration -= SetPlayerOrientation;
     }
 
     private void ResetPlayerPosition()
@@ -44,8 +46,11 @@ public class FieldMovementController : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
         transform.position = Vector3.zero;
+    }
 
-        for(int i = 0; i < 4; i++)
+    private void SetPlayerOrientation()
+    {
+        for (int i = 0; i < 4; i++)
         {
             Vector3 rayOrigin = transform.position + transform.rotation * Vector3.forward * 5;
             Ray ray = new Ray(rayOrigin, Vector3.down * 3);
@@ -68,7 +73,7 @@ public class FieldMovementController : MonoBehaviour
             }
 
             transform.Rotate(0, 90, 0);
-            if(PlayerRotationChanged != null)
+            if (PlayerRotationChanged != null)
                 PlayerRotationChanged.Invoke(new Vector3(0, 0, -90));
         }
     }
