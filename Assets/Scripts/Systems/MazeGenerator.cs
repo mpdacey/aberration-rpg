@@ -29,7 +29,8 @@ public class MazeGenerator : MonoBehaviour
 
     private void GenerateMazeTexture()
     {
-        gridSize = new Vector2Int(startingSize + (GameController.CurrentLevel / 3), startingSize + (GameController.CurrentLevel / 3));
+        var newFloorGridSize = startingSize + (GameController.CurrentLevel / 3);
+        gridSize = new Vector2Int(newFloorGridSize, newFloorGridSize);
         cells = new Color[gridSize.x * gridSize.y];
         int minimumCellCount;
 

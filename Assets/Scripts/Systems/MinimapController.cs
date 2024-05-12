@@ -123,7 +123,7 @@ public class MinimapController : MonoBehaviour
 
     private void UpdateEntities()
     {
-        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 2.1f * (TILE_SIZE * 5 * 2))
+        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 70)
             portalEntity.gameObject.SetActive(true);
     }
 
@@ -134,7 +134,8 @@ public class MinimapController : MonoBehaviour
 
     private void SetPortalPosition(Vector2 portalPosition)
     {
-        portalEntity.position = playerEntity.transform.position + (Vector3)((portalPosition - startPosition) * TILE_SIZE * 5 * 2);
+        portalEntity.position = playerEntity.transform.position;
+        portalEntity.localPosition = new Vector3(Mathf.Floor(portalEntity.localPosition.x)+0.5f, Mathf.Floor(portalEntity.localPosition.y) + 0.5f, 0) + (Vector3)(portalPosition - startPosition) * 25;
         portalEntity.gameObject.SetActive(false);
     }
 }
