@@ -123,7 +123,7 @@ public class MinimapController : MonoBehaviour
 
     private void UpdateEntities()
     {
-        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 2.1f * (TILE_SIZE * 5 * 2))
+        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 70)
             portalEntity.gameObject.SetActive(true);
     }
 
