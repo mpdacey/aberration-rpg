@@ -27,8 +27,6 @@ public class GoalRiftController : MonoBehaviour
 
     private void CheckForPlayer(Transform player)
     {
-        transform.rotation = player.rotation;
-
         if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
         {
             EnterRift();
