@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreasureRift
       objectReference: {fileID: 0}
+    - target: {fileID: 8937087326543544951, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
+      propertyPath: m_TagString
+      value: Treasure
+      objectReference: {fileID: 0}
     - target: {fileID: 8937087326693994711, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
       propertyPath: m_Name
       value: TreasureRiftTexture
@@ -90,3 +94,21 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8937087326543544936, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
+--- !u!1 &1202398442360222807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8937087326543544951, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
+  m_PrefabInstance: {fileID: 7829840631258887712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &6241762435012065185
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202398442360222807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: -1, z: 0}

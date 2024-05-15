@@ -89,13 +89,22 @@ public class FieldMovementController : MonoBehaviour
         if (vertical > 0.5f)
         {
             Vector3 rayOrigin = transform.position + transform.rotation * Vector3.forward * 5;
-            Ray ray = new Ray(rayOrigin, Vector3.down * 3);
-            if (Physics.Raycast(ray))
+            RaycastHit raycastInfo;
+            Ray ray = new(rayOrigin, Vector3.down * 6);
+            if (Physics.Raycast(ray, out raycastInfo))
             {
-                AudioManager.PlayAudioClip(playerMovementSFX, true);
-                CallAnimation(MOVE_FORWARD_STATE);
-                if (PlayerPositionChanged != null)
-                    PlayerPositionChanged.Invoke(rayOrigin);
+                if(raycastInfo.collider.tag == "Treasure")
+                {
+
+                }
+                else
+                {
+                    if(playerMovementSFX != null)
+                        AudioManager.PlayAudioClip(playerMovementSFX, true);
+                    CallAnimation(MOVE_FORWARD_STATE);
+                    if (PlayerPositionChanged != null)
+                        PlayerPositionChanged.Invoke(rayOrigin);
+                }
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
