@@ -43,6 +43,16 @@ public class EquipmentUIController : MonoBehaviour
         InitialiseSpellList();
     }
 
+    private void OnEnable()
+    {
+        TreasureController.TreasureEquipmentGenerated += CompareEquipment;
+    }
+
+    private void OnDisable()
+    {
+        TreasureController.TreasureEquipmentGenerated -= CompareEquipment;
+    }
+
     public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
     {
         switch (incomingEquipment.equipmentType)
