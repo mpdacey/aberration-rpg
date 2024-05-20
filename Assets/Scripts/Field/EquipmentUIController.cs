@@ -84,6 +84,8 @@ public class EquipmentUIController : MonoBehaviour
         SetEquipmentSpells(allEquipment, currentEquipment.equipmentType, currentEquipment.equipmentSpells, incomingEquipment.equipmentSpells);
 
         SetAffinities(allEquipment, currentEquipment.equipmentType, currentEquipment.equipmentAffinties, incomingEquipment.equipmentAffinties);
+
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void SetStatSliders(EquipmentStatUISlider stat, int cumulativeStat, int currentStat, int incomingStat)
