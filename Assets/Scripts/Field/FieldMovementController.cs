@@ -6,6 +6,7 @@ public class FieldMovementController : MonoBehaviour
 {
     public static event Action<Vector3> PlayerPositionChanged;
     public static event Action<Vector3> PlayerRotationChanged;
+    public static event Action TreasureFound;
 
     public static bool inBattle = false;
     public AudioClip playerMovementSFX;
@@ -93,13 +94,11 @@ public class FieldMovementController : MonoBehaviour
             Ray ray = new(rayOrigin, Vector3.down * 6);
             if (Physics.Raycast(ray, out raycastInfo))
             {
-                if(raycastInfo.collider.tag == "Treasure")
-                {
-
-                }
+                if (raycastInfo.collider.tag == "Treasure" && TreasureFound != null)
+                    TreasureFound.Invoke();
                 else
                 {
-                    if(playerMovementSFX != null)
+                    if (playerMovementSFX != null)
                         AudioManager.PlayAudioClip(playerMovementSFX, true);
                     CallAnimation(MOVE_FORWARD_STATE);
                     if (PlayerPositionChanged != null)
