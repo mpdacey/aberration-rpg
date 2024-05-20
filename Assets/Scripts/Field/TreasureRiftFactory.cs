@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreasureController : MonoBehaviour
+public class TreasureRiftFactory : MonoBehaviour
 {
     public GameObject treasureRiftPrefab;
     public Transform treasureContainer;
