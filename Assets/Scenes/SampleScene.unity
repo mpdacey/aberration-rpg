@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 1796975616}
   - component: {fileID: 1796975617}
   - component: {fileID: 1796975618}
+  - component: {fileID: 1796975619}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -860,7 +861,6 @@ MonoBehaviour:
     defense: {fileID: 11400000, guid: 6beae0ee0e91374459d337379f5b80a8, type: 2}
     trinkets:
     - {fileID: 11400000, guid: 3f19b10f8888a654da098dc79a391cb0, type: 2}
-    - {fileID: 11400000, guid: 047db6e5966dd2d47be0f0102c283ad6, type: 2}
   partyMonsters: []
 --- !u!4 &1796975613
 Transform:
@@ -1018,6 +1018,24 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 1956a7324e7dbb845997c59a7fb723b8, type: 2}
     - {fileID: 11400000, guid: 2574d9579feb2ae44a0b4e954f61c83d, type: 2}
     - {fileID: 11400000, guid: 82a48fe5ffaa60c45bede2006e61f60e, type: 2}
+--- !u!114 &1796975619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67286adf3c6c1f040adb8aa3aab1ea3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentTiers:
+  - equipmentItems:
+    - {fileID: 11400000, guid: 047db6e5966dd2d47be0f0102c283ad6, type: 2}
+  - equipmentItems: []
+  - equipmentItems: []
+  - equipmentItems: []
 --- !u!1001 &8937087326629629784
 PrefabInstance:
   m_ObjectHideFlags: 0
