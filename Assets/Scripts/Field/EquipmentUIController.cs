@@ -8,6 +8,7 @@ using AffinityItem = CombatantScriptableObject.AttributeAffinityDictionaryItem;
 using AffinityType = CombatantScriptableObject.AttributeAffinity;
 using EquipmentType = EquipmentScriptableObject.EquipmentType;
 using SpellType = SpellScriptableObject.SpellType;
+using UnityEngine.EventSystems;
 
 public class EquipmentUIController : MonoBehaviour
 {
@@ -40,6 +41,12 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] AffinitySpritesScriptableObject affinitySprites;
     SpellUIObject[] spellObjects;
     int currentDisplayedSpellIndex = 0;
+    [SerializeField] Button defaultOfferButton;
+
+    private void OnEnable()
+    {
+        defaultOfferButton.Select();
+    }
 
     private void Start()
     {
@@ -252,5 +259,13 @@ public class EquipmentUIController : MonoBehaviour
 
             affinityImages[offsetIndex].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
         }
+    }
+
+    private void Update()
+    {
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+
+        if (selectedObject == null)
+            defaultOfferButton.Select();
     }
 }
