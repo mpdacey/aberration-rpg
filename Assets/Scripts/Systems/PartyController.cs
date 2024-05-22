@@ -32,12 +32,14 @@ public class PartyController : MonoBehaviour
     {
         protagonistEquipment = protagonistEquipmentNonstatic;
         SceneController.CombatSceneLoaded += SetPartyValues;
+        EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += HealParty;
     }
 
     private void OnDisable()
     {
         SceneController.CombatSceneLoaded -= SetPartyValues;
+        EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= HealParty;
     }
 

@@ -901,9 +901,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502335}
-        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
-        m_MethodName: SetRecruitmentState
+      - m_Target: {fileID: 1672502336}
+        m_TargetAssemblyTypeName: EquipmentController, Assembly-CSharp
+        m_MethodName: SetOfferState
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1462,6 +1462,7 @@ MonoBehaviour:
   positiveColour: {r: 0.2627451, g: 0.5647059, b: 0.9490197, a: 1}
   negativeColour: {r: 0.8352942, g: 0.3803922, b: 0.3803922, a: 1}
   affinitySprites: {fileID: 11400000, guid: 1b49b363b441cee4cbe46d20cd6ced87, type: 2}
+  defaultOfferButton: {fileID: 1793540589}
 --- !u!224 &246543794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126826238819231817, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
@@ -11823,9 +11824,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502335}
-        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
-        m_MethodName: SetRecruitmentState
+      - m_Target: {fileID: 1672502336}
+        m_TargetAssemblyTypeName: EquipmentController, Assembly-CSharp
+        m_MethodName: SetOfferState
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11978,9 +11979,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1672502335}
-        m_TargetAssemblyTypeName: RecruitmentController, Assembly-CSharp
-        m_MethodName: SetRecruitmentState
+      - m_Target: {fileID: 1672502336}
+        m_TargetAssemblyTypeName: EquipmentController, Assembly-CSharp
+        m_MethodName: SetOfferState
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
