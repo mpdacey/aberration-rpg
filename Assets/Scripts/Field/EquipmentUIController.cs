@@ -90,12 +90,12 @@ public class EquipmentUIController : MonoBehaviour
 
     private void SetStatSliders(EquipmentStatUISlider stat, int cumulativeStat, int currentStat, int incomingStat)
     {
-        stat.sliderValueText.text = incomingStat.ToString();
+        stat.sliderValueText.text = (cumulativeStat + incomingStat - currentStat).ToString();
 
         // Worse stat
         if(currentStat > incomingStat)
         {
-            stat.baseSlider.value = cumulativeStat + currentStat - incomingStat;
+            stat.baseSlider.value = cumulativeStat + incomingStat - currentStat;
             stat.negativeSlider.value = cumulativeStat;
             stat.positiveSlider.value = 0;
             stat.sliderValueText.text += $"<color=#{ColorUtility.ToHtmlStringRGB(negativeColour)}> -{currentStat-incomingStat}</color>";

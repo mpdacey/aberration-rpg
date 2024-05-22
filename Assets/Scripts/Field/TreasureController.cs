@@ -57,6 +57,6 @@ public class TreasureController : MonoBehaviour
         selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-3, 6));
 
         if (TreasureEquipmentGenerated != null)
-            TreasureEquipmentGenerated.Invoke(partyController.protagonist, partyController.protagonistEquipment, selectedEquipment);
+            TreasureEquipmentGenerated.Invoke(PartyController.partyMembers[0].Value, partyController.protagonistEquipment, selectedEquipment);
     }
 }
