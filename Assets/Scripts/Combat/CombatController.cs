@@ -103,7 +103,7 @@ public class CombatController : MonoBehaviour
     {
         currentBattleState = BattleState.Initializing;
 
-        FieldMovementController.inBattle = true;
+        FieldMovementController.lockedInPlace = true;
 
         var monstersParent = monsters[0].transform.parent;
         monstersParent.localRotation = playerTransform.rotation;
@@ -577,7 +577,7 @@ public class CombatController : MonoBehaviour
 
             if (CombatVictory != null)
                 CombatVictory.Invoke();
-            FieldMovementController.inBattle = false;
+            FieldMovementController.lockedInPlace = false;
         }
 
         yield return null;

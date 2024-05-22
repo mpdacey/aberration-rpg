@@ -8,7 +8,7 @@ public class FieldMovementController : MonoBehaviour
     public static event Action<Vector3> PlayerRotationChanged;
     public static event Action TreasureFound;
 
-    public static bool inBattle = false;
+    public static bool lockedInPlace = false;
     public AudioClip playerMovementSFX;
     [SerializeField] Animator movementAnimator;
 
@@ -81,7 +81,7 @@ public class FieldMovementController : MonoBehaviour
 
     void Update()
     {
-        if (inBattle || !movementAnimator.GetCurrentAnimatorStateInfo(0).IsName(NULL_STATE))
+        if (lockedInPlace || !movementAnimator.GetCurrentAnimatorStateInfo(0).IsName(NULL_STATE))
             return;
 
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -96,7 +96,7 @@ public class FieldMovementController : MonoBehaviour
             {
                 if (raycastInfo.collider.tag == "Treasure" && TreasureFound != null)
                 {
-                    inBattle = true;
+                    lockedInPlace = true;
                     TreasureFound.Invoke();
                 }
                 else
