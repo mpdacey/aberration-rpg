@@ -95,7 +95,10 @@ public class FieldMovementController : MonoBehaviour
             if (Physics.Raycast(ray, out raycastInfo))
             {
                 if (raycastInfo.collider.tag == "Treasure" && TreasureFound != null)
+                {
+                    inBattle = true;
                     TreasureFound.Invoke();
+                }
                 else
                 {
                     if (playerMovementSFX != null)
