@@ -207,58 +207,55 @@ public class EquipmentUIController : MonoBehaviour
 
     private void SetAffinities(PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject.EquipmentType equipmentType, CombatantScriptableObject.AttributeAffinityDictionaryItem[] currentEquipmentAffinties, CombatantScriptableObject.AttributeAffinityDictionaryItem[] incomingEquipmentAffinties)
     {
-        void TallyAffinities(ref Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity> runningTally, EquipmentScriptableObject.EquipmentType type, CombatantScriptableObject.AttributeAffinityDictionaryItem[] equipmentAffinities)
+        void TallyAffinities(ref Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity> runningTally, CombatantScriptableObject.AttributeAffinityDictionaryItem[] equipmentAffinities)
         {
-            if (type == equipmentType) return;
-
             for(int i = 0; i < equipmentAffinities.Length; i++)
             {
-                if(runningTally[(SpellScriptableObject.SpellType)i] < equipmentAffinities[i].value)
+                if(!runningTally.ContainsKey((SpellScriptableObject.SpellType)i) || runningTally[(SpellScriptableObject.SpellType)i] < equipmentAffinities[i].value)
                     runningTally[(SpellScriptableObject.SpellType)i] = equipmentAffinities[i].value;
             }
         }
 
         // Set known affinities
         Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity> knownAffinities = new Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity>();
+        Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity> currentAffinities = new Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity>();
+        Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity> incomingAffinities = new Dictionary<SpellScriptableObject.SpellType, CombatantScriptableObject.AttributeAffinity>();
 
         // Iterate through all equipment disregarding the compared equipment
-        if(allEquipment.weapon != null)
-            TallyAffinities(ref knownAffinities, EquipmentScriptableObject.EquipmentType.Weapon, allEquipment.weapon.equipmentAffinties);
+        if (allEquipment.weapon != null && equipmentType != EquipmentScriptableObject.EquipmentType.Weapon)
+            TallyAffinities(ref knownAffinities, allEquipment.weapon.equipmentAffinties);
 
-        if (allEquipment.defense != null)
-            TallyAffinities(ref knownAffinities, EquipmentScriptableObject.EquipmentType.Armour, allEquipment.defense.equipmentAffinties);
+        if (allEquipment.defense != null && equipmentType != EquipmentScriptableObject.EquipmentType.Armour)
+            TallyAffinities(ref knownAffinities, allEquipment.defense.equipmentAffinties);
 
-        if (allEquipment.trinkets != null && allEquipment.trinkets[0] != null)
-            TallyAffinities(ref knownAffinities, EquipmentScriptableObject.EquipmentType.Trinket, allEquipment.trinkets[0].equipmentAffinties);
+        if (allEquipment.trinkets != null && equipmentType != EquipmentScriptableObject.EquipmentType.Trinket && allEquipment.trinkets[0] != null)
+            TallyAffinities(ref knownAffinities, allEquipment.trinkets[0].equipmentAffinties);
+
+        TallyAffinities(ref currentAffinities, currentEquipmentAffinties);
+        TallyAffinities(ref incomingAffinities, incomingEquipmentAffinties);
+
+        CombatantScriptableObject.AttributeAffinity[] equipmentAffinties = new CombatantScriptableObject.AttributeAffinity[6] { 0,0,0,0,0,0 };
 
         //TODO: make second trinket follow logic too.
 
-        for(int i = 0; i < currentEquipmentAffinties.Length; i++)
+        for (int i = 0; i < equipmentAffinties.Length; i++)
         {
-            // Neutral
-            if(knownAffinities[(SpellScriptableObject.SpellType)i] >= incomingEquipmentAffinties[i].value || knownAffinities[(SpellScriptableObject.SpellType)i] >= currentEquipmentAffinties[i].value)
-            {
-                affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[knownAffinities[(SpellScriptableObject.SpellType)i]];
-                affinityImages[i].color = Color.white;
-            }
-            // Positive affinity
-            else if(incomingEquipmentAffinties[i].value > currentEquipmentAffinties[i].value)
-            {
-                affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[incomingEquipmentAffinties[i].value];
-                affinityImages[i].color = positiveColour;
-            }
-            // Negative affinity
-            else if (currentEquipmentAffinties[i].value > incomingEquipmentAffinties[i].value)
-            {
-                affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[currentEquipmentAffinties[i].value];
-                affinityImages[i].color = negativeColour;
-            }
-            // Neutral
-            else
-            {
-                affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[currentEquipmentAffinties[i].value];
-                affinityImages[i].color = Color.white;
-            }
+            if (knownAffinities.ContainsKey((SpellScriptableObject.SpellType)i))
+                equipmentAffinties[i] = knownAffinities[(SpellScriptableObject.SpellType)i];
+
+            int knownAffinityValue = knownAffinities.ContainsKey((SpellScriptableObject.SpellType)i) ? (int)knownAffinities[(SpellScriptableObject.SpellType)i] : 0;
+            int currentAffinityValue = currentAffinities.ContainsKey((SpellScriptableObject.SpellType)i) ? (int)currentAffinities[(SpellScriptableObject.SpellType)i] : -1;
+            int incomingAffinityValue = incomingAffinities.ContainsKey((SpellScriptableObject.SpellType)i) ? (int)incomingAffinities[(SpellScriptableObject.SpellType)i] : -1;
+
+            equipmentAffinties[i] = (CombatantScriptableObject.AttributeAffinity)Mathf.Max(knownAffinityValue, incomingAffinityValue);
+
+            int offsetIndex = (i + 2) % equipmentAffinties.Length;
+
+            if (incomingAffinityValue > knownAffinityValue && incomingAffinityValue > currentAffinityValue && incomingAffinityValue != (int)CombatantScriptableObject.AttributeAffinity.Weak) affinityImages[offsetIndex].color = positiveColour;
+            else if (incomingAffinityValue < knownAffinityValue && incomingAffinityValue < currentAffinityValue || incomingAffinityValue > knownAffinityValue && incomingAffinityValue == (int)CombatantScriptableObject.AttributeAffinity.Weak) affinityImages[offsetIndex].color = negativeColour;
+            else affinityImages[offsetIndex].color = Color.white;
+
+            affinityImages[offsetIndex].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
         }
     }
 }
