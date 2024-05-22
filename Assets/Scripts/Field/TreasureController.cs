@@ -7,7 +7,13 @@ public class TreasureController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember, PartyController.ProtagonistEquipment, EquipmentScriptableObject> TreasureEquipmentGenerated;
 
-    [SerializeField] EquipmentScriptableObject[][] possibleEquipmentTreasure;
+    [Serializable]
+    public struct EquipmentTierArray
+    {
+        public EquipmentScriptableObject[] equipmentItems;
+    }
+
+    [SerializeField] EquipmentTierArray[] equipmentTiers;
     PartyController partyController;
 
     private void Start()
@@ -27,23 +33,23 @@ public class TreasureController : MonoBehaviour
 
     public void ProvideTreasureEquipment()
     {
-        if (possibleEquipmentTreasure == null)
+        if (equipmentTiers == null)
         {
             Debug.LogError("There are no equipment tiers in treasure controller");
             return;
         }
 
         int tierRangeModifier = Random.Range(-5, 5) / 4;
-        int tierIndex = Mathf.Clamp(GameController.CurrentLevel / 5 + tierRangeModifier, 0, possibleEquipmentTreasure.Length - 1);
-        if (possibleEquipmentTreasure[tierIndex] == null)
+        int tierIndex = Mathf.Clamp(GameController.CurrentLevel / 5 + tierRangeModifier, 0, equipmentTiers.Length - 1);
+        if (equipmentTiers[tierIndex].equipmentItems == null || equipmentTiers[tierIndex].equipmentItems.Length <= 0)
         {
             Debug.LogError($"There are no equipment items in tier {tierIndex} in treasure controller");
             return;
         }
 
-        int itemIndex = Mathf.Min(Mathf.FloorToInt(possibleEquipmentTreasure[tierIndex].Length * Random.value), possibleEquipmentTreasure[tierIndex].Length-1);
+        int itemIndex = Mathf.Clamp(Mathf.FloorToInt(equipmentTiers[tierIndex].equipmentItems.Length * Random.value), 0, equipmentTiers[tierIndex].equipmentItems.Length-1);
 
-        EquipmentScriptableObject selectedEquipment = Instantiate(possibleEquipmentTreasure[tierIndex][itemIndex]);
+        EquipmentScriptableObject selectedEquipment = Instantiate(equipmentTiers[tierIndex].equipmentItems[itemIndex]);
         selectedEquipment.equipmentStats.strength += Mathf.Max(0,Random.Range(-3, 6));
         selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-3, 6));
         selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-3, 6));
