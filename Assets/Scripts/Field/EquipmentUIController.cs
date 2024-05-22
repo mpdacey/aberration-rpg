@@ -98,7 +98,7 @@ public class EquipmentUIController : MonoBehaviour
             stat.baseSlider.value = cumulativeStat + incomingStat - currentStat;
             stat.negativeSlider.value = cumulativeStat;
             stat.positiveSlider.value = 0;
-            stat.sliderValueText.text += $"<color=#{ColorUtility.ToHtmlStringRGB(negativeColour)}> -{currentStat-incomingStat}</color>";
+            stat.sliderValueText.text += $"<size=12> </size><b><size=34><color=#{ColorUtility.ToHtmlStringRGB(negativeColour)}>-{currentStat-incomingStat}</color></size></b>";
         }
         // Better stat
         else if (currentStat < incomingStat)
@@ -106,7 +106,7 @@ public class EquipmentUIController : MonoBehaviour
             stat.baseSlider.value = cumulativeStat;
             stat.negativeSlider.value = 0;
             stat.positiveSlider.value = cumulativeStat + incomingStat - currentStat;
-            stat.sliderValueText.text += $"<color=#{ColorUtility.ToHtmlStringRGB(positiveColour)}> +{incomingStat - currentStat}</color>";
+            stat.sliderValueText.text += $"<size=12> </size><b><size=34><color=#{ColorUtility.ToHtmlStringRGB(positiveColour)}>+{incomingStat - currentStat}</color></size></b>";
         }
         else
         {
