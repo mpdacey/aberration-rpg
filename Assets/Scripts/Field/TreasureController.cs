@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class TreasureController : MonoBehaviour
 {
-    public static event Action<PartyController.PartyMember, PartyController.ProtagonistEquipment, EquipmentScriptableObject> TreasureEquipmentGenerated;
+    public static event Action<EquipmentScriptableObject> TreasureEquipmentGenerated;
 
     [Serializable]
     public struct EquipmentTierArray
@@ -14,12 +14,6 @@ public class TreasureController : MonoBehaviour
     }
 
     [SerializeField] EquipmentTierArray[] equipmentTiers;
-    PartyController partyController;
-
-    private void Start()
-    {
-        partyController = GetComponent<PartyController>();
-    }
 
     private void OnEnable()
     {
@@ -57,6 +51,6 @@ public class TreasureController : MonoBehaviour
         selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-3, 6));
 
         if (TreasureEquipmentGenerated != null)
-            TreasureEquipmentGenerated.Invoke(PartyController.partyMembers[0].Value, partyController.protagonistEquipment, selectedEquipment);
+            TreasureEquipmentGenerated.Invoke(selectedEquipment);
     }
 }

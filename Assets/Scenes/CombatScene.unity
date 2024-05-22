@@ -10901,6 +10901,7 @@ GameObject:
   - component: {fileID: 1672502333}
   - component: {fileID: 1672502334}
   - component: {fileID: 1672502335}
+  - component: {fileID: 1672502336}
   m_Layer: 0
   m_Name: CombatController
   m_TagString: Untagged
@@ -10979,6 +10980,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 1115945990}
+--- !u!114 &1672502336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672502331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c7a985d490cb744bad92dad6a617ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiController: {fileID: 239613821}
 --- !u!1 &1686181502
 GameObject:
   m_ObjectHideFlags: 0

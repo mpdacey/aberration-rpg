@@ -36,25 +36,16 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] AffinitySpritesScriptableObject affinitySprites;
     SpellUIObject[] spellObjects;
     int currentDisplayedSpellIndex = 0;
-    EquipmentScriptableObject currentEquipment;
 
     private void Start()
     {
         InitialiseSpellList();
     }
 
-    private void OnEnable()
-    {
-        TreasureController.TreasureEquipmentGenerated += CompareEquipment;
-    }
-
-    private void OnDisable()
-    {
-        TreasureController.TreasureEquipmentGenerated -= CompareEquipment;
-    }
-
     public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
     {
+        EquipmentScriptableObject currentEquipment;
+
         switch (incomingEquipment.equipmentType)
         {
             case EquipmentScriptableObject.EquipmentType.Weapon:
