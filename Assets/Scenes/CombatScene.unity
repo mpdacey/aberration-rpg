@@ -1451,12 +1451,12 @@ MonoBehaviour:
     sliderValueText: {fileID: 678763899}
   spellUIContainer: {fileID: 410425188}
   affinityImages:
-  - {fileID: 985982600}
-  - {fileID: 1347059369}
   - {fileID: 804569862}
   - {fileID: 1965312635}
   - {fileID: 2052196064}
   - {fileID: 1023957286}
+  - {fileID: 985982600}
+  - {fileID: 1347059369}
   titleText: {fileID: 78079058}
   acceptButtonText: {fileID: 1659866596}
   positiveColour: {r: 0.2627451, g: 0.5647059, b: 0.9490197, a: 1}

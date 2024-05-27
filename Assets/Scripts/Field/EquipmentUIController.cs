@@ -213,8 +213,10 @@ public class EquipmentUIController : MonoBehaviour
         {
             for(int i = 0; i < equipmentAffinities.Length; i++)
             {
-                if(!runningTally.ContainsKey((SpellType)i) || runningTally[(SpellType)i] < equipmentAffinities[i].value)
-                    runningTally[(SpellType)i] = equipmentAffinities[i].value;
+                if(!runningTally.ContainsKey(equipmentAffinities[i].key) || runningTally[equipmentAffinities[i].key] < equipmentAffinities[i].value)
+                {
+                    runningTally[equipmentAffinities[i].key] = equipmentAffinities[i].value;
+                }
             }
         }
 
@@ -251,13 +253,11 @@ public class EquipmentUIController : MonoBehaviour
 
             equipmentAffinties[i] = (AffinityType)Mathf.Max(knownAffinityValue, incomingAffinityValue);
 
-            int offsetIndex = (i + 2) % equipmentAffinties.Length;
+            if (incomingAffinityValue > knownAffinityValue && incomingAffinityValue > currentAffinityValue && incomingAffinityValue != (int)AffinityType.Weak) affinityImages[i].color = positiveColour;
+            else if (incomingAffinityValue < knownAffinityValue && incomingAffinityValue < currentAffinityValue || incomingAffinityValue > knownAffinityValue && incomingAffinityValue == (int)AffinityType.Weak) affinityImages[i].color = negativeColour;
+            else affinityImages[i].color = Color.white;
 
-            if (incomingAffinityValue > knownAffinityValue && incomingAffinityValue > currentAffinityValue && incomingAffinityValue != (int)AffinityType.Weak) affinityImages[offsetIndex].color = positiveColour;
-            else if (incomingAffinityValue < knownAffinityValue && incomingAffinityValue < currentAffinityValue || incomingAffinityValue > knownAffinityValue && incomingAffinityValue == (int)AffinityType.Weak) affinityImages[offsetIndex].color = negativeColour;
-            else affinityImages[offsetIndex].color = Color.white;
-
-            affinityImages[offsetIndex].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
+            affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
         }
     }
 
