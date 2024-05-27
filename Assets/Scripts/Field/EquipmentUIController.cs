@@ -97,6 +97,11 @@ public class EquipmentUIController : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(true);
     }
 
+    public void Test(int trinketIndex)
+    {
+        Debug.Log(trinketIndex);
+    }
+
     private void SetStatSliders(EquipmentStatUISlider stat, int cumulativeStat, int currentStat, int incomingStat)
     {
         stat.sliderValueText.text = (cumulativeStat + incomingStat - currentStat).ToString();
