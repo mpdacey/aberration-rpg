@@ -42,13 +42,16 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] Transform spellUIContainer;
     [SerializeField] Image[] affinityImages;
     [SerializeField] TextMeshProUGUI titleText;
-    [SerializeField] TextMeshProUGUI acceptButtonText;
+    [SerializeField] TextMeshProUGUI offerButton1Text;
+    [SerializeField] Button offerButton2Button;
+    [SerializeField] TextMeshProUGUI offerButton2Text;
     [SerializeField] Color positiveColour;
     [SerializeField] Color negativeColour;
     [SerializeField] AffinitySpritesScriptableObject affinitySprites;
     SpellUIObject[] spellObjects;
     int currentDisplayedSpellIndex = 0;
     [SerializeField] Button defaultOfferButton;
+    int selectedTrinketIndex = 0;
 
     private void OnEnable()
     {
@@ -62,7 +65,7 @@ public class EquipmentUIController : MonoBehaviour
 
     public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
     {
-        EquipmentScriptableObject currentEquipment;
+        EquipmentScriptableObject currentEquipment = null;
 
         switch (incomingEquipment.equipmentType)
         {
@@ -82,24 +85,37 @@ public class EquipmentUIController : MonoBehaviour
         }
 
         titleText.text = $"Aquired\n{incomingEquipment.equipmentName}";
-        acceptButtonText.text = $"Replace {currentEquipment.equipmentName}";
 
-        SetStatSliders(statSliders[0], protagonist.partyMemberBaseStats.combatantBaseStats.strength, currentEquipment.equipmentStats.strength, incomingEquipment.equipmentStats.strength);
-        SetStatSliders(statSliders[1], protagonist.partyMemberBaseStats.combatantBaseStats.magic, currentEquipment.equipmentStats.magic, incomingEquipment.equipmentStats.magic);
-        SetStatSliders(statSliders[2], protagonist.partyMemberBaseStats.combatantBaseStats.agility, currentEquipment.equipmentStats.agility, incomingEquipment.equipmentStats.agility);
-        SetStatSliders(statSliders[3], protagonist.partyMemberBaseStats.combatantBaseStats.endurance, currentEquipment.equipmentStats.endurance, incomingEquipment.equipmentStats.endurance);
-        SetStatSliders(statSliders[4], protagonist.partyMemberBaseStats.combatantBaseStats.luck, currentEquipment.equipmentStats.luck, incomingEquipment.equipmentStats.luck);
+        if(currentEquipment != null)
+        {
+            offerButton1Text.text = $"Replace {currentEquipment.equipmentName}";
 
-        SetEquipmentSpells(allEquipment, currentEquipment.equipmentType, currentEquipment.equipmentSpells, incomingEquipment.equipmentSpells);
+            SetStatSliders(statSliders[0], protagonist.partyMemberBaseStats.combatantBaseStats.strength, currentEquipment.equipmentStats.strength, incomingEquipment.equipmentStats.strength);
+            SetStatSliders(statSliders[1], protagonist.partyMemberBaseStats.combatantBaseStats.magic, currentEquipment.equipmentStats.magic, incomingEquipment.equipmentStats.magic);
+            SetStatSliders(statSliders[2], protagonist.partyMemberBaseStats.combatantBaseStats.agility, currentEquipment.equipmentStats.agility, incomingEquipment.equipmentStats.agility);
+            SetStatSliders(statSliders[3], protagonist.partyMemberBaseStats.combatantBaseStats.endurance, currentEquipment.equipmentStats.endurance, incomingEquipment.equipmentStats.endurance);
+            SetStatSliders(statSliders[4], protagonist.partyMemberBaseStats.combatantBaseStats.luck, currentEquipment.equipmentStats.luck, incomingEquipment.equipmentStats.luck);
 
-        SetAffinities(allEquipment, currentEquipment.equipmentType, currentEquipment.equipmentAffinties, incomingEquipment.equipmentAffinties);
+            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentSpells, incomingEquipment.equipmentSpells);
+
+            SetAffinities(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentAffinties, incomingEquipment.equipmentAffinties);
+        }
+        else
+        {
+            offerButton1Text.text = $"Equip {incomingEquipment.equipmentType}";
+
+            SetStatSliders(statSliders[0], protagonist.partyMemberBaseStats.combatantBaseStats.strength, 0, incomingEquipment.equipmentStats.strength);
+            SetStatSliders(statSliders[1], protagonist.partyMemberBaseStats.combatantBaseStats.magic, 0, incomingEquipment.equipmentStats.magic);
+            SetStatSliders(statSliders[2], protagonist.partyMemberBaseStats.combatantBaseStats.agility, 0, incomingEquipment.equipmentStats.agility);
+            SetStatSliders(statSliders[3], protagonist.partyMemberBaseStats.combatantBaseStats.endurance, 0, incomingEquipment.equipmentStats.endurance);
+            SetStatSliders(statSliders[4], protagonist.partyMemberBaseStats.combatantBaseStats.luck, 0, incomingEquipment.equipmentStats.luck);
+
+            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, new SpellScriptableObject[0], incomingEquipment.equipmentSpells);
+
+            SetAffinities(allEquipment, incomingEquipment.equipmentType, new AffinityItem[0], incomingEquipment.equipmentAffinties);
+        }
 
         transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-    public void Test(int trinketIndex)
-    {
-        Debug.Log(trinketIndex);
     }
 
     private void SetStatSliders(EquipmentStatUISlider stat, int cumulativeStat, int currentStat, int incomingStat)

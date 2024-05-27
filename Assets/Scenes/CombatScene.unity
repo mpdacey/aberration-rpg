@@ -1473,7 +1473,9 @@ MonoBehaviour:
   - {fileID: 985982600}
   - {fileID: 1347059369}
   titleText: {fileID: 78079058}
-  acceptButtonText: {fileID: 1659866596}
+  offerButton1Text: {fileID: 1659866596}
+  offerButton2Button: {fileID: 1770765449}
+  offerButton2Text: {fileID: 852978252}
   positiveColour: {r: 0.2627451, g: 0.5647059, b: 0.9490197, a: 1}
   negativeColour: {r: 0.8352942, g: 0.3803922, b: 0.3803922, a: 1}
   affinitySprites: {fileID: 11400000, guid: 1b49b363b441cee4cbe46d20cd6ced87, type: 2}
