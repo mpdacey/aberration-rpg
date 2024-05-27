@@ -31,6 +31,13 @@ public class EquipmentUIController : MonoBehaviour
         public TextMeshProUGUI spellCost;
     }
 
+    enum SpellUIState
+    {
+        Positive,
+        Negative,
+        Neutral
+    }
+
     [SerializeField] EquipmentStatUISlider[] statSliders;
     [SerializeField] Transform spellUIContainer;
     [SerializeField] Image[] affinityImages;
@@ -148,17 +155,33 @@ public class EquipmentUIController : MonoBehaviour
         currentDisplayedSpellIndex = 0;
     }
 
-    private void SetSpellListItem(SpellScriptableObject spell, bool isPositive)
+    private void SetSpellListItem(SpellScriptableObject spell, SpellUIState spellState)
     {
         var currentSpellObject = spellObjects[currentDisplayedSpellIndex];
 
-        currentSpellObject.spellGameObject.SetActive(true);
-        currentSpellObject.spellBackground.color = isPositive ? positiveColour : negativeColour;
-        currentSpellObject.inclusionSymbol.color = isPositive ? positiveColour : negativeColour;
-        currentSpellObject.inclusionSymbol.text = isPositive ? "+" : "-";
+        switch (spellState)
+        {
+            case SpellUIState.Positive:
+                currentSpellObject.spellBackground.color = positiveColour;
+                currentSpellObject.inclusionSymbol.color = positiveColour;
+                currentSpellObject.inclusionSymbol.text = "+";
+                break;
+            case SpellUIState.Negative:
+                currentSpellObject.spellBackground.color = negativeColour;
+                currentSpellObject.inclusionSymbol.color = negativeColour;
+                currentSpellObject.inclusionSymbol.text = "-";
+                break;
+            case SpellUIState.Neutral:
+                currentSpellObject.spellBackground.color = Color.grey;
+                currentSpellObject.inclusionSymbol.color = Color.grey;
+                currentSpellObject.inclusionSymbol.text = "";
+                break;
+        }
+        
         currentSpellObject.spellName.text = spell.spellName;
         currentSpellObject.spellCost.text = spell.spellCost.ToString();
         currentSpellObject.spellIcon.sprite = SpellIcons.icons[spell.spellType];
+        currentSpellObject.spellGameObject.SetActive(true);
 
         currentDisplayedSpellIndex++;
     }
@@ -195,15 +218,24 @@ public class EquipmentUIController : MonoBehaviour
         {
             if (knownSpells.Contains(incomingSpell) || currentEquipmentSpells.Contains(incomingSpell)) continue;
 
-            SetSpellListItem(incomingSpell, true);
+            SetSpellListItem(incomingSpell, SpellUIState.Positive);
+        }
+
+        // Neutral spells
+        foreach (var incomingSpell in incomingEquipmentSpells)
+        {
+            if (knownSpells.Contains(incomingSpell) || currentEquipmentSpells.Contains(incomingSpell))
+            {
+                SetSpellListItem(incomingSpell, SpellUIState.Neutral);
+            }
         }
 
         // Negative spells next. If current spells arn't in set or incoming spells, display them here.
-        foreach(var outgoingSpell in currentEquipmentSpells)
+        foreach (var outgoingSpell in currentEquipmentSpells)
         {
             if (knownSpells.Contains(outgoingSpell) || incomingEquipmentSpells.Contains(outgoingSpell)) continue;
 
-            SetSpellListItem(outgoingSpell, false);
+            SetSpellListItem(outgoingSpell, SpellUIState.Negative);
         }
     }
 
