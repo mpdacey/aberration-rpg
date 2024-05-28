@@ -306,9 +306,12 @@ public class EquipmentUIController : MonoBehaviour
 
             equipmentAffinties[i] = (AffinityType)Mathf.Max(knownAffinityValue, incomingAffinityValue);
 
-            if (incomingAffinityValue != (int)AffinityType.Weak && (incomingAffinityValue > knownAffinityValue && incomingAffinityValue > currentAffinityValue || currentAffinityValue == (int)AffinityType.Weak)) affinityImages[i].color = positiveColour;
-            else if (currentAffinityValue != (int)AffinityType.Weak && (incomingAffinityValue < knownAffinityValue && incomingAffinityValue < currentAffinityValue || incomingAffinityValue == (int)AffinityType.Weak)) affinityImages[i].color = negativeColour;
-            else affinityImages[i].color = Color.white;
+            int currentMax = Mathf.Max(knownAffinityValue, currentAffinityValue);
+            int incomingMax = Mathf.Max(knownAffinityValue, incomingAffinityValue);
+
+            if (incomingMax == currentMax) affinityImages[i].color = Color.white;
+            else if ((incomingMax > currentMax && incomingMax != (int)AffinityType.Weak) || currentMax == (int)AffinityType.Weak) affinityImages[i].color = positiveColour;
+            else affinityImages[i].color = negativeColour;
 
             affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
         }
