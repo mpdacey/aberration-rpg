@@ -975,9 +975,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 239613821}
-        m_TargetAssemblyTypeName: EquipmentUIController, Assembly-CSharp
-        m_MethodName: Test
+      - m_Target: {fileID: 1672502336}
+        m_TargetAssemblyTypeName: EquipmentController, Assembly-CSharp
+        m_MethodName: SwapTrinket
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11011,6 +11011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 239613821}
+  testEquipment: {fileID: 11400000, guid: 2cbc3159764ac004a9169f9c48230303, type: 2}
 --- !u!1 &1686181502
 GameObject:
   m_ObjectHideFlags: 0
@@ -11915,9 +11916,9 @@ MonoBehaviour:
   m_OnSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 239613821}
-        m_TargetAssemblyTypeName: EquipmentUIController, Assembly-CSharp
-        m_MethodName: Test
+      - m_Target: {fileID: 1672502336}
+        m_TargetAssemblyTypeName: EquipmentController, Assembly-CSharp
+        m_MethodName: SwapTrinket
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

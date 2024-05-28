@@ -9,7 +9,9 @@ public class EquipmentController : MonoBehaviour
     public static event Action EquipmentUpdated;
 
     public EquipmentUIController uiController;
-    OfferState state = OfferState.Decline;
+    private OfferState state = OfferState.Decline;
+    private EquipmentScriptableObject incomingEquipment;
+
 
     public EquipmentScriptableObject testEquipment;
 
@@ -28,9 +30,16 @@ public class EquipmentController : MonoBehaviour
     public void ContructOffer(EquipmentScriptableObject incomingEquipment)=>
         StartCoroutine(PitchOffer(incomingEquipment));
 
-
-    IEnumerator PitchOffer(EquipmentScriptableObject incomingEquipment)
+    public void SwapTrinket(int index)
     {
+        if(incomingEquipment.equipmentType == EquipmentType.Trinket)
+            uiController.CompareEquipment(PartyController.partyMembers[0].Value, PartyController.protagonistEquipment, incomingEquipment, index);
+    }
+
+    IEnumerator PitchOffer(EquipmentScriptableObject proposedEquipment)
+    {
+        incomingEquipment = proposedEquipment;
+
         uiController.gameObject.SetActive(true);
         uiController.InitialiseEquipmentUI(PartyController.protagonistEquipment, incomingEquipment);
         uiController.CompareEquipment(PartyController.partyMembers[0].Value, PartyController.protagonistEquipment, incomingEquipment);

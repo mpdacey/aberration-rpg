@@ -80,7 +80,6 @@ public class EquipmentUIController : MonoBehaviour
                 offerButton2Button.gameObject.SetActive(false);
                 break;
             case EquipmentType.Trinket:
-                // TODO: have logic for multiple trinkets.
                 if (allEquipment.trinkets == null)
                     allEquipment.trinkets = new EquipmentScriptableObject[2];
 
@@ -94,7 +93,7 @@ public class EquipmentUIController : MonoBehaviour
         }
     }
 
-    public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
+    public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment, int trinketIndex = 0)
     {
         EquipmentScriptableObject currentEquipment = null;
 
@@ -108,7 +107,7 @@ public class EquipmentUIController : MonoBehaviour
                 break;
             case EquipmentType.Trinket:
                 // TODO: have logic for multiple trinkets.
-                currentEquipment = allEquipment.trinkets[0];
+                currentEquipment = allEquipment.trinkets[trinketIndex];
                 break;
             default: 
                 currentEquipment = allEquipment.weapon;
@@ -123,9 +122,9 @@ public class EquipmentUIController : MonoBehaviour
             SetStatSliders(statSliders[3], protagonist.partyMemberBaseStats.combatantBaseStats.endurance, currentEquipment.equipmentStats.endurance, incomingEquipment.equipmentStats.endurance);
             SetStatSliders(statSliders[4], protagonist.partyMemberBaseStats.combatantBaseStats.luck, currentEquipment.equipmentStats.luck, incomingEquipment.equipmentStats.luck);
 
-            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentSpells, incomingEquipment.equipmentSpells);
+            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentSpells, incomingEquipment.equipmentSpells, trinketIndex);
 
-            SetAffinities(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentAffinties, incomingEquipment.equipmentAffinties);
+            SetAffinities(allEquipment, incomingEquipment.equipmentType, currentEquipment.equipmentAffinties, incomingEquipment.equipmentAffinties, trinketIndex);
         }
         else
         {
@@ -135,9 +134,9 @@ public class EquipmentUIController : MonoBehaviour
             SetStatSliders(statSliders[3], protagonist.partyMemberBaseStats.combatantBaseStats.endurance, 0, incomingEquipment.equipmentStats.endurance);
             SetStatSliders(statSliders[4], protagonist.partyMemberBaseStats.combatantBaseStats.luck, 0, incomingEquipment.equipmentStats.luck);
 
-            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, new SpellScriptableObject[0], incomingEquipment.equipmentSpells);
+            SetEquipmentSpells(allEquipment, incomingEquipment.equipmentType, new SpellScriptableObject[0], incomingEquipment.equipmentSpells, trinketIndex);
 
-            SetAffinities(allEquipment, incomingEquipment.equipmentType, new AffinityItem[0], incomingEquipment.equipmentAffinties);
+            SetAffinities(allEquipment, incomingEquipment.equipmentType, new AffinityItem[0], incomingEquipment.equipmentAffinties, trinketIndex);
         }
 
         transform.GetChild(0).gameObject.SetActive(true);
@@ -232,12 +231,10 @@ public class EquipmentUIController : MonoBehaviour
         currentDisplayedSpellIndex++;
     }
 
-    private void SetEquipmentSpells(PartyController.ProtagonistEquipment allEquipment, EquipmentType equipmentType, SpellScriptableObject[] currentEquipmentSpells, SpellScriptableObject[] incomingEquipmentSpells)
+    private void SetEquipmentSpells(PartyController.ProtagonistEquipment allEquipment, EquipmentType equipmentType, SpellScriptableObject[] currentEquipmentSpells, SpellScriptableObject[] incomingEquipmentSpells, int trinketIndex = 0)
     {
         void AddSpellsToSet(ref HashSet<SpellScriptableObject> hashSet, EquipmentType type, SpellScriptableObject[] spells)
         {
-            if (type == equipmentType) return;
-
             foreach (var spell in spells)
                 hashSet.Add(spell);
         }
@@ -248,16 +245,19 @@ public class EquipmentUIController : MonoBehaviour
         HashSet<SpellScriptableObject> knownSpells = new();
 
         // Search all equipment. Add spells to set.
-        if(allEquipment.weapon != null)
+        if(allEquipment.weapon != null && equipmentType != EquipmentType.Weapon)
             AddSpellsToSet(ref knownSpells, EquipmentType.Weapon, allEquipment.weapon.equipmentSpells);
 
-        if (allEquipment.defense != null)
+        if (allEquipment.defense != null && equipmentType != EquipmentType.Armour)
             AddSpellsToSet(ref knownSpells, EquipmentType.Armour, allEquipment.defense.equipmentSpells);
 
-        if (allEquipment.trinkets != null && allEquipment.trinkets[0] != null)
-            AddSpellsToSet(ref knownSpells, EquipmentType.Trinket, allEquipment.trinkets[0].equipmentSpells);
-
-        //TODO: make second trinket follow logic too.
+        if (allEquipment.trinkets != null)
+        {
+            if(allEquipment.trinkets[0] != null && (equipmentType != EquipmentType.Trinket || (equipmentType == EquipmentType.Trinket && trinketIndex != 0)))
+                AddSpellsToSet(ref knownSpells, EquipmentType.Trinket, allEquipment.trinkets[0].equipmentSpells);
+            if(allEquipment.trinkets[1] != null && (equipmentType != EquipmentType.Trinket || (equipmentType == EquipmentType.Trinket && trinketIndex != 1)))
+                AddSpellsToSet(ref knownSpells, EquipmentType.Trinket, allEquipment.trinkets[1].equipmentSpells);
+        }
 
         // Positive spells first. If incoming spells aren't in set or current spells, display them here.
         foreach(var incomingSpell in incomingEquipmentSpells)
@@ -285,7 +285,7 @@ public class EquipmentUIController : MonoBehaviour
         }
     }
 
-    private void SetAffinities(PartyController.ProtagonistEquipment allEquipment, EquipmentType equipmentType, AffinityItem[] currentEquipmentAffinties, AffinityItem[] incomingEquipmentAffinties)
+    private void SetAffinities(PartyController.ProtagonistEquipment allEquipment, EquipmentType equipmentType, AffinityItem[] currentEquipmentAffinties, AffinityItem[] incomingEquipmentAffinties, int trinketIndex = 0)
     {
         void TallyAffinities(ref Dictionary<SpellType, AffinityType> runningTally, AffinityItem[] equipmentAffinities)
         {
@@ -310,8 +310,13 @@ public class EquipmentUIController : MonoBehaviour
         if (allEquipment.defense != null && equipmentType != EquipmentType.Armour)
             TallyAffinities(ref knownAffinities, allEquipment.defense.equipmentAffinties);
 
-        if (allEquipment.trinkets != null && equipmentType != EquipmentType.Trinket && allEquipment.trinkets[0] != null)
-            TallyAffinities(ref knownAffinities, allEquipment.trinkets[0].equipmentAffinties);
+        if (allEquipment.trinkets != null)
+        {
+            if (allEquipment.trinkets[0] != null && (equipmentType != EquipmentType.Trinket || (equipmentType == EquipmentType.Trinket && trinketIndex != 0)))
+                TallyAffinities(ref knownAffinities, allEquipment.trinkets[0].equipmentAffinties);
+            if (allEquipment.trinkets[1] != null && (equipmentType != EquipmentType.Trinket || (equipmentType == EquipmentType.Trinket && trinketIndex != 1)))
+                TallyAffinities(ref knownAffinities, allEquipment.trinkets[1].equipmentAffinties);
+        }
 
         TallyAffinities(ref currentAffinities, currentEquipmentAffinties);
         TallyAffinities(ref incomingAffinities, incomingEquipmentAffinties);
