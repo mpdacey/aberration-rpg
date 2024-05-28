@@ -30,6 +30,7 @@ public class EquipmentController : MonoBehaviour
     IEnumerator PitchOffer(EquipmentScriptableObject incomingEquipment)
     {
         uiController.gameObject.SetActive(true);
+        uiController.InitialiseEquipmentUI(PartyController.protagonistEquipment, incomingEquipment);
         uiController.CompareEquipment(PartyController.partyMembers[0].Value, PartyController.protagonistEquipment, incomingEquipment);
 
         state = OfferState.Pending;

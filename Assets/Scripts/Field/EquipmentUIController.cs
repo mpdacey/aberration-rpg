@@ -63,6 +63,37 @@ public class EquipmentUIController : MonoBehaviour
         InitialiseSpellList();
     }
 
+    public void InitialiseEquipmentUI(PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
+    {
+        titleText.text = $"Aquired\n{incomingEquipment.equipmentName}";
+
+        switch (incomingEquipment.equipmentType)
+        {
+            case EquipmentType.Weapon:
+                if (allEquipment.weapon != null) offerButton1Text.text = $"Replace {allEquipment.weapon.equipmentName}";
+                else offerButton1Text.text = $"Equip {incomingEquipment.equipmentType}";
+                offerButton2Button.gameObject.SetActive(false);
+                break;
+            case EquipmentType.Armour:
+                if (allEquipment.defense != null) offerButton1Text.text = $"Replace {allEquipment.defense.equipmentName}";
+                else offerButton1Text.text = $"Equip {incomingEquipment.equipmentType}";
+                offerButton2Button.gameObject.SetActive(false);
+                break;
+            case EquipmentType.Trinket:
+                // TODO: have logic for multiple trinkets.
+                if (allEquipment.trinkets == null)
+                    allEquipment.trinkets = new EquipmentScriptableObject[2];
+
+                if (allEquipment.trinkets[0] != null) offerButton1Text.text = $"Replace {allEquipment.trinkets[0].equipmentName}";
+                else offerButton1Text.text = $"Equip {incomingEquipment.equipmentType}";
+
+                offerButton2Button.gameObject.SetActive(true);
+                if (allEquipment.trinkets[1] != null) offerButton2Text.text = $"Replace {allEquipment.trinkets[1].equipmentName}";
+                else offerButton2Text.text = $"Equip {incomingEquipment.equipmentType}";
+                break;
+        }
+    }
+
     public void CompareEquipment(PartyController.PartyMember protagonist, PartyController.ProtagonistEquipment allEquipment, EquipmentScriptableObject incomingEquipment)
     {
         EquipmentScriptableObject currentEquipment = null;
@@ -84,12 +115,8 @@ public class EquipmentUIController : MonoBehaviour
                 break;
         }
 
-        titleText.text = $"Aquired\n{incomingEquipment.equipmentName}";
-
         if(currentEquipment != null)
         {
-            offerButton1Text.text = $"Replace {currentEquipment.equipmentName}";
-
             SetStatSliders(statSliders[0], protagonist.partyMemberBaseStats.combatantBaseStats.strength, currentEquipment.equipmentStats.strength, incomingEquipment.equipmentStats.strength);
             SetStatSliders(statSliders[1], protagonist.partyMemberBaseStats.combatantBaseStats.magic, currentEquipment.equipmentStats.magic, incomingEquipment.equipmentStats.magic);
             SetStatSliders(statSliders[2], protagonist.partyMemberBaseStats.combatantBaseStats.agility, currentEquipment.equipmentStats.agility, incomingEquipment.equipmentStats.agility);
@@ -102,8 +129,6 @@ public class EquipmentUIController : MonoBehaviour
         }
         else
         {
-            offerButton1Text.text = $"Equip {incomingEquipment.equipmentType}";
-
             SetStatSliders(statSliders[0], protagonist.partyMemberBaseStats.combatantBaseStats.strength, 0, incomingEquipment.equipmentStats.strength);
             SetStatSliders(statSliders[1], protagonist.partyMemberBaseStats.combatantBaseStats.magic, 0, incomingEquipment.equipmentStats.magic);
             SetStatSliders(statSliders[2], protagonist.partyMemberBaseStats.combatantBaseStats.agility, 0, incomingEquipment.equipmentStats.agility);
