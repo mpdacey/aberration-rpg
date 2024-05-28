@@ -11,6 +11,8 @@ public class EquipmentController : MonoBehaviour
     public EquipmentUIController uiController;
     OfferState state = OfferState.Decline;
 
+    public EquipmentScriptableObject testEquipment;
+
     private void OnEnable()
     {
         TreasureController.TreasureEquipmentGenerated += ContructOffer;
@@ -23,7 +25,7 @@ public class EquipmentController : MonoBehaviour
     public void SetOfferState(int value) =>
         state = (OfferState)value;
 
-    private void ContructOffer(EquipmentScriptableObject incomingEquipment)=>
+    public void ContructOffer(EquipmentScriptableObject incomingEquipment)=>
         StartCoroutine(PitchOffer(incomingEquipment));
 
 
@@ -32,6 +34,7 @@ public class EquipmentController : MonoBehaviour
         uiController.gameObject.SetActive(true);
         uiController.InitialiseEquipmentUI(PartyController.protagonistEquipment, incomingEquipment);
         uiController.CompareEquipment(PartyController.partyMembers[0].Value, PartyController.protagonistEquipment, incomingEquipment);
+        FieldMovementController.lockedInPlace = true;
 
         state = OfferState.Pending;
         while (state == OfferState.Pending)

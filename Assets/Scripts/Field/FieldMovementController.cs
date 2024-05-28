@@ -96,7 +96,6 @@ public class FieldMovementController : MonoBehaviour
             {
                 if (raycastInfo.collider.tag == "Treasure" && TreasureFound != null)
                 {
-                    lockedInPlace = true;
                     TreasureFound.Invoke();
                 }
                 else
