@@ -33,8 +33,9 @@ public class TreasureController : MonoBehaviour
             return;
         }
 
-        int tierRangeModifier = Random.Range(-5, 5) / 4;
-        int tierIndex = Mathf.Clamp(GameController.CurrentLevel / 5 + tierRangeModifier, 0, equipmentTiers.Length - 1);
+        int tierRangeModifier = Random.Range(-5, 6) / 2;
+        float tierQuality = Mathf.Max(GameController.CurrentLevel + tierRangeModifier, 0) / 7f;
+        int tierIndex = Mathf.Clamp(Mathf.FloorToInt(tierQuality), 0, equipmentTiers.Length - 1);
         if (equipmentTiers[tierIndex].equipmentItems == null || equipmentTiers[tierIndex].equipmentItems.Length <= 0)
         {
             Debug.LogError($"There are no equipment items in tier {tierIndex} in treasure controller");
@@ -49,6 +50,17 @@ public class TreasureController : MonoBehaviour
         selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-3, 6));
         selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-3, 6));
         selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-3, 6));
+
+        bool upgraded = (tierQuality - Math.Truncate(tierQuality)) > 0.5f;
+        if (upgraded)
+        {
+            selectedEquipment.equipmentName += "+";
+            selectedEquipment.equipmentStats.strength += Mathf.Max(0, Random.Range(-1, 4));
+            selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-1, 4));
+            selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-1, 4));
+            selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-1, 4));
+            selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-1, 4));
+        }
 
         if (TreasureEquipmentGenerated != null)
             TreasureEquipmentGenerated.Invoke(selectedEquipment);
