@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treasureRiftPrefab: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
   treasureContainer: {fileID: 259109407}
-  treasureSpawnChance: 0.275
+  treasureSpawnChance: 0.215
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796975611}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 193cb5f68a3864a40b077039c2e25ec1, type: 3}
   m_Name: 
