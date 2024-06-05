@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Ski Suit
+  m_EditorClassIdentifier: 
+  equipmentName: Ski Suit
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 1
+  equipmentStats:
+    strength: 3
+    magic: 10
+    endurance: 4
+    agility: 8
+    luck: 3
+  equipmentAffinties:
+  - key: 1
+    value: 2
+  equipmentSpells:
+  - {fileID: 11400000, guid: f256cb48c54c35e44bde0dcea00470c8, type: 2}

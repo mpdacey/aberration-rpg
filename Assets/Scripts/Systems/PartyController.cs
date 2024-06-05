@@ -23,19 +23,23 @@ public class PartyController : MonoBehaviour
     }
 
     public static PartyMember?[] partyMembers = new PartyMember?[4];
+    public static ProtagonistEquipment protagonistEquipment;
     public PartyMember protagonist;
-    public ProtagonistEquipment protagonistEquipment;
+    public ProtagonistEquipment protagonistEquipmentNonstatic;
     public PartyMember[] partyMonsters;
 
     private void OnEnable()
     {
+        protagonistEquipment = protagonistEquipmentNonstatic;
         SceneController.CombatSceneLoaded += SetPartyValues;
+        EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += HealParty;
     }
 
     private void OnDisable()
     {
         SceneController.CombatSceneLoaded -= SetPartyValues;
+        EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= HealParty;
     }
 

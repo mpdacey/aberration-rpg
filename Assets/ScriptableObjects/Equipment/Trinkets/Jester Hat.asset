@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
-  m_Name: Explorer Boots
+  m_Name: Jester Hat
   m_EditorClassIdentifier: 
-  equipmentName: Explorer's Boots
-  equipmentHP: 10
+  equipmentName: Jester Hat
+  equipmentHP: 0
   equipmentSP: 0
   equipmentType: 2
   equipmentStats:
-    strength: 3
-    magic: 0
-    endurance: 2
-    agility: 3
-    luck: 1
+    strength: 0
+    magic: 10
+    endurance: 0
+    agility: 4
+    luck: 6
+  equipmentAffinties:
+  - key: 0
+    value: 1
+  - key: 1
+    value: 1
+  - key: 2
+    value: 1
+  - key: 3
+    value: 1
   equipmentSpells:
-  - {fileID: 11400000, guid: 6d15a6187678ee945af7b2a6a7d230e7, type: 2}
+  - {fileID: 11400000, guid: 362c445ce24fdfc4b88c8c03b3ec55b2, type: 2}
+  - {fileID: 11400000, guid: f256cb48c54c35e44bde0dcea00470c8, type: 2}

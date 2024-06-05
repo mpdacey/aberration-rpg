@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
-  m_Name: Explorer Tunic
+  m_Name: Baton
   m_EditorClassIdentifier: 
-  equipmentName: Explorer Tunic
-  equipmentHP: 25
-  equipmentSP: 8
-  equipmentType: 1
+  equipmentName: Baton
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 0
   equipmentStats:
-    strength: 2
+    strength: 8
     magic: 1
-    endurance: 5
-    agility: 2
-    luck: 2
+    endurance: 8
+    agility: 7
+    luck: 3
   equipmentAffinties: []
-  equipmentSpells: []
+  equipmentSpells:
+  - {fileID: 11400000, guid: 28a19f5acc2b621458da0f5065008509, type: 2}

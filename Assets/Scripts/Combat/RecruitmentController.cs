@@ -10,7 +10,7 @@ public class RecruitmentController : MonoBehaviour
 
     public RecruitmentUIController uiController;
 
-    private enum RecruitmentState
+    public enum RecruitmentState
     {
         Pending,
         OfferA,

@@ -50,5 +50,4 @@ public class FormationSelector : MonoBehaviour
         if (FormationSelected != null)
             FormationSelected.Invoke();
     }
-        
 }

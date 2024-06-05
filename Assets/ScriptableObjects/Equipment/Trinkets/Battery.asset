@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Battery
+  m_EditorClassIdentifier: 
+  equipmentName: Battery
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 2
+  equipmentStats:
+    strength: 1
+    magic: 5
+    endurance: 3
+    agility: 2
+    luck: 1
+  equipmentAffinties: []
+  equipmentSpells:
+  - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}

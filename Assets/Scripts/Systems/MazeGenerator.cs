@@ -67,8 +67,6 @@ public class MazeGenerator : MonoBehaviour
 
         int loopFactor = Random.Range(2, 5);
 
-        cells[start.y * gridSize.x + start.x] = Color.red;
-
         visited.Clear();
         walls.Clear();
 
@@ -88,7 +86,7 @@ public class MazeGenerator : MonoBehaviour
                 if (randomWall + Vector2Int.left == end || randomWall + Vector2Int.right == end)
                     continue;
 
-                cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
+                ColourCell(randomWall, Color.white);
                 if (visited.Contains(randomWall + Vector2Int.left) && visited.Contains(randomWall + Vector2Int.right))
                 {
                     int fillSpaceValue = Random.Range(0, 3);
@@ -102,11 +100,13 @@ public class MazeGenerator : MonoBehaviour
                 if (visited.Contains(randomWall + Vector2Int.left))
                 {
                     AddVisited(randomWall + Vector2Int.right, ref minimumCount);
+                    ColourCell(randomWall + Vector2Int.left, Color.white);
                     end = randomWall + Vector2Int.right;
                 }
                 else
                 {
                     AddVisited(randomWall + Vector2Int.left, ref minimumCount);
+                    ColourCell(randomWall + Vector2Int.right, Color.white);
                     end = randomWall + Vector2Int.left;
                 }
             }
@@ -115,7 +115,7 @@ public class MazeGenerator : MonoBehaviour
                 if (randomWall + Vector2Int.up == end || randomWall + Vector2Int.down == end)
                     continue;
 
-                cells[randomWall.y * gridSize.x + randomWall.x] = Color.white;
+                ColourCell(randomWall, Color.white);
                 if (visited.Contains(randomWall + Vector2Int.up) && visited.Contains(randomWall + Vector2Int.down))
                 {
                     int fillSpaceValue = Random.Range(0, 3);
@@ -129,24 +129,30 @@ public class MazeGenerator : MonoBehaviour
                 if (visited.Contains(randomWall + Vector2Int.up))
                 {
                     AddVisited(randomWall + Vector2Int.down, ref minimumCount);
+                    ColourCell(randomWall + Vector2Int.up, Color.white);
                     end = randomWall + Vector2Int.down;
                 }
                 else
                 {
                     AddVisited(randomWall + Vector2Int.up, ref minimumCount);
+                    ColourCell(randomWall + Vector2Int.down, Color.white);
                     end = randomWall + Vector2Int.up;
                  }
             }
         }
 
-        cells[end.y * gridSize.x + end.x] = Color.red + Color.green;
+        ColourCell(start, Color.red);
+        ColourCell(end, Color.red + Color.green);
 
         return cells;
     }
 
+    private void ColourCell(Vector2Int cell, Color colour) =>
+        cells[cell.y * gridSize.x + cell.x] = colour;
+
     private void AddVisited(Vector2Int newCell, ref int visitedCellsLeft)
     {
-        cells[newCell.y * gridSize.x + newCell.x] = Color.white;
+        ColourCell(newCell, Color.red + Color.blue);
         visited.Add(newCell);
         AddWalls(newCell);
         visitedCellsLeft--;
@@ -170,12 +176,12 @@ public class MazeGenerator : MonoBehaviour
     private void FillSpace(Vector2Int emptySpace)
     {
         if (emptySpace.x < 0 || emptySpace.y < 0 || emptySpace.x >= gridSize.x || emptySpace.y >= gridSize.y) return;
-        if (cells[emptySpace.y * gridSize.x + emptySpace.x] == Color.white)
+        if (cells[emptySpace.y * gridSize.x + emptySpace.x] == Color.white) return;
         if (emptySpace.x > 0 && cells[emptySpace.y * gridSize.x + emptySpace.x - 1] != Color.white) return;
         if (emptySpace.x < gridSize.x-1 && cells[emptySpace.y * gridSize.x + emptySpace.x + 1] != Color.white) return;
         if (emptySpace.y > 0 && cells[(emptySpace.y - 1) * gridSize.x + emptySpace.x] != Color.white) return;
         if (emptySpace.y < gridSize.y - 1 && cells[(emptySpace.y + 1) * gridSize.x + emptySpace.x] != Color.white) return;
 
-        cells[emptySpace.y * gridSize.x + emptySpace.x] = Color.white;
+        ColourCell(emptySpace, Color.white);
     }
 }

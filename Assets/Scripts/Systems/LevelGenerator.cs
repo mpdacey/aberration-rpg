@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public static event Action<Vector2> GoalLocationFound;
+    public static event Action<List<Vector2>> TreasureLocationsFound;
     public static event Action FinishedLevelGeneration;
 
     public Texture2D levelGeometry;
@@ -57,6 +58,7 @@ public class LevelGenerator : MonoBehaviour
 
         Vector2 startLocation = Vector2.zero;
         Vector2 endLocation = Vector2.zero;
+        List<Vector2> treasureLocations = new();
 
         for(int y = 0; y < levelGeometry.height; y++)
         {
@@ -75,6 +77,10 @@ public class LevelGenerator : MonoBehaviour
                     {
                         endLocation = pixelCoords;
                     }
+                    if(pixels[index].g == 0 && pixels[index].b == 1)
+                    {
+                        treasureLocations.Add(pixelCoords);
+                    }
 
                     edges.AddRange(FindEdges(pixels, pixelCoords));
                 }
@@ -83,6 +89,14 @@ public class LevelGenerator : MonoBehaviour
 
         if (GoalLocationFound != null)
             GoalLocationFound.Invoke(endLocation-startLocation);
+
+        if (TreasureLocationsFound != null)
+        {
+            for (int i = 0; i < treasureLocations.Count; i++)
+                treasureLocations[i] -= startLocation;
+
+            TreasureLocationsFound.Invoke(treasureLocations);
+        }
 
         for (int i = 0; i < pixels.Length; i++)
         {
