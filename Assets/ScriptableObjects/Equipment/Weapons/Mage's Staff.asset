@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Mage's Staff
+  m_EditorClassIdentifier: 
+  equipmentName: Mage's Staff
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 0
+  equipmentStats:
+    strength: 8
+    magic: 25
+    endurance: 3
+    agility: 5
+    luck: 10
+  equipmentAffinties:
+  - key: 0
+    value: 2
+  - key: 2
+    value: 2
+  - key: 4
+    value: 1
+  equipmentSpells:
+  - {fileID: 11400000, guid: 952d517cabdf71d42ae2219b5b54475e, type: 2}
+  - {fileID: 11400000, guid: f83b48f1b9606ce4fb708dca4bf0194d, type: 2}

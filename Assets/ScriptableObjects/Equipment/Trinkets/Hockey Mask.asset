@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Hockey Mask
+  m_EditorClassIdentifier: 
+  equipmentName: 
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 0
+  equipmentStats:
+    strength: 12
+    magic: 0
+    endurance: 21
+    agility: 10
+    luck: 0
+  equipmentAffinties:
+  - key: 4
+    value: 3
+  - key: 1
+    value: 1
+  equipmentSpells:
+  - {fileID: 11400000, guid: 08aed493106ac8749b785849164fba7b, type: 2}

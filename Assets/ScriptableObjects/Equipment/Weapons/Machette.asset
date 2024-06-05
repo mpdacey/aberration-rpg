@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Machette
+  m_EditorClassIdentifier: 
+  equipmentName: Machette
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 0
+  equipmentStats:
+    strength: 26
+    magic: 8
+    endurance: 7
+    agility: 12
+    luck: 7
+  equipmentAffinties: []
+  equipmentSpells:
+  - {fileID: 11400000, guid: 46ee347a941d94e4f8f7d766255e46a7, type: 2}

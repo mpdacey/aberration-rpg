@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
-  m_Name: Explorer Tunic
+  m_Name: Sports Jersey
   m_EditorClassIdentifier: 
-  equipmentName: Explorer Tunic
-  equipmentHP: 25
-  equipmentSP: 8
+  equipmentName: Sports Jersey
+  equipmentHP: 0
+  equipmentSP: 0
   equipmentType: 1
   equipmentStats:
-    strength: 2
-    magic: 1
-    endurance: 5
-    agility: 2
-    luck: 2
-  equipmentAffinties: []
-  equipmentSpells: []
+    strength: 6
+    magic: 0
+    endurance: 14
+    agility: 18
+    luck: 0
+  equipmentAffinties:
+  - key: 3
+    value: 2
+  equipmentSpells:
+  - {fileID: 11400000, guid: e662c14f9f11e1b46adab12ac9db9b76, type: 2}

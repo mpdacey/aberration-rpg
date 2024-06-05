@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Wizard Glove
+  m_EditorClassIdentifier: 
+  equipmentName: Wizard Glove
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 2
+  equipmentStats:
+    strength: 0
+    magic: 17
+    endurance: 3
+    agility: 0
+    luck: 10
+  equipmentAffinties:
+  - key: 0
+    value: 1
+  - key: 2
+    value: 3
+  equipmentSpells:
+  - {fileID: 11400000, guid: ba1e02f8e5ad6cb41930aad93cb69978, type: 2}

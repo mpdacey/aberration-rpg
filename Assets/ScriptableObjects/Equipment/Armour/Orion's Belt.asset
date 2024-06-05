@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
+  m_Name: Orion's Belt
+  m_EditorClassIdentifier: 
+  equipmentName: Orion's Belt
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 1
+  equipmentStats:
+    strength: 28
+    magic: 13
+    endurance: 13
+    agility: 21
+    luck: 7
+  equipmentAffinties:
+  - key: 4
+    value: 3
+  - key: 0
+    value: 2
+  - key: 2
+    value: 2
+  equipmentSpells:
+  - {fileID: 11400000, guid: 1bb7d9329776fd946a015c304085f6ab, type: 2}

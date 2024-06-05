@@ -860,7 +860,7 @@ MonoBehaviour:
     weapon: {fileID: 11400000, guid: a849ab1efa5ed3243bc0df49e80d4442, type: 2}
     defense: {fileID: 11400000, guid: 6beae0ee0e91374459d337379f5b80a8, type: 2}
     trinkets:
-    - {fileID: 11400000, guid: 3f19b10f8888a654da098dc79a391cb0, type: 2}
+    - {fileID: 0}
     - {fileID: 0}
   partyMonsters: []
 --- !u!4 &1796975613
@@ -1033,10 +1033,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentTiers:
   - equipmentItems:
+    - {fileID: 11400000, guid: a849ab1efa5ed3243bc0df49e80d4442, type: 2}
+    - {fileID: 11400000, guid: 95a39873747fa7c44b63e17262104a81, type: 2}
+    - {fileID: 11400000, guid: 6beae0ee0e91374459d337379f5b80a8, type: 2}
+    - {fileID: 11400000, guid: eee2184f82201f347ad171e2034f2270, type: 2}
+    - {fileID: 11400000, guid: 010f2a3541a95eb449ad1321409ddd16, type: 2}
+    - {fileID: 11400000, guid: d35e7e44332d69249958e69eef347f78, type: 2}
+    - {fileID: 11400000, guid: 3f19b10f8888a654da098dc79a391cb0, type: 2}
+    - {fileID: 11400000, guid: 44b60f6cce3b1c9428da70cbb79a5615, type: 2}
+  - equipmentItems:
+    - {fileID: 11400000, guid: 2cbc3159764ac004a9169f9c48230303, type: 2}
+    - {fileID: 11400000, guid: e10a68c02333b234988f69daf07658ef, type: 2}
+    - {fileID: 11400000, guid: 7ce3883f360a7f2428668f29cf318a3b, type: 2}
+    - {fileID: 11400000, guid: 448126df10528454eb598aadfb88a8cb, type: 2}
     - {fileID: 11400000, guid: 047db6e5966dd2d47be0f0102c283ad6, type: 2}
-  - equipmentItems: []
-  - equipmentItems: []
-  - equipmentItems: []
+    - {fileID: 11400000, guid: 62c6b0d82a0674449a18d050070f768a, type: 2}
+    - {fileID: 11400000, guid: 901c260d51d0cd54f82756787a06ba32, type: 2}
+    - {fileID: 11400000, guid: 0a4ecfe9fc91b9144842b41bdf44c9a2, type: 2}
+  - equipmentItems:
+    - {fileID: 11400000, guid: 9cdc72513359eed40bbcb4685caf7644, type: 2}
+    - {fileID: 11400000, guid: 7f5486d4fe9bbfd45bae300fa05848c4, type: 2}
+    - {fileID: 11400000, guid: 651acca650c99ae49a556ee41022fd77, type: 2}
+    - {fileID: 11400000, guid: cb78141de7344fe40ba6509002ecbddb, type: 2}
+    - {fileID: 11400000, guid: 96156c6316890ae40b5630a8a2d86eec, type: 2}
+    - {fileID: 11400000, guid: 295aad83571028f429367fd8bb1f5d9c, type: 2}
+    - {fileID: 11400000, guid: 9572f087cfac7ef4784ee70328339c5c, type: 2}
+    - {fileID: 11400000, guid: 5baee1cdf53689543a1979dbf092eb0d, type: 2}
+  - equipmentItems:
+    - {fileID: 11400000, guid: 6f4f1b7b500719c40a40ec22c78160d6, type: 2}
+    - {fileID: 11400000, guid: 065363687fd84e047bee07f2a5021047, type: 2}
+    - {fileID: 11400000, guid: f61d66fc0c4de9e4386a43aba669f6a2, type: 2}
+    - {fileID: 11400000, guid: ba862b5130bd93f47995e09863f0418b, type: 2}
+    - {fileID: 11400000, guid: dc55e4ed1ed893949b369ff5e72c6c04, type: 2}
+    - {fileID: 11400000, guid: a3ff159bda522914da2c7ca38a0a6da3, type: 2}
+    - {fileID: 11400000, guid: d687fafdf2cb7d54d9b68f93aef47930, type: 2}
+    - {fileID: 11400000, guid: ae8979638d4243b4d9db603f77bff084, type: 2}
 --- !u!1001 &8937087326629629784
 PrefabInstance:
   m_ObjectHideFlags: 0

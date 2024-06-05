@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
-  m_Name: Broken Flashlight
+  m_Name: Explorer Boots
   m_EditorClassIdentifier: 
-  equipmentName: Broken Flashlight
-  equipmentHP: 8
-  equipmentSP: 8
-  equipmentType: 0
+  equipmentName: Explorer's Boots
+  equipmentHP: 0
+  equipmentSP: 0
+  equipmentType: 2
   equipmentStats:
-    strength: 2
-    magic: 3
-    endurance: 1
+    strength: 3
+    magic: 0
+    endurance: 2
     agility: 3
     luck: 1
+  equipmentAffinties: []
   equipmentSpells:
-  - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
+  - {fileID: 11400000, guid: 6d15a6187678ee945af7b2a6a7d230e7, type: 2}
