@@ -29,13 +29,18 @@ public class FieldMovementController : MonoBehaviour
     {
         GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration += SetPlayerOrientation;
+        SceneController.TitleSceneLoaded += OnTitle;
     }
 
     private void OnDisable()
     {
-        GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
+        GoalRiftController.GoalRiftEntered -= ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration -= SetPlayerOrientation;
+        SceneController.TitleSceneLoaded -= OnTitle;
     }
+
+    private void OnTitle() =>
+        lockedInPlace = false;
 
     private void ResetPlayerPosition()
     {
