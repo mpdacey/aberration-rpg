@@ -15,12 +15,12 @@ MonoBehaviour:
   equipmentName: 
   equipmentHP: 0
   equipmentSP: 0
-  equipmentType: 0
+  equipmentType: 2
   equipmentStats:
-    strength: 12
+    strength: 4
     magic: 0
-    endurance: 21
-    agility: 10
+    endurance: 11
+    agility: 4
     luck: 0
   equipmentAffinties:
   - key: 4
