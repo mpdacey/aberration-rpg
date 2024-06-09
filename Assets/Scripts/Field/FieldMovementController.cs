@@ -12,6 +12,7 @@ public class FieldMovementController : MonoBehaviour
     public static bool lockedInPlace = false;
     public AudioClip playerMovementSFX;
     [SerializeField] Animator movementAnimator;
+    private bool onTitle = false;
 
     private const string MOVE_FORWARD_STATE = "MoveForward";
     private const string BUMP_FORWARD_STATE = "MoveForwardBump";
@@ -30,6 +31,7 @@ public class FieldMovementController : MonoBehaviour
         GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration += SetPlayerOrientation;
         SceneController.TitleSceneLoaded += OnTitle;
+        SceneController.CombatSceneLoaded += OnCombat;
     }
 
     private void OnDisable()
@@ -37,10 +39,14 @@ public class FieldMovementController : MonoBehaviour
         GoalRiftController.GoalRiftEntered -= ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration -= SetPlayerOrientation;
         SceneController.TitleSceneLoaded -= OnTitle;
+        SceneController.CombatSceneLoaded -= OnCombat;
     }
 
     private void OnTitle() =>
-        lockedInPlace = false;
+        onTitle = true;
+
+    private void OnCombat() =>
+        onTitle = false;
 
     private void ResetPlayerPosition()
     {
@@ -87,7 +93,7 @@ public class FieldMovementController : MonoBehaviour
 
     void Update()
     {
-        if (lockedInPlace || !movementAnimator.GetCurrentAnimatorStateInfo(0).IsName(NULL_STATE))
+        if (lockedInPlace || onTitle || !movementAnimator.GetCurrentAnimatorStateInfo(0).IsName(NULL_STATE))
             return;
 
         float horizontal = Input.GetAxisRaw("Horizontal");
