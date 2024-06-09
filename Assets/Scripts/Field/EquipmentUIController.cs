@@ -50,13 +50,7 @@ public class EquipmentUIController : MonoBehaviour
     [SerializeField] AffinitySpritesScriptableObject affinitySprites;
     SpellUIObject[] spellObjects;
     int currentDisplayedSpellIndex = 0;
-    [SerializeField] Button defaultOfferButton;
     int selectedTrinketIndex = 0;
-
-    private void OnEnable()
-    {
-        defaultOfferButton.Select();
-    }
 
     private void Start()
     {
@@ -345,13 +339,5 @@ public class EquipmentUIController : MonoBehaviour
 
             affinityImages[i].sprite = affinitySprites.affinitySpriteDictionary[equipmentAffinties[i]];
         }
-    }
-
-    private void Update()
-    {
-        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
-
-        if (selectedObject == null)
-            defaultOfferButton.Select();
     }
 }
