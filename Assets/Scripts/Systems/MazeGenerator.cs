@@ -19,12 +19,14 @@ public class MazeGenerator : MonoBehaviour
     {
         GoalRiftController.GoalRiftEntered += GenerateMazeTexture;
         SceneController.TitleSceneLoaded += GenerateMazeTexture;
+        SceneController.CombatSceneLoaded += DisplayGeneratedMinimap;
     }
 
     private void OnDisable()
     {
         GoalRiftController.GoalRiftEntered -= GenerateMazeTexture;
         SceneController.TitleSceneLoaded -= GenerateMazeTexture;
+        SceneController.CombatSceneLoaded -= DisplayGeneratedMinimap;
     }
 
     private void GenerateMazeTexture()
@@ -51,6 +53,11 @@ public class MazeGenerator : MonoBehaviour
             testRenderer.sprite = testSprite;
         }
 
+        DisplayGeneratedMinimap();
+    }
+
+    private void DisplayGeneratedMinimap()
+    {
         if (MazeTextureGenerated != null)
             MazeTextureGenerated.Invoke(generatedTexture);
     }
