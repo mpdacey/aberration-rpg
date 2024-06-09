@@ -18,7 +18,7 @@ public class SceneController : MonoBehaviour
         StartCoroutine(LoadTitleScene());
     }
 
-    IEnumerator LoadTitleScene()
+    public IEnumerator LoadTitleScene()
     {
         UnloadScenes();
 
@@ -30,7 +30,7 @@ public class SceneController : MonoBehaviour
             TitleSceneLoaded.Invoke();
     }
 
-    IEnumerator LoadCombatScene()
+    public IEnumerator LoadCombatScene()
     {
         UnloadScenes();
 
