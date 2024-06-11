@@ -3493,6 +3493,7 @@ GameObject:
   - component: {fileID: 562135805}
   - component: {fileID: 562135804}
   - component: {fileID: 562135803}
+  - component: {fileID: 562135807}
   m_Layer: 5
   m_Name: GameoverMask
   m_TagString: Untagged
@@ -3589,6 +3590,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562135801}
   m_CullTransparentMesh: 1
+--- !u!114 &562135807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562135801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a7a2dc1f54c48439b6537c7aeccb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameoverAnimation: {fileID: 562135803}
+  gameoverFloorCounter: {fileID: 159046682}
 --- !u!1001 &586978334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11294,8 +11309,6 @@ MonoBehaviour:
   - {fileID: 1622869111}
   partyLineUpDefaultY: 53
   partyLineUpActiveY: 89
-  gameoverAnimation: {fileID: 562135803}
-  gameoverFloorCounter: {fileID: 159046682}
 --- !u!1 &1659866594
 GameObject:
   m_ObjectHideFlags: 0
