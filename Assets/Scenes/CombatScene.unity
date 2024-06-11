@@ -1403,6 +1403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 239613820}
   - component: {fileID: 239613821}
+  - component: {fileID: 239613822}
   m_Layer: 5
   m_Name: EquipmentPanel
   m_TagString: Untagged
@@ -1479,7 +1480,19 @@ MonoBehaviour:
   positiveColour: {r: 0.2627451, g: 0.5647059, b: 0.9490197, a: 1}
   negativeColour: {r: 0.8352942, g: 0.3803922, b: 0.3803922, a: 1}
   affinitySprites: {fileID: 11400000, guid: 1b49b363b441cee4cbe46d20cd6ced87, type: 2}
-  defaultOfferButton: {fileID: 1793540589}
+--- !u!114 &239613822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239613819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a3cf030bc951a42b0989eea8125801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 1793540589}
 --- !u!224 &246543794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126826238819231817, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
