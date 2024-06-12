@@ -150,5 +150,6 @@ public class PartyController : MonoBehaviour
         Array.Clear(partyMembers, 0, partyMembers.Length);
         Array.Clear(partyMonsters, 0, partyMonsters.Length);
         protagonistEquipment = protagonistEquipmentNonstatic;
+        SetPartyValues();
     }
 }
