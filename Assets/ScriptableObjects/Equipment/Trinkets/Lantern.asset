@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Lantern
   m_EditorClassIdentifier: 
+  Id: 56ef8936-823b-40ce-a770-ceb685bed33f
   equipmentName: Lantern
   equipmentHP: 0
   equipmentSP: 0

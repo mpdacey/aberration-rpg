@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Buzz Bunny
   m_EditorClassIdentifier: 
+  Id: 407180ee-7ab8-4aa3-858f-995fe9cbf4e2
   combatantName: Buzz Bunny
   combatantMaxHealth: 130
   combatantMaxStamina: 48

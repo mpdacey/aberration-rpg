@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Mage's Staff
   m_EditorClassIdentifier: 
+  Id: 62c72eae-3da2-4781-be4a-5b900960e437
   equipmentName: Mage's Staff
   equipmentHP: 0
   equipmentSP: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Philosopher's Stone
   m_EditorClassIdentifier: 
+  Id: 07a4bece-86d5-48e4-9295-e3cc285eb7e7
   equipmentName: Philosopher's Stone
   equipmentHP: 0
   equipmentSP: 0

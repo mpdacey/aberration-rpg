@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Gorillia
   m_EditorClassIdentifier: 
+  Id: 35d8ceb3-fe3e-428c-8167-c124a9b0c6ca
   combatantName: Gorillia
   combatantMaxHealth: 220
   combatantMaxStamina: 80

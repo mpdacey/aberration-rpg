@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Dragon's Tooth
   m_EditorClassIdentifier: 
+  Id: 116d7d2e-59c1-45a3-94fc-250f97c9dd40
   equipmentName: Dragon's Tooth
   equipmentHP: 0
   equipmentSP: 0

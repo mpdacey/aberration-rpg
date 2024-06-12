@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Developer
   m_EditorClassIdentifier: 
+  Id: cd0c0095-97f3-4341-9c43-93916af99c31
   combatantName: Developer
   combatantMaxHealth: 10
   combatantMaxStamina: 2

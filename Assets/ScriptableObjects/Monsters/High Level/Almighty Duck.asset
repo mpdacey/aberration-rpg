@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Almighty Duck
   m_EditorClassIdentifier: 
+  Id: 522b7229-43d2-4dd1-9193-0ad367dc8e32
   combatantName: Almighty Duck
   combatantMaxHealth: 250
   combatantMaxStamina: 32

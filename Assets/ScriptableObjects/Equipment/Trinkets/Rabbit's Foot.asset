@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Rabbit's Foot
   m_EditorClassIdentifier: 
+  Id: d747a84a-1f75-41af-84ac-3af0c19aa2d3
   equipmentName: Rabbit's Foot
   equipmentHP: 0
   equipmentSP: 0

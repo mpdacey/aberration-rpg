@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Orion's Belt
   m_EditorClassIdentifier: 
+  Id: b6c7df6a-0e2a-4c87-8145-1a1c242130a5
   equipmentName: Orion's Belt
   equipmentHP: 0
   equipmentSP: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Battery
   m_EditorClassIdentifier: 
+  Id: 6f24c342-ac85-413a-a574-96f020b67a1d
   equipmentName: Battery
   equipmentHP: 0
   equipmentSP: 0

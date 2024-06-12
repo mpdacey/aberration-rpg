@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Baton
   m_EditorClassIdentifier: 
+  Id: 9a1ceec8-767b-4f60-b0f5-e9a152701872
   equipmentName: Baton
   equipmentHP: 0
   equipmentSP: 0

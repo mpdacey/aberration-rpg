@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Machette
   m_EditorClassIdentifier: 
+  Id: cca2eeb6-0d42-4be6-80f6-135826326807
   equipmentName: Machette
   equipmentHP: 0
   equipmentSP: 0

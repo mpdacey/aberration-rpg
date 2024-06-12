@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Ski Suit
   m_EditorClassIdentifier: 
+  Id: 5b6022e2-5078-4e32-9ded-017b1c5eb62a
   equipmentName: Ski Suit
   equipmentHP: 0
   equipmentSP: 0

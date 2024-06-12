@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Dread Deer
   m_EditorClassIdentifier: 
+  Id: 1b367bf1-fb08-4b12-9e80-2be8a61425a1
   combatantName: Dread Deer
   combatantMaxHealth: 180
   combatantMaxStamina: 72

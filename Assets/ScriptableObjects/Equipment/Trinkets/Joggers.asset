@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Joggers
   m_EditorClassIdentifier: 
+  Id: 9c88df59-eb4d-4487-b6cd-ff0d45b140af
   equipmentName: Joggers
   equipmentHP: 0
   equipmentSP: 0

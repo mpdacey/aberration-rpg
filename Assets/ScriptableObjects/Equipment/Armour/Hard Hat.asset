@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Hard Hat
   m_EditorClassIdentifier: 
+  Id: a949d76d-ae42-4682-9846-eb5fc0368f88
   equipmentName: Hard Hat
   equipmentHP: 0
   equipmentSP: 0

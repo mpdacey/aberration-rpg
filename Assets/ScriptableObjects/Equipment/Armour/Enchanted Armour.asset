@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Enchanted Armour
   m_EditorClassIdentifier: 
+  Id: 0f0f73e4-67a0-4a71-8743-3515fdefef01
   equipmentName: Encharted Armour
   equipmentHP: 0
   equipmentSP: 0

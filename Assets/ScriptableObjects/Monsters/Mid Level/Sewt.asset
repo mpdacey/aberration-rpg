@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Sewt
   m_EditorClassIdentifier: 
+  Id: def0a103-a592-4aca-8862-6b83f9fe1f50
   combatantName: Sewt
   combatantMaxHealth: 125
   combatantMaxStamina: 56
