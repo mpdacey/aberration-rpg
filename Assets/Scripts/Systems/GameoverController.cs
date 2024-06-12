@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 
 public class GameoverController : MonoBehaviour
 {
+    public static event Action OnTitleEvent;
+    public static event Action OnRetryEvent;
+
     [SerializeField] Animation gameoverAnimation;
     public TextMeshProUGUI gameoverFloorCounter;
 
@@ -25,4 +27,16 @@ public class GameoverController : MonoBehaviour
 
     private void PlayGameoverAnimation() =>
         gameoverAnimation.Play();
+
+    public void OnRetryButtonPress()
+    {
+        if (OnRetryEvent != null)
+            OnRetryEvent.Invoke();
+    }
+
+    public void OnTitleButtonPress()
+    {
+        if (OnTitleEvent != null)
+            OnTitleEvent.Invoke();
+    }
 }

@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         sceneController = GetComponent<SceneController>();
+        if (ResetGameEvent != null)
+            ResetGameEvent.Invoke();
         CallTitleScene();
     }
 
@@ -27,6 +29,8 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady += SetPlayerUI;
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
         TitleManager.PlayButtonPressed += CallCombatScene;
+        GameoverController.OnRetryEvent += ResetGame;
+        GameoverController.OnTitleEvent += CallTitleScene;
     }
 
     private void OnDisable()
@@ -34,6 +38,8 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady -= SetPlayerUI;
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
         TitleManager.PlayButtonPressed -= CallCombatScene;
+        GameoverController.OnRetryEvent -= ResetGame;
+        GameoverController.OnTitleEvent -= CallTitleScene;
     }
 
     private void SetPlayerUI()
@@ -53,11 +59,12 @@ public class GameController : MonoBehaviour
         currentLevel = 0;
         if (ResetGameEvent != null)
             ResetGameEvent.Invoke();
+
+        CallCombatScene();
     }
 
     private void CallCombatScene()
     {
-        ResetGame();
         StartCoroutine(sceneController.LoadCombatScene());
     }
 
