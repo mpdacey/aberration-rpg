@@ -21,11 +21,13 @@ public class FormationSelector : MonoBehaviour
     private void OnEnable()
     {
         MonsterEncounterController.ThreatTriggered += GetFormation;
+        GameController.ResetGameEvent += ResetHasFoughtBefore;
     }
 
     private void OnDisable()
     {
         MonsterEncounterController.ThreatTriggered -= GetFormation;
+        GameController.ResetGameEvent -= ResetHasFoughtBefore;
     }
 
     private void GetFormation()
@@ -50,4 +52,7 @@ public class FormationSelector : MonoBehaviour
         if (FormationSelected != null)
             FormationSelected.Invoke();
     }
+
+    private void ResetHasFoughtBefore() =>
+        hasFoughtBefore = false;
 }
