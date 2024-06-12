@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Monster", menuName = "Scriptable Objects/Combatant")]
-public class CombatantScriptableObject : ScriptableObject
+public class CombatantScriptableObject : BaseScriptableObject
 {
     [System.Serializable]
     public struct CombatantStats
