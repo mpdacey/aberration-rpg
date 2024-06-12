@@ -12,12 +12,6 @@ public class SceneController : MonoBehaviour
     private const int COMBAT_SCENE_INDEX = 1;
     private const int TITLE_SCENE_INDEX = 2;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(LoadTitleScene());
-    }
-
     public IEnumerator LoadTitleScene()
     {
         UnloadScenes();
