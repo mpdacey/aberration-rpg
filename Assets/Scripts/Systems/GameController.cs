@@ -29,8 +29,8 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady += SetPlayerUI;
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
         TitleManager.PlayButtonPressed += CallCombatScene;
-        GameoverController.OnRetryEvent += ResetGame;
-        GameoverController.OnTitleEvent += CallTitleScene;
+        GameoverController.OnRetryEvent += ResetCombatScene;
+        GameoverController.OnTitleEvent += ResetTitleScene;
     }
 
     private void OnDisable()
@@ -38,8 +38,8 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady -= SetPlayerUI;
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
         TitleManager.PlayButtonPressed -= CallCombatScene;
-        GameoverController.OnRetryEvent -= ResetGame;
-        GameoverController.OnTitleEvent -= CallTitleScene;
+        GameoverController.OnRetryEvent -= ResetCombatScene;
+        GameoverController.OnTitleEvent -= ResetTitleScene;
     }
 
     private void SetPlayerUI()
@@ -54,13 +54,23 @@ public class GameController : MonoBehaviour
     private void IncrementCurrentLevel() =>
         currentLevel++;
 
+    private void ResetCombatScene()
+    {
+        ResetGame();
+        CallCombatScene();
+    }
+
+    private void ResetTitleScene()
+    {
+        ResetGame();
+        CallTitleScene();
+    }
+
     private void ResetGame()
     {
         currentLevel = 0;
         if (ResetGameEvent != null)
             ResetGameEvent.Invoke();
-
-        CallCombatScene();
     }
 
     private void CallCombatScene()
