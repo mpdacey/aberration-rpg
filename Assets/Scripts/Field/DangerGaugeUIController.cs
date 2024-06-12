@@ -16,7 +16,7 @@ public class DangerGaugeUIController : MonoBehaviour
     public ThreatColourPairs[] threatColourPairs;
     Dictionary<MonsterEncounterController.ThreatLevel, Color> threatLevelColours = new Dictionary<MonsterEncounterController.ThreatLevel, Color>();
     
-    void Start()
+    void Awake()
     {
         foreach (var pair in threatColourPairs)
             threatLevelColours.Add(pair.key, pair.value);
