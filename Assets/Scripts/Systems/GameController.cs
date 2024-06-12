@@ -4,6 +4,7 @@ using System;
 public class GameController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
+    public static event Action ResetGameEvent;
 
     public static int CurrentLevel
     {
@@ -47,8 +48,16 @@ public class GameController : MonoBehaviour
     private void IncrementCurrentLevel() =>
         currentLevel++;
 
+    private void ResetGame()
+    {
+        currentLevel = 0;
+        if (ResetGameEvent != null)
+            ResetGameEvent.Invoke();
+    }
+
     private void CallCombatScene()
     {
+        ResetGame();
         StartCoroutine(sceneController.LoadCombatScene());
     }
 
