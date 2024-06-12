@@ -29,6 +29,7 @@ public class FieldMovementController : MonoBehaviour
     private void OnEnable()
     {
         GoalRiftController.GoalRiftEntered += ResetPlayerPosition;
+        GameController.ResetGameEvent += ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration += SetPlayerOrientation;
         SceneController.TitleSceneLoaded += OnTitle;
         SceneController.CombatSceneLoaded += OnCombat;
@@ -37,16 +38,23 @@ public class FieldMovementController : MonoBehaviour
     private void OnDisable()
     {
         GoalRiftController.GoalRiftEntered -= ResetPlayerPosition;
+        GameController.ResetGameEvent -= ResetPlayerPosition;
         LevelGenerator.FinishedLevelGeneration -= SetPlayerOrientation;
         SceneController.TitleSceneLoaded -= OnTitle;
         SceneController.CombatSceneLoaded -= OnCombat;
     }
 
-    private void OnTitle() =>
+    private void OnTitle()
+    {
         onTitle = true;
+        lockedInPlace = true;
+    }
 
-    private void OnCombat() =>
+    private void OnCombat()
+    {
         onTitle = false;
+        lockedInPlace = false;
+    }
 
     private void ResetPlayerPosition()
     {

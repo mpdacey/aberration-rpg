@@ -30,10 +30,10 @@ public class PartyController : MonoBehaviour
 
     private void OnEnable()
     {
-        protagonistEquipment = protagonistEquipmentNonstatic;
         SceneController.CombatSceneLoaded += SetPartyValues;
         EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += HealParty;
+        GameController.ResetGameEvent += ResetParty;
     }
 
     private void OnDisable()
@@ -41,6 +41,7 @@ public class PartyController : MonoBehaviour
         SceneController.CombatSceneLoaded -= SetPartyValues;
         EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= HealParty;
+        GameController.ResetGameEvent += ResetParty;
     }
 
     private void HealParty()
@@ -142,5 +143,12 @@ public class PartyController : MonoBehaviour
             if (PartyLineUpChanged != null)
                 PartyLineUpChanged.Invoke(null, index);
         }
+    }
+
+    private void ResetParty()
+    {
+        Array.Clear(partyMembers, 0, partyMembers.Length);
+        Array.Clear(partyMonsters, 0, partyMonsters.Length);
+        protagonistEquipment = protagonistEquipmentNonstatic;
     }
 }

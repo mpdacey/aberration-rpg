@@ -18,14 +18,14 @@ public class MazeGenerator : MonoBehaviour
     private void OnEnable()
     {
         GoalRiftController.GoalRiftEntered += GenerateMazeTexture;
-        SceneController.TitleSceneLoaded += GenerateMazeTexture;
+        GameController.ResetGameEvent += GenerateMazeTexture;
         SceneController.CombatSceneLoaded += DisplayGeneratedMinimap;
     }
 
     private void OnDisable()
     {
         GoalRiftController.GoalRiftEntered -= GenerateMazeTexture;
-        SceneController.TitleSceneLoaded -= GenerateMazeTexture;
+        GameController.ResetGameEvent -= GenerateMazeTexture;
         SceneController.CombatSceneLoaded -= DisplayGeneratedMinimap;
     }
 
