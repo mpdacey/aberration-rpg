@@ -74,18 +74,24 @@ public class DataManager : MonoBehaviour
 
     private void SetSeenAffinitiesPlayerPrefs()
     {
-        Dictionary<string, int> convertedSeenAffinities = new Dictionary<string, int>();
+        JSONObject seenAffinitiesObject = new();
+
         var seenAffinities = SeenMonsterAffinities.GetAllSeenAffinities();
         foreach (KeyValuePair<CombatantScriptableObject, bool[]> item in seenAffinities)
         {
             BitArray bitArray = new(item.Value);
             int[] storedValue = new int[1];
             bitArray.CopyTo(storedValue, 0);
-            convertedSeenAffinities.Add(item.Key.Id, storedValue[0]);
-        }
-        PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, JsonUtility.ToJson(convertedSeenAffinities));
 
-        Debug.Log(JsonUtility.ToJson(convertedSeenAffinities));
+            JSONObject currentMonsterAffinities = new();
+            currentMonsterAffinities.AddField("ID", item.Key.Id);
+            currentMonsterAffinities.AddField("Affinities", storedValue[0]);
+            seenAffinitiesObject.Add(currentMonsterAffinities);
+        }
+
+        PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, seenAffinitiesObject.ToString());
+
+        Debug.Log(PlayerPrefs.GetString(DISCOVERED_AFFINITIES_KEY));
     }
 
     private JSONObject GetEquipmentObject(EquipmentScriptableObject scriptableObject)
