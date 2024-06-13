@@ -54,13 +54,22 @@ public class DataManager : MonoBehaviour
 
     private void SetPartyMonsterPlayerPrefs()
     {
-        Dictionary<string, int> monsterObjects = new Dictionary<string, int>();
+        JSONObject partyMonstersObject = new();
         for (int i = 1; i < PartyController.partyMembers.Length; i++)
+        {
+            JSONObject currentMonsterObject = new();
             if (PartyController.partyMembers[i].HasValue)
-                monsterObjects.Add(PartyController.partyMembers[i].Value.partyMemberBaseStats.Id, PartyController.partyMembers[i].Value.currentSP);
-        PlayerPrefs.SetString(PARTY_KEY, JsonUtility.ToJson(monsterObjects));
+            {
+                currentMonsterObject.AddField("ID", PartyController.partyMembers[i].Value.partyMemberBaseStats.Id);
+                currentMonsterObject.AddField("SP", PartyController.partyMembers[i].Value.currentSP);
+            }
 
-        Debug.Log(JsonUtility.ToJson(monsterObjects));
+            partyMonstersObject.Add(currentMonsterObject);
+        }
+
+        PlayerPrefs.SetString(PARTY_KEY, partyMonstersObject.ToString());
+
+        Debug.Log(PlayerPrefs.GetString(PARTY_KEY));
     }
 
     private void SetSeenAffinitiesPlayerPrefs()
