@@ -2,14 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Defective.JSON;
 
 public class DataManager : MonoBehaviour
 {
-    const string FLOOR_KEY = "Floor";
-    const string EQUIPMENT_KEY = "Equipment";
-    const string PROTAG_SP_KEY = "PlayerSP";
-    const string PARTY_KEY = "Party";
-    const string DISCOVERED_AFFINITIES_KEY = "DiscoveredAffinities";
+    const string FLOOR_KEY = "Cryptemental_Floor";
+    const string EQUIPMENT_KEY = "Cryptemental_Equipment";
+    const string PROTAG_SP_KEY = "Cryptemental_PlayerSP";
+    const string PARTY_KEY = "Cryptemental_Party";
+    const string DISCOVERED_AFFINITIES_KEY = "Cryptemental_DiscoveredAffinities";
 
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
@@ -34,12 +35,21 @@ public class DataManager : MonoBehaviour
 
     private void SetEquipmentPlayerPrefs()
     {
-        PlayerEquipmentObject[] equipmentObjects = new PlayerEquipmentObject[4];
-        equipmentObjects[0] = GetEquipmentObject(PartyController.protagonistEquipment.weapon);
-        equipmentObjects[1] = GetEquipmentObject(PartyController.protagonistEquipment.defense);
-        equipmentObjects[2] = GetEquipmentObject(PartyController.protagonistEquipment.trinkets[0]);
-        equipmentObjects[3] = GetEquipmentObject(PartyController.protagonistEquipment.trinkets[1]);
-        PlayerPrefs.SetString(EQUIPMENT_KEY, JsonUtility.ToJson(equipmentObjects));
+        JSONObject equipmentJSON = new();
+
+        equipmentJSON.AddField("Weapon", GetEquipmentObject(PartyController.protagonistEquipment.weapon));
+        equipmentJSON.AddField("Armour", GetEquipmentObject(PartyController.protagonistEquipment.defense));
+
+        JSONObject trinketsJSON = new()
+        {
+            GetEquipmentObject(PartyController.protagonistEquipment.trinkets[0]),
+            GetEquipmentObject(PartyController.protagonistEquipment.trinkets[1])
+        };
+        equipmentJSON.AddField("Trinkets", trinketsJSON);
+
+        PlayerPrefs.SetString(EQUIPMENT_KEY, equipmentJSON.ToString());
+
+        Debug.Log(PlayerPrefs.GetString(EQUIPMENT_KEY));
     }
 
     private void SetPartyMonsterPlayerPrefs()
@@ -49,6 +59,8 @@ public class DataManager : MonoBehaviour
             if (PartyController.partyMembers[i].HasValue)
                 monsterObjects.Add(PartyController.partyMembers[i].Value.partyMemberBaseStats.Id, PartyController.partyMembers[i].Value.currentSP);
         PlayerPrefs.SetString(PARTY_KEY, JsonUtility.ToJson(monsterObjects));
+
+        Debug.Log(JsonUtility.ToJson(monsterObjects));
     }
 
     private void SetSeenAffinitiesPlayerPrefs()
@@ -63,26 +75,31 @@ public class DataManager : MonoBehaviour
             convertedSeenAffinities.Add(item.Key.Id, storedValue[0]);
         }
         PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, JsonUtility.ToJson(convertedSeenAffinities));
+
+        Debug.Log(JsonUtility.ToJson(convertedSeenAffinities));
     }
 
-    private PlayerEquipmentObject GetEquipmentObject(EquipmentScriptableObject scriptableObject)
+    private JSONObject GetEquipmentObject(EquipmentScriptableObject scriptableObject)
     {
-        PlayerEquipmentObject current = new PlayerEquipmentObject();
+        JSONObject currentJSON = new();
 
-        if (scriptableObject == null) return current;
+        if (scriptableObject == null) return currentJSON;
+
+        currentJSON.AddField("ID", scriptableObject.Id);
 
         EquipmentScriptableObject baseEquipment = (EquipmentScriptableObject)equipmentDatabase.database[scriptableObject.Id];
+        JSONObject bonusesObject = new() 
+        {
+            scriptableObject.equipmentStats.strength - baseEquipment.equipmentStats.strength,
+            scriptableObject.equipmentStats.magic - baseEquipment.equipmentStats.magic,
+            scriptableObject.equipmentStats.endurance - baseEquipment.equipmentStats.endurance,
+            scriptableObject.equipmentStats.agility - baseEquipment.equipmentStats.agility,
+            scriptableObject.equipmentStats.luck - baseEquipment.equipmentStats.luck
+        };
+        currentJSON.AddField("Bonuses", bonusesObject);
 
-        current.ID = scriptableObject.Id;
-        current.bonuses = new int[5];
-        current.bonuses[0] = scriptableObject.equipmentStats.strength - baseEquipment.equipmentStats.strength;
-        current.bonuses[1] = scriptableObject.equipmentStats.magic - baseEquipment.equipmentStats.magic;
-        current.bonuses[2] = scriptableObject.equipmentStats.endurance - baseEquipment.equipmentStats.endurance;
-        current.bonuses[3] = scriptableObject.equipmentStats.agility - baseEquipment.equipmentStats.agility;
-        current.bonuses[4] = scriptableObject.equipmentStats.luck - baseEquipment.equipmentStats.luck;
+        currentJSON.AddField("Upgraded", scriptableObject.equipmentName.EndsWith("+"));
 
-        current.upgraded = scriptableObject.equipmentName.EndsWith("+");
-
-        return current;
+        return currentJSON;
     }
 }
