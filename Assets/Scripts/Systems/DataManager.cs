@@ -37,13 +37,13 @@ public class DataManager : MonoBehaviour
     {
         JSONObject equipmentJSON = new();
 
-        equipmentJSON.AddField("Weapon", GetEquipmentObject(PartyController.protagonistEquipment.weapon));
-        equipmentJSON.AddField("Armour", GetEquipmentObject(PartyController.protagonistEquipment.defense));
+        equipmentJSON.AddField("Weapon", GetEquipmentJSONObject(PartyController.protagonistEquipment.weapon));
+        equipmentJSON.AddField("Armour", GetEquipmentJSONObject(PartyController.protagonistEquipment.defense));
 
         JSONObject trinketsJSON = new()
         {
-            GetEquipmentObject(PartyController.protagonistEquipment.trinkets[0]),
-            GetEquipmentObject(PartyController.protagonistEquipment.trinkets[1])
+            GetEquipmentJSONObject(PartyController.protagonistEquipment.trinkets[0]),
+            GetEquipmentJSONObject(PartyController.protagonistEquipment.trinkets[1])
         };
         equipmentJSON.AddField("Trinkets", trinketsJSON);
 
@@ -94,7 +94,7 @@ public class DataManager : MonoBehaviour
         Debug.Log(PlayerPrefs.GetString(DISCOVERED_AFFINITIES_KEY));
     }
 
-    private JSONObject GetEquipmentObject(EquipmentScriptableObject scriptableObject)
+    private JSONObject GetEquipmentJSONObject(EquipmentScriptableObject scriptableObject)
     {
         JSONObject currentJSON = new();
 
@@ -117,4 +117,5 @@ public class DataManager : MonoBehaviour
 
         return currentJSON;
     }
+    #endregion
 }
