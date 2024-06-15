@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Defective.JSON;
+using SpellType = SpellScriptableObject.SpellType;
 
 public class DataManager : MonoBehaviour
 {
@@ -126,6 +127,7 @@ public class DataManager : MonoBehaviour
     {
         LoadEquipmentPlayerPrefs();
         LoadPartyMonsterPlayerPrefs();
+        LoadSeenAffinitiesPlayerPrefs();
     }
 
     private void LoadEquipmentPlayerPrefs()
@@ -192,6 +194,36 @@ public class DataManager : MonoBehaviour
             monster.currentHP = monster.partyMemberBaseStats.combatantMaxHealth;
             monster.currentSP = partyMonstersJSONObject[i - 1].GetField("SP").intValue;
             PartyController.SetPartyMember(monster, i);
+        }
+    }
+
+    private void LoadSeenAffinitiesPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey(DISCOVERED_AFFINITIES_KEY))
+        {
+            Debug.LogError("Affinities were not saved in Player Prefs");
+            return;
+        }
+
+        JSONObject seenAffinitiesJSON = JSONObject.Create(PlayerPrefs.GetString(DISCOVERED_AFFINITIES_KEY));
+
+        if(seenAffinitiesJSON == null || seenAffinitiesJSON.ToString() == "null")
+        {
+            Debug.LogWarning("seenAffinitiesJSON is null");
+            return;
+        }
+
+        SeenMonsterAffinities.ClearSeenAffinity();
+
+        JSONObject[] monsterAffinitiesList = seenAffinitiesJSON.list.ToArray();
+
+        for(int i = 0; i < monsterAffinitiesList.Length; i++)
+        {
+            var monster = (CombatantScriptableObject)monsterDatabase.database[monsterAffinitiesList[i].GetField("ID").stringValue];
+            var seenToggles = new BitArray(new int[] { monsterAffinitiesList[i].GetField("Affinities").intValue });
+            for(int j = 0; j < seenToggles.Length; j++)
+                if (seenToggles.Get(j))
+                    SeenMonsterAffinities.UpdateAffinityWitness(monster, (SpellType)j);
         }
     }
 
