@@ -6,6 +6,8 @@ using Defective.JSON;
 
 public class DataManager : MonoBehaviour
 {
+    public static event Action<EquipmentState> LoadEquipment;
+
     const string FLOOR_KEY = "Cryptemental_Floor";
     const string EQUIPMENT_KEY = "Cryptemental_Equipment";
     const string PROTAG_SP_KEY = "Cryptemental_PlayerSP";
@@ -15,14 +17,14 @@ public class DataManager : MonoBehaviour
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
 
-    [Serializable]
-    struct PlayerEquipmentObject
+    public struct EquipmentState
     {
-        public string ID;
-        public int[] bonuses;
-        public bool upgraded;
+        public EquipmentScriptableObject weapon;
+        public EquipmentScriptableObject armour;
+        public EquipmentScriptableObject[] trinkets;
     }
 
+    #region Saving Progress
     public void SaveProgress()
     {
         PlayerPrefs.SetInt(FLOOR_KEY, GameController.CurrentLevel);
@@ -117,5 +119,55 @@ public class DataManager : MonoBehaviour
 
         return currentJSON;
     }
+    #endregion
+
+    #region Load Progress
+    public void LoadProgress()
+    {
+        LoadEquipmentPlayerPrefs();
+    }
+
+    private void LoadEquipmentPlayerPrefs()
+    {
+        if (LoadEquipment == null) return;
+
+        if (!PlayerPrefs.HasKey(EQUIPMENT_KEY))
+        {
+            Debug.LogError("Equipment not saved in Player Prefs");
+            return;
+        }
+
+        JSONObject equipmentJSONObject = JSONObject.Create(PlayerPrefs.GetString(EQUIPMENT_KEY));
+
+        EquipmentState equipmentPacket = new EquipmentState();
+
+        equipmentPacket.weapon = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Weapon"));
+        equipmentPacket.armour = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Armour"));
+        equipmentPacket.trinkets = new EquipmentScriptableObject[2];
+        equipmentPacket.trinkets[0] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[0]);
+        equipmentPacket.trinkets[1] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[1]);
+
+        LoadEquipment.Invoke(equipmentPacket);
+    }
+
+    private EquipmentScriptableObject GetEquipmentScriptableObject(JSONObject json)
+    {
+        if (!json || json.ToString() == "null") return null;
+
+        EquipmentScriptableObject equipment = Instantiate((EquipmentScriptableObject)equipmentDatabase.database[json.GetField("ID").stringValue]);
+
+        if (json.GetField("Upgraded").boolValue)
+            equipment.equipmentName += "+";
+
+        var bonuses = json.GetField("Bonuses").list;
+        equipment.equipmentStats.strength += bonuses[0].intValue;
+        equipment.equipmentStats.magic += bonuses[1].intValue;
+        equipment.equipmentStats.endurance += bonuses[2].intValue;
+        equipment.equipmentStats.agility += bonuses[3].intValue;
+        equipment.equipmentStats.luck += bonuses[4].intValue;
+
+        return equipment;
+    }
+
     #endregion
 }

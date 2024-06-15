@@ -19,6 +19,6 @@ public class DataManagerEditor : Editor
             component.SaveProgress();
 
         if (GUILayout.Button("Load Progress"))
-            ;//component.LoadProgress();
+            component.LoadProgress();
     }
 }

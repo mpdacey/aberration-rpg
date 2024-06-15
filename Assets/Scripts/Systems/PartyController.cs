@@ -69,6 +69,7 @@ public class PartyController : MonoBehaviour
         tempProtag.currentHP = tempProtag.partyMemberBaseStats.combatantMaxHealth;
         tempProtag.currentSP = tempProtag.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = tempProtag;
+        protagonistEquipmentNonstatic = protagonistEquipment;
 
         for (int i = 0; i < 3; i++)
         {
