@@ -125,6 +125,7 @@ public class DataManager : MonoBehaviour
     public void LoadProgress()
     {
         LoadEquipmentPlayerPrefs();
+        LoadPartyMonsterPlayerPrefs();
     }
 
     private void LoadEquipmentPlayerPrefs()
@@ -167,6 +168,31 @@ public class DataManager : MonoBehaviour
         equipment.equipmentStats.luck += bonuses[4].intValue;
 
         return equipment;
+    }
+
+    private void LoadPartyMonsterPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey(PARTY_KEY))
+        {
+            Debug.LogError("Party not saved in Player Prefs");
+            return;
+        }
+
+        List<JSONObject> partyMonstersJSONObject = JSONObject.Create(PlayerPrefs.GetString(PARTY_KEY)).list;
+
+        for(int i = 1; i < PartyController.partyMembers.Length; i++)
+        {
+            if (partyMonstersJSONObject[i - 1] == null || partyMonstersJSONObject[i - 1].ToString() == "null")
+            {
+                PartyController.SetPartyMember(null, i);
+                continue;
+            }
+            PartyController.PartyMember monster = new();
+            monster.partyMemberBaseStats = (CombatantScriptableObject)monsterDatabase.database[partyMonstersJSONObject[i - 1].GetField("ID").stringValue];
+            monster.currentHP = monster.partyMemberBaseStats.combatantMaxHealth;
+            monster.currentSP = partyMonstersJSONObject[i - 1].GetField("SP").intValue;
+            PartyController.SetPartyMember(monster, i);
+        }
     }
 
     #endregion
