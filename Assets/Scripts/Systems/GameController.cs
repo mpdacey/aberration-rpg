@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     private static int currentLevel = 0;
 
     SceneController sceneController;
+    DataManager dataManager;
 
     void Start()
     {
@@ -29,10 +30,13 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady += SetPlayerUI;
         SceneController.CombatSceneLoaded += SetPlayerUI;
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
+        GoalRiftController.GoalRiftEntered += AutoSaveGame;
         TitleManager.PlayButtonPressed += CallCombatScene;
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
-        DataManager.SetFloorLevel += SetFloorLevel;
+
+        if(dataManager == null) dataManager = GetComponent<DataManager>();
+        dataManager.SetFloorLevel += SetFloorLevel;
     }
 
     private void OnDisable()
@@ -40,10 +44,11 @@ public class GameController : MonoBehaviour
         PartyController.PartyIsReady -= SetPlayerUI;
         SceneController.CombatSceneLoaded -= SetPlayerUI;
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
+        GoalRiftController.GoalRiftEntered -= AutoSaveGame;
         TitleManager.PlayButtonPressed -= CallCombatScene;
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
-        DataManager.SetFloorLevel -= SetFloorLevel;
+        dataManager.SetFloorLevel -= SetFloorLevel;
     }
 
     private void SetPlayerUI()
@@ -76,6 +81,9 @@ public class GameController : MonoBehaviour
         if (ResetGameEvent != null)
             ResetGameEvent.Invoke();
     }
+
+    private void AutoSaveGame() =>
+        dataManager.SaveProgress();
 
     public void SetFloorLevel(int value) =>
         currentLevel = value;

@@ -9,7 +9,7 @@ using Cryptemental.Data;
 public class DataManager : MonoBehaviour
 {
     public static event Action<EquipmentState> LoadEquipment;
-    public static event Action<int> SetFloorLevel;
+    public event Action<int> SetFloorLevel;
 
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
