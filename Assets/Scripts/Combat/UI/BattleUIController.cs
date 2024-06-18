@@ -30,6 +30,7 @@ public class BattleUIController : MonoBehaviour
         GameController.SetPartyMember += SetPartyValues;
         GoalRiftController.GoalRiftEntered += PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered += UpdateFloorCounter;
+        SceneController.CombatSceneLoaded += UpdateFloorCounter;
         PartyController.PartyLineUpChanged += SetPartyValues;
         RecruitmentController.UpdatePlayerHP += UpdateHealth;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;

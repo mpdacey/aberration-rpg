@@ -9,6 +9,7 @@ using Cryptemental.Data;
 public class DataManager : MonoBehaviour
 {
     public static event Action<EquipmentState> LoadEquipment;
+    public static event Action<int> SetFloorLevel;
 
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
@@ -113,9 +114,30 @@ public class DataManager : MonoBehaviour
     #region Load Progress
     public void LoadProgress()
     {
+        if (!PlayerPrefs.HasKey(PlayerPrefsKeys.FLOOR_KEY))
+        {
+            Debug.LogError("Attempted to load player prefs without saving first");
+            return;
+        }
+
+        if (SetFloorLevel != null) SetFloorLevel.Invoke(PlayerPrefs.GetInt(PlayerPrefsKeys.FLOOR_KEY));
+        LoadProtagonistPlayerSP();
         LoadEquipmentPlayerPrefs();
         LoadPartyMonsterPlayerPrefs();
         LoadSeenAffinitiesPlayerPrefs();
+    }
+
+    private void LoadProtagonistPlayerSP()
+    {
+        if (!PartyController.partyMembers[0].HasValue)
+        {
+            Debug.LogError("Party controller does not have protagonist party member.");
+            return;
+        }
+
+        var temp = PartyController.partyMembers[0].Value;
+        temp.currentSP = PlayerPrefs.GetInt(PlayerPrefsKeys.PROTAG_SP_KEY);
+        PartyController.partyMembers[0] = temp;
     }
 
     private void LoadEquipmentPlayerPrefs()

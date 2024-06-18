@@ -30,7 +30,6 @@ public class PartyController : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneController.CombatSceneLoaded += SetPartyValues;
         EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += HealParty;
         GameController.ResetGameEvent += ResetParty;
@@ -38,7 +37,6 @@ public class PartyController : MonoBehaviour
 
     private void OnDisable()
     {
-        SceneController.CombatSceneLoaded -= SetPartyValues;
         EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= HealParty;
         GameController.ResetGameEvent += ResetParty;
