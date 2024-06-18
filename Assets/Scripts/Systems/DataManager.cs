@@ -30,13 +30,12 @@ public class DataManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(FLOOR_KEY, GameController.CurrentLevel);
         PlayerPrefs.SetInt(PROTAG_SP_KEY, PartyController.partyMembers[0].Value.currentSP);
-
-        SetEquipmentPlayerPrefs();
-        SetPartyMonsterPlayerPrefs();
-        SetSeenAffinitiesPlayerPrefs();
+        PlayerPrefs.SetString(EQUIPMENT_KEY, GetEquipmentJSONString());
+        PlayerPrefs.SetString(PARTY_KEY, GetPartyMonsterJSONString());
+        PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, GetSeenAffinitiesJSONString());
     }
 
-    private void SetEquipmentPlayerPrefs()
+    private string GetEquipmentJSONString()
     {
         JSONObject equipmentJSON = new();
 
@@ -50,12 +49,10 @@ public class DataManager : MonoBehaviour
         };
         equipmentJSON.AddField("Trinkets", trinketsJSON);
 
-        PlayerPrefs.SetString(EQUIPMENT_KEY, equipmentJSON.ToString());
-
-        Debug.Log(PlayerPrefs.GetString(EQUIPMENT_KEY));
+        return equipmentJSON.ToString();
     }
 
-    private void SetPartyMonsterPlayerPrefs()
+    private string GetPartyMonsterJSONString()
     {
         JSONObject partyMonstersObject = new();
         for (int i = 1; i < PartyController.partyMembers.Length; i++)
@@ -70,12 +67,10 @@ public class DataManager : MonoBehaviour
             partyMonstersObject.Add(currentMonsterObject);
         }
 
-        PlayerPrefs.SetString(PARTY_KEY, partyMonstersObject.ToString());
-
-        Debug.Log(PlayerPrefs.GetString(PARTY_KEY));
+        return partyMonstersObject.ToString();
     }
 
-    private void SetSeenAffinitiesPlayerPrefs()
+    private string GetSeenAffinitiesJSONString()
     {
         JSONObject seenAffinitiesObject = new();
 
@@ -92,9 +87,7 @@ public class DataManager : MonoBehaviour
             seenAffinitiesObject.Add(currentMonsterAffinities);
         }
 
-        PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, seenAffinitiesObject.ToString());
-
-        Debug.Log(PlayerPrefs.GetString(DISCOVERED_AFFINITIES_KEY));
+        return seenAffinitiesObject.ToString();
     }
 
     private JSONObject GetEquipmentJSONObject(EquipmentScriptableObject scriptableObject)
