@@ -4,16 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Defective.JSON;
 using SpellType = SpellScriptableObject.SpellType;
+using Cryptemental.Data;
 
 public class DataManager : MonoBehaviour
 {
     public static event Action<EquipmentState> LoadEquipment;
-
-    const string FLOOR_KEY = "Cryptemental_Floor";
-    const string EQUIPMENT_KEY = "Cryptemental_Equipment";
-    const string PROTAG_SP_KEY = "Cryptemental_PlayerSP";
-    const string PARTY_KEY = "Cryptemental_Party";
-    const string DISCOVERED_AFFINITIES_KEY = "Cryptemental_DiscoveredAffinities";
 
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
@@ -28,11 +23,11 @@ public class DataManager : MonoBehaviour
     #region Saving Progress
     public void SaveProgress()
     {
-        PlayerPrefs.SetInt(FLOOR_KEY, GameController.CurrentLevel);
-        PlayerPrefs.SetInt(PROTAG_SP_KEY, PartyController.partyMembers[0].Value.currentSP);
-        PlayerPrefs.SetString(EQUIPMENT_KEY, GetEquipmentJSONString());
-        PlayerPrefs.SetString(PARTY_KEY, GetPartyMonsterJSONString());
-        PlayerPrefs.SetString(DISCOVERED_AFFINITIES_KEY, GetSeenAffinitiesJSONString());
+        PlayerPrefs.SetInt(PlayerPrefsKeys.FLOOR_KEY, GameController.CurrentLevel);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.PROTAG_SP_KEY, PartyController.partyMembers[0].Value.currentSP);
+        PlayerPrefs.SetString(PlayerPrefsKeys.EQUIPMENT_KEY, GetEquipmentJSONString());
+        PlayerPrefs.SetString(PlayerPrefsKeys.PARTY_KEY, GetPartyMonsterJSONString());
+        PlayerPrefs.SetString(PlayerPrefsKeys.DISCOVERED_AFFINITIES_KEY, GetSeenAffinitiesJSONString());
     }
 
     private string GetEquipmentJSONString()
@@ -127,13 +122,13 @@ public class DataManager : MonoBehaviour
     {
         if (LoadEquipment == null) return;
 
-        if (!PlayerPrefs.HasKey(EQUIPMENT_KEY))
+        if (!PlayerPrefs.HasKey(PlayerPrefsKeys.EQUIPMENT_KEY))
         {
             Debug.LogError("Equipment not saved in Player Prefs");
             return;
         }
 
-        JSONObject equipmentJSONObject = JSONObject.Create(PlayerPrefs.GetString(EQUIPMENT_KEY));
+        JSONObject equipmentJSONObject = JSONObject.Create(PlayerPrefs.GetString(PlayerPrefsKeys.EQUIPMENT_KEY));
 
         EquipmentState equipmentPacket = new EquipmentState();
 
@@ -167,13 +162,13 @@ public class DataManager : MonoBehaviour
 
     private void LoadPartyMonsterPlayerPrefs()
     {
-        if (!PlayerPrefs.HasKey(PARTY_KEY))
+        if (!PlayerPrefs.HasKey(PlayerPrefsKeys.PARTY_KEY))
         {
             Debug.LogError("Party not saved in Player Prefs");
             return;
         }
 
-        List<JSONObject> partyMonstersJSONObject = JSONObject.Create(PlayerPrefs.GetString(PARTY_KEY)).list;
+        List<JSONObject> partyMonstersJSONObject = JSONObject.Create(PlayerPrefs.GetString(PlayerPrefsKeys.PARTY_KEY)).list;
 
         for(int i = 1; i < PartyController.partyMembers.Length; i++)
         {
@@ -192,13 +187,13 @@ public class DataManager : MonoBehaviour
 
     private void LoadSeenAffinitiesPlayerPrefs()
     {
-        if (!PlayerPrefs.HasKey(DISCOVERED_AFFINITIES_KEY))
+        if (!PlayerPrefs.HasKey(PlayerPrefsKeys.DISCOVERED_AFFINITIES_KEY))
         {
             Debug.LogError("Affinities were not saved in Player Prefs");
             return;
         }
 
-        JSONObject seenAffinitiesJSON = JSONObject.Create(PlayerPrefs.GetString(DISCOVERED_AFFINITIES_KEY));
+        JSONObject seenAffinitiesJSON = JSONObject.Create(PlayerPrefs.GetString(PlayerPrefsKeys.DISCOVERED_AFFINITIES_KEY));
 
         if(seenAffinitiesJSON == null || seenAffinitiesJSON.ToString() == "null")
         {
