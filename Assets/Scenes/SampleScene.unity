@@ -857,13 +857,19 @@ MonoBehaviour:
     partyMemberBaseStats: {fileID: 11400000, guid: 998b75cfe3f38644e843342591665e9c, type: 2}
     currentHP: 0
     currentSP: 0
-  protagonistEquipmentNonstatic:
+  initialEquipment:
     weapon: {fileID: 11400000, guid: a849ab1efa5ed3243bc0df49e80d4442, type: 2}
     defense: {fileID: 11400000, guid: 6beae0ee0e91374459d337379f5b80a8, type: 2}
     trinkets:
     - {fileID: 0}
     - {fileID: 0}
   partyMonsters: []
+  protagonistEquipmentNonstatic:
+    weapon: {fileID: 11400000, guid: a849ab1efa5ed3243bc0df49e80d4442, type: 2}
+    defense: {fileID: 11400000, guid: 6beae0ee0e91374459d337379f5b80a8, type: 2}
+    trinkets:
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!4 &1796975613
 Transform:
   m_ObjectHideFlags: 0

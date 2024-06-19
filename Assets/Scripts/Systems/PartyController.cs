@@ -15,7 +15,7 @@ public class PartyController : MonoBehaviour
     }
 
     [Serializable]
-    public struct ProtagonistEquipment
+    public class ProtagonistEquipment
     {
         public EquipmentScriptableObject weapon;
         public EquipmentScriptableObject defense;
@@ -25,8 +25,9 @@ public class PartyController : MonoBehaviour
     public static PartyMember?[] partyMembers = new PartyMember?[4];
     public static ProtagonistEquipment protagonistEquipment;
     public PartyMember protagonist;
-    public ProtagonistEquipment protagonistEquipmentNonstatic;
+    [SerializeField] private ProtagonistEquipment initialEquipment;
     public PartyMember[] partyMonsters;
+    [SerializeField] private ProtagonistEquipment protagonistEquipmentNonstatic;
 
     private void OnEnable()
     {
@@ -67,7 +68,6 @@ public class PartyController : MonoBehaviour
         tempProtag.currentHP = tempProtag.partyMemberBaseStats.combatantMaxHealth;
         tempProtag.currentSP = tempProtag.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = tempProtag;
-        protagonistEquipmentNonstatic = protagonistEquipment;
 
         for (int i = 0; i < 3; i++)
         {
@@ -148,7 +148,25 @@ public class PartyController : MonoBehaviour
     {
         Array.Clear(partyMembers, 0, partyMembers.Length);
         Array.Clear(partyMonsters, 0, partyMonsters.Length);
-        protagonistEquipment = protagonistEquipmentNonstatic;
+        ResetProtagonistEquipment();
         SetPartyValues();
+    }
+
+    private void ResetProtagonistEquipment()
+    {
+        if (protagonistEquipment == null)
+        {
+            protagonistEquipment = new ProtagonistEquipment();
+            protagonistEquipment.trinkets = new EquipmentScriptableObject[initialEquipment.trinkets.Length];
+        }
+
+        protagonistEquipment.weapon = initialEquipment.weapon;
+        protagonistEquipment.defense = initialEquipment.defense;
+        protagonistEquipment.trinkets[0] = initialEquipment.trinkets[0];
+        protagonistEquipment.trinkets[1] = initialEquipment.trinkets[1];
+
+        // Assigns protagonistEquipment memory address to protagonistEquipmentNonstatic
+        // Therefore, we don't need to update it when ever protagonistEquipment is updated
+        protagonistEquipmentNonstatic = protagonistEquipment;
     }
 }
