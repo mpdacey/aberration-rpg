@@ -20,5 +20,8 @@ public class DataManagerEditor : Editor
 
         if (GUILayout.Button("Load Progress"))
             component.LoadProgress();
+
+        if (GUILayout.Button("Clear Progress"))
+            component.ClearProgress();
     }
 }

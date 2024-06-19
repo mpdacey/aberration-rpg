@@ -223,4 +223,13 @@ public class DataManager : MonoBehaviour
     }
 
     #endregion
+
+    public void ClearProgress()
+    {
+        PlayerPrefs.SetInt(PlayerPrefsKeys.FLOOR_KEY, 0);
+        PlayerPrefs.SetInt(PlayerPrefsKeys.PROTAG_SP_KEY, 0);
+        PlayerPrefs.SetString(PlayerPrefsKeys.EQUIPMENT_KEY, "{}");
+        PlayerPrefs.SetString(PlayerPrefsKeys.PARTY_KEY, "{}");
+        PlayerPrefs.SetString(PlayerPrefsKeys.DISCOVERED_AFFINITIES_KEY, "{}");
+    }
 }

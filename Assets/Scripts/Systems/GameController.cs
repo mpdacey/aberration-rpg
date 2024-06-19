@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
         TitleManager.ContinueButtonPressed += ContinueGame;
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
+        CombatController.GameoverEvent += ClearProgress;
 
         if(dataManager == null) dataManager = GetComponent<DataManager>();
         dataManager.SetFloorLevel += SetFloorLevel;
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
         TitleManager.ContinueButtonPressed -= ContinueGame;
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
+        CombatController.GameoverEvent -= ClearProgress;
         dataManager.SetFloorLevel -= SetFloorLevel;
     }
 
@@ -98,6 +100,9 @@ public class GameController : MonoBehaviour
 
     public void SetFloorLevel(int value) =>
         currentLevel = value;
+
+    private void ClearProgress() =>
+        dataManager.ClearProgress();
 
     private void CallCombatScene()
     {
