@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Umbrella
   m_EditorClassIdentifier: 
+  Id: 320b5681-67e6-46f3-8665-d5546308abc0
   equipmentName: Umbrella
   equipmentHP: 0
   equipmentSP: 0

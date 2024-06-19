@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Broken Flashlight
   m_EditorClassIdentifier: 
+  Id: 1451d297-0e7e-4816-8284-e0102396814e
   equipmentName: Broken Flashlight
   equipmentHP: 0
   equipmentSP: 0

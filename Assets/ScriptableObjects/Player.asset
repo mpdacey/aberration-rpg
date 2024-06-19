@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  Id: 4b68c68c-d0f7-4c88-8643-883929537a92
   combatantName: Maggie
   combatantMaxHealth: 100
   combatantMaxStamina: 30

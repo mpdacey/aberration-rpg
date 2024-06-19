@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Hockey Mask
   m_EditorClassIdentifier: 
+  Id: e9ece98a-fa26-4cf6-a3aa-f14158e88b04
   equipmentName: 
   equipmentHP: 0
   equipmentSP: 0

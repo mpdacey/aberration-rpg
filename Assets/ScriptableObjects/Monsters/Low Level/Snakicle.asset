@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Snakicle
   m_EditorClassIdentifier: 
+  Id: c0141ee2-3c56-451a-a1ce-0c4d2d57336d
   combatantName: Snakicle
   combatantMaxHealth: 75
   combatantMaxStamina: 24

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Tactical Vest
   m_EditorClassIdentifier: 
+  Id: c9a90bec-1326-4fec-8841-ef2bf76d4a25
   equipmentName: Tactical Vest
   equipmentHP: 0
   equipmentSP: 0

@@ -826,11 +826,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796975613}
+  - component: {fileID: 1796975617}
+  - component: {fileID: 1796975616}
+  - component: {fileID: 1796975620}
   - component: {fileID: 1796975612}
   - component: {fileID: 1796975614}
   - component: {fileID: 1796975615}
-  - component: {fileID: 1796975616}
-  - component: {fileID: 1796975617}
   - component: {fileID: 1796975618}
   - component: {fileID: 1796975619}
   m_Layer: 0
@@ -1068,6 +1069,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a3ff159bda522914da2c7ca38a0a6da3, type: 2}
     - {fileID: 11400000, guid: d687fafdf2cb7d54d9b68f93aef47930, type: 2}
     - {fileID: 11400000, guid: ae8979638d4243b4d9db603f77bff084, type: 2}
+--- !u!114 &1796975620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa0c89def2778149a2fa5c4c7b86bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterDatabase: {fileID: 11400000, guid: ac99f114693896c4b901f3282ea5c1c4, type: 2}
+  equipmentDatabase: {fileID: 11400000, guid: c957721fd7a683743ba1224c872b6881, type: 2}
 --- !u!1001 &8937087326629629784
 PrefabInstance:
   m_ObjectHideFlags: 0

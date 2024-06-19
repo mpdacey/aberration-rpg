@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Alliglacier
   m_EditorClassIdentifier: 
+  Id: 7624be64-48ef-42a7-9a32-afec4a849f94
   combatantName: Alliglacier
   combatantMaxHealth: 140
   combatantMaxStamina: 36

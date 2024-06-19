@@ -4,6 +4,11 @@ public class SeenMonsterAffinities
 {
     private static Dictionary<CombatantScriptableObject, bool[]> seenMonsterAffinities = new Dictionary<CombatantScriptableObject, bool[]>();
 
+    public static Dictionary<CombatantScriptableObject, bool[]> GetAllSeenAffinities()
+    {
+        return seenMonsterAffinities;
+    }
+
     public static bool[] GetAffinityWitnesses(CombatantScriptableObject monster)
     {
         if (!seenMonsterAffinities.ContainsKey(monster))

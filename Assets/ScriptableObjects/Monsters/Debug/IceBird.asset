@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: IceBird
   m_EditorClassIdentifier: 
+  Id: 8822dc91-6041-492e-9524-783da2802581
   combatantName: Ice Owl
   combatantMaxHealth: 70
   combatantMaxStamina: 32

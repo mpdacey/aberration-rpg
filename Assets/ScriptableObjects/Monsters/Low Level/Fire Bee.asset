@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Fire Bee
   m_EditorClassIdentifier: 
+  Id: ae8b848e-6352-4411-8f5f-59b63a5dabf5
   combatantName: Fire Bee
   combatantMaxHealth: 65
   combatantMaxStamina: 36

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Wizard Glove
   m_EditorClassIdentifier: 
+  Id: e0109368-d280-46b9-b0dc-78bafb1c6b17
   equipmentName: Wizard Glove
   equipmentHP: 0
   equipmentSP: 0

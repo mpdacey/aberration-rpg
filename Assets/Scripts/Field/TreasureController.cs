@@ -62,6 +62,8 @@ public class TreasureController : MonoBehaviour
             selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-1, 4));
         }
 
+        selectedEquipment.Id = equipmentTiers[tierIndex].equipmentItems[itemIndex].Id;
+
         if (TreasureEquipmentGenerated != null)
             TreasureEquipmentGenerated.Invoke(selectedEquipment);
     }

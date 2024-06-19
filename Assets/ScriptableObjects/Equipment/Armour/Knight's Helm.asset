@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Knight's Helm
   m_EditorClassIdentifier: 
+  Id: bdc9d657-edad-4c4c-99ae-bd2ddcc259f3
   equipmentName: Knight's Helm
   equipmentHP: 0
   equipmentSP: 0

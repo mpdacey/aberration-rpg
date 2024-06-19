@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Ice Pack
   m_EditorClassIdentifier: 
+  Id: 35befd04-1d71-49e2-96a2-1bb40ae097bd
   equipmentName: Ice Pack
   equipmentHP: 0
   equipmentSP: 0

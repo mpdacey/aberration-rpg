@@ -22,19 +22,21 @@ public class FormationSelector : MonoBehaviour
     {
         MonsterEncounterController.ThreatTriggered += GetFormation;
         GameController.ResetGameEvent += ResetHasFoughtBefore;
+        GameController.ContinueGameEvent += TickHasFoughtBefore;
     }
 
     private void OnDisable()
     {
         MonsterEncounterController.ThreatTriggered -= GetFormation;
         GameController.ResetGameEvent -= ResetHasFoughtBefore;
+        GameController.ContinueGameEvent -= TickHasFoughtBefore;
     }
 
     private void GetFormation()
     {
         if (!hasFoughtBefore)
         {
-            hasFoughtBefore = true;
+            TickHasFoughtBefore();
             InvokeFormation(introFormation);
             return;
         }
@@ -52,6 +54,9 @@ public class FormationSelector : MonoBehaviour
         if (FormationSelected != null)
             FormationSelected.Invoke();
     }
+
+    private void TickHasFoughtBefore() =>
+        hasFoughtBefore = true;
 
     private void ResetHasFoughtBefore() =>
         hasFoughtBefore = false;

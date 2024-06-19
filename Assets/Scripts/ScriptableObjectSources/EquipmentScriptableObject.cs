@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Equipment", menuName = "Scriptable Objects/Equipment")]
-public class EquipmentScriptableObject : ScriptableObject
+public class EquipmentScriptableObject : BaseScriptableObject
 {
     public enum EquipmentType
     {

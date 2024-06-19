@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Bug Net
   m_EditorClassIdentifier: 
+  Id: fa893917-8550-4ff5-aee1-7dc6ff439c51
   equipmentName: Bug Net
   equipmentHP: 0
   equipmentSP: 0

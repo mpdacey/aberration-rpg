@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Stun Gun
   m_EditorClassIdentifier: 
+  Id: ef9e21d8-c63d-496f-8498-0e1039d8dc8f
   equipmentName: Stun Gun
   equipmentHP: 0
   equipmentSP: 0

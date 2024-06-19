@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Thrumming Bird
   m_EditorClassIdentifier: 
+  Id: d7700017-4967-4bf8-b59c-42a0d3e158af
   combatantName: Thrumming Bird
   combatantMaxHealth: 80
   combatantMaxStamina: 40

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Flying Pig
   m_EditorClassIdentifier: 
+  Id: 996d4f86-3553-462a-a827-0acebdc2a7fd
   combatantName: Flying Pig
   combatantMaxHealth: 120
   combatantMaxStamina: 52

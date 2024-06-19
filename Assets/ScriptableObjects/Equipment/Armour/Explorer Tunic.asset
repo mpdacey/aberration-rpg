@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Explorer Tunic
   m_EditorClassIdentifier: 
+  Id: 92f5a496-8e0c-4b8d-a773-5737938b2a98
   equipmentName: Explorer Tunic
   equipmentHP: 0
   equipmentSP: 0

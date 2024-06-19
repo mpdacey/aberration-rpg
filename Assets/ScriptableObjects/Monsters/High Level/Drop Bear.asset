@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Drop Bear
   m_EditorClassIdentifier: 
+  Id: 0afda82a-4783-416e-9735-3d53382a0138
   combatantName: Drop Bear
   combatantMaxHealth: 175
   combatantMaxStamina: 64

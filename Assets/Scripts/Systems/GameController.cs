@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
     public static event Action ResetGameEvent;
+    public static event Action ContinueGameEvent;
 
     public static int CurrentLevel
     {
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour
     private static int currentLevel = 0;
 
     SceneController sceneController;
+    DataManager dataManager;
 
     void Start()
     {
@@ -27,19 +29,31 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         PartyController.PartyIsReady += SetPlayerUI;
+        SceneController.CombatSceneLoaded += SetPlayerUI;
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
+        GoalRiftController.GoalRiftEntered += AutoSaveGame;
         TitleManager.PlayButtonPressed += CallCombatScene;
+        TitleManager.ContinueButtonPressed += ContinueGame;
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
+        CombatController.GameoverEvent += ClearProgress;
+
+        if(dataManager == null) dataManager = GetComponent<DataManager>();
+        dataManager.SetFloorLevel += SetFloorLevel;
     }
 
     private void OnDisable()
     {
         PartyController.PartyIsReady -= SetPlayerUI;
+        SceneController.CombatSceneLoaded -= SetPlayerUI;
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
+        GoalRiftController.GoalRiftEntered -= AutoSaveGame;
         TitleManager.PlayButtonPressed -= CallCombatScene;
+        TitleManager.ContinueButtonPressed -= ContinueGame;
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
+        CombatController.GameoverEvent -= ClearProgress;
+        dataManager.SetFloorLevel -= SetFloorLevel;
     }
 
     private void SetPlayerUI()
@@ -72,6 +86,23 @@ public class GameController : MonoBehaviour
         if (ResetGameEvent != null)
             ResetGameEvent.Invoke();
     }
+
+    private void AutoSaveGame() =>
+        dataManager.SaveProgress();
+
+    private void ContinueGame()
+    {
+        dataManager.LoadProgress();
+        if (ContinueGameEvent != null && currentLevel > 0)
+            ContinueGameEvent.Invoke();
+        CallCombatScene();
+    }
+
+    public void SetFloorLevel(int value) =>
+        currentLevel = value;
+
+    private void ClearProgress() =>
+        dataManager.ClearProgress();
 
     private void CallCombatScene()
     {

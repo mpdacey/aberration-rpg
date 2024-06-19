@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Power Ring
   m_EditorClassIdentifier: 
+  Id: 514f26ec-32e7-4875-8d60-5f6d17d2d976
   equipmentName: Power Ring
   equipmentHP: 0
   equipmentSP: 0

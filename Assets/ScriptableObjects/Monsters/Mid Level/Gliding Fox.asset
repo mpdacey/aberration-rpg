@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Gliding Fox
   m_EditorClassIdentifier: 
+  Id: 1ff71d6f-b9c0-413a-85e8-1faa51abdd2c
   combatantName: Gliding Fox
   combatantMaxHealth: 110
   combatantMaxStamina: 44

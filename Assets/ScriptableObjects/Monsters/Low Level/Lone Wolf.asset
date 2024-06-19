@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Lone Wolf
   m_EditorClassIdentifier: 
+  Id: 97ac6d8d-dfee-4bdb-9ae3-ea4cdd421b77
   combatantName: Lone Wolf
   combatantMaxHealth: 90
   combatantMaxStamina: 24

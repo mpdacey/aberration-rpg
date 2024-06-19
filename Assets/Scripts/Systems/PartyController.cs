@@ -30,7 +30,6 @@ public class PartyController : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneController.CombatSceneLoaded += SetPartyValues;
         EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += HealParty;
         GameController.ResetGameEvent += ResetParty;
@@ -38,7 +37,6 @@ public class PartyController : MonoBehaviour
 
     private void OnDisable()
     {
-        SceneController.CombatSceneLoaded -= SetPartyValues;
         EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= HealParty;
         GameController.ResetGameEvent += ResetParty;
@@ -69,6 +67,7 @@ public class PartyController : MonoBehaviour
         tempProtag.currentHP = tempProtag.partyMemberBaseStats.combatantMaxHealth;
         tempProtag.currentSP = tempProtag.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = tempProtag;
+        protagonistEquipmentNonstatic = protagonistEquipment;
 
         for (int i = 0; i < 3; i++)
         {

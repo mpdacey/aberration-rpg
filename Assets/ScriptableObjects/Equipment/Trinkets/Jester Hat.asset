@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Jester Hat
   m_EditorClassIdentifier: 
+  Id: a95cd492-ba1c-4d4b-85e9-3d2733368fa4
   equipmentName: Jester Hat
   equipmentHP: 0
   equipmentSP: 0

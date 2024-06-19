@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
   m_Name: Eleplant
   m_EditorClassIdentifier: 
+  Id: 2c95cb65-6ba2-4980-8251-7dc5089e1d09
   combatantName: Eleplant
   combatantMaxHealth: 210
   combatantMaxStamina: 56

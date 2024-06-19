@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Candle
   m_EditorClassIdentifier: 
+  Id: e9f8d960-e5aa-462a-add4-0ed83cdb8858
   equipmentName: Candle
   equipmentHP: 0
   equipmentSP: 0

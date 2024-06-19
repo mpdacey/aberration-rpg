@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Southern Cross
   m_EditorClassIdentifier: 
+  Id: 80b36faa-e4eb-4a2f-8469-6e9b8bbd0c86
   equipmentName: Southern Cross
   equipmentHP: 0
   equipmentSP: 0

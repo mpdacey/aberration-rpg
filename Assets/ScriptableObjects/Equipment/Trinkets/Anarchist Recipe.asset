@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580ff69ed8782948b8bacec94c83810, type: 3}
   m_Name: Anarchist Recipe
   m_EditorClassIdentifier: 
+  Id: 3ff735d0-2292-40ce-9144-1de5ff683bfe
   equipmentName: Anarchist Recipe
   equipmentHP: 0
   equipmentSP: 0
