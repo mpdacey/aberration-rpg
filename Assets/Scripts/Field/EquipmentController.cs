@@ -20,14 +20,12 @@ public class EquipmentController : MonoBehaviour
     {
         TreasureController.TreasureEquipmentGenerated += ContructOffer;
         FieldMovementController.TreasureFoundAnimator += GetTreasureRiftAnimator;
-        DataManager.LoadEquipment += LoadEquipment;
     }
 
     private void OnDisable()
     {
         TreasureController.TreasureEquipmentGenerated -= ContructOffer;
         FieldMovementController.TreasureFoundAnimator -= GetTreasureRiftAnimator;
-        DataManager.LoadEquipment -= LoadEquipment;
     }
     public void SetOfferState(int value) =>
         state = (OfferState)value;
@@ -94,17 +92,6 @@ public class EquipmentController : MonoBehaviour
                 else PartyController.protagonistEquipment.trinkets[1] = incomingEquipment;
                 break;
         }
-
-        if (EquipmentUpdated != null)
-            EquipmentUpdated.Invoke();
-    }
-
-    private void LoadEquipment(DataManager.EquipmentState incomingEquipment)
-    {
-        PartyController.protagonistEquipment.weapon = incomingEquipment.weapon;
-        PartyController.protagonistEquipment.defense = incomingEquipment.armour;
-        PartyController.protagonistEquipment.trinkets[0] = incomingEquipment.trinkets[0];
-        PartyController.protagonistEquipment.trinkets[1] = incomingEquipment.trinkets[1];
 
         if (EquipmentUpdated != null)
             EquipmentUpdated.Invoke();

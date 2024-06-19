@@ -8,18 +8,10 @@ using Cryptemental.Data;
 
 public class DataManager : MonoBehaviour
 {
-    public static event Action<EquipmentState> LoadEquipment;
     public event Action<int> SetFloorLevel;
 
     public ScriptableObjectDatabase monsterDatabase;
     public ScriptableObjectDatabase equipmentDatabase;
-
-    public struct EquipmentState
-    {
-        public EquipmentScriptableObject weapon;
-        public EquipmentScriptableObject armour;
-        public EquipmentScriptableObject[] trinkets;
-    }
 
     #region Saving Progress
     public void SaveProgress()
@@ -142,8 +134,6 @@ public class DataManager : MonoBehaviour
 
     private void LoadEquipmentPlayerPrefs()
     {
-        if (LoadEquipment == null) return;
-
         if (!PlayerPrefs.HasKey(PlayerPrefsKeys.EQUIPMENT_KEY))
         {
             Debug.LogError("Equipment not saved in Player Prefs");
@@ -152,15 +142,10 @@ public class DataManager : MonoBehaviour
 
         JSONObject equipmentJSONObject = JSONObject.Create(PlayerPrefs.GetString(PlayerPrefsKeys.EQUIPMENT_KEY));
 
-        EquipmentState equipmentPacket = new EquipmentState();
-
-        equipmentPacket.weapon = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Weapon"));
-        equipmentPacket.armour = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Armour"));
-        equipmentPacket.trinkets = new EquipmentScriptableObject[2];
-        equipmentPacket.trinkets[0] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[0]);
-        equipmentPacket.trinkets[1] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[1]);
-
-        LoadEquipment.Invoke(equipmentPacket);
+        PartyController.protagonistEquipment.weapon = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Weapon"));
+        PartyController.protagonistEquipment.defense = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Armour"));
+        PartyController.protagonistEquipment.trinkets[0] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[0]);
+        PartyController.protagonistEquipment.trinkets[1] = GetEquipmentScriptableObject(equipmentJSONObject.GetField("Trinkets").list[1]);
     }
 
     private EquipmentScriptableObject GetEquipmentScriptableObject(JSONObject json)
