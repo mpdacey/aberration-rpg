@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
     public static event Action ResetGameEvent;
+    public static event Action ContinueGameEvent;
 
     public static int CurrentLevel
     {
@@ -32,6 +33,7 @@ public class GameController : MonoBehaviour
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
         GoalRiftController.GoalRiftEntered += AutoSaveGame;
         TitleManager.PlayButtonPressed += CallCombatScene;
+        TitleManager.ContinueButtonPressed += ContinueGame;
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
 
@@ -46,6 +48,7 @@ public class GameController : MonoBehaviour
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
         GoalRiftController.GoalRiftEntered -= AutoSaveGame;
         TitleManager.PlayButtonPressed -= CallCombatScene;
+        TitleManager.ContinueButtonPressed -= ContinueGame;
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
         dataManager.SetFloorLevel -= SetFloorLevel;
@@ -84,6 +87,14 @@ public class GameController : MonoBehaviour
 
     private void AutoSaveGame() =>
         dataManager.SaveProgress();
+
+    private void ContinueGame()
+    {
+        dataManager.LoadProgress();
+        if (ContinueGameEvent != null && currentLevel > 0)
+            ContinueGameEvent.Invoke();
+        CallCombatScene();
+    }
 
     public void SetFloorLevel(int value) =>
         currentLevel = value;
