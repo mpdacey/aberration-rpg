@@ -11323,8 +11323,8 @@ MonoBehaviour:
   - {fileID: 1689702924}
   - {fileID: 1465054744}
   - {fileID: 1622869111}
-  partyLineUpDefaultY: 53
-  partyLineUpActiveY: 89
+  partyLineUpDefaultY: 30
+  partyLineUpActiveY: 71.5
 --- !u!1 &1659866594
 GameObject:
   m_ObjectHideFlags: 0
