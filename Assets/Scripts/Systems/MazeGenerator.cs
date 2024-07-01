@@ -11,10 +11,15 @@ public class MazeGenerator : MonoBehaviour
     public List<Vector2Int> visited = new List<Vector2Int>();
     public List<Vector2Int> walls = new List<Vector2Int>();
     private Vector2Int gridSize = new Vector2Int(16, 16);
-    public SpriteRenderer testRenderer;
     private Color[] cells;
     private Texture2D generatedTexture;
 
+#if UNITY_EDITOR
+    [Header("Testing")]
+    [SerializeField] private SpriteRenderer testRenderer;
+    [SerializeField] private Texture2D testTexture;
+    [SerializeField] private bool useTestTexture;
+#endif
     private void OnEnable()
     {
         GoalRiftController.GoalRiftEntered += GenerateMazeTexture;
@@ -31,6 +36,14 @@ public class MazeGenerator : MonoBehaviour
 
     private void GenerateMazeTexture()
     {
+#if UNITY_EDITOR
+        if (useTestTexture)
+        {
+            generatedTexture = testTexture;
+            DisplayGeneratedMinimap();
+            return;
+        }
+#endif
         var newFloorGridSize = startingSize + (GameController.CurrentLevel / 3);
         gridSize = new Vector2Int(newFloorGridSize, newFloorGridSize);
         cells = new Color[gridSize.x * gridSize.y];
