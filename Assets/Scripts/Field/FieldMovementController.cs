@@ -73,7 +73,7 @@ public class FieldMovementController : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            Vector3 rayOrigin = transform.position + transform.rotation * Vector3.forward * 5;
+            Vector3 rayOrigin = transform.rotation * Vector3.forward * 5;
             Ray ray = new Ray(rayOrigin, Vector3.down * 3);
             if (Physics.Raycast(ray))
             {

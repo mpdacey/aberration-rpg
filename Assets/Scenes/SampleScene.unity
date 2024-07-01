@@ -650,6 +650,8 @@ MonoBehaviour:
   visited: []
   walls: []
   testRenderer: {fileID: 0}
+  testTexture: {fileID: 2800000, guid: 8fd53830e2678d74485847d3d3fc09a9, type: 3}
+  useTestTexture: 0
 --- !u!114 &951064613
 MonoBehaviour:
   m_ObjectHideFlags: 0
