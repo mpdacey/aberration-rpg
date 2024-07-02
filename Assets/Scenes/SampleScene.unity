@@ -666,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treasureRiftPrefab: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
   treasureContainer: {fileID: 259109407}
-  treasureSpawnChance: 0.215
+  treasureSpawnChance: 0.35
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
