@@ -45,21 +45,21 @@ public class TreasureController : MonoBehaviour
         int itemIndex = Mathf.Clamp(Mathf.FloorToInt(equipmentTiers[tierIndex].equipmentItems.Length * Random.value), 0, equipmentTiers[tierIndex].equipmentItems.Length-1);
 
         EquipmentScriptableObject selectedEquipment = Instantiate(equipmentTiers[tierIndex].equipmentItems[itemIndex]);
-        selectedEquipment.equipmentStats.strength += Mathf.Max(0,Random.Range(-3, 6));
-        selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-3, 6));
-        selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-3, 6));
-        selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-3, 6));
-        selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-3, 6));
+        selectedEquipment.equipmentStats.strength += Mathf.Max(0,Random.Range(-2, 4));
+        selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-2, 4));
+        selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-2, 4));
+        selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-2, 4));
+        selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-2, 4));
 
         bool upgraded = (tierQuality - Math.Truncate(tierQuality)) > 0.5f;
         if (upgraded)
         {
             selectedEquipment.equipmentName += "+";
-            selectedEquipment.equipmentStats.strength += Mathf.Max(0, Random.Range(-1, 4));
-            selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-1, 4));
-            selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-1, 4));
-            selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-1, 4));
-            selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-1, 4));
+            selectedEquipment.equipmentStats.strength += Mathf.Max(0, Random.Range(-1, 3));
+            selectedEquipment.equipmentStats.magic += Mathf.Max(0, Random.Range(-1, 3));
+            selectedEquipment.equipmentStats.endurance += Mathf.Max(0, Random.Range(-1, 3));
+            selectedEquipment.equipmentStats.agility += Mathf.Max(0, Random.Range(-1, 3));
+            selectedEquipment.equipmentStats.luck += Mathf.Max(0, Random.Range(-1, 3));
         }
 
         selectedEquipment.Id = equipmentTiers[tierIndex].equipmentItems[itemIndex].Id;
