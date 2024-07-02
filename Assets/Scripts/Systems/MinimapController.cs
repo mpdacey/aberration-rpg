@@ -25,6 +25,7 @@ public class MinimapController : MonoBehaviour
         MazeGenerator.MazeTextureGenerated += DrawNewMinimap;
         FieldMovementController.PlayerPositionChanged += UpdatePlayerPosition;
         FieldMovementController.PlayerRotationChanged += UpdatePlayerRotation;
+        FieldMovementController.SetPlayerRotation += SetPlayerRotation;
     }
 
     private void OnDisable()
@@ -32,6 +33,7 @@ public class MinimapController : MonoBehaviour
         MazeGenerator.MazeTextureGenerated -= DrawNewMinimap;
         FieldMovementController.PlayerPositionChanged -= UpdatePlayerPosition;
         FieldMovementController.PlayerRotationChanged -= UpdatePlayerRotation;
+        FieldMovementController.SetPlayerRotation -= SetPlayerRotation;
     }
 
     private void DrawNewMinimap(Texture2D mazeTexture)
@@ -130,6 +132,11 @@ public class MinimapController : MonoBehaviour
     private void UpdatePlayerRotation(Vector3 newRotation)
     {
         playerEntity.Rotate(newRotation);
+    }
+
+    private void SetPlayerRotation(Vector3 playerRotation)
+    {
+        playerEntity.rotation = Quaternion.Euler(new Vector3(0, 0, playerRotation.y));
     }
 
     private void SetPortalPosition(Vector2 portalPosition)

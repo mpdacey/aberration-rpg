@@ -6,6 +6,7 @@ public class FieldMovementController : MonoBehaviour
 {
     public static event Action<Vector3> PlayerPositionChanged;
     public static event Action<Vector3> PlayerRotationChanged;
+    public static event Action<Vector3> SetPlayerRotation;
     public static event Action TreasureFound;
     public static event Action<Animator> TreasureFoundAnimator;
 
@@ -54,6 +55,9 @@ public class FieldMovementController : MonoBehaviour
     {
         onTitle = false;
         lockedInPlace = false;
+
+        if (SetPlayerRotation != null)
+            SetPlayerRotation.Invoke(-transform.rotation.eulerAngles);
     }
 
     private void ResetPlayerPosition()
