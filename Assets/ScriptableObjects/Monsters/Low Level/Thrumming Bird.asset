@@ -17,11 +17,11 @@ MonoBehaviour:
   combatantMaxHealth: 80
   combatantMaxStamina: 40
   combatantBaseStats:
-    strength: 3
-    magic: 5
-    endurance: 3
-    agility: 8
-    luck: 3
+    strength: 6
+    magic: 10
+    endurance: 6
+    agility: 16
+    luck: 6
   combatantSpells:
   - {fileID: 11400000, guid: 4a557e2c23c6b144faa1f648ca1c7b45, type: 2}
   - {fileID: 11400000, guid: 421ba264b407ed843988d0b6adb3422c, type: 2}

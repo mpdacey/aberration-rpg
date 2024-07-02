@@ -19,10 +19,10 @@ MonoBehaviour:
   equipmentType: 1
   equipmentStats:
     strength: 5
-    magic: 11
-    endurance: 30
-    agility: 7
-    luck: 15
+    magic: 9
+    endurance: 25
+    agility: 6
+    luck: 13
   equipmentAffinties:
   - key: 5
     value: 2

@@ -9,6 +9,7 @@ public class RecruitmentController : MonoBehaviour
     public static event Action<PartyController.PartyMember, int> UpdatePlayerHP;
 
     public RecruitmentUIController uiController;
+    [SerializeField] private int recruitmentCost = 40;
 
     public enum RecruitmentState
     {
@@ -47,11 +48,11 @@ public class RecruitmentController : MonoBehaviour
         uiController.rightOffer.transform.parent.gameObject.SetActive(availableIndexes.Count > 1);
 
         string leftOffer;
-        if (leftOfferIndex == 0) leftOffer = "Sacrifice 40HP";
+        if (leftOfferIndex == 0) leftOffer = $"Sacrifice {recruitmentCost}HP";
         else leftOffer = $"Offer {PartyController.partyMembers[leftOfferIndex].Value.partyMemberBaseStats.combatantName} ({leftOfferIndex})";
 
         string rightOffer;
-        if (rightOfferIndex == 0) rightOffer = "Sacrifice 40HP";
+        if (rightOfferIndex == 0) rightOffer = $"Sacrifice {recruitmentCost}HP";
         else rightOffer = $"Offer {PartyController.partyMembers[rightOfferIndex].Value.partyMemberBaseStats.combatantName} ({rightOfferIndex})";
 
         uiController.SetOffers(leftOffer, rightOffer);
@@ -86,7 +87,7 @@ public class RecruitmentController : MonoBehaviour
         if (selectedSacrifice == 0)
         {
             var temp = PartyController.partyMembers[0].Value;
-            temp.currentHP -= 40;
+            temp.currentHP -= recruitmentCost;
             PartyController.partyMembers[0] = temp;
             if (UpdatePlayerHP != null)
                 UpdatePlayerHP.Invoke(temp, 0);

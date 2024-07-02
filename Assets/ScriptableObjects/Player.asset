@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 4b68c68c-d0f7-4c88-8643-883929537a92
   combatantName: Maggie
-  combatantMaxHealth: 100
+  combatantMaxHealth: 150
   combatantMaxStamina: 30
   combatantBaseStats:
     strength: 3

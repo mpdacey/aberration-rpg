@@ -11551,6 +11551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 1115945990}
+  recruitmentCost: 35
 --- !u!114 &1672502336
 MonoBehaviour:
   m_ObjectHideFlags: 0
