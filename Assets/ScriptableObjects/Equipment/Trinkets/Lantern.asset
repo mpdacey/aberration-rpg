@@ -19,9 +19,9 @@ MonoBehaviour:
   equipmentType: 2
   equipmentStats:
     strength: 0
-    magic: 8
+    magic: 7
     endurance: 5
-    agility: 3
+    agility: 2
     luck: 0
   equipmentAffinties: []
   equipmentSpells:

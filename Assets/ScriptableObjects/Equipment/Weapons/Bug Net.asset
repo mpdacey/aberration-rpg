@@ -18,11 +18,11 @@ MonoBehaviour:
   equipmentSP: 0
   equipmentType: 0
   equipmentStats:
-    strength: 6
-    magic: 9
+    strength: 5
+    magic: 8
     endurance: 0
-    agility: 7
-    luck: 6
+    agility: 6
+    luck: 5
   equipmentAffinties:
   - key: 5
     value: 1

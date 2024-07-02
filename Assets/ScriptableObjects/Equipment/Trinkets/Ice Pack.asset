@@ -20,7 +20,7 @@ MonoBehaviour:
   equipmentStats:
     strength: 1
     magic: 2
-    endurance: 5
+    endurance: 3
     agility: 1
     luck: 1
   equipmentAffinties:
