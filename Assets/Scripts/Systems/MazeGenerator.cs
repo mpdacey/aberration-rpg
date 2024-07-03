@@ -60,11 +60,13 @@ public class MazeGenerator : MonoBehaviour
         generatedTexture.SetPixels(cells);
         generatedTexture.Apply();
 
+#if UNITY_EDITOR
         if (testRenderer != null)
         {
             Sprite testSprite = Sprite.Create(generatedTexture, new Rect(0, 0, gridSize.x, gridSize.y), Vector2.zero, 16f);
             testRenderer.sprite = testSprite;
         }
+#endif
 
         DisplayGeneratedMinimap();
     }
