@@ -670,6 +670,8 @@ MonoBehaviour:
     spawnChance: 0.35
   - riftPrefab: {fileID: 5513308295706484921, guid: 23d7284619af72a49881f2d9f4455409, type: 3}
     spawnChance: 0.1
+  - riftPrefab: {fileID: 3888083698616550473, guid: 190fef0dfcd890e4fa8e223d8a002703, type: 3}
+    spawnChance: 0.2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

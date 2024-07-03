@@ -35,6 +35,7 @@ public class PartyController : MonoBehaviour
         GoalRiftController.GoalRiftEntered += GoalRiftHealParty;
         GameController.ResetGameEvent += ResetParty;
         StaminaRiftController.RecoverStamina += RestorePartyStamina;
+        HealthRiftController.RecoverHealth += HealParty;
     }
 
     private void OnDisable()
@@ -43,6 +44,7 @@ public class PartyController : MonoBehaviour
         GoalRiftController.GoalRiftEntered -= GoalRiftHealParty;
         GameController.ResetGameEvent -= ResetParty;
         StaminaRiftController.RecoverStamina -= RestorePartyStamina;
+        HealthRiftController.RecoverHealth -= HealParty;
     }
 
     private void GoalRiftHealParty()
