@@ -96,8 +96,6 @@ public class PartyController : MonoBehaviour
     private void SetPartyValues()
     {
         var tempProtag = SetProtagonistStats();
-        tempProtag.currentHP = tempProtag.partyMemberBaseStats.combatantMaxHealth;
-        tempProtag.currentSP = tempProtag.partyMemberBaseStats.combatantMaxStamina;
         partyMembers[0] = tempProtag;
 
         for (int i = 0; i < 3; i++)
@@ -121,8 +119,16 @@ public class PartyController : MonoBehaviour
             ApplyEquipmentStats(ref protagonistStats, tricket);
 
         protagonist.partyMemberBaseStats = protagonistStats;
-        protagonist.currentHP = Mathf.Min(this.protagonist.currentHP, protagonistStats.combatantMaxHealth);
-        protagonist.currentSP = Mathf.Min(this.protagonist.currentSP, protagonistStats.combatantMaxStamina);
+        if (partyMembers[0].HasValue)
+        {
+            protagonist.currentHP = Mathf.Min(partyMembers[0].Value.currentHP, protagonistStats.combatantMaxHealth);
+            protagonist.currentSP = Mathf.Min(partyMembers[0].Value.currentSP, protagonistStats.combatantMaxStamina);
+        }
+        else
+        {
+            protagonist.currentHP = protagonistStats.combatantMaxHealth;
+            protagonist.currentSP = protagonistStats.combatantMaxStamina;
+        }
 
         return protagonist;
     }
