@@ -32,34 +32,61 @@ public class PartyController : MonoBehaviour
     private void OnEnable()
     {
         EquipmentController.EquipmentUpdated += SetPartyValues;
-        GoalRiftController.GoalRiftEntered += HealParty;
+        GoalRiftController.GoalRiftEntered += GoalRiftHealParty;
         GameController.ResetGameEvent += ResetParty;
     }
 
     private void OnDisable()
     {
         EquipmentController.EquipmentUpdated -= SetPartyValues;
-        GoalRiftController.GoalRiftEntered -= HealParty;
+        GoalRiftController.GoalRiftEntered -= GoalRiftHealParty;
         GameController.ResetGameEvent += ResetParty;
     }
 
-    private void HealParty()
+    private void GoalRiftHealParty()
+    {
+        partyMembers[0] = RestoreMemberStamina(partyMembers[0].Value, 0.3f);
+        HealParty(1);
+    }
+
+    private void HealParty(float percentageHeal)
     {
         for(int i = 0; i < partyMembers.Length; i++)
         {
             if (!partyMembers[i].HasValue) continue;
 
-            var currentMember = partyMembers[i].Value;
-            currentMember.currentHP = currentMember.partyMemberBaseStats.combatantMaxHealth;
-            partyMembers[i] = currentMember;
+            partyMembers[i] = HealPartyMember(partyMembers[i].Value, percentageHeal);
         }
-
-        var temp = partyMembers[0].Value;
-        temp.currentSP = Mathf.Min(temp.currentSP + temp.partyMemberBaseStats.combatantMaxStamina / 3, temp.partyMemberBaseStats.combatantMaxStamina);
-        partyMembers[0] = temp;
 
         if (PartyIsReady != null)
             PartyIsReady.Invoke();
+    }
+
+    private PartyMember HealPartyMember(PartyMember member, float percentageHeal)
+    {
+        member.currentHP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxHealth / percentageHeal);
+        member.currentHP = Mathf.Min(member.currentHP, member.partyMemberBaseStats.combatantMaxHealth);
+        return member;
+    }
+
+    private void RestorePartyStamina(float percentageRestore)
+    {
+        for (int i = 0; i < partyMembers.Length; i++)
+        {
+            if (!partyMembers[i].HasValue) continue;
+
+            partyMembers[i] = RestoreMemberStamina(partyMembers[i].Value, percentageRestore);
+        }
+
+        if (PartyIsReady != null)
+            PartyIsReady.Invoke();
+    }
+
+    private PartyMember RestoreMemberStamina(PartyMember member, float percentageRestore)
+    {
+        member.currentSP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxStamina / percentageRestore);
+        member.currentSP = Mathf.Min(member.currentSP, member.partyMemberBaseStats.combatantMaxStamina);
+        return member;
     }
 
     private void SetPartyValues()
