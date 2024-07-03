@@ -40,6 +40,7 @@ public class RiftFactory : MonoBehaviour
 
                 var rift = Instantiate(rifts[i].riftPrefab, riftContainer);
                 rift.transform.position = new Vector3(riftPosition.x * 5, 0, riftPosition.y * 5);
+                break;
             }
         }
     }
