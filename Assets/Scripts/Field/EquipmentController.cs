@@ -7,34 +7,28 @@ using EquipmentType = EquipmentScriptableObject.EquipmentType;
 public class EquipmentController : MonoBehaviour
 {
     public static event Action EquipmentUpdated;
+    public static event Action DismissRift;
 
     public EquipmentUIController uiController;
     private OfferState state = OfferState.Decline;
     private EquipmentScriptableObject incomingEquipment;
-    private Animator treasureRiftAnimator = null;
-
 
     public EquipmentScriptableObject testEquipment;
 
     private void OnEnable()
     {
         TreasureController.TreasureEquipmentGenerated += ContructOffer;
-        FieldMovementController.TreasureFoundAnimator += GetTreasureRiftAnimator;
     }
 
     private void OnDisable()
     {
         TreasureController.TreasureEquipmentGenerated -= ContructOffer;
-        FieldMovementController.TreasureFoundAnimator -= GetTreasureRiftAnimator;
     }
     public void SetOfferState(int value) =>
         state = (OfferState)value;
 
     public void ContructOffer(EquipmentScriptableObject incomingEquipment)=>
         StartCoroutine(PitchOffer(incomingEquipment));
-
-    private void GetTreasureRiftAnimator(Animator animator) =>
-        treasureRiftAnimator = animator;
 
     public void SwapTrinket(int index)
     {
@@ -70,11 +64,8 @@ public class EquipmentController : MonoBehaviour
         uiController.gameObject.SetActive(false);
         FieldMovementController.lockedInPlace = false;
 
-        if(treasureRiftAnimator != null)
-        {
-            treasureRiftAnimator.Play("Dismiss");
-            treasureRiftAnimator = null;
-        }
+        if (DismissRift != null)
+            DismissRift.Invoke();
     }
 
     private void CarryOutOffer(EquipmentScriptableObject incomingEquipment, bool leftSlot = true)
