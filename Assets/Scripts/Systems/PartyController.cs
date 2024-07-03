@@ -34,13 +34,15 @@ public class PartyController : MonoBehaviour
         EquipmentController.EquipmentUpdated += SetPartyValues;
         GoalRiftController.GoalRiftEntered += GoalRiftHealParty;
         GameController.ResetGameEvent += ResetParty;
+        StaminaRiftController.RecoverStamina += RestorePartyStamina;
     }
 
     private void OnDisable()
     {
         EquipmentController.EquipmentUpdated -= SetPartyValues;
         GoalRiftController.GoalRiftEntered -= GoalRiftHealParty;
-        GameController.ResetGameEvent += ResetParty;
+        GameController.ResetGameEvent -= ResetParty;
+        StaminaRiftController.RecoverStamina -= RestorePartyStamina;
     }
 
     private void GoalRiftHealParty()
