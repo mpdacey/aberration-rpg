@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6641951472228603118
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1202398442067793877, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442067793877, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8402894
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442067793877, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442067793879, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5e08a243302a7e409394d995bebbc79, type: 2}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222793, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Name
+      value: StaminaRift
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202398442440525559, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+      propertyPath: m_Name
+      value: RiftTexture
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1491813464922534895, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+--- !u!1 &5513308295706484921 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+  m_PrefabInstance: {fileID: 6641951472228603118}
+  m_PrefabAsset: {fileID: 0}

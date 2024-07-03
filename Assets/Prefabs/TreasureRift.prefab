@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937087326693994711, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
       propertyPath: m_Name
-      value: TreasureRiftTexture
+      value: RiftTexture
       objectReference: {fileID: 0}
     - target: {fileID: 8937087327393817076, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
       propertyPath: m_LocalScale.x
