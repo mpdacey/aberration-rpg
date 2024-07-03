@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 259109407}
   m_Layer: 0
-  m_Name: TreasureContainer
+  m_Name: RiftContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -664,9 +664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece80ae82cc69324c86bb6ac362484e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  treasureRiftPrefab: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
-  treasureContainer: {fileID: 259109407}
-  treasureSpawnChance: 0.35
+  riftContainer: {fileID: 259109407}
+  rifts:
+  - riftPrefab: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
+    spawnChance: 0.35
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
