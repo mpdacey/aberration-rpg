@@ -30,7 +30,7 @@ public class GoalRiftController : MonoBehaviour, IInteractable
 
     public IEnumerator EnterRift()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.26f);
 
         AudioManager.PlayAudioClip(playerWarpSFX);
         if(GoalRiftEntered != null)
