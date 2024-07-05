@@ -6,9 +6,10 @@ public class TreasureRiftController : MonoBehaviour, IInteractable
 {
     public static event Action TreasureFound;
 
-    public void Interact()
+    public bool Interact()
     {
         TreasureHandling();
+        return false;
     }
 
     private void OnDisable()

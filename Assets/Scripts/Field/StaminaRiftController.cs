@@ -8,9 +8,10 @@ public class StaminaRiftController : MonoBehaviour, IInteractable
     [Range(0, 1)]
     public float percentStaminaReplenished = 0.15f;
 
-    public void Interact()
+    public bool Interact()
     {
         ReplenishStamina();
+        return false;
     }
 
     private void ReplenishStamina()
