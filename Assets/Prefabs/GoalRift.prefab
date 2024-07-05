@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8937087326543544937}
   - component: {fileID: 8937087326543544936}
   - component: {fileID: 8937087326543544938}
+  - component: {fileID: 1188862739384120543}
   m_Layer: 0
   m_Name: GoalRift
   m_TagString: Untagged
@@ -46,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c74a717fb01bf41b8cc7e09470e24f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   playerWarpSFX: {fileID: 8300000, guid: 0def90cb04cbf864b9f35f693ed0f8de, type: 3}
 --- !u!114 &8937087326543544938
 MonoBehaviour:
@@ -61,6 +61,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!135 &1188862739384120543
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937087326543544951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!1 &8937087326693994711
 GameObject:
   m_ObjectHideFlags: 0

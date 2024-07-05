@@ -116,15 +116,14 @@ public class FieldMovementController : MonoBehaviour
             Ray ray = new(rayOrigin, Vector3.down * 6);
             if (Physics.Raycast(ray, out raycastInfo))
             {
-                if (raycastInfo.transform.TryGetComponent(out IInteractable target)) target.Interact();
-                else
-                {
-                    if (playerMovementSFX != null)
-                        AudioManager.PlayAudioClip(playerMovementSFX, true);
-                    CallAnimation(MOVE_FORWARD_STATE);
-                    if (PlayerPositionChanged != null)
-                        PlayerPositionChanged.Invoke(rayOrigin);
-                }
+                if (raycastInfo.transform.TryGetComponent(out IInteractable target) && !target.Interact())
+                        return;
+
+                if (playerMovementSFX != null)
+                    AudioManager.PlayAudioClip(playerMovementSFX, true);
+                CallAnimation(MOVE_FORWARD_STATE);
+                if (PlayerPositionChanged != null)
+                    PlayerPositionChanged.Invoke(rayOrigin);
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
