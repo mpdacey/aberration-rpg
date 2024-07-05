@@ -1,13 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
-public class GoalRiftController : MonoBehaviour
+public class GoalRiftController : MonoBehaviour, IInteractable
 {
     public static event Action GoalRiftEntered;
 
-    public Transform player;
     public AudioClip playerWarpSFX;
-    private bool portalIsActive;
+    public bool HasInteracted => hasInteracted;
+    private bool hasInteracted = false;
 
     private void OnEnable()
     {
@@ -19,30 +20,26 @@ public class GoalRiftController : MonoBehaviour
         LevelGenerator.GoalLocationFound -= SetEndGoal;
     }
 
-    private void FixedUpdate()
+    public bool Interact()
     {
-        if(portalIsActive)
-            CheckForPlayer(player);
+        hasInteracted = true;
+        StartCoroutine(EnterRift());
+
+        return true;
     }
 
-    private void CheckForPlayer(Transform player)
+    public IEnumerator EnterRift()
     {
-        if (Vector3.Distance(player.position, transform.position) < 1f && GoalRiftEntered != null)
-        {
-            EnterRift();
-        }
-    }
+        yield return new WaitForSeconds(0.26f);
 
-    public void EnterRift()
-    {
-        portalIsActive = false;
         AudioManager.PlayAudioClip(playerWarpSFX);
-        GoalRiftEntered.Invoke();
+        if(GoalRiftEntered != null)
+            GoalRiftEntered.Invoke();
     }
 
     private void SetEndGoal(Vector2 endLocation)
     {
         transform.position = new Vector3(endLocation.x*5, 0, endLocation.y * 5);
-        portalIsActive = true;
+        hasInteracted = false;
     }
 }

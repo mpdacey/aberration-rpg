@@ -9,6 +9,6 @@ public class GoalRiftControllerEditor : Editor
         base.OnInspectorGUI();
 
         if (GUILayout.Button("Skip current floor"))
-            ((GoalRiftController)target).EnterRift();
+            ((GoalRiftController)target).StartCoroutine(((GoalRiftController)target).EnterRift());
     }
 }

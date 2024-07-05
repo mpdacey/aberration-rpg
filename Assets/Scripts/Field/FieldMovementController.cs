@@ -7,8 +7,6 @@ public class FieldMovementController : MonoBehaviour
     public static event Action<Vector3> PlayerPositionChanged;
     public static event Action<Vector3> PlayerRotationChanged;
     public static event Action<Vector3> SetPlayerRotation;
-    public static event Action TreasureFound;
-    public static event Action<Animator> TreasureFoundAnimator;
 
     public static bool lockedInPlace = false;
     public AudioClip playerMovementSFX;
@@ -118,15 +116,14 @@ public class FieldMovementController : MonoBehaviour
             Ray ray = new(rayOrigin, Vector3.down * 6);
             if (Physics.Raycast(ray, out raycastInfo))
             {
-                if (raycastInfo.collider.tag == "Treasure") TreasureHandling(raycastInfo.transform);
-                else
-                {
-                    if (playerMovementSFX != null)
-                        AudioManager.PlayAudioClip(playerMovementSFX, true);
-                    CallAnimation(MOVE_FORWARD_STATE);
-                    if (PlayerPositionChanged != null)
-                        PlayerPositionChanged.Invoke(rayOrigin);
-                }
+                if (raycastInfo.transform.TryGetComponent(out IInteractable target) && (target.HasInteracted || !target.Interact()))
+                        return;
+
+                if (playerMovementSFX != null)
+                    AudioManager.PlayAudioClip(playerMovementSFX, true);
+                CallAnimation(MOVE_FORWARD_STATE);
+                if (PlayerPositionChanged != null)
+                    PlayerPositionChanged.Invoke(rayOrigin);
             }
             else
                 CallAnimation(BUMP_FORWARD_STATE);
@@ -154,13 +151,5 @@ public class FieldMovementController : MonoBehaviour
     private void CallAnimation(string animationClipName)
     {
         movementAnimator.Play(animationClipName);
-    }
-
-    private void TreasureHandling(Transform treasureRift)
-    {
-        if (TreasureFound != null)
-            TreasureFound.Invoke();
-        if (TreasureFoundAnimator != null && treasureRift.TryGetComponent<Animator>(out var animator))
-            TreasureFoundAnimator.Invoke(animator);
     }
 }

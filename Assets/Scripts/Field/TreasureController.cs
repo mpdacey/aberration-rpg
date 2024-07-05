@@ -17,12 +17,12 @@ public class TreasureController : MonoBehaviour
 
     private void OnEnable()
     {
-        FieldMovementController.TreasureFound += ProvideTreasureEquipment;
+        TreasureRiftController.TreasureFound += ProvideTreasureEquipment;
     }
 
     private void OnDisable()
     {
-        FieldMovementController.TreasureFound -= ProvideTreasureEquipment;
+        TreasureRiftController.TreasureFound -= ProvideTreasureEquipment;
     }
 
     public void ProvideTreasureEquipment()

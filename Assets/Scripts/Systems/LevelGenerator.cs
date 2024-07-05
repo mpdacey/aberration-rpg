@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     public static event Action<Vector2> GoalLocationFound;
-    public static event Action<List<Vector2>> TreasureLocationsFound;
+    public static event Action<List<Vector2>> RiftLocationsFound;
     public static event Action FinishedLevelGeneration;
 
     public Texture2D levelGeometry;
@@ -58,7 +58,7 @@ public class LevelGenerator : MonoBehaviour
 
         Vector2 startLocation = Vector2.zero;
         Vector2 endLocation = Vector2.zero;
-        List<Vector2> treasureLocations = new();
+        List<Vector2> bonusRiftLocations = new();
 
         for(int y = 0; y < levelGeometry.height; y++)
         {
@@ -79,7 +79,7 @@ public class LevelGenerator : MonoBehaviour
                     }
                     if(pixels[index].g == 0 && pixels[index].b == 1)
                     {
-                        treasureLocations.Add(pixelCoords);
+                        bonusRiftLocations.Add(pixelCoords);
                     }
 
                     edges.AddRange(FindEdges(pixels, pixelCoords));
@@ -90,12 +90,12 @@ public class LevelGenerator : MonoBehaviour
         if (GoalLocationFound != null)
             GoalLocationFound.Invoke(endLocation-startLocation);
 
-        if (TreasureLocationsFound != null)
+        if (RiftLocationsFound != null)
         {
-            for (int i = 0; i < treasureLocations.Count; i++)
-                treasureLocations[i] -= startLocation;
+            for (int i = 0; i < bonusRiftLocations.Count; i++)
+                bonusRiftLocations[i] -= startLocation;
 
-            TreasureLocationsFound.Invoke(treasureLocations);
+            RiftLocationsFound.Invoke(bonusRiftLocations);
         }
 
         for (int i = 0; i < pixels.Length; i++)

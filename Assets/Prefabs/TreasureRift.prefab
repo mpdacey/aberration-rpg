@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937087326693994711, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
       propertyPath: m_Name
-      value: TreasureRiftTexture
+      value: RiftTexture
       objectReference: {fileID: 0}
     - target: {fileID: 8937087327393817076, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
       propertyPath: m_LocalScale.x
@@ -99,19 +99,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8937087326543544951, guid: 307d722041a65c54d8d1699766ea7e7d, type: 3}
   m_PrefabInstance: {fileID: 7829840631258887712}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &6241762435012065185
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202398442360222807}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: -1, z: 0}
 --- !u!95 &8386346177779638508
 Animator:
   serializedVersion: 5
@@ -132,3 +119,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1491813464922534895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202398442360222807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b3cd5c0ac0c8c24a8e98f29c65ea00c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
