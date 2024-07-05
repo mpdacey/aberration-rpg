@@ -5,9 +5,12 @@ using UnityEngine;
 public class TreasureRiftController : MonoBehaviour, IInteractable
 {
     public static event Action TreasureFound;
+    public bool HasInteracted => hasInteracted;
+    private bool hasInteracted = false;
 
     public bool Interact()
     {
+        hasInteracted = true;
         TreasureHandling();
         return false;
     }

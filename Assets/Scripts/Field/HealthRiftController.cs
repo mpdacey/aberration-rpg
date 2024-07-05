@@ -7,9 +7,12 @@ public class HealthRiftController : MonoBehaviour, IInteractable
 
     [Range(0, 1)]
     public float percentHealthReplenished = 0.3f;
+    public bool HasInteracted => hasInteracted;
+    private bool hasInteracted = false;
 
     public bool Interact()
     {
+        hasInteracted = true;
         ReplenishHealth();
         return false;
     }

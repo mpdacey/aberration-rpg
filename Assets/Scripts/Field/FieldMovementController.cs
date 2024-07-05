@@ -116,7 +116,7 @@ public class FieldMovementController : MonoBehaviour
             Ray ray = new(rayOrigin, Vector3.down * 6);
             if (Physics.Raycast(ray, out raycastInfo))
             {
-                if (raycastInfo.transform.TryGetComponent(out IInteractable target) && !target.Interact())
+                if (raycastInfo.transform.TryGetComponent(out IInteractable target) && (target.HasInteracted || !target.Interact()))
                         return;
 
                 if (playerMovementSFX != null)

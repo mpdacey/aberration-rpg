@@ -7,9 +7,12 @@ public class StaminaRiftController : MonoBehaviour, IInteractable
 
     [Range(0, 1)]
     public float percentStaminaReplenished = 0.15f;
+    public bool HasInteracted => hasInteracted;
+    private bool hasInteracted = false;
 
     public bool Interact()
     {
+        hasInteracted = true;
         ReplenishStamina();
         return false;
     }
