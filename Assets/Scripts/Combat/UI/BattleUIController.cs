@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Cryptemental.SceneController;
 
 public class BattleUIController : MonoBehaviour
 {

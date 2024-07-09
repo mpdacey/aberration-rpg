@@ -3,73 +3,76 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 
-public class SceneController : MonoBehaviour
+namespace Cryptemental.SceneController
 {
-    public static event Action CombatSceneLoaded;
-    public static event Action TitleSceneLoaded;
-    public static event Action ManualSceneLoaded;
-    public static event Action ManualSceneUnloaded;
-
-    private const int COMBAT_SCENE_INDEX = 1;
-    private const int TITLE_SCENE_INDEX = 2;
-    private const int MANUAL_SCENE_INDEX = 3;
-
-    public IEnumerator LoadTitleScene()
+    public static class SceneController
     {
-        UnloadScenes();
+        public static event Action CombatSceneLoaded;
+        public static event Action TitleSceneLoaded;
+        public static event Action ManualSceneLoaded;
+        public static event Action ManualSceneUnloaded;
 
-        yield return LoadScene(TITLE_SCENE_INDEX);
+        private const int COMBAT_SCENE_INDEX = 1;
+        private const int TITLE_SCENE_INDEX = 2;
+        private const int MANUAL_SCENE_INDEX = 3;
 
-        if (TitleSceneLoaded != null)
-            TitleSceneLoaded.Invoke();
-    }
-
-    public IEnumerator LoadCombatScene()
-    {
-        UnloadScenes();
-
-        yield return LoadScene(COMBAT_SCENE_INDEX);
-
-        if (CombatSceneLoaded != null)
-            CombatSceneLoaded.Invoke();
-    }
-
-    public IEnumerator LoadManualScene()
-    {
-        yield return LoadScene(MANUAL_SCENE_INDEX);
-
-        if (ManualSceneLoaded != null)
-            ManualSceneLoaded.Invoke();
-    }
-
-    public IEnumerator UnloadManualScene()
-    {
-        if (SceneManager.GetSceneByBuildIndex(MANUAL_SCENE_INDEX).isLoaded)
+        public static IEnumerator LoadTitleScene()
         {
-            yield return SceneManager.UnloadSceneAsync(MANUAL_SCENE_INDEX);
+            UnloadScenes();
 
-            if (ManualSceneUnloaded != null)
-                ManualSceneUnloaded.Invoke();
+            yield return LoadScene(TITLE_SCENE_INDEX);
+
+            if (TitleSceneLoaded != null)
+                TitleSceneLoaded.Invoke();
         }
-    }
 
-    private IEnumerator LoadScene(int sceneIndex)
-    {
-        var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
-        while (!asyncLoadLevel.isDone)
-            yield return new WaitForEndOfFrame();
-    }
+        public static IEnumerator LoadCombatScene()
+        {
+            UnloadScenes();
 
-    private void UnloadScenes()
-    {
-        UnloadScene(COMBAT_SCENE_INDEX);
-        UnloadScene(TITLE_SCENE_INDEX);
-        UnloadScene(MANUAL_SCENE_INDEX);
-    }
+            yield return LoadScene(COMBAT_SCENE_INDEX);
 
-    private void UnloadScene(int sceneIndex)
-    {
-        if (SceneManager.GetSceneByBuildIndex(sceneIndex).isLoaded)
-            SceneManager.UnloadSceneAsync(sceneIndex);
+            if (CombatSceneLoaded != null)
+                CombatSceneLoaded.Invoke();
+        }
+
+        public static IEnumerator LoadManualScene()
+        {
+            yield return LoadScene(MANUAL_SCENE_INDEX);
+
+            if (ManualSceneLoaded != null)
+                ManualSceneLoaded.Invoke();
+        }
+
+        public static IEnumerator UnloadManualScene()
+        {
+            if (SceneManager.GetSceneByBuildIndex(MANUAL_SCENE_INDEX).isLoaded)
+            {
+                yield return SceneManager.UnloadSceneAsync(MANUAL_SCENE_INDEX);
+
+                if (ManualSceneUnloaded != null)
+                    ManualSceneUnloaded.Invoke();
+            }
+        }
+
+        private static IEnumerator LoadScene(int sceneIndex)
+        {
+            var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+            while (!asyncLoadLevel.isDone)
+                yield return new WaitForEndOfFrame();
+        }
+
+        private static void UnloadScenes()
+        {
+            UnloadScene(COMBAT_SCENE_INDEX);
+            UnloadScene(TITLE_SCENE_INDEX);
+            UnloadScene(MANUAL_SCENE_INDEX);
+        }
+
+        private static void UnloadScene(int sceneIndex)
+        {
+            if (SceneManager.GetSceneByBuildIndex(sceneIndex).isLoaded)
+                SceneManager.UnloadSceneAsync(sceneIndex);
+        }
     }
 }

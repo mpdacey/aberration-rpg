@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Cryptemental.SceneController;
 
 public class FieldMovementController : MonoBehaviour
 {
