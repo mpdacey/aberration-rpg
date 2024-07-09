@@ -70,6 +70,8 @@ public class BattleUIController : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current == null) return;
+
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
         if (battleMenuUI.activeInHierarchy)

@@ -13,6 +13,8 @@ public class SelectDefaultButton : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current == null) return;
+
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
         if (selectedObject == null)

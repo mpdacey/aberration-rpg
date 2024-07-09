@@ -59,18 +59,18 @@ public class SpellMenuUIController : MonoBehaviour
 
     private void Update()
     {
-        if(buttonObjects != null)
-        {
-            GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+        if (buttonObjects == null || EventSystem.current == null) return;
+        
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
-            if (buttonObjects[0].spellButton.transform.parent.gameObject.activeInHierarchy)
-            {
-                if (selectedObject == null)
-                    buttonObjects[currentSelected].spellButton.Select();
-                else
-                    currentSelected = selectedObject.transform.GetSiblingIndex();
-            }
+        if (buttonObjects[0].spellButton.transform.parent.gameObject.activeInHierarchy)
+        {
+            if (selectedObject == null)
+                buttonObjects[currentSelected].spellButton.Select();
+            else
+                currentSelected = selectedObject.transform.GetSiblingIndex();
         }
+        
     }
 
     private void ShowSpellMenu(PartyController.PartyMember partyMember)
