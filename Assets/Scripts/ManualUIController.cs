@@ -3,10 +3,12 @@ using UnityEngine;
 public class ManualUIController : MonoBehaviour
 {
     private Animator animator;
+    private AudioSource sfx;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        sfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -18,10 +20,12 @@ public class ManualUIController : MonoBehaviour
         if (input > 0)
         {
             animator.Play("ManualLeft");
+            sfx.PlayOneShot(sfx.clip);
         }
         else
         {
             animator.Play("ManualRight");
+            sfx.PlayOneShot(sfx.clip);
         }
     }
 }
