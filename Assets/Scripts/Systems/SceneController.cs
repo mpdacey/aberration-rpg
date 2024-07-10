@@ -38,10 +38,10 @@ namespace Cryptemental.SceneController
 
         public static IEnumerator LoadManualScene()
         {
-            yield return LoadScene(MANUAL_SCENE_INDEX);
-
             if (ManualSceneLoaded != null)
                 ManualSceneLoaded.Invoke();
+
+            yield return LoadScene(MANUAL_SCENE_INDEX);
         }
 
         public static IEnumerator UnloadManualScene()
