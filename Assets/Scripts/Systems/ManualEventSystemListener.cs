@@ -5,6 +5,8 @@ using Cryptemental.SceneController;
 [RequireComponent(typeof(EventSystem))]
 public class ManualEventSystemListener : MonoBehaviour
 {
+    public EventSystem combatEventSystem;
+
     private void OnEnable()
     {
         SceneController.ManualSceneLoaded += DisableEventSystem;
@@ -19,11 +21,11 @@ public class ManualEventSystemListener : MonoBehaviour
 
     private void DisableEventSystem()
     {
-        EventSystem.current.enabled = false;
+        combatEventSystem.enabled = false;
     }
 
     private void EnableEventSystem()
     {
-        EventSystem.current.enabled = true;
+        combatEventSystem.enabled = true;
     }
 }
