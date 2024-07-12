@@ -1,31 +1,44 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class ManualUIController : MonoBehaviour
+namespace Cryptemental.Manual
 {
-    private Animator animator;
-    private AudioSource sfx;
-
-    void Start()
+    public class ManualUIController : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        sfx = GetComponent<AudioSource>();
-    }
+        public Transform pageMarkerColumn;
 
-    // Update is called once per frame
-    void Update()
-    {
-        float input = Input.GetAxisRaw("Horizontal");
-        if (input == 0 || !animator.GetCurrentAnimatorStateInfo(0).IsName("Empty")) return;
+        private Animator animator;
+        private AudioSource sfx;
 
-        if (input > 0)
+        void Start()
         {
-            animator.Play("ManualLeft");
-            sfx.PlayOneShot(sfx.clip);
+            animator = GetComponent<Animator>();
+            sfx = GetComponent<AudioSource>();
         }
-        else
+
+        void Update()
         {
-            animator.Play("ManualRight");
-            sfx.PlayOneShot(sfx.clip);
+            float input = Input.GetAxisRaw("Horizontal");
+            if (input == 0 || !animator.GetCurrentAnimatorStateInfo(0).IsName("Empty")) return;
+
+            if (input > 0)
+            {
+                animator.Play("ManualLeft");
+                sfx.PlayOneShot(sfx.clip);
+            }
+            else
+            {
+                animator.Play("ManualRight");
+                sfx.PlayOneShot(sfx.clip);
+            }
+        }
+
+        public void UpdatePageMarker(int siblingIndex, ManualController.ManualPage manualPage)
+        {
+            Transform child = pageMarkerColumn.GetChild(siblingIndex);
+            child.GetComponentInChildren<TMP_Text>().text = manualPage.name;
+            child.GetComponentInChildren<Image>().sprite = manualPage.content;
         }
     }
 }
