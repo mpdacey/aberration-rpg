@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class SelectDefaultButton : MonoBehaviour
 {
-    [SerializeField] Button defaultButton;
+    public Button defaultButton;
 
     private void OnEnable()
     {
