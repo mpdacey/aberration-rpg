@@ -8,18 +8,21 @@ namespace Cryptemental.Manual
     {
         public Transform pageMarkerColumn;
 
-        {
-        }
-
-        {
-
-        }
-
         public void UpdatePageMarker(int siblingIndex, ManualController.ManualPage manualPage)
         {
             Transform child = pageMarkerColumn.GetChild(siblingIndex);
             child.GetComponentInChildren<TMP_Text>().text = manualPage.name;
             child.GetComponentInChildren<Image>().sprite = manualPage.content;
+        }
+
+        public void SetDefaultButton()
+        {
+            if (pageMarkerColumn.childCount == 0) return;
+
+            GetComponent<SelectDefaultButton>().defaultButton = pageMarkerColumn.GetChild(0).GetComponent<Button>();
+        }
+
+        {
         }
     }
 }

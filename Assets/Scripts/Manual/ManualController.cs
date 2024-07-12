@@ -77,6 +77,8 @@ namespace Cryptemental.Manual
 
                 uiController.UpdatePageMarker(i, manualPages[i]);
             }
+
+            uiController.SetDefaultButton();
         }
     }
 }
