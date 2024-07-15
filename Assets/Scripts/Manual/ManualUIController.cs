@@ -12,7 +12,6 @@ namespace Cryptemental.Manual
         {
             Transform child = pageMarkerColumn.GetChild(siblingIndex);
             child.GetComponentInChildren<TMP_Text>().text = manualPage.name;
-            child.GetComponentInChildren<Image>().sprite = manualPage.content;
         }
 
         public void SetDefaultButton()
