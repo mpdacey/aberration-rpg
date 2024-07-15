@@ -81,7 +81,7 @@ namespace Cryptemental.Manual
             for (int i = 0; i < manualPages.Length; i++)
             {
                 if (i >= uiController.pageMarkerColumn.childCount)
-                    Instantiate(pageMarkerPrefab, uiController.pageMarkerColumn);
+                    UnityEditor.PrefabUtility.InstantiatePrefab(pageMarkerPrefab, uiController.pageMarkerColumn);
 
                 uiController.UpdatePageMarker(i, manualPages[i]);
             }
