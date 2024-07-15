@@ -27,11 +27,13 @@ namespace Cryptemental.Manual
         private void OnEnable()
         {
             ManualPageOnSelect.OnManualPageSelect += FlipToPage;
+            ManualInteractListener.CloseManualInput += PlayCloseManual;
         }
 
         private void OnDisable()
         {
             ManualPageOnSelect.OnManualPageSelect -= FlipToPage;
+            ManualInteractListener.CloseManualInput -= PlayCloseManual;
         }
 
         private void FlipToPage(int index)
@@ -52,6 +54,12 @@ namespace Cryptemental.Manual
             currentIndex = index;
         }
 
+        private void PlayCloseManual()
+        {
+            animator.Play("ManualClose");
+        }
+
+#if UNITY_EDITOR
         private void OnValidate()
         {
             if(uiController == null)
@@ -80,5 +88,6 @@ namespace Cryptemental.Manual
 
             uiController.SetDefaultButton();
         }
+#endif
     }
 }
