@@ -7,6 +7,7 @@ namespace Cryptemental.Manual
     public class ManualUIController : MonoBehaviour
     {
         public Transform pageMarkerColumn;
+        public Image pageContentImage;
 
         public void UpdatePageMarker(int siblingIndex, ManualController.ManualPage manualPage)
         {
@@ -21,7 +22,7 @@ namespace Cryptemental.Manual
             GetComponent<SelectDefaultButton>().defaultButton = pageMarkerColumn.GetChild(0).GetComponent<Button>();
         }
 
-        {
-        }
+        public void SetPageContent(Sprite content) =>
+            pageContentImage.sprite = content;
     }
 }

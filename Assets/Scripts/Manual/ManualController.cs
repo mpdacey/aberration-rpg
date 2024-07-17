@@ -51,6 +51,7 @@ namespace Cryptemental.Manual
                 sfx.PlayOneShot(sfx.clip);
             }
 
+            uiController.SetPageContent(manualPages[index].content);
             currentIndex = index;
         }
 

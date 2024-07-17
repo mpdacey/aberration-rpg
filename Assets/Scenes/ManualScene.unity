@@ -571,8 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pageMarkerColumn: {fileID: 1248583698}
-  overlapPage: {fileID: 977983403}
-  underlyingPage: {fileID: 1042262211}
+  pageContentImage: {fileID: 871680938}
 --- !u!114 &598510335
 MonoBehaviour:
   m_ObjectHideFlags: 0
