@@ -28,6 +28,7 @@ namespace Cryptemental.Manual
         {
             ManualPageOnSelect.OnManualPageSelect += FlipToPage;
             ManualInteractListener.CloseManualInput += PlayCloseManual;
+            uiController.SetPageContent(manualPages[0].content);
         }
 
         private void OnDisable()
