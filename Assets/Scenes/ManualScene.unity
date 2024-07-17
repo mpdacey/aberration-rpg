@@ -586,21 +586,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manualPages:
   - name: How To Play
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: 9fe2ec02fdf94bf4c8c040b8260d9b08, type: 3}
   - name: Movement
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: 49ffb7bc312c4fa459d3f8790f114814, type: 3}
   - name: Goal
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: e57ec27f1920d2f48bd8ff1d5c18853a, type: 3}
   - name: Rifts
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: 27e05067e2d73c141bc873cfb01ba7c7, type: 3}
   - name: Equipment
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: cb94b548a7436a24a8d49ec9002c6db8, type: 3}
   - name: Status
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: a2b3edb5a50f96b4dbae2597c73d6ee6, type: 3}
   - name: Affinity
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: 51ada28cf5e6b29479cc36e0fe998e9e, type: 3}
   - name: Combat
-    content: {fileID: 0}
+    content: {fileID: 21300000, guid: f48ee3a969c4cef4b9aab37243ff017b, type: 3}
   - name: Dice
     content: {fileID: 0}
   - name: Spells 1
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 27e05067e2d73c141bc873cfb01ba7c7, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
