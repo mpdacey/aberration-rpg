@@ -29,13 +29,16 @@ public class RiftFactory : MonoBehaviour
 
     private void GenerateTreasure(List<Vector2> possibleRiftPositions)
     {
+        if (!PartyController.partyMembers[0].HasValue) return;
         ClearRifts();
 
         foreach(var riftPosition in possibleRiftPositions)
         {
-            for(int i = 0; i < rifts.Length; i++)
+            int protagLuck = PartyController.partyMembers[0].Value.partyMemberBaseStats.combatantBaseStats.luck;
+            float luckWeight = 1 - Mathf.Clamp((protagLuck * 0.4f - GameController.CurrentLevel) * 0.1f, -0.2f, 0.2f);
+            for (int i = 0; i < rifts.Length; i++)
             {
-                if (Random.value > rifts[i].spawnChance)
+                if (Random.value * luckWeight > rifts[i].spawnChance)
                     continue;
 
                 var rift = Instantiate(rifts[i].riftPrefab, riftContainer);
