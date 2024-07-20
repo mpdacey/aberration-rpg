@@ -100,7 +100,6 @@ public class EquipmentUIController : MonoBehaviour
                 currentEquipment = allEquipment.defense;
                 break;
             case EquipmentType.Trinket:
-                // TODO: have logic for multiple trinkets.
                 currentEquipment = allEquipment.trinkets[trinketIndex];
                 break;
             default: 
@@ -316,8 +315,6 @@ public class EquipmentUIController : MonoBehaviour
         TallyAffinities(ref incomingAffinities, incomingEquipmentAffinties);
 
         AffinityType[] equipmentAffinties = new AffinityType[6] { 0,0,0,0,0,0 };
-
-        //TODO: make second trinket follow logic too.
 
         for (int i = 0; i < equipmentAffinties.Length; i++)
         {
