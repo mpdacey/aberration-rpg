@@ -35,7 +35,7 @@ public class TreasureController : MonoBehaviour
 
         int protagLuck = PartyController.partyMembers[0].Value.partyMemberBaseStats.combatantBaseStats.luck;
 
-        float tierLuckRatio = Mathf.Clamp(protagLuck * 0.5f - GameController.CurrentLevel * 0.3f, 0, 4);
+        float tierLuckRatio = Mathf.Clamp(protagLuck * 0.3f - GameController.CurrentLevel, 0, 3);
         int tierRangeModifier = RandomLuckWeightedRange(-5, 6, tierLuckRatio) / 2;
         float tierQuality = Mathf.Max(GameController.CurrentLevel + tierRangeModifier, 0) / 7f;
         int tierIndex = Mathf.Clamp(Mathf.FloorToInt(tierQuality), 0, equipmentTiers.Length - 1);
@@ -46,7 +46,7 @@ public class TreasureController : MonoBehaviour
         }
 
         int itemIndex = Mathf.Clamp(Mathf.FloorToInt(equipmentTiers[tierIndex].equipmentItems.Length * Random.value), 0, equipmentTiers[tierIndex].equipmentItems.Length-1);
-        float itemLuckRatio = Mathf.Clamp(protagLuck * 0.4f - GameController.CurrentLevel, -1, 4) * 0.5f;
+        float itemLuckRatio = Mathf.Clamp(protagLuck * 0.3f - GameController.CurrentLevel, -1, 3) * 0.5f;
         float itemBonusLuckRatio = itemLuckRatio * 0.575f;
 
         EquipmentScriptableObject selectedEquipment = Instantiate(equipmentTiers[tierIndex].equipmentItems[itemIndex]);
