@@ -48,15 +48,24 @@ public class MonsterController : MonoBehaviour
 
     public IEnumerator GenerateDice()
     {
-        //diceControllers[0].gameObject.SetActive(true);
         for(int i = 0; i < currentDiceValues.Length; i++)
         {
             diceControllers[i].gameObject.SetActive(currentDiceValues.Length >= i);
-            currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[Random.Range(0, combatantStats.combatantDiceSet[i].dieFaces.Length-1)];
+            float weightedRandomIndex = Random.value * GetLuckAdvantage(PartyController.partyMembers[0].Value.partyMemberBaseStats.combatantBaseStats.luck, combatantStats.combatantBaseStats.luck);
+            int validatedDiceIndex = Mathf.Min(Mathf.RoundToInt(weightedRandomIndex * (combatantStats.combatantDiceSet[i].dieFaces.Length - 1)), combatantStats.combatantDiceSet[i].dieFaces.Length - 1);
+            currentDiceValues[i] = combatantStats.combatantDiceSet[i].dieFaces[validatedDiceIndex];
             diceControllers[i].CastFace(currentDiceValues[i], combatantStats.combatantDiceSet[i].dieFaces);
 
             yield return new WaitForSeconds(diceControllers[i].revealTime/2);
         }
+    }
+
+    private float GetLuckAdvantage(int protagonistLuck, int monsterLuck)
+    {
+        float advantage = protagonistLuck * 0.575f - monsterLuck;
+        float variance = Random.Range(-0.15f, 0.15f); 
+        float boundAdvantage = 1 + Mathf.Clamp((advantage + variance) * 0.085f, -0.4f, 0.4f);
+        return boundAdvantage;
     }
 
     public void HideDice()

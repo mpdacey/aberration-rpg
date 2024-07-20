@@ -21,7 +21,7 @@ MonoBehaviour:
     magic: 4
     endurance: 4
     agility: 2
-    luck: 4
+    luck: 1
   combatantSpells: []
   combatantNormalAttackType: 4
   combatantSprite: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
