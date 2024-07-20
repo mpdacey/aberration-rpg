@@ -667,11 +667,11 @@ MonoBehaviour:
   riftContainer: {fileID: 259109407}
   rifts:
   - riftPrefab: {fileID: 1202398442360222807, guid: 82a748cad8f2c3949a1ac8812eac6d62, type: 3}
-    spawnChance: 0.35
+    spawnChance: 0.2275
   - riftPrefab: {fileID: 5513308295706484921, guid: 23d7284619af72a49881f2d9f4455409, type: 3}
-    spawnChance: 0.1
+    spawnChance: 0.065
   - riftPrefab: {fileID: 3888083698616550473, guid: 190fef0dfcd890e4fa8e223d8a002703, type: 3}
-    spawnChance: 0.2
+    spawnChance: 0.13
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

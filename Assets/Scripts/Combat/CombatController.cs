@@ -555,20 +555,7 @@ public class CombatController : MonoBehaviour
 
         Debug.Log("Victory");
 
-        HashSet<int> recruitmentChance = new HashSet<int>();
-        int partyMemberCount = PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length;
-        while (recruitmentChance.Count < FormationSelector.CurrentFormation.monsters.Count())
-            recruitmentChance.Add(UnityEngine.Random.Range(0, partyMemberCount));
-
-        if (recruitmentChance.Contains(0) || FormationSelector.CurrentFormation.monsters[0].combatantName.Equals("Lone Wolf"))
-        {
-            //Begin recruitment
-            yield return recruitmentController.PitchRecruitment(FormationSelector.CurrentFormation);
-            if (PartyController.partyMembers[0].Value.currentHP <= 0)
-            {
-                Defeat();
-            }
-        }
+        yield return RecruitmentPhase();
 
         if (currentBattleState != BattleState.Defeat)
         {
@@ -581,6 +568,31 @@ public class CombatController : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    IEnumerator RecruitmentPhase()
+    {
+        HashSet<int> recruitmentChance = new HashSet<int>();
+        int partyMemberCount = PartyController.partyMembers.Select((PartyController.PartyMember? member) => member.HasValue).ToArray().Length;
+
+        int protagLuck = PartyController.partyMembers[0].Value.partyMemberBaseStats.combatantBaseStats.luck;
+        float luckWeight = Mathf.Clamp((protagLuck * 0.4f - GameController.CurrentLevel) * 0.1f, 0, 0.1f);
+
+        while (recruitmentChance.Count < FormationSelector.CurrentFormation.monsters.Count())
+        {
+            float unweightedRecruitChance = UnityEngine.Random.Range(0f, partyMemberCount);
+            recruitmentChance.Add(Mathf.FloorToInt(Mathf.Max(unweightedRecruitChance - luckWeight * partyMemberCount, 0)));
+        }
+
+        if (recruitmentChance.Contains(0) || FormationSelector.CurrentFormation.monsters[0].combatantName.Equals("Lone Wolf"))
+        {
+            //Begin recruitment
+            yield return recruitmentController.PitchRecruitment(FormationSelector.CurrentFormation);
+            if (PartyController.partyMembers[0].Value.currentHP <= 0)
+            {
+                Defeat();
+            }
+        }
     }
 
     private void Defeat()
