@@ -13,15 +13,14 @@ namespace Cryptemental.Manual
 
         public ManualPage[] manualPages;
         public GameObject pageMarkerPrefab;
+        public AudioClip pageTurnSFX;
         private ManualUIController uiController;
         private Animator animator;
-        private AudioSource sfx;
         private int currentIndex = 0;
 
         void Start()
         {
             animator = GetComponent<Animator>();
-            sfx = GetComponent<AudioSource>();
         }
 
         private void OnEnable()
@@ -44,12 +43,14 @@ namespace Cryptemental.Manual
             if(index > currentIndex)
             {
                 animator.Play("ManualRight", -1, 0f);
-                sfx.PlayOneShot(sfx.clip);
+                if (pageTurnSFX != null)
+                    AudioManager.PlayAudioClip(pageTurnSFX, true);
             }
             else
             {
                 animator.Play("ManualLeft", -1, 0f);
-                sfx.PlayOneShot(sfx.clip);
+                if (pageTurnSFX != null)
+                    AudioManager.PlayAudioClip(pageTurnSFX, true);
             }
 
             uiController.SetPageContent(manualPages[index].content);
