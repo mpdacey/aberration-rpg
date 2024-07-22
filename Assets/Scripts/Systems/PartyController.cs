@@ -68,7 +68,7 @@ public class PartyController : MonoBehaviour
 
     private PartyMember HealPartyMember(PartyMember member, float percentageHeal)
     {
-        member.currentHP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxHealth / percentageHeal);
+        member.currentHP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxHealth * percentageHeal);
         member.currentHP = Mathf.Min(member.currentHP, member.partyMemberBaseStats.combatantMaxHealth);
         return member;
     }
@@ -88,7 +88,7 @@ public class PartyController : MonoBehaviour
 
     private PartyMember RestoreMemberStamina(PartyMember member, float percentageRestore)
     {
-        member.currentSP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxStamina / percentageRestore);
+        member.currentSP += Mathf.CeilToInt(member.partyMemberBaseStats.combatantMaxStamina * percentageRestore);
         member.currentSP = Mathf.Min(member.currentSP, member.partyMemberBaseStats.combatantMaxStamina);
         return member;
     }
