@@ -34,6 +34,13 @@ public class MusicEventController : MonoBehaviour
 
     private void StopMusic()
     {
+        StartCoroutine(FadeOutMusic());
+    }
+
+    IEnumerator FadeOutMusic()
+    {
+        yield return manager.FadeMusicOut(1.2f);
+
         manager.StopMusic();
     }
 }

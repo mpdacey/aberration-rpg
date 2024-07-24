@@ -12,6 +12,7 @@ public class MusicManager : MonoBehaviour
         nextLoopTime = AudioSettings.dspTime + 0.1;
         sources[currentSource].clip = musicObject.track;
         sources[currentSource].PlayScheduled(nextLoopTime);
+        sources[0].volume = sources[1].volume = 1;
 
         currentSource = 1 - currentSource;
 
@@ -25,6 +26,21 @@ public class MusicManager : MonoBehaviour
     {
         sources[0].Stop();
         sources[1].Stop();
+        StopAllCoroutines();
+    }
+
+    public IEnumerator FadeMusicOut(float fadeTime)
+    {
+        float timer = fadeTime;
+
+        while(timer > 0)
+        {
+            sources[currentSource].volume = timer / fadeTime;
+            timer -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        sources[currentSource].volume = 0;
     }
 
     private void PlayMusicLoopPoint(MusicScriptableObject musicObject, double trackLength)
