@@ -8,7 +8,6 @@ using AffinityItem = CombatantScriptableObject.AttributeAffinityDictionaryItem;
 using AffinityType = CombatantScriptableObject.AttributeAffinity;
 using EquipmentType = EquipmentScriptableObject.EquipmentType;
 using SpellType = SpellScriptableObject.SpellType;
-using UnityEngine.EventSystems;
 
 public class EquipmentUIController : MonoBehaviour
 {
