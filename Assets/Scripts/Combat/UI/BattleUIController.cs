@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Cryptemental.SceneController;
 
 public class BattleUIController : MonoBehaviour
 {
@@ -70,6 +71,8 @@ public class BattleUIController : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current == null) return;
+
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
         if (battleMenuUI.activeInHierarchy)

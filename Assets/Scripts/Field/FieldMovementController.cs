@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Cryptemental.SceneController;
 
 public class FieldMovementController : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public class FieldMovementController : MonoBehaviour
         LevelGenerator.FinishedLevelGeneration += SetPlayerOrientation;
         SceneController.TitleSceneLoaded += OnTitle;
         SceneController.CombatSceneLoaded += OnCombat;
+        SceneController.ManualSceneLoaded += OnTitle;
+        SceneController.ManualSceneUnloaded += OnCombat;
     }
 
     private void OnDisable()
@@ -41,18 +44,18 @@ public class FieldMovementController : MonoBehaviour
         LevelGenerator.FinishedLevelGeneration -= SetPlayerOrientation;
         SceneController.TitleSceneLoaded -= OnTitle;
         SceneController.CombatSceneLoaded -= OnCombat;
+        SceneController.ManualSceneLoaded -= OnTitle;
+        SceneController.ManualSceneUnloaded -= OnCombat;
     }
 
     private void OnTitle()
     {
         onTitle = true;
-        lockedInPlace = true;
     }
 
     private void OnCombat()
     {
         onTitle = false;
-        lockedInPlace = false;
 
         if (SetPlayerRotation != null)
             SetPlayerRotation.Invoke(-transform.rotation.eulerAngles);

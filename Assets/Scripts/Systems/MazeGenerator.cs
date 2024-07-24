@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Cryptemental.SceneController;
 
 public class MazeGenerator : MonoBehaviour
 {

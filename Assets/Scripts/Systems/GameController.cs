@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Cryptemental.SceneController;
 
 public class GameController : MonoBehaviour
 {
@@ -13,14 +14,12 @@ public class GameController : MonoBehaviour
     }
     private static int currentLevel = 0;
 
-    SceneController sceneController;
     DataManager dataManager;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        sceneController = GetComponent<SceneController>();
         if (ResetGameEvent != null)
             ResetGameEvent.Invoke();
         CallTitleScene();
@@ -106,11 +105,11 @@ public class GameController : MonoBehaviour
 
     private void CallCombatScene()
     {
-        StartCoroutine(sceneController.LoadCombatScene());
+        StartCoroutine(SceneController.LoadCombatScene());
     }
 
     private void CallTitleScene()
     {
-        StartCoroutine(sceneController.LoadTitleScene());
+        StartCoroutine(SceneController.LoadTitleScene());
     }
 }
