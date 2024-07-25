@@ -7,6 +7,7 @@ public class MusicEventController : MonoBehaviour
 {
     public MusicScriptableObject battleMusic;
     public MusicScriptableObject fieldMusic;
+    public MusicScriptableObject gameoverMusic;
     private MusicManager manager;
 
     private void Start()
@@ -46,7 +47,7 @@ public class MusicEventController : MonoBehaviour
 
     private void Gameover()
     {
-        StartCoroutine(FadeOutMusic(3));
+        StartCoroutine(FadeOutMusic(3, gameoverMusic));
     }
 
     IEnumerator FadeOutMusic(float fadeoutTime, MusicScriptableObject nextTrack = null)

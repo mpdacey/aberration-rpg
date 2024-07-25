@@ -450,6 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleMusic: {fileID: 11400000, guid: 5af5a791bb011444c810ddfa65a77c2d, type: 2}
   fieldMusic: {fileID: 11400000, guid: 3b0124fbe9409f8478eb46aa2a274015, type: 2}
+  gameoverMusic: {fileID: 11400000, guid: edaeee577c65a3e4d8a30058eb696f56, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
