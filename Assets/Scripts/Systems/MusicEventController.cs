@@ -7,6 +7,7 @@ using Cryptemental.SceneController;
 public class MusicEventController : MonoBehaviour
 {
     public MusicScriptableObject battleMusic;
+    public MusicScriptableObject battleIntenseMusic;
     public MusicScriptableObject fieldMusic;
     public MusicScriptableObject titleMusic;
     public MusicScriptableObject gameoverMusic;
@@ -21,7 +22,7 @@ public class MusicEventController : MonoBehaviour
     {
         SceneController.TitleSceneLoaded += StartTitleMusic;
         SceneController.CombatSceneLoaded += StartFieldMusic;
-        FormationSelector.FormationSelected += StartBattleMusic;
+        FormationSelector.FormationThreatLevel += PickBattleMusic;
         CombatController.CombatVictory += StopBattleMusic;
         CombatController.GameoverEvent += Gameover;
     }
@@ -30,7 +31,7 @@ public class MusicEventController : MonoBehaviour
     {
         SceneController.TitleSceneLoaded -= StartTitleMusic;
         SceneController.CombatSceneLoaded -= StartFieldMusic;
-        FormationSelector.FormationSelected -= StartBattleMusic;
+        FormationSelector.FormationThreatLevel -= PickBattleMusic;
         CombatController.CombatVictory -= StopBattleMusic;
         CombatController.GameoverEvent -= Gameover;
     }
@@ -45,9 +46,48 @@ public class MusicEventController : MonoBehaviour
         StartCoroutine(FadeOutMusic(0.8f, fieldMusic));
     }
 
-    private void StartBattleMusic()
+    private void PickBattleMusic(int threatLevel)
     {
-        StartCoroutine(FadeOutMusic(0.5f, battleMusic));
+        int formationCount = FormationSelector.CurrentFormation.monsters.Length;
+        int partyCount = 0;
+        float partyHealthPercent = 0;
+        float partyStaminaPercent = 0;
+        for(int i = 0; i < PartyController.partyMembers.Length; i++)
+        {
+            if (PartyController.partyMembers[i].HasValue)
+            {
+                PartyController.PartyMember currentMember = PartyController.partyMembers[i].Value;
+                partyHealthPercent += (float)currentMember.currentHP / currentMember.partyMemberBaseStats.combatantMaxHealth;
+                partyStaminaPercent += (float)currentMember.currentSP / currentMember.partyMemberBaseStats.combatantMaxStamina;
+                partyCount++;
+            }
+        }
+
+        partyHealthPercent /= partyCount;
+        partyStaminaPercent /= partyCount;
+
+        bool lowThreat = threatLevel < 0 && partyHealthPercent < 0.3f;
+        bool mediumThreat = threatLevel == 0 &&
+            (((partyHealthPercent < 0.6f || partyStaminaPercent < 0.4f) && partyCount < 3) ||
+            partyHealthPercent < 0.4f || partyStaminaPercent < 0.25f ||
+            formationCount > partyCount);
+        bool highThreat = threatLevel > 0 &&
+            ((partyHealthPercent < 0.8f && partyCount < 3) ||
+            ((partyHealthPercent < 0.7f || partyStaminaPercent < 0.6f) && partyCount < 4) ||
+            partyHealthPercent < 0.5f || partyStaminaPercent < 0.4f ||
+            formationCount > partyCount);
+        bool lethalThreat = threatLevel > 1;
+        bool isThreat = lowThreat || mediumThreat || highThreat || lethalThreat;
+
+        if (isThreat)
+            StartBattleMusic(battleIntenseMusic);
+        else
+            StartBattleMusic(battleMusic);
+    }
+
+    private void StartBattleMusic(MusicScriptableObject music)
+    {
+        StartCoroutine(FadeOutMusic(0.5f, music));
     }
 
     private void StopBattleMusic()

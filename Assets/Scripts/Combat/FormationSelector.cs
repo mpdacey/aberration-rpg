@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 public class FormationSelector : MonoBehaviour
 {
     public static event Action FormationSelected;
+    public static event Action<int> FormationThreatLevel;
 
     [Serializable]
     public struct FormationTier
@@ -38,6 +39,7 @@ public class FormationSelector : MonoBehaviour
         {
             TickHasFoughtBefore();
             InvokeFormation(introFormation);
+            InvokeThreatLevelEvent(-1);
             return;
         }
 
@@ -46,6 +48,7 @@ public class FormationSelector : MonoBehaviour
         int randomEncounterIndex = Random.Range(0, formationTiers[tierIndex].formations.Length);
 
         InvokeFormation(formationTiers[tierIndex].formations[randomEncounterIndex]);
+        InvokeThreatLevelEvent(tierIndex - GameController.CurrentLevel / 3);
     }
 
     private void InvokeFormation(FormationScriptableObject formation)
@@ -60,4 +63,11 @@ public class FormationSelector : MonoBehaviour
 
     private void ResetHasFoughtBefore() =>
         hasFoughtBefore = false;
+
+    private void InvokeThreatLevelEvent(int threatLevel)
+    {
+        if (FormationThreatLevel != null)
+            FormationThreatLevel.Invoke(threatLevel);
+    }
+        
 }
