@@ -18,14 +18,14 @@ public class MusicEventController : MonoBehaviour
     private void OnEnable()
     {
         FormationSelector.FormationSelected += StartBattleMusic;
-        CombatController.CombatVictory += StopMusic;
+        CombatController.CombatVictory += StopBattleMusic;
         CombatController.GameoverEvent += Gameover;
     }
 
     private void OnDisable()
     {
         FormationSelector.FormationSelected -= StartBattleMusic;
-        CombatController.CombatVictory -= StopMusic;
+        CombatController.CombatVictory -= StopBattleMusic;
         CombatController.GameoverEvent -= Gameover;
     }
 
@@ -36,22 +36,22 @@ public class MusicEventController : MonoBehaviour
 
     private void StartBattleMusic()
     {
-        manager.PlayMusic(battleMusic);
+        StartCoroutine(FadeOutMusic(0.5f, battleMusic));
     }
 
-    private void StopMusic()
+    private void StopBattleMusic()
     {
-        StartCoroutine(FadeOutMusic(fieldMusic));
+        StartCoroutine(FadeOutMusic(1.2f, fieldMusic));
     }
 
     private void Gameover()
     {
-        StartCoroutine(FadeOutMusic());
+        StartCoroutine(FadeOutMusic(3));
     }
 
-    IEnumerator FadeOutMusic(MusicScriptableObject nextTrack = null)
+    IEnumerator FadeOutMusic(float fadeoutTime, MusicScriptableObject nextTrack = null)
     {
-        yield return manager.FadeMusicOut(1.2f);
+        yield return manager.FadeMusicOut(fadeoutTime);
 
         if (nextTrack)
             manager.PlayMusic(nextTrack);
