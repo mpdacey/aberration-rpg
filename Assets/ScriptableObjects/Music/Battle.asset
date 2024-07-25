@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   track: {fileID: 8300000, guid: bccfdc30f5b925c4c967696c6450ba3b, type: 3}
   doesLoop: 1
-  loopPointSeconds: 7.719948
+  loopPointSeconds: 7.266156
