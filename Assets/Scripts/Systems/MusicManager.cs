@@ -7,11 +7,12 @@ public class MusicManager : MonoBehaviour
     private int currentSource = 0;
     private double nextLoopTime;
 
-    public void PlayMusic(MusicScriptableObject musicObject)
+    public void PlayMusic(MusicScriptableObject musicObject, double resumeTime = 0)
     {
         nextLoopTime = AudioSettings.dspTime + 0.1;
         sources[currentSource].clip = musicObject.track;
         sources[currentSource].PlayScheduled(nextLoopTime);
+        sources[currentSource].timeSamples = Mathf.RoundToInt((float)(resumeTime * musicObject.track.frequency));
         sources[0].volume = sources[1].volume = 1;
 
         currentSource = 1 - currentSource;
@@ -19,7 +20,7 @@ public class MusicManager : MonoBehaviour
         StopAllCoroutines();
         if (!musicObject.doesLoop) return;
 
-        PlayMusicLoopPoint(musicObject, (double)sources[1 - currentSource].clip.samples / sources[1 - currentSource].clip.frequency);
+        PlayMusicLoopPoint(musicObject, ((double)sources[1 - currentSource].clip.samples / sources[1 - currentSource].clip.frequency) - resumeTime);
     }
 
     public void StopMusic()
@@ -42,6 +43,9 @@ public class MusicManager : MonoBehaviour
 
         sources[currentSource].volume = 0;
     }
+
+    public double GetCurrentTime() =>
+        (double)sources[currentSource].timeSamples / sources[1 - currentSource].clip.frequency;
 
     private void PlayMusicLoopPoint(MusicScriptableObject musicObject, double trackLength)
     {

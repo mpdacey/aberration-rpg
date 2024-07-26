@@ -6,12 +6,16 @@ using Cryptemental.SceneController;
 [RequireComponent(typeof(MusicManager))]
 public class MusicEventController : MonoBehaviour
 {
+    [Header("Music Objects")]
     public MusicScriptableObject battleMusic;
     public MusicScriptableObject battleIntenseMusic;
     public MusicScriptableObject fieldMusic;
     public MusicScriptableObject titleMusic;
     public MusicScriptableObject gameoverMusic;
+
     private MusicManager manager;
+    private double fieldTime = 0;
+    private bool returnToField = false;
 
     private void Start()
     {
@@ -87,11 +91,13 @@ public class MusicEventController : MonoBehaviour
 
     private void StartBattleMusic(MusicScriptableObject music)
     {
+        fieldTime = manager.GetCurrentTime();
         StartCoroutine(FadeOutMusic(0.5f, music));
     }
 
     private void StopBattleMusic()
     {
+        returnToField = true;
         StartCoroutine(FadeOutMusic(1.2f, fieldMusic));
     }
 
@@ -104,9 +110,15 @@ public class MusicEventController : MonoBehaviour
     {
         yield return manager.FadeMusicOut(fadeoutTime);
 
-        if (nextTrack)
-            manager.PlayMusic(nextTrack);
-        else
+        if (!nextTrack)
             manager.StopMusic();
+
+        if (returnToField)
+        {
+            manager.PlayMusic(nextTrack, resumeTime:fieldTime);
+            returnToField = false;
+        }
+        else
+            manager.PlayMusic(nextTrack);
     }
 }
