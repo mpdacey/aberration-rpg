@@ -117,6 +117,7 @@ public class MusicEventController : MonoBehaviour
         {
             manager.PlayMusic(nextTrack, resumeTime:fieldTime);
             returnToField = false;
+            yield return manager.FadeInMusic(0.6f);
         }
         else
             manager.PlayMusic(nextTrack);

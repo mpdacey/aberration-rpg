@@ -44,6 +44,20 @@ public class MusicManager : MonoBehaviour
         sources[currentSource].volume = 0;
     }
 
+    public IEnumerator FadeInMusic(float fadeTime)
+    {
+        float timer = 0;
+
+        while(timer < fadeTime)
+        {
+            sources[currentSource].volume = timer / fadeTime;
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+        sources[currentSource].volume = 1;
+    }
+
     public double GetCurrentTime() =>
         (double)sources[currentSource].timeSamples / sources[1 - currentSource].clip.frequency;
 
