@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Cryptemental.Data;
 
 public class TitleManager : MonoBehaviour
@@ -7,12 +8,12 @@ public class TitleManager : MonoBehaviour
     public static event Action PlayButtonPressed;
     public static event Action ContinueButtonPressed;
 
-    public GameObject continueButton;
+    public Button continueButton;
 
     private void OnEnable()
     {
         bool hasSave = PlayerPrefs.HasKey(PlayerPrefsKeys.FLOOR_KEY) && PlayerPrefs.GetInt(PlayerPrefsKeys.FLOOR_KEY) > 0;
-        continueButton.SetActive(hasSave);
+        continueButton.enabled = hasSave;
     }
 
     public void OnPlayButton()
