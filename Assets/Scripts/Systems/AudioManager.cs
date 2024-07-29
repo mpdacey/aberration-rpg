@@ -20,4 +20,10 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetSFXPitch(randomPitch ? Random.Range(0.95f, 1.05f) : 1);
         audioSource.PlayOneShot(audioClip);
     }
+
+    public static void SetMusicVolume(float normalizedVolume) =>
+        audioMixer.SetMusicVolume(normalizedVolume);
+
+    public static void SetSFXVolume(float normalizedVolume) =>
+        audioMixer.SetSFXVolume(normalizedVolume);
 }

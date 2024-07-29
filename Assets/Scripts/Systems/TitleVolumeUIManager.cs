@@ -41,6 +41,21 @@ public class TitleVolumeUIManager : MonoBehaviour
         ignoreFirstInput = true;
     }
 
+    public void SliderValueChange()
+    {
+        if (!currentSlider) return;
+
+        switch (buttonIndex)
+        {
+            case MUSIC_SLIDER_INDEX:
+                AudioManager.SetMusicVolume(currentSlider.value / currentSlider.maxValue);
+                break;
+            case SOUND_SLIDER_INDEX:
+                AudioManager.SetSFXVolume(currentSlider.value / currentSlider.maxValue);
+                break;
+        }
+    }
+
     private void Update()
     {
         CheckForSliderExit();
@@ -78,6 +93,15 @@ public class TitleVolumeUIManager : MonoBehaviour
     private void DiscardChanges()
     {
         currentSlider.value = previousSliderState;
+        switch (buttonIndex)
+        {
+            case MUSIC_SLIDER_INDEX:
+                AudioManager.SetMusicVolume(previousSliderState / currentSlider.maxValue);
+                break;
+            case SOUND_SLIDER_INDEX:
+                AudioManager.SetSFXVolume(previousSliderState / currentSlider.maxValue);
+                break;
+        }
         ReturnToParentButton();
     }
 
