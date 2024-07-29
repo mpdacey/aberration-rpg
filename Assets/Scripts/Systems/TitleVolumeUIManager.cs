@@ -11,6 +11,7 @@ public class TitleVolumeUIManager : MonoBehaviour
     public Button[] sliderButtons;
     private SelectDefaultButton defaultButtonSelector;
     private bool inSlider = false;
+    private bool ignoreFirstInput = false;
     private int buttonIndex = 0;
     private int previousSliderState = 0;
     private Slider currentSlider = null;
@@ -37,6 +38,7 @@ public class TitleVolumeUIManager : MonoBehaviour
         previousSliderState = (int)currentSlider.value;
         currentSlider.Select();
         inSlider = true;
+        ignoreFirstInput = true;
     }
 
     private void Update()
@@ -47,6 +49,12 @@ public class TitleVolumeUIManager : MonoBehaviour
     private void CheckForSliderExit()
     {
         if (!inSlider) return;
+        if (ignoreFirstInput)
+        {
+            ignoreFirstInput = false;
+            return;
+        }
+
         if (Input.GetButtonDown("Submit")) ConfirmChanges();
         else if (Input.GetButtonDown("Cancel")) DiscardChanges();
     }
