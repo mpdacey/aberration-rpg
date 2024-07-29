@@ -232,4 +232,10 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetString(PlayerPrefsKeys.PARTY_KEY, "{}");
         PlayerPrefs.SetString(PlayerPrefsKeys.DISCOVERED_AFFINITIES_KEY, "{}");
     }
+
+    public void SaveMusicVolume(float normalisedVolume) =>
+        PlayerPrefs.SetFloat(PlayerPrefsKeys.VOLUME_MUSIC_KEY, Mathf.Clamp01(normalisedVolume));
+
+    public void SaveSoundVolume(float normalisedVolume) =>
+        PlayerPrefs.SetFloat(PlayerPrefsKeys.VOLUME_SOUND_KEY, Mathf.Clamp01(normalisedVolume));    
 }
