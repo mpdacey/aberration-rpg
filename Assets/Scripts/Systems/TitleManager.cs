@@ -24,7 +24,8 @@ public class TitleManager : MonoBehaviour
     private void OnEnable()
     {
         bool hasSave = PlayerPrefs.HasKey(PlayerPrefsKeys.FLOOR_KEY) && PlayerPrefs.GetInt(PlayerPrefsKeys.FLOOR_KEY) > 0;
-        continueButton.enabled = hasSave;
+        continueButton.interactable = hasSave;
+        continueButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().alpha = hasSave ? 1 : 0.5f;
 
         settingsUIManager.ReturnToMainMenu += OnReturnButton;
     }
