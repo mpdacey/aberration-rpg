@@ -36,8 +36,10 @@ public class GameController : MonoBehaviour
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
         CombatController.GameoverEvent += ClearProgress;
+        TitleVolumeUIManager.SavedMusicVolume += SaveMusicVolume;
+        TitleVolumeUIManager.SavedSoundVolume += SaveSoundVolume;
 
-        if(dataManager == null) dataManager = GetComponent<DataManager>();
+        if (dataManager == null) dataManager = GetComponent<DataManager>();
         dataManager.SetFloorLevel += SetFloorLevel;
     }
 
@@ -52,6 +54,8 @@ public class GameController : MonoBehaviour
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
         CombatController.GameoverEvent -= ClearProgress;
+        TitleVolumeUIManager.SavedMusicVolume -= SaveMusicVolume;
+        TitleVolumeUIManager.SavedSoundVolume -= SaveSoundVolume;
         dataManager.SetFloorLevel -= SetFloorLevel;
     }
 
@@ -111,5 +115,27 @@ public class GameController : MonoBehaviour
     private void CallTitleScene()
     {
         StartCoroutine(SceneController.LoadTitleScene());
+    }
+
+    private void SaveMusicVolume(float normalisedVolume)
+    {
+        if (!dataManager)
+        {
+            Debug.LogWarning("Couldn't save music volume because dataManager was null");
+            return;
+        }
+
+        dataManager.SaveMusicVolume(normalisedVolume);
+    }
+
+    private void SaveSoundVolume(float normalisedVolume)
+    {
+        if (!dataManager)
+        {
+            Debug.LogWarning("Couldn't save sound volume because dataManager was null");
+            return;
+        }
+
+        dataManager.SaveSoundVolume(normalisedVolume);
     }
 }

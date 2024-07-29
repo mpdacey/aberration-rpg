@@ -1,6 +1,8 @@
 using UnityEngine;
 namespace Cryptemental.Manual
 {
+    using Cryptemental.Audio;
+
     [RequireComponent(typeof(ManualUIController))]
     public class ManualController : MonoBehaviour
     {

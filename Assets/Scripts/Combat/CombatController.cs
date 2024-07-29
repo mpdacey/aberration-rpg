@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using Cryptemental.Audio;
 
 public class CombatController : MonoBehaviour
 {
