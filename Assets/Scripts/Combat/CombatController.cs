@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using Cryptemental.Audio;
 
 public class CombatController : MonoBehaviour
 {
@@ -554,6 +555,8 @@ public class CombatController : MonoBehaviour
         currentBattleState = BattleState.Victory;
 
         Debug.Log("Victory");
+        if (CombatVictory != null)
+            CombatVictory.Invoke();
 
         yield return RecruitmentPhase();
 
@@ -562,8 +565,6 @@ public class CombatController : MonoBehaviour
             for (int i = 0; i < 4; i++)
                 ClearPlayerActions(i);
 
-            if (CombatVictory != null)
-                CombatVictory.Invoke();
             FieldMovementController.lockedInPlace = false;
         }
 
