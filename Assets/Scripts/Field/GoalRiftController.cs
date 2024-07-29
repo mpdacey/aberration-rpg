@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Cryptemental.Audio;
 
 public class GoalRiftController : MonoBehaviour, IInteractable
 {

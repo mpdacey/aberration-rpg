@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using Cryptemental.SceneController;
+using Cryptemental.Audio;
 
 public class FieldMovementController : MonoBehaviour
 {
