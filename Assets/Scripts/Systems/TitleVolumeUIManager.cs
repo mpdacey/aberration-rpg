@@ -8,6 +8,7 @@ public class TitleVolumeUIManager : MonoBehaviour
 {
     public static event Action<float> SavedMusicVolume;
     public static event Action<float> SavedSoundVolume;
+    public event Action ReturnToMainMenu;
 
     public Button[] sliderButtons;
     private SelectDefaultButton defaultButtonSelector;
@@ -59,6 +60,7 @@ public class TitleVolumeUIManager : MonoBehaviour
 
     private void Update()
     {
+        CheckForSettingsExit();
         CheckForSliderExit();
     }
 
@@ -110,5 +112,13 @@ public class TitleVolumeUIManager : MonoBehaviour
     {
         sliderButtons[buttonIndex].Select();
         currentSlider = null;
+    }
+
+    private void CheckForSettingsExit()
+    {
+        if (inSlider) return;
+
+        if (Input.GetButtonDown("Cancel") && ReturnToMainMenu != null)
+            ReturnToMainMenu.Invoke();
     }
 }
