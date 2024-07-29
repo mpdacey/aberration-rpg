@@ -52,11 +52,13 @@ public class FieldMovementController : MonoBehaviour
     private void OnTitle()
     {
         onTitle = true;
+        lockedInPlace = false;
     }
 
     private void OnCombat()
     {
         onTitle = false;
+        lockedInPlace = false;
 
         if (SetPlayerRotation != null)
             SetPlayerRotation.Invoke(-transform.rotation.eulerAngles);
