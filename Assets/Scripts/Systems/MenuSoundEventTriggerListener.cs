@@ -1,19 +1,24 @@
 using UnityEngine;
+using Cryptemental.Audio;
 
 public class MenuSoundEventTriggerListener : MonoBehaviour
 {
+    public AudioClip menuMoveClip;
+    public AudioClip menuConfirmClip;
+    public AudioClip menuCancelClip;
+
     public void OnButtonMove()
     {
-        Debug.Log("Hello");
+        AudioManager.PlayAudioClip(menuMoveClip);
     }
 
     public void OnButtonSubmit()
     {
-        Debug.Log("Submit");
+        AudioManager.PlayAudioClip(menuConfirmClip);
     }
 
     public void OnButtonCancel()
     {
-        Debug.Log("Cancel");
+        AudioManager.PlayAudioClip(menuCancelClip);
     }
 }

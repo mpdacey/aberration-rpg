@@ -1764,6 +1764,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0bdeaf22e29e0418eec5779c1630e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuMoveClip: {fileID: 8300000, guid: 1b869581eabf0914ababaa04a8617975, type: 3}
+  menuConfirmClip: {fileID: 8300000, guid: d823582c1114fc742a529d5c7b46eca8, type: 3}
+  menuCancelClip: {fileID: 8300000, guid: af7df918b4208fb42a148cb058a2bc1a, type: 3}
 --- !u!114 &1498833362 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7965565818983182060, guid: 958be4bb34f6b8941837e1676e971488, type: 3}
