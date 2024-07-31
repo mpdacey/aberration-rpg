@@ -985,6 +985,7 @@ GameObject:
   - component: {fileID: 123775211}
   - component: {fileID: 123775210}
   - component: {fileID: 123775213}
+  - component: {fileID: 123775214}
   m_Layer: 5
   m_Name: Left Offer Button
   m_TagString: Untagged
@@ -1122,6 +1123,67 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &123775214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123775208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &159046680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2092,6 +2154,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6936772259292056678, guid: c3982e1e5e299354096e188cce73a210, type: 3}
   m_PrefabInstance: {fileID: 282298966}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &282298968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6936772259292056673, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+  m_PrefabInstance: {fileID: 282298966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &283103857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2099,6 +2166,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (2)
@@ -2481,6 +2556,7 @@ GameObject:
   - component: {fileID: 298091015}
   - component: {fileID: 298091014}
   - component: {fileID: 298091017}
+  - component: {fileID: 298091018}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2551,6 +2627,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatEventSystem: {fileID: 298091015}
+--- !u!114 &298091018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298091013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0bdeaf22e29e0418eec5779c1630e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &371910981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2832,7 @@ GameObject:
   - component: {fileID: 383241358}
   - component: {fileID: 383241357}
   - component: {fileID: 383241356}
+  - component: {fileID: 383241359}
   m_Layer: 5
   m_Name: SkillButton
   m_TagString: Untagged
@@ -2866,6 +2955,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383241354}
   m_CullTransparentMesh: 1
+--- !u!114 &383241359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383241354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &402361335
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,6 +3088,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (3)
@@ -3469,6 +3627,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053b77da31ae97b46a5aedacd964326f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &525592558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525592555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &546033404 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3452408736075756949, guid: c3982e1e5e299354096e188cce73a210, type: 3}
@@ -3615,6 +3834,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (5)
@@ -6689,6 +6916,7 @@ GameObject:
   - component: {fileID: 1109640019}
   - component: {fileID: 1109640018}
   - component: {fileID: 1109640017}
+  - component: {fileID: 1109640020}
   m_Layer: 5
   m_Name: Decline Button
   m_TagString: Untagged
@@ -6811,6 +7039,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109640015}
   m_CullTransparentMesh: 1
+--- !u!114 &1109640020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109640015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1112800716
 GameObject:
   m_ObjectHideFlags: 0
@@ -7081,6 +7370,7 @@ GameObject:
   - component: {fileID: 1135293197}
   - component: {fileID: 1135293196}
   - component: {fileID: 1135293195}
+  - component: {fileID: 1135293199}
   m_Layer: 5
   m_Name: Right Offer Button
   m_TagString: Untagged
@@ -7203,6 +7493,67 @@ RectTransform:
   m_AnchoredPosition: {x: 1278.75, y: -65.290016}
   m_SizeDelta: {x: 842.5, y: 130.58003}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1135293199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135293194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1154019164
 GameObject:
   m_ObjectHideFlags: 0
@@ -7419,12 +7770,73 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5476420010910533180, guid: c3982e1e5e299354096e188cce73a210, type: 3}
   m_PrefabInstance: {fileID: 282298966}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 282298968}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 053b77da31ae97b46a5aedacd964326f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1159974680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282298968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1166462308
 GameObject:
   m_ObjectHideFlags: 0
@@ -7982,6 +8394,7 @@ GameObject:
   - component: {fileID: 1297064343}
   - component: {fileID: 1297064342}
   - component: {fileID: 1297064341}
+  - component: {fileID: 1297064344}
   m_Layer: 5
   m_Name: GuardButton
   m_TagString: Untagged
@@ -8104,6 +8517,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297064339}
   m_CullTransparentMesh: 1
+--- !u!114 &1297064344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297064339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1315136114
 GameObject:
   m_ObjectHideFlags: 0
@@ -8905,6 +9379,7 @@ GameObject:
   - component: {fileID: 1370968809}
   - component: {fileID: 1370968808}
   - component: {fileID: 1370968807}
+  - component: {fileID: 1370968811}
   m_Layer: 5
   m_Name: Left Offer Button
   m_TagString: Untagged
@@ -9027,6 +9502,67 @@ RectTransform:
   m_AnchoredPosition: {x: 421.25, y: -65.290016}
   m_SizeDelta: {x: 842.5, y: 130.58003}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1370968811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370968806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1378321489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9371,6 +9907,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (1)
@@ -10424,6 +10968,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (4)
@@ -10930,6 +11482,7 @@ GameObject:
   - component: {fileID: 1595954121}
   - component: {fileID: 1595954120}
   - component: {fileID: 1595954119}
+  - component: {fileID: 1595954122}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -11052,6 +11605,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595954117}
   m_CullTransparentMesh: 1
+--- !u!114 &1595954122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595954117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &1607847951 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126826238819231817, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
@@ -12583,6 +13197,7 @@ GameObject:
   - component: {fileID: 1738636429}
   - component: {fileID: 1738636428}
   - component: {fileID: 1738636427}
+  - component: {fileID: 1738636430}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -12705,6 +13320,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738636425}
   m_CullTransparentMesh: 1
+--- !u!114 &1738636430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738636425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!224 &1763613327 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9126826238819231817, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
@@ -12722,6 +13398,7 @@ GameObject:
   - component: {fileID: 1770765447}
   - component: {fileID: 1770765446}
   - component: {fileID: 1770765449}
+  - component: {fileID: 1770765450}
   m_Layer: 5
   m_Name: Right Offer Button
   m_TagString: Untagged
@@ -12859,6 +13536,67 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1770765450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770765444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1793540587
 GameObject:
   m_ObjectHideFlags: 0
@@ -12871,6 +13609,7 @@ GameObject:
   - component: {fileID: 1793540591}
   - component: {fileID: 1793540590}
   - component: {fileID: 1793540589}
+  - component: {fileID: 1793540592}
   m_Layer: 5
   m_Name: Decline Button
   m_TagString: Untagged
@@ -12993,6 +13732,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793540587}
   m_CullTransparentMesh: 1
+--- !u!114 &1793540592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793540587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1843659813
 GameObject:
   m_ObjectHideFlags: 0
@@ -13076,6 +13876,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (7)
@@ -13334,6 +14142,7 @@ GameObject:
   - component: {fileID: 1903064318}
   - component: {fileID: 1903064317}
   - component: {fileID: 1903064316}
+  - component: {fileID: 1903064319}
   m_Layer: 5
   m_Name: InspectButton
   m_TagString: Untagged
@@ -13456,6 +14265,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903064314}
   m_CullTransparentMesh: 1
+--- !u!114 &1903064319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903064314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1910296557
 GameObject:
   m_ObjectHideFlags: 0
@@ -14187,6 +15057,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6936772259292056678, guid: c3982e1e5e299354096e188cce73a210, type: 3}
   m_PrefabInstance: {fileID: 1940352346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1940352348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6936772259292056673, guid: c3982e1e5e299354096e188cce73a210, type: 3}
+  m_PrefabInstance: {fileID: 1940352346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1941338553 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3306097813423265150, guid: 45304c77cacfe4f4883d89cd6c309405, type: 3}
@@ -14638,6 +15513,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton (6)
@@ -15132,12 +16015,73 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5476420010910533180, guid: c3982e1e5e299354096e188cce73a210, type: 3}
   m_PrefabInstance: {fileID: 1940352346}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1940352348}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 053b77da31ae97b46a5aedacd964326f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2037919760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940352348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2052114872
 GameObject:
   m_ObjectHideFlags: 0
@@ -15706,6 +16650,7 @@ GameObject:
   - component: {fileID: 2134016697}
   - component: {fileID: 2134016696}
   - component: {fileID: 2134016695}
+  - component: {fileID: 2134016698}
   m_Layer: 5
   m_Name: AttackButton
   m_TagString: Untagged
@@ -15828,6 +16773,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134016693}
   m_CullTransparentMesh: 1
+--- !u!114 &2134016698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134016693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 11
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonSubmit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 298091018}
+          m_TargetAssemblyTypeName: EventTriggerListener, Assembly-CSharp
+          m_MethodName: OnButtonCancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &15521311077695000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16703,6 +17709,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029167160}
     m_Modifications:
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 298091018}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonSubmit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013801886502087406, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnButtonCancel
+      objectReference: {fileID: 0}
     - target: {fileID: 9126826238819231816, guid: 0628c0885a8252e40bdd88a7216f024b, type: 3}
       propertyPath: m_Name
       value: SpellButton
