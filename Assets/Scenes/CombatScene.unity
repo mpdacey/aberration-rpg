@@ -12060,6 +12060,7 @@ GameObject:
   - component: {fileID: 1654621432}
   - component: {fileID: 1654621431}
   - component: {fileID: 1654621435}
+  - component: {fileID: 1654621436}
   m_Layer: 5
   m_Name: BattleUI
   m_TagString: Untagged
@@ -12182,6 +12183,7 @@ MonoBehaviour:
   riftTransitionAnimator: {fileID: 295931839}
   floorCounter: {fileID: 1338522787}
   monsterAffinityUI: {fileID: 1867799340}
+  defaultButtonSelector: {fileID: 1654621436}
   partyLineUpUI:
   - {fileID: 3306097812092775625}
   - {fileID: 1689702924}
@@ -12189,6 +12191,19 @@ MonoBehaviour:
   - {fileID: 1622869111}
   partyLineUpDefaultY: 30
   partyLineUpActiveY: 71.5
+--- !u!114 &1654621436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654621430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfac561fd4dd3d4e950c749e67e6ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 0}
 --- !u!1 &1659866594
 GameObject:
   m_ObjectHideFlags: 0

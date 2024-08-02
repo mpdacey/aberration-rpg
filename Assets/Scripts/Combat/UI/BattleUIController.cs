@@ -18,6 +18,7 @@ public class BattleUIController : MonoBehaviour
     public Animator riftTransitionAnimator;
     public TextMeshProUGUI floorCounter;
     public MonsterAffinityUIController monsterAffinityUI;
+    public SelectDefaultButton defaultButtonSelector;
 
     [Header("Player Battle UI")]
     public PlayerStatsUIController[] partyLineUpUI;
@@ -69,28 +70,6 @@ public class BattleUIController : MonoBehaviour
         combatController.DisplayInspectUI -= DisplayInspectUI;
     }
 
-    private void Update()
-    {
-        if (EventSystem.current == null) return;
-
-        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
-
-        if (battleMenuUI.activeInHierarchy)
-        {
-            if (selectedObject == null)
-                battleMenuUI.GetComponentsInChildren<Button>()[currentSelected].Select();
-            else
-                currentSelected = selectedObject.transform.GetSiblingIndex();
-        }
-        else if (monsterTargetButtons[0].transform.parent.gameObject.activeInHierarchy)
-        {
-            if (selectedObject == null)
-                monsterTargetButtons[currentSelected].Select();
-            else
-                currentSelected = selectedObject.transform.GetSiblingIndex();
-        }
-    }
-
     private void SetPartyValues(PartyController.PartyMember? partyMemberStats, int partyMemberPosition)
     {
         var hasValue = partyMemberStats.HasValue;
@@ -128,7 +107,7 @@ public class BattleUIController : MonoBehaviour
     private void ShowBattleMenu(PartyController.PartyMember currentPlayer)
     {
         battleMenuUI.SetActive(true);
-        battleMenuUI.GetComponentInChildren<Button>().Select();
+        SelectDefaultButton(battleMenuUI.GetComponentInChildren<Button>());
         skillButton.interactable = currentPlayer.partyMemberBaseStats.combatantSpells.Count > 0;
 
         HideTargets();
@@ -197,7 +176,7 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i].navigation = customNav;
                 }
                 currentSelected = monsterTargetButtons.First(x => x.gameObject.activeInHierarchy == true).transform.GetSiblingIndex();
-                monsterTargetButtons[currentSelected].Select();
+                SelectDefaultButton(monsterTargetButtons[currentSelected]);
                 break;
             case 2:
                 monsterTargetButtons[1].gameObject.SetActive(false);
@@ -211,7 +190,7 @@ public class BattleUIController : MonoBehaviour
                     monsterTargetButtons[i * 2].navigation = customNav;
                 }
                 currentSelected = monsterTargetButtons.First(x => x.gameObject.activeInHierarchy == true).transform.GetSiblingIndex();
-                monsterTargetButtons[currentSelected].Select();
+                SelectDefaultButton(monsterTargetButtons[currentSelected]);
                 break;
             case 1:
                 monsterTargetButtons[1].gameObject.SetActive(true);
@@ -219,7 +198,7 @@ public class BattleUIController : MonoBehaviour
                 customNav.mode = Navigation.Mode.None;
                 monsterTargetButtons[1].navigation = customNav;
                 currentSelected = 1;
-                monsterTargetButtons[1].Select();
+                SelectDefaultButton(monsterTargetButtons[1]);
                 break;
         }
     }
@@ -237,7 +216,7 @@ public class BattleUIController : MonoBehaviour
             if (!setInteractable)
             {
                 monsterTargetButtons[i].interactable = true;
-                monsterTargetButtons[i].Select();
+                SelectDefaultButton(monsterTargetButtons[i]);
                 setInteractable = true;
             }
 
@@ -294,4 +273,10 @@ public class BattleUIController : MonoBehaviour
 
     private void UpdateFloorCounter() =>
         floorCounter.text = $"Realm: {GameController.CurrentLevel + 1}";
+
+    private void SelectDefaultButton(Button button)
+    {
+        defaultButtonSelector.defaultButton = button;
+        button.Select();
+    }
 }
