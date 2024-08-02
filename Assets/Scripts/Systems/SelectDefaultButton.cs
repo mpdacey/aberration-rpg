@@ -8,17 +8,19 @@ public class SelectDefaultButton : MonoBehaviour
 
     private void OnEnable()
     {
+        if (!defaultButton) return;
         defaultButton.Select();
     }
 
     private void Update()
     {
-        if (EventSystem.current == null) return;
+        if (!defaultButton) return;
+
+        if (EventSystem.current == null || EventSystem.current.gameObject.scene.buildIndex != gameObject.scene.buildIndex) return;
 
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
         if (selectedObject == null)
             defaultButton.Select();
     }
-
 }
