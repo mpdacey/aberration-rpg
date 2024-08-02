@@ -42,10 +42,11 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
 
     IEnumerator SetLastSelected()
     {
-        yield return new WaitForEndOfFrame();
-
         EventSystem currentSystem = EventSystem.current;
-        if (currentSystem && currentSystem.currentSelectedGameObject != lastSelected)
+        while(currentSystem && lastSelected == currentSystem.currentSelectedGameObject && currentSystem.currentSelectedGameObject.activeInHierarchy)
+            yield return new WaitForEndOfFrame();
+
+        if (currentSystem)
             lastSelected = currentSystem.currentSelectedGameObject;
     }
 }
