@@ -70,6 +70,9 @@ public class BattleUIController : MonoBehaviour
         combatController.DisplayInspectUI -= DisplayInspectUI;
     }
 
+    public void UpdateSelectedDefaultButton(Button item) =>
+        SelectDefaultButton(item);
+
     private void SetPartyValues(PartyController.PartyMember? partyMemberStats, int partyMemberPosition)
     {
         var hasValue = partyMemberStats.HasValue;

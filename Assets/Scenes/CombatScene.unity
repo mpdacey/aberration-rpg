@@ -3023,6 +3023,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultMenuItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 383241356}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &402361335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3694,6 +3710,22 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 525592557}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -7852,6 +7884,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1159974679}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1166462308
 GameObject:
   m_ObjectHideFlags: 0
@@ -8588,6 +8636,22 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultMenuItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1297064341}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -14368,6 +14432,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultMenuItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1903064316}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1910296557
 GameObject:
   m_ObjectHideFlags: 0
@@ -16128,6 +16208,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2037919759}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2052114872
 GameObject:
   m_ObjectHideFlags: 0
@@ -16875,6 +16971,22 @@ MonoBehaviour:
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1654621435}
+          m_TargetAssemblyTypeName: BattleUIController, Assembly-CSharp
+          m_MethodName: UpdateSelectedDefaultMenuItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2134016695}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
