@@ -10,6 +10,8 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
 
     private GameObject lastSelected = null;
 
+    public static bool isInspecting = false;
+
     public void OnButtonMove()
     {
         EventSystem currentSystem = EventSystem.current;
@@ -21,7 +23,8 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
 
     public void OnButtonSubmit()
     {
-        AudioManager.PlayAudioClip(menuConfirmClip);
+        if(!isInspecting)
+            AudioManager.PlayAudioClip(menuConfirmClip);
     }
 
     public void OnButtonCancel()

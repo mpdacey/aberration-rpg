@@ -285,6 +285,8 @@ public class BattleUIController : MonoBehaviour
     {
         if(shouldShowUI) monsterAffinityUI.ShowMonsterAffinities();
         else monsterAffinityUI.HideMonsterAffinities();
+
+        MenuSoundEventTriggerListener.isInspecting = shouldShowUI;
     }
 
     private void PlayTransitionAnimation() =>
