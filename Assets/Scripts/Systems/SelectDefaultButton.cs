@@ -13,12 +13,11 @@ public class SelectDefaultButton : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current == null) return;
+        if (EventSystem.current == null || EventSystem.current.gameObject.scene.buildIndex != gameObject.scene.buildIndex) return;
 
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
 
         if (selectedObject == null)
             defaultButton.Select();
     }
-
 }
