@@ -28,4 +28,9 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
     {
         AudioManager.PlayAudioClip(menuCancelClip);
     }
+
+    public void OnSliderValueChange()
+    {
+        AudioManager.PlayAudioClip(menuMoveClip);
+    }
 }
