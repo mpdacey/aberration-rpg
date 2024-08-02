@@ -14,20 +14,24 @@ namespace Cryptemental.Manual
         public Image manualUIElement;
         private bool manualOpen = false;
         private bool hasClosedManual = false;
+        private bool canOpenManual = true;
 
         private void OnEnable()
         {
             StateBehaviourCloseManualEvent.CloseManualEvent += CloseManual;
+            CombatController.GameoverEvent += GameoverEvent;
+            canOpenManual = true;
         }
 
         private void OnDisable()
         {
             StateBehaviourCloseManualEvent.CloseManualEvent -= CloseManual;
+            CombatController.GameoverEvent -= GameoverEvent;
         }
 
         void Update()
         {
-            if (Input.GetButtonDown("Manual"))
+            if (Input.GetButtonDown("Manual") && canOpenManual)
             {
                 if (!manualOpen) OpenManual();
                 else InitiateCloseManual();
@@ -55,5 +59,8 @@ namespace Cryptemental.Manual
             manualUIElement.sprite = manualCloseSprite;
             manualOpen = hasClosedManual = false;
         }
+
+        void GameoverEvent() =>
+            canOpenManual = false;
     }
 }
