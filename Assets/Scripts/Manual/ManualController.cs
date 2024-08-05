@@ -35,7 +35,7 @@ namespace Cryptemental.Manual
         private void OnDisable()
         {
             ManualPageOnSelect.OnManualPageSelect -= FlipToPage;
-            ManualInteractListener.CloseManualInput -= PlayCloseManual;
+            CombatController.GameoverEvent -= PlayCloseManual;
         }
 
         private void FlipToPage(int index)

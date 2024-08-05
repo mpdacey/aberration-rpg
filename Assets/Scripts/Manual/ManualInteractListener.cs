@@ -60,7 +60,10 @@ namespace Cryptemental.Manual
             manualOpen = hasClosedManual = false;
         }
 
-        void GameoverEvent() =>
+        void GameoverEvent()
+        {
+            InitiateCloseManual();
             canOpenManual = false;
+        }
     }
 }
