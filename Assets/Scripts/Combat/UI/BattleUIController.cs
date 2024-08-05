@@ -34,6 +34,7 @@ public class BattleUIController : MonoBehaviour
         SceneController.CombatSceneLoaded += UpdateFloorCounter;
         PartyController.PartyLineUpChanged += SetPartyValues;
         RecruitmentController.UpdatePlayerHP += UpdateHealth;
+        CombatController.GameoverEvent += ClearDefaultButton;
         combatController.CurrentPartyTurn += SetPartyLayoutPositions;
         combatController.ShowAttackMenu += ShowBattleMenu;
         combatController.ShowTargetIndicator += ShowTargets;
@@ -55,6 +56,7 @@ public class BattleUIController : MonoBehaviour
         GoalRiftController.GoalRiftEntered -= UpdateFloorCounter;
         PartyController.PartyLineUpChanged -= SetPartyValues;
         RecruitmentController.UpdatePlayerHP -= UpdateHealth;
+        CombatController.GameoverEvent -= ClearDefaultButton;
         combatController.CurrentPartyTurn -= SetPartyLayoutPositions;
         combatController.ShowAttackMenu -= ShowBattleMenu;
         combatController.ShowTargetIndicator -= ShowTargets;
@@ -71,6 +73,9 @@ public class BattleUIController : MonoBehaviour
 
     public void UpdateSelectedDefaultButton(Button item) =>
         SelectDefaultButton(item);
+
+    private void ClearDefaultButton() =>
+        defaultButtonSelector.defaultButton = null;
 
     private void SetPartyValues(PartyController.PartyMember? partyMemberStats, int partyMemberPosition)
     {
