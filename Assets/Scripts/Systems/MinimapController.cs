@@ -15,6 +15,7 @@ public class MinimapController : MonoBehaviour
     private Texture2D mapMaskTexture;
     private float mazeRatio = 1f;
     private Vector2 startPosition;
+    private Vector3 goalPosition;
 
     [Header("Minimap Entities")]
     public Transform playerEntity;
@@ -23,6 +24,7 @@ public class MinimapController : MonoBehaviour
     private void OnEnable()
     {
         MazeGenerator.MazeTextureGenerated += DrawNewMinimap;
+        LevelGenerator.GoalLocationFound += SetGoalPosition;
         FieldMovementController.PlayerPositionChanged += UpdatePlayerPosition;
         FieldMovementController.PlayerRotationChanged += UpdatePlayerRotation;
         FieldMovementController.SetPlayerRotation += SetPlayerRotation;
@@ -31,6 +33,7 @@ public class MinimapController : MonoBehaviour
     private void OnDisable()
     {
         MazeGenerator.MazeTextureGenerated -= DrawNewMinimap;
+        LevelGenerator.GoalLocationFound += SetGoalPosition;
         FieldMovementController.PlayerPositionChanged -= UpdatePlayerPosition;
         FieldMovementController.PlayerRotationChanged -= UpdatePlayerRotation;
         FieldMovementController.SetPlayerRotation -= SetPlayerRotation;
@@ -108,12 +111,15 @@ public class MinimapController : MonoBehaviour
                 cells[(topLeft.y+y) * baseWidth * TILE_SIZE + topLeft.x] = outlineColour;
     }
 
+    private void SetGoalPosition(Vector2 position) =>
+        goalPosition = new Vector3(position.x, 0, position.y) * 5;
+
     private void UpdatePlayerPosition(Vector3 playerPosition)
     {
         Vector2 currentPosition = startPosition + new Vector2(playerPosition.x / 5, playerPosition.z / 5);
         mapParentTranform.localPosition = new Vector2(12.5f, 12.5f) * ((mazeRatio-1)*8+1) + new Vector2(15,15) + currentPosition * -25f;
         UpdateMask(currentPosition);
-        UpdateEntities();
+        UpdateEntities(playerPosition);
     }
 
     private void UpdateMask(Vector2 currentPosition)
@@ -123,9 +129,9 @@ public class MinimapController : MonoBehaviour
         mapMask.texture = mapMaskTexture;
     }
 
-    private void UpdateEntities()
+    private void UpdateEntities(Vector3 playerPosition)
     {
-        if (Mathf.CeilToInt(Vector2.Distance(portalEntity.position, playerEntity.position)) <= 70)
+        if (Mathf.Abs(Vector3.Distance(goalPosition, playerPosition)) <= 14)
             portalEntity.gameObject.SetActive(true);
     }
 
