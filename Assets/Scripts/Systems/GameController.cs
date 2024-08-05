@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
     public static event Action ResetGameEvent;
     public static event Action ContinueGameEvent;
+    public static event Action<Vector2> VolumesLoaded;
 
     public static int CurrentLevel
     {
@@ -15,6 +16,7 @@ public class GameController : MonoBehaviour
     private static int currentLevel = 0;
 
     DataManager dataManager;
+    private bool hasLoadedVolume = false;
 
     void Start()
     {
@@ -29,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         PartyController.PartyIsReady += SetPlayerUI;
         SceneController.CombatSceneLoaded += SetPlayerUI;
+        SceneController.TitleSceneLoaded += LoadVolumes;
         GoalRiftController.GoalRiftEntered += IncrementCurrentLevel;
         GoalRiftController.GoalRiftEntered += AutoSaveGame;
         TitleManager.PlayButtonPressed += CallCombatScene;
@@ -47,6 +50,7 @@ public class GameController : MonoBehaviour
     {
         PartyController.PartyIsReady -= SetPlayerUI;
         SceneController.CombatSceneLoaded -= SetPlayerUI;
+        SceneController.TitleSceneLoaded -= LoadVolumes;
         GoalRiftController.GoalRiftEntered -= IncrementCurrentLevel;
         GoalRiftController.GoalRiftEntered -= AutoSaveGame;
         TitleManager.PlayButtonPressed -= CallCombatScene;
@@ -137,5 +141,20 @@ public class GameController : MonoBehaviour
         }
 
         dataManager.SaveSoundVolume(normalisedVolume);
+    }
+
+    private void LoadVolumes()
+    {
+        if (hasLoadedVolume) return;
+        hasLoadedVolume = true;
+
+        if (!dataManager)
+        {
+            Debug.LogWarning("Couldn't save load volume because dataManager was null");
+            return;
+        }
+
+        if (VolumesLoaded != null)
+            VolumesLoaded.Invoke(dataManager.LoadVolumes(Vector2.zero));
     }
 }

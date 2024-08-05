@@ -237,5 +237,22 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetFloat(PlayerPrefsKeys.VOLUME_MUSIC_KEY, Mathf.Clamp01(normalisedVolume));
 
     public void SaveSoundVolume(float normalisedVolume) =>
-        PlayerPrefs.SetFloat(PlayerPrefsKeys.VOLUME_SOUND_KEY, Mathf.Clamp01(normalisedVolume));    
+        PlayerPrefs.SetFloat(PlayerPrefsKeys.VOLUME_SOUND_KEY, Mathf.Clamp01(normalisedVolume));
+
+    public Vector2 LoadVolumes(Vector2 defaultVolumes)
+    {
+        Vector2 volumes = defaultVolumes;
+
+        if (PlayerPrefs.HasKey(PlayerPrefsKeys.VOLUME_MUSIC_KEY))
+            volumes.x = PlayerPrefs.GetFloat(PlayerPrefsKeys.VOLUME_MUSIC_KEY);
+        else
+            Debug.LogWarning("Player prefs does not have music volume");
+
+        if (PlayerPrefs.HasKey(PlayerPrefsKeys.VOLUME_SOUND_KEY))
+            volumes.y = PlayerPrefs.GetFloat(PlayerPrefsKeys.VOLUME_SOUND_KEY);
+        else
+            Debug.LogWarning("Player prefs does not have sound volume");
+
+        return volumes;
+    }
 }

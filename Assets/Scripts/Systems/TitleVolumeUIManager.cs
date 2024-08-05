@@ -26,6 +26,17 @@ public class TitleVolumeUIManager : MonoBehaviour
         defaultButtonSelector = GetComponent<SelectDefaultButton>();
     }
 
+    public void SetSliders(float music, float sfx)
+    {
+        var musicSlider = sliderButtons[0].GetComponentInChildren<Slider>();
+        musicSlider.value = music * musicSlider.maxValue;
+        AudioManager.SetMusicVolume(music);
+
+        var sfxSlider = sliderButtons[1].GetComponentInChildren<Slider>();
+        sfxSlider.value = sfx * sfxSlider.maxValue;
+        AudioManager.SetSFXVolume(sfx);
+    }
+
     public void OnSelectButton(int index)
     {
         if (!defaultButtonSelector) return;

@@ -28,11 +28,13 @@ public class TitleManager : MonoBehaviour
         continueButton.GetComponentInChildren<TMPro.TextMeshProUGUI>().alpha = hasSave ? 1 : 0.5f;
 
         settingsUIManager.ReturnToMainMenu += OnReturnButton;
+        GameController.VolumesLoaded += VolumesLoaded;
     }
 
     private void OnDisable()
     {
         settingsUIManager.ReturnToMainMenu -= OnReturnButton;
+        GameController.VolumesLoaded -= VolumesLoaded;
     }
 
     public void OnPlayButton()
@@ -58,4 +60,7 @@ public class TitleManager : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(MAIN_ANIM_KEY))
             animator.Play(MAIN_ANIM_KEY);
     }
+
+    private void VolumesLoaded(Vector2 volumes) =>
+        settingsUIManager.SetSliders(volumes.x, volumes.y);
 }
