@@ -244,6 +244,7 @@ public class BattleUIController : MonoBehaviour
     {
         HideBattleMenu();
         HideTargets();
+        defaultButtonSelector.enabled = false;
     }
 
     private void UpdateHealth(PartyController.PartyMember partyMember, int playerIndex) =>
@@ -285,6 +286,7 @@ public class BattleUIController : MonoBehaviour
 
     private void SelectDefaultButton(Button button)
     {
+        if (!defaultButtonSelector.enabled) defaultButtonSelector.enabled = true;
         defaultButtonSelector.defaultButton = button;
         button.Select();
     }
