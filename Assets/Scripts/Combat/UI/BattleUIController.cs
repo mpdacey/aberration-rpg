@@ -22,8 +22,7 @@ public class BattleUIController : MonoBehaviour
 
     [Header("Player Battle UI")]
     public PlayerStatsUIController[] partyLineUpUI;
-    [SerializeField] private float partyLineUpDefaultY = 231 - 178f;
-    [SerializeField] private float partyLineUpActiveY = 231 - 142f;
+    [SerializeField] private float partyLineUpActivePivot = 0.3f;
 
     private int currentSelected;
 
@@ -103,7 +102,7 @@ public class BattleUIController : MonoBehaviour
     {
         for (int i = 0; i < partyLineUpUI.Length; i++)
         {
-            partyLineUpUI[i].transform.position = new Vector3(partyLineUpUI[i].transform.position.x, i == currentMember ? partyLineUpActiveY: partyLineUpDefaultY, 0);
+            partyLineUpUI[i].GetComponent<RectTransform>().pivot = new Vector2(0.5f, i == currentMember ? partyLineUpActivePivot: 0.5f);
         }
     }
 
