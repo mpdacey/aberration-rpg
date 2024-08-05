@@ -86,7 +86,8 @@ public class DataManager : MonoBehaviour
 
         currentJSON.AddField("ID", scriptableObject.Id);
 
-        EquipmentScriptableObject baseEquipment = (EquipmentScriptableObject)equipmentDatabase.database[scriptableObject.Id];
+        EquipmentScriptableObject baseEquipment = (EquipmentScriptableObject)equipmentDatabase.Database[scriptableObject.Id];
+
         JSONObject bonusesObject = new() 
         {
             scriptableObject.equipmentStats.strength - baseEquipment.equipmentStats.strength,
@@ -152,7 +153,7 @@ public class DataManager : MonoBehaviour
     {
         if (!json || json.ToString() == "null") return null;
 
-        EquipmentScriptableObject equipment = Instantiate((EquipmentScriptableObject)equipmentDatabase.database[json.GetField("ID").stringValue]);
+        EquipmentScriptableObject equipment = Instantiate((EquipmentScriptableObject)equipmentDatabase.Database[json.GetField("ID").stringValue]);
 
         if (json.GetField("Upgraded").boolValue)
             equipment.equipmentName += "+";
@@ -185,7 +186,7 @@ public class DataManager : MonoBehaviour
                 continue;
             }
             PartyController.PartyMember monster = new();
-            monster.partyMemberBaseStats = (CombatantScriptableObject)monsterDatabase.database[partyMonstersJSONObject[i - 1].GetField("ID").stringValue];
+            monster.partyMemberBaseStats = (CombatantScriptableObject)monsterDatabase.Database[partyMonstersJSONObject[i - 1].GetField("ID").stringValue];
             monster.currentHP = monster.partyMemberBaseStats.combatantMaxHealth;
             monster.currentSP = partyMonstersJSONObject[i - 1].GetField("SP").intValue;
             PartyController.SetPartyMember(monster, i);
@@ -214,7 +215,7 @@ public class DataManager : MonoBehaviour
 
         for(int i = 0; i < monsterAffinitiesList.Length; i++)
         {
-            var monster = (CombatantScriptableObject)monsterDatabase.database[monsterAffinitiesList[i].GetField("ID").stringValue];
+            var monster = (CombatantScriptableObject)monsterDatabase.Database[monsterAffinitiesList[i].GetField("ID").stringValue];
             var seenToggles = new BitArray(new int[] { monsterAffinitiesList[i].GetField("Affinities").intValue });
             for(int j = 0; j < seenToggles.Length; j++)
                 if (seenToggles.Get(j))

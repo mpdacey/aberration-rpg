@@ -17,7 +17,7 @@ namespace Cryptemental.Manual
         public GameObject pageMarkerPrefab;
         public AudioClip pageTurnSFX;
         public Animator animator;
-        private ManualUIController uiController;
+        public ManualUIController uiController;
         private int currentIndex = 0;
 
         private void OnEnable()
