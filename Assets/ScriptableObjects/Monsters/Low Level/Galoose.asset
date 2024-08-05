@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67f14f823de6be9489016ea2f26d8139, type: 3}
-  m_Name: Goose
+  m_Name: Galoose
   m_EditorClassIdentifier: 
   Id: 65225c2d-860d-491b-bdf6-fd2db0369bf6
-  combatantName: Goose
+  combatantName: Galoose
   combatantMaxHealth: 100
   combatantMaxStamina: 32
   combatantBaseStats:
