@@ -6,8 +6,6 @@ using Cryptemental.Audio;
 public class GoalRiftController : MonoBehaviour, IInteractable
 {
     public static event Action GoalRiftEntered;
-
-    public AudioClip playerWarpSFX;
     public bool HasInteracted => hasInteracted;
     private bool hasInteracted = false;
 
@@ -33,7 +31,6 @@ public class GoalRiftController : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(0.26f);
 
-        AudioManager.PlayAudioClip(playerWarpSFX);
         if(GoalRiftEntered != null)
             GoalRiftEntered.Invoke();
     }

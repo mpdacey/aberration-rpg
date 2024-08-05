@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using Cryptemental.SceneController;
 
 public class GameController : MonoBehaviour
@@ -100,9 +101,15 @@ public class GameController : MonoBehaviour
     private void ContinueGame()
     {
         dataManager.LoadProgress();
-        if (ContinueGameEvent != null && currentLevel > 0)
+        StartCoroutine(ContinueInCombatScene());
+    }
+
+    IEnumerator ContinueInCombatScene()
+    {
+        yield return SceneController.LoadCombatScene();
+
+        if (currentLevel > 0 && ContinueGameEvent != null)
             ContinueGameEvent.Invoke();
-        CallCombatScene();
     }
 
     public void SetFloorLevel(int value) =>

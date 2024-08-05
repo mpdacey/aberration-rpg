@@ -29,6 +29,7 @@ public class BattleUIController : MonoBehaviour
     private void OnEnable()
     {
         GameController.SetPartyMember += SetPartyValues;
+        GameController.ContinueGameEvent += PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered += PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered += UpdateFloorCounter;
         SceneController.CombatSceneLoaded += UpdateFloorCounter;
@@ -52,6 +53,7 @@ public class BattleUIController : MonoBehaviour
     private void OnDisable()
     {
         GameController.SetPartyMember -= SetPartyValues;
+        GameController.ContinueGameEvent -= PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered -= PlayTransitionAnimation;
         GoalRiftController.GoalRiftEntered -= UpdateFloorCounter;
         PartyController.PartyLineUpChanged -= SetPartyValues;

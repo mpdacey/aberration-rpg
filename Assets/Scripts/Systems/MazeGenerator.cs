@@ -25,6 +25,7 @@ public class MazeGenerator : MonoBehaviour
     {
         GoalRiftController.GoalRiftEntered += GenerateMazeTexture;
         GameController.ResetGameEvent += GenerateMazeTexture;
+        GameController.ContinueGameEvent += GenerateMazeTexture;
         SceneController.CombatSceneLoaded += DisplayGeneratedMinimap;
     }
 
@@ -32,6 +33,7 @@ public class MazeGenerator : MonoBehaviour
     {
         GoalRiftController.GoalRiftEntered -= GenerateMazeTexture;
         GameController.ResetGameEvent -= GenerateMazeTexture;
+        GameController.ContinueGameEvent -= GenerateMazeTexture;
         SceneController.CombatSceneLoaded -= DisplayGeneratedMinimap;
     }
 
