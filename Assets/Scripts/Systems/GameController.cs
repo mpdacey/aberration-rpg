@@ -162,6 +162,6 @@ public class GameController : MonoBehaviour
         }
 
         if (VolumesLoaded != null)
-            VolumesLoaded.Invoke(dataManager.LoadVolumes(Vector2.zero));
+            VolumesLoaded.Invoke(dataManager.LoadVolumes(Vector2.one * 0.8f));
     }
 }
