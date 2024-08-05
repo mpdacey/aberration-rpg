@@ -510,6 +510,7 @@ MonoBehaviour:
     content: {fileID: 21300000, guid: d50051c9bd16bac4fa4b327e7e003732, type: 3}
   pageMarkerPrefab: {fileID: 2495452671541301791, guid: 325e6aece405a0c4e87bd0c4f8f0ed90, type: 3}
   pageTurnSFX: {fileID: 8300000, guid: 11bde424ec8ba164089330a2d8b7f015, type: 3}
+  animator: {fileID: 598510332}
 --- !u!114 &598510336
 MonoBehaviour:
   m_ObjectHideFlags: 0

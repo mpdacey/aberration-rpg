@@ -16,14 +16,9 @@ namespace Cryptemental.Manual
         public ManualPage[] manualPages;
         public GameObject pageMarkerPrefab;
         public AudioClip pageTurnSFX;
+        public Animator animator;
         private ManualUIController uiController;
-        private Animator animator;
         private int currentIndex = 0;
-
-        void Start()
-        {
-            animator = GetComponent<Animator>();
-        }
 
         private void OnEnable()
         {
@@ -35,7 +30,7 @@ namespace Cryptemental.Manual
         private void OnDisable()
         {
             ManualPageOnSelect.OnManualPageSelect -= FlipToPage;
-            CombatController.GameoverEvent -= PlayCloseManual;
+            ManualInteractListener.CloseManualInput -= PlayCloseManual;
         }
 
         private void FlipToPage(int index)
