@@ -10,6 +10,7 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
     public AudioClip menuCancelClip;
 
     private GameObject lastSelected = null;
+    private bool hasIgnoredLoadSliderChange = false;
 
     public static bool isInspecting = false;
 
@@ -37,6 +38,12 @@ public class MenuSoundEventTriggerListener : MonoBehaviour
 
     public void OnSliderValueChange()
     {
+        if (!hasIgnoredLoadSliderChange)
+        {
+            hasIgnoredLoadSliderChange = true;
+            return;
+        }
+
         AudioManager.PlayAudioClip(menuMoveClip);
     }
 
