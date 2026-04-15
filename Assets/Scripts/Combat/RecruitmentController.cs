@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class RecruitmentController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember, int> UpdatePlayerHP;
+    public static event Action RecruitmentMade;
 
     public RecruitmentUIController uiController;
     [SerializeField] private int recruitmentCost = 40;
@@ -105,5 +106,8 @@ public class RecruitmentController : MonoBehaviour
         {
             PartyController.SetPartyMember(newPartyMember, selectedSacrifice);
         }
+
+        if (RecruitmentMade != null)
+            RecruitmentMade.Invoke();
     }
 }

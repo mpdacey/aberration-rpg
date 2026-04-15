@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static event Action<PartyController.PartyMember?, int> SetPartyMember;
     public static event Action ResetGameEvent;
+    public static event Action StartNewGameEvent;
     public static event Action ContinueGameEvent;
     public static event Action<Vector2> VolumesLoaded;
 
@@ -120,6 +121,9 @@ public class GameController : MonoBehaviour
 
     private void CallCombatScene()
     {
+        if (StartNewGameEvent != null)
+            StartNewGameEvent.Invoke();
+
         StartCoroutine(SceneController.LoadCombatScene());
     }
 
