@@ -12,6 +12,7 @@ public class MusicEventController : MonoBehaviour
     public MusicScriptableObject fieldMusic;
     public MusicScriptableObject titleMusic;
     public MusicScriptableObject gameoverMusic;
+    public MusicScriptableObject victoryMusic;
 
     private MusicManager manager;
     private double fieldTime = 0;
@@ -29,6 +30,7 @@ public class MusicEventController : MonoBehaviour
         FormationSelector.FormationThreatLevel += PickBattleMusic;
         CombatController.CombatVictory += StopBattleMusic;
         CombatController.GameoverEvent += Gameover;
+        VictoryController.VictoryAchievedAction += PlayVictoryMusic;
     }
 
     private void OnDisable()
@@ -38,6 +40,7 @@ public class MusicEventController : MonoBehaviour
         FormationSelector.FormationThreatLevel -= PickBattleMusic;
         CombatController.CombatVictory -= StopBattleMusic;
         CombatController.GameoverEvent -= Gameover;
+        VictoryController.VictoryAchievedAction -= PlayVictoryMusic;
     }
 
     private void StartTitleMusic()
@@ -104,6 +107,11 @@ public class MusicEventController : MonoBehaviour
     private void Gameover()
     {
         StartCoroutine(FadeOutMusic(1.6f, gameoverMusic));
+    }
+
+    private void PlayVictoryMusic()
+    {
+        StartCoroutine(FadeOutMusic(1.0f, victoryMusic));
     }
 
     IEnumerator FadeOutMusic(float fadeoutTime, MusicScriptableObject nextTrack = null)
