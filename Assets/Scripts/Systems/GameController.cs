@@ -126,6 +126,8 @@ public class GameController : MonoBehaviour
         if (StartNewGameEvent != null)
             StartNewGameEvent.Invoke();
 
+        //Demo Only
+        SeenMonsterAffinities.ClearSeenAffinity();
         StartCoroutine(SceneController.LoadCombatScene());
     }
 
