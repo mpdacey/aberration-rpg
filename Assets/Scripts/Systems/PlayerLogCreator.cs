@@ -51,6 +51,9 @@ public class PlayerLogCreator : MonoBehaviour
 
     private void EndLog()
     {
+        if (writer == null)
+            return;
+
         float playtime = Time.realtimeSinceStartup - startTime;
 
         writer.WriteLine($"End Time: {DateTime.Now.AddDays(0):T}");
@@ -60,5 +63,7 @@ public class PlayerLogCreator : MonoBehaviour
         writer.WriteLine($"Creatures Recruited: {creaturesRecruited}");
         writer.WriteLine($"Equipment Collected: {equipmentCollected}");
         writer.Close();
+        writer.Dispose();
+        writer = null;
     }
 }
