@@ -11,7 +11,6 @@ public class PlayerLogCreator : MonoBehaviour
     private int creaturesDefeated;
     private int creaturesRecruited;
     private int equipmentCollected;
-    private bool hasEscaped;
 
     private void OnEnable()
     {
@@ -50,7 +49,6 @@ public class PlayerLogCreator : MonoBehaviour
         creaturesDefeated = 0;
         creaturesRecruited = 0;
         equipmentCollected = 0;
-        hasEscaped = false;
     }
 
     private void EndLog(bool victoryAchieved)
