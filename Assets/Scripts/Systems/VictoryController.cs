@@ -8,7 +8,7 @@ public class VictoryController : GameoverController
     public UnityEvent VictoryAchievedEvent;
     static public UnityAction VictoryAchievedAction;
 
-    const int VICTORY_REALM = 1;
+    const int VICTORY_REALM = 10;
 
     private void OnEnable()
     {
