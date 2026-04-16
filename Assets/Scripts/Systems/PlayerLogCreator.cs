@@ -42,6 +42,10 @@ public class PlayerLogCreator : MonoBehaviour
 
     private void StartLog()
     {
+        var has_log_folder = Directory.Exists($"{Application.dataPath}/Logs");
+        if (!has_log_folder)
+            Directory.CreateDirectory($"{Application.dataPath}/Logs");
+
         writer = new StreamWriter($"{Application.dataPath}/Logs/{DateTime.Now.AddDays(0):yyyyMMddHHmmss}.log", true);
         writer.WriteLine($"Start Time: {DateTime.Now.AddDays(0):T}");
 
