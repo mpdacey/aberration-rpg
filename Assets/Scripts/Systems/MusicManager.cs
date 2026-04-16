@@ -18,7 +18,11 @@ public class MusicManager : MonoBehaviour
         currentSource = 1 - currentSource;
 
         StopAllCoroutines();
-        if (!musicObject.doesLoop) return;
+        if (!musicObject.doesLoop)
+        {
+            sources[currentSource].Stop();
+            return;
+        }
 
         PlayMusicLoopPoint(musicObject, ((double)sources[1 - currentSource].clip.samples / sources[1 - currentSource].clip.frequency) - resumeTime);
     }
