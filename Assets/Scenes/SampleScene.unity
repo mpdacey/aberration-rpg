@@ -1102,6 +1102,7 @@ GameObject:
   - component: {fileID: 1796975618}
   - component: {fileID: 1796975619}
   - component: {fileID: 1796975621}
+  - component: {fileID: 1796975622}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -1357,6 +1358,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe06f47ba5ce8a64f82116e4dd53c235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1796975622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796975611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22009544c5b2601478f1e62ffdd3fdb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameResetPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1796975620}
+        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+        m_MethodName: ClearProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1796975616}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: ResetTitleScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &8937087326629629784
 PrefabInstance:
   m_ObjectHideFlags: 0

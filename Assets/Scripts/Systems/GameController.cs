@@ -67,6 +67,18 @@ public class GameController : MonoBehaviour
         dataManager.SetFloorLevel -= SetFloorLevel;
     }
 
+    public void ResetCombatScene()
+    {
+        ResetGame();
+        CallCombatScene();
+    }
+
+    public void ResetTitleScene()
+    {
+        ResetGame();
+        CallTitleScene();
+    }
+
     private void SetPlayerUI()
     {
         for (int i = 0; i < PartyController.partyMembers.Length; i++)
@@ -78,18 +90,6 @@ public class GameController : MonoBehaviour
 
     private void IncrementCurrentLevel() =>
         currentLevel++;
-
-    private void ResetCombatScene()
-    {
-        ResetGame();
-        CallCombatScene();
-    }
-
-    private void ResetTitleScene()
-    {
-        ResetGame();
-        CallTitleScene();
-    }
 
     private void ResetGame()
     {
