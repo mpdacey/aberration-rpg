@@ -11,12 +11,14 @@ public class PlayerLogCreator : MonoBehaviour
     private int creaturesDefeated;
     private int creaturesRecruited;
     private int equipmentCollected;
+    private bool hasEscaped;
 
     private void OnEnable()
     {
         GameController.StartNewGameEvent += StartLog;
         GameController.ContinueGameEvent += StartLog;
-        CombatController.GameoverEvent += EndLog;
+        CombatController.GameoverEvent += () => EndLog(false);
+        VictoryController.VictoryAchievedAction += () => EndLog(true);
         MonsterController.MonsterDefeated += (int value) => creaturesDefeated++;
         RecruitmentController.RecruitmentMade += () => creaturesRecruited++;
         EquipmentController.EquipmentUpdated += () => equipmentCollected++;
@@ -27,7 +29,8 @@ public class PlayerLogCreator : MonoBehaviour
     {
         GameController.StartNewGameEvent -= StartLog;
         GameController.ContinueGameEvent -= StartLog;
-        CombatController.GameoverEvent -= EndLog;
+        CombatController.GameoverEvent -= () => EndLog(false);
+        VictoryController.VictoryAchievedAction -= () => EndLog(true);
         MonsterController.MonsterDefeated -= (int value) => creaturesDefeated++;
         RecruitmentController.RecruitmentMade -= () => creaturesRecruited++;
         EquipmentController.EquipmentUpdated -= () => equipmentCollected++;
@@ -35,7 +38,7 @@ public class PlayerLogCreator : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        EndLog();
+        EndLog(false);
     }
 
     private void StartLog()
@@ -47,9 +50,10 @@ public class PlayerLogCreator : MonoBehaviour
         creaturesDefeated = 0;
         creaturesRecruited = 0;
         equipmentCollected = 0;
+        hasEscaped = false;
     }
 
-    private void EndLog()
+    private void EndLog(bool victoryAchieved)
     {
         if (writer == null)
             return;
@@ -58,6 +62,7 @@ public class PlayerLogCreator : MonoBehaviour
 
         writer.WriteLine($"End Time: {DateTime.Now.AddDays(0):T}");
         writer.WriteLine($"Play Duration: {TimeSpan.FromSeconds(playtime).ToString(@"mm\:ss")}");
+        writer.WriteLine($"Did Escape: {(victoryAchieved ? "Yes": "No")}");
         writer.WriteLine($"Realms Clears: {GameController.CurrentLevel}");
         writer.WriteLine($"Creatures Defeated: {creaturesDefeated}");
         writer.WriteLine($"Creatures Recruited: {creaturesRecruited}");
