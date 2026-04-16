@@ -36,6 +36,7 @@ public class FieldMovementController : MonoBehaviour
         SceneController.CombatSceneLoaded += OnCombat;
         SceneController.ManualSceneLoaded += OnTitle;
         SceneController.ManualSceneUnloaded += OnCombat;
+        VictoryController.VictoryAchievedAction += OnTitle;
     }
 
     private void OnDisable()
@@ -47,6 +48,7 @@ public class FieldMovementController : MonoBehaviour
         SceneController.CombatSceneLoaded -= OnCombat;
         SceneController.ManualSceneLoaded -= OnTitle;
         SceneController.ManualSceneUnloaded -= OnCombat;
+        VictoryController.VictoryAchievedAction -= OnTitle;
     }
 
     private void OnTitle()

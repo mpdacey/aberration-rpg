@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
         GameoverController.OnRetryEvent += ResetCombatScene;
         GameoverController.OnTitleEvent += ResetTitleScene;
         CombatController.GameoverEvent += ClearProgress;
+        VictoryController.VictoryAchievedAction += ClearProgress;
         TitleVolumeUIManager.SavedMusicVolume += SaveMusicVolume;
         TitleVolumeUIManager.SavedSoundVolume += SaveSoundVolume;
 
@@ -60,6 +61,7 @@ public class GameController : MonoBehaviour
         GameoverController.OnRetryEvent -= ResetCombatScene;
         GameoverController.OnTitleEvent -= ResetTitleScene;
         CombatController.GameoverEvent -= ClearProgress;
+        VictoryController.VictoryAchievedAction -= ClearProgress;
         TitleVolumeUIManager.SavedMusicVolume -= SaveMusicVolume;
         TitleVolumeUIManager.SavedSoundVolume -= SaveSoundVolume;
         dataManager.SetFloorLevel -= SetFloorLevel;

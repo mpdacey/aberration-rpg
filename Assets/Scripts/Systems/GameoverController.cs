@@ -23,7 +23,7 @@ public class GameoverController : MonoBehaviour
         CombatController.GameoverEvent -= PlayGameoverAnimation;
     }
 
-    private void UpdateFloorCounter() =>
+    protected void UpdateFloorCounter() =>
         gameoverFloorCounter.text = $"{GameController.CurrentLevel + 1}";
 
     private void PlayGameoverAnimation()
